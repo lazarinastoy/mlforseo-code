@@ -1,0 +1,7 @@
+rapidfuzz>=3.9
+thefuzz>=0.22
+polyfuzz>=0.4.3
+jellyfish>=0.9
+pandas>=2.0
+# optional, for the semantic comparison cell (RUN_SEMANTIC = True)
+# sentence-transformers>=3.0

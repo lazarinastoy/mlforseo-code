@@ -1,0 +1,440 @@
+URL,Content,Title,Top query
+https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/what-fuzzy-matching-is-and-where-it-fits-in-seo/,"Fuzzy matching is one of those techniques that feels almost too simple to be machine learning, until you realise how many SEO problems are really just “are these two strings the same, more or less?” Redirect maps, 404 clean-ups, hreflang audits, brand-mention monitoring, they all come down to measuring how alike two pieces of text are. This post explains what fuzzy matching is, the different ways it measures similarity, the specific algorithms and libraries you will use, and, just as importantly, the one big limitation that decides whether it is the right tool or completely the wrong one. It is the conceptual grounding for the fuzzy-matching module of the Introduction to Machine Learning for SEO course.
+What fuzzy matching is
+Fuzzy matching is a form of string matching, a machine learning problem that dates back to the 1980s. At its core it measures the distance between two strings and turns that into a similarity score, classifying them as equivalent, similar or distant. You will hear a few related terms worth untangling. Fuzzy search (also called approximate string matching) is the same idea applied to retrieving similar-but-not-identical entries from a database; fuzzy matching is the broader umbrella that encompasses it, and both deploy similar algorithms, the search version just has information retrieval as its goal. And where traditional logic is binary, a statement is true or false, information is retrieved or it is not, fuzzy logic expresses the degree to which a statement is true, which is exactly what a similarity score gives you.
+It emerged to solve two problems. Error correction is a corruption-correction point of view: finding patterns in a large corpus, retrieving information based on a specified input, spotting similarity mismatches and correcting the error, which is also how you de-duplicate a database. Information retrieval is about providing an input that best describes what you want to pull from a dataset, where the two risks are returning unwanted matches or missing needed ones. Pause and count how many places in SEO a spelling slip or a copy-paste error creeps in, URLs, product databases, customer records, brand mentions, and you will see why this is such fertile ground for us.
+It is worth dwelling on just how many SEO and marketing scenarios are secretly string-similarity problems, because once you see the pattern you find it everywhere. Any place a human types data by hand is a place errors accumulate: product databases where the same item is entered three slightly different ways, customer records with misspelled names, tagging systems that drift over time, campaign names that never quite match across advertising platforms. Fuzzy matching is the tool that reconciles all of these back to a single canonical version, which is why it turns up as often in data-cleaning and reporting work as it does in technical SEO.
+The similarity problem, and the catch that matters most
+Every fuzzy matching algorithm exists to solve the similarity problem: understanding how approximate, how alike, two strings are. The mathematical way each algorithm solves that is where they differ. Broadly, string variation is measured by errors in spelling and typing, and early research found the culprits: mistaking one letter for another (the most common), omitting a letter, inserting one by mistake, or transposing two. Algorithms calculate distance by deciphering which of those errors separates the two strings, then scoring similarity accordingly.
+And here is the catch you must internalise, because it decides everything.
+String matching measures similarity at the character level, not the semantic level. It has no understanding of meaning or context. That is exactly why it is perfect for redirect mapping, where you only care whether two URLs are spelled similarly and the semantics of the content have not changed, and exactly why it is the wrong tool for internal-link opportunity finding, where you need to understand whether two pages are actually about related things and would genuinely help a user. For anything semantic, an entity-based approach beats fuzzy matching every time. Keep that line in your head; it will save you from a lot of wasted effort and, worse, from confidently recommending the wrong method to a client.
+The approaches to string matching
+String-matching methods are classified by how they calculate similarity, or how they resolve that core problem.
+Exact matching (or direct matching) performs a direct, character-by-character comparison for the exact pattern; it is fast and highly accurate with minimal computational cost, but limited to exact matches and useless for typos. Distance-based matching uses edit distance, the minimum number of edit operations (substitutions, insertions, deletions) needed to convert one string into another; it is considered the best group for approximate matches and is flexible for typos and minor spelling differences, but it does not consider semantic meaning. Phonetic matching matches by how words sound, which is key for multilingual environments and handles homophones well, at the cost of lower precision and more false positives. N-gram matching detects occurrences of fixed-length substring patterns, so the phrase “what is string matching in machine learning” splits into bigrams (what-is, is-string, string-matching…) or trigrams, and similarity is scored on shared n-grams across your dataset; it is extremely efficient and scalable for large keyword sets, but computationally heavier for long strings. And TF-IDF matching uses cosine similarity with TF-IDF, analysing the whole corpus and weighting each token as more important if it is rarer, so matches become context-sensitive rather than purely character-based.
+Each approach trades off differently, and knowing the trade-offs is how you choose. Exact matching is fast and cheap but fails on any typo. Distance-based matching is flexible for spelling errors but blind to meaning and weak on words that sound alike yet are spelled differently. Phonetic matching handles exactly those homophones and multilingual variation but is low-precision, throwing false positives and sometimes missing close matches. N-gram matching is highly efficient and scalable for large datasets and partial matches, but computationally expensive on long strings and still semantically shallow. And TF-IDF matching brings genuine context-sensitivity by weighting rarer terms, but it does not capture true semantic similarity and needs preprocessing. There is no universal best, only the best fit for your data and your tolerance for false positives versus missed matches.
+The algorithms, in detail
+Each approach has a flagship algorithm worth knowing by name.
+Boyer-Moore is the classic exact-matching algorithm, one of the best-known pattern-matching algorithms and very fast in practice, designed to match many strings against a single keyword; it loops through entries checking characters and length, and where it finds a partial rather than full match it flags a partial keyword match. Levenshtein distance is the workhorse of distance-based matching (first described by Vladimir Levenshtein in 1966): it counts the character shifts needed to get from your input to a dataset entry. Its famous limitation is that it has no sense of meaning, so it will tell you “hard” and “hand” are more similar (one substitution) than “hard” and “harder” (two additions), even though a human reads the latter pair as more related. Metaphone is the go-to phonetic algorithm, excellent for languages other than English and robust to misspellings, missing letters, swaps and extra letters. When one method is not enough, a hybrid architecture often wins, for example Levenshtein plus Metaphone to catch misspelled-but-phonetically-similar words, or n-grams to preprocess before applying TF-IDF for contextual relevance.
+In Python you will reach for libraries that bundle these together, so swapping one algorithm for another is often a single line of code: FuzzyWuzzy, RapidFuzz and PolyFuzz, plus Fuzzy Pandas, NLTK, SciKit-Fuzzy and Elasticsearch. Those will take you as far as you need to go as a beginner. The important thing is to pick your method first, then compare algorithms within it, and only reach for a hybrid if a single method underperforms on your data.
+Where fuzzy matching fits in SEO
+This is where it earns its keep, and there is a lot of it.
+Redirect mapping and 404 clean-up are the classic wins: automatically match old or broken URLs to the most similar live ones, preserving link equity (especially valuable when those broken pages have backlinks) and killing dead ends, remembering it matches on the URL string, not the meaning of the content. Hreflang audits catch mismatches between the URLs your hreflang specifies and the URLs your map says should be there, which prevents real revenue leaks on multilingual ecommerce and lead-gen sites. Duplicate and near-duplicate detection spots accidental content overlap or cannibalisation fast, brilliant for large enterprise sites with accidental section duplication, and best run on metadata (titles, headings, URLs) or, for plagiarism, at paragraph level, since fuzzy matching works best on shorter strings. And a favourite of mine, title-versus-query alignment, compares ranked queries to page titles to spot click-through-rate opportunities and better align the title with how users actually search, brilliantly demonstrated in Natzir Ruiz’s guest tutorial on the MLforSEO blog, which pairs fuzzy matching with generative AI.
+Beyond core SEO, it is genuinely useful across marketing: comparing PPC ad copy for similarity (yours or competitors’, using Levenshtein, cosine or n-grams) to improve variations and align weaker campaigns to winning ones; social hashtag normalisation, grouping near-identical hashtags to capture every post on a topic; catching brand mentions across social posts, captions and comments even when your name is misspelled; quick-and-dirty keyword clustering when your topics are closely aligned to the keyword text; and matching product-category or product-name terms unique to your ecommerce brand. Two of the SEO use cases already have full walkthroughs: 404 and redirect mapping with fuzzy matching in Python and automatically optimising metadata with FuzzyWuzzy. It is also a wonderful conversation-starter with siloed teams, PPC, social, product, customer service, all of whom have data you can share scripts with and learn from.
+Resources
+Grab the free Automated Redirect Mapping with Triple Fuzzy Matching notebook to see a hybrid approach on a real migration, and the deeper Comprehensive String & Fuzzy Matching Reference Guide (every approach, algorithm and use case) is included with the course.
+How a fuzzy matching project actually runs
+It helps to see the shape of a real job. Take redirect mapping, the most common one. You start with two lists: the old URLs (from your pre-migration crawl, or your backlink and analytics exports) and the live URLs (from a fresh crawl of the new site). You run a distance-based or hybrid algorithm to score every old URL against every live URL, keep the best match for each, and bucket the results by similarity score: a near-100% score is a confident one-to-one redirect, a middling score is a partial match to review by hand, and a low score flags an old URL with no good destination, which you either send to a relevant category page or accept as a genuine 404. Set a sensible similarity threshold and you have turned a week of manual spreadsheet work into a first-pass map you can review in an hour. The 404 clean-up job is almost identical; only the input list changes.
+The workflow for improving your results is just as repeatable. Identify the kind of error or variation you are dealing with, pick the method that targets it, compare the specific algorithms within that method, and only build a hybrid architecture if a single method underperforms. Catching misspelled brand names across languages points to phonetic; searching a huge keyword set for partial matches points to n-grams; a job where context and term rarity matter points to TF-IDF. Because the popular Python libraries bundle many algorithms behind a near-identical interface, the cost of testing one against another is close to zero, so test on your own data before you commit. The right choice is empirical, not theoretical, and the comprehensive reference guide that maps each algorithm to its approach, similarity calculation, advantages and limitations makes narrowing it down far quicker.
+The Role of Fuzzy and Semantic Matching in AI Search
+This character-versus-meaning distinction matters more, not less, in the AI-search era, and I dug into exactly why in a longer piece for iPullRank, Fuzzy Matching and Semantic Search. The core argument is that modern retrieval runs on two layers at once. Fuzzy, lexical matching (edit distance, n-grams, BM25) repairs messy input and tolerates typos, while semantic matching via embeddings captures paraphrases, synonyms and intent. Leading systems combine both in a hybrid pipeline and then rerank the candidates with fusion methods, because neither layer alone is enough.
+Three practical consequences follow for anyone optimising for AI search. First, because these systems extract short, self-contained passages, you should map clustered question variants to tight H2 and H3 sections an LLM can lift with high confidence and no hallucination risk. Second, entity consistency, unified NAP and stable, machine-readable schema, reduces the ambiguity that makes a system distrust and skip your content. And third, the metric that matters shifts from ranking to retrieval inclusion: in a retrieval-augmented pipeline, being selected as a candidate passage is step zero. Fuzzy matching keeps your technical foundations clean so you stay eligible; semantic structure is what actually gets you chosen.
+Where to Take Fuzzy Matching Next
+This post covers what fuzzy matching is and where it fits. The Introduction to Fuzzy Matching module inside Introduction to Machine Learning for SEO takes you into the practicals: 404 and redirect mapping, and competitor or internal metadata opportunity analysis, all hands-on. And remember the golden rule: fuzzy matching is for character similarity. When you need meaning, reach for entity analysis instead.
+Related glossary terms
+MLforSEO Academy
+Take your skills further — pick your path
+Introduction to Machine Learning for SEO
+by Lazarina Stoy
+Ship practical ML workflows — classification, clustering, entity extraction — no CS degree required.
+View course →AI Search Optimisation & Agentic SEO
+by Beatrice Gamba
+How agentic systems retrieve, evaluate and select — and how to become the source they cite.
+View course →AI Search, LLMs, Entity SEO & Knowledge Graph Strategies
+by Beatrice Gamba
+Build the entity authority and knowledge-graph presence that makes AI recognise and trust your brand.
+View course →Semantic ML-enabled Keyword Research
+by Lazarina Stoy
+Query understanding, search intent and semantic clustering for how people and AI really search.
+View course →","What Fuzzy Matching Is, and Where It Fits in SEO",what is fuzzy matching
+https://www.mlforseo.com/machine-learning-tutorials/topic-modeling-clustering/topic-modeling-for-seo-with-bertopic/,"If LDA is the classic that taught search to think in topics, BERTopic is the modern successor that does it with the semantic muscle of transformer embeddings. For most of the text-heavy work SEOs actually do, clustering keywords, reviews, titles and content, it is the approach I reach for first. This post explains what it is, how it works, walks through the actual code so you can run it yourself, and gives you the honest benefits and limitations so you know exactly when it is the right tool.
+What BERTopic is
+BERTopic is a topic modelling technique, introduced by Maarten Grootendorst in his 2022 paper “BERTopic: Neural topic modeling with a class-based TF-IDF procedure”, that uses BERT embeddings and class-based TF-IDF to create dense, easily interpretable clusters while keeping the most important words in each topic’s description. Its defining feature is that it is built like Lego: you can pick and choose the model for each step, tokenise one way, cluster with HDBSCAN or K-means or BIRCH, swap in a model from Hugging Face. That modularity is what makes it far more versatile than LDA.
+How BERTopic works
+Like any topic model, it ends up identifying sets of words that form coherent themes. Under the hood, it reverse-engineers those themes through a clean pipeline.
+It converts text into 384-dimensional BERT embeddings that capture semantic relationships, uses UMAP to reduce those to a low-dimensional space, applies HDBSCAN to find dense clusters (each a potential topic), and then uses class-based TF-IDF to surface the most representative words per topic, refined with MMR for relevance. You can feed it your own topic labels or none at all, in which case it discovers topics automatically. In short, it is an embedding-based, density-based, soft/fuzzy, unsupervised model. Recent versions from its creator, Maarten Grootendorst, add zero-shot topic modelling, model merging and large language model support, which keep it at the front of the field.
+The class-based TF-IDF step is worth understanding, because it is what gives BERTopic its readable labels. Ordinary TF-IDF weighs how important a word is to a single document; the class-based version treats all the documents in a cluster as one big document and asks which words are distinctive to that cluster versus the others. The result is a topic description made of the words that genuinely set that topic apart, rather than generic high-frequency filler, which is a big part of why BERTopic’s topics tend to read so cleanly compared with older bag-of-words approaches.
+Running BERTopic yourself: the code
+Here is the part I want you to actually try. BERTopic is refreshingly little code to get going. In the course you get the fully annotated Colab notebook, the demo dataset and a ready pipeline, but there is no reason you cannot work through the essentials on your own right now. Start with the simplest possible run on a list of documents (your pages, reviews, titles, whatever your corpus is).
+!pip install bertopic
+from bertopic import BERTopic
+docs = df[""content""].tolist() # your pages, reviews or titles as a list of strings
+topic_model = BERTopic(language=""english"", min_topic_size=10)
+topics, probs = topic_model.fit_transform(docs)
+topic_model.get_topic_info() # the topics it discovered
+That is genuinely all you need for a first pass. The magic, and the reason I love this model, is in the “build your own Lego” step, where you swap the embedding model, the dimensionality reduction and the clustering to suit your data.
+from sentence_transformers import SentenceTransformer
+from umap import UMAP
+from hdbscan import HDBSCAN
+from sklearn.feature_extraction.text import CountVectorizer
+embedding_model = SentenceTransformer(""all-MiniLM-L6-v2"") # 384-dim embeddings
+umap_model = UMAP(n_neighbors=15, n_components=5, metric=""cosine"")
+hdbscan_model = HDBSCAN(min_cluster_size=15, metric=""euclidean"", prediction_data=True)
+vectorizer = CountVectorizer(stop_words=""english"", ngram_range=(1, 2))
+topic_model = BERTopic(
+embedding_model = embedding_model,
+umap_model = umap_model,
+hdbscan_model = hdbscan_model,
+vectorizer_model= vectorizer,
+calculate_probabilities = True,
+verbose = True,
+)
+topics, probs = topic_model.fit_transform(docs)
+Every one of those blocks is optional and swappable. Prefer K-means because you want a fixed number of topics? Pass it as the hdbscan_model
+. Working in another language? Swap the sentence transformer. That is the flexibility the slides call “building your Lego”, and it is what puts BERTopic a level above LDA.
+What the output actually looks like
+Once it has run, you inspect and visualise. In the course demo we deliberately use the same small BBC news dataset (about 100 articles) that we used for LDA and text classification, so you can compare the three approaches directly. BERTopic pulls out six coherent topics from it, family care and support, climate change, a Trump/election topic, and the Ukraine-Russia war among them.
+topic_model.get_topic_info()
+# Topic Count Name
+# 0 -1 11 -1_the_to_of_and <- outliers, no clear topic
+# 1 0 28 0_ukraine_russia_putin_war
+# 2 1 19 1_climate_emissions_energy
+# 3 2 15 2_trump_election_republican
+# 4 3 14 3_family_care_support_children
+topic_model.get_topic(0)
+# [('ukraine', 0.041), ('russia', 0.033), ('putin', 0.028), ('war', 0.021), ...]
+Notice topic -1
+: that is the outlier bucket, documents HDBSCAN could not confidently place. It is normal, and it is one of the trade-offs we will get to. From here you visualise, reduce the topic count if it over-produced, and export each document’s topic.
+topic_model.visualize_topics() # interactive inter-topic distance map
+topic_model.visualize_barchart() # top words per topic
+topic_model.visualize_hierarchy() # see which topics could merge
+topic_model.reduce_topics(docs, nr_topics=20) # rein in an over-produced list
+df[""topic""] = topics # tag every document
+df.to_csv(""content_with_topics.csv"", index=False)
+That CSV, every page or review tagged with its dominant topic and the representative words, is the artefact you actually take into an internal-linking or content-audit project. A quick, important caveat: this is a very limited demonstration of what BERTopic can do. If you are going to use it seriously, the creator’s GitHub repository is a must-read, it is full of tips on scalability, coherence and customising the pipeline.
+BERTopic versus LDA and the others
+Choosing a topic model is really about your data and your constraints. Here is how the main options compare.
+The headline differences: BERTopic and Top2Vec need minimal preprocessing and detect the number of topics automatically, which makes them strong on short texts like reviews, tweets and titles, exactly the data we tend to have. LDA and NMF need more preprocessing and you must predefine the topic count. And BERTopic is usually praised for producing the clearest, most coherent topics, helped by its LLM integration for natural-sounding labels. Whichever you pick, human judgement still matters for validating the topics.
+The honest benefits and limitations
+I am a fan, but BERTopic is not magic, and knowing where it struggles will save you a bad analysis.
+On the benefits side: high topic quality from contextual embeddings, minimal preprocessing, automatic topic count, excellent handling of short text, and clear keyword-labelled topics that align with how a human would group the content. On the limitations side: it is computationally heavy and often wants a GPU; it is weak on small datasets (under about 1,000 documents, like our 100-article demo, it will still form topics but not perfectly coherent ones); it can over-produce topics (feed it 1,000 documents and you might get 200 to 500 topics unless you cap them with reduce_topics
+or nr_topics
+); it leaves some documents unassigned as outliers (that topic -1
+above); and its biggest real-world catch, in my experience, is that it assigns only one topic per document, which rarely matches how content is actually written.
+That last point is exactly why I teach both approaches. BERTopic gives you crisp, coherent top-level topics; LDA, with its soft membership, is better at surfacing the multiple subtopics inside a single document. Run both and marry them and you get a far better picture for something like content categorisation than either gives alone.
+Turning BERTopic Topics into SEO Wins
+The applications mirror the LDA post, because the output serves the same goals: improve internal linking by linking articles in the same topics and subtopics; enhance it with entity extraction to enable entity-based modular linking; run competitor analysis to understand rival content libraries fast; and do market analysis by clustering YouTube or Reddit content to read a competitive landscape quickly. My standing challenge: on your next content audit, run BERTopic, LDA and Google’s text classification on the same set and see which gives the most useful labels.
+Free resource + full practical
+The snippets above get you started. Weigh the approach up with the free BERTopic: Benefits and Limitations guide, and when you want the fully annotated Colab notebook, the demo dataset and the ready-to-run pipeline, they live in the Introduction to Clustering module of the course.
+Where to Take BERTopic Next
+Read the companion post on topic modelling with LDA to see the classic approach BERTopic builds on, and what clustering is and where it fits in SEO for the wider context. For hands-on keyword work, our KeyBERT keyword clustering guide is a great next step.
+Related glossary terms
+MLforSEO Academy
+Take your skills further — pick your path
+Introduction to Machine Learning for SEO
+by Lazarina Stoy
+Ship practical ML workflows — classification, clustering, entity extraction — no CS degree required.
+View course →AI Search Optimisation & Agentic SEO
+by Beatrice Gamba
+How agentic systems retrieve, evaluate and select — and how to become the source they cite.
+View course →AI Search, LLMs, Entity SEO & Knowledge Graph Strategies
+by Beatrice Gamba
+Build the entity authority and knowledge-graph presence that makes AI recognise and trust your brand.
+View course →Semantic ML-enabled Keyword Research
+by Lazarina Stoy
+Query understanding, search intent and semantic clustering for how people and AI really search.
+View course →",Topic Modelling for SEO with BERTopic,bertopic seo
+https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/how-to-do-keyword-clustering-with-keybert/,"Keyword extraction is primarily used in Natural Language Processing (NLP) to identify the most relevant or important words or phrases (keywords) from a document or a set of documents.
+In digital marketing, and particular in SEO tasks like keyword research or content auditing, this technique can be really useful for reducing noise from the keyword, title, paragraph or otherwise to only take the one (or few) words that most robustly, semantically represent the text.
+In this guide, I’ll show you how to work with KeyBERT, and how to use it for keyword clustering in the process of keyword research.
+About the model: KeyBERT
+KeyBERT is a keyword extraction technique that uses BERT (Bidirectional Encoder Representations from Transformers) to generate relevant keywords from a given text. Unlike traditional keyword extraction methods that rely on statistical or linguistic approaches, KeyBERT leverages the powerful contextual embeddings of BERT to identify words or phrases that are most relevant to the content.
+How it works
+How KeyBERT works is, in short, it tokenizes the terms, extracts embeddings, and then it gives you the most important word. Here’s a quick breakdown of the process:
+- Text Input: You provide a block of text (a document, sentence, or paragraph).
+- Tokenization: Count Vectorizer and Scikit-learn are used to tokenize the document into candidate keywords
+- Embedding Generation: Using BERT, KeyBERT converts the input text into contextual embeddings (numerical representations of words or phrases based on their meaning in context). Note that any language model can be used for this step, including: flair, gensim, spacy, or use.
+- Keyword Extraction: KeyBERT computes the cosine similarity between the embedding of the full document and the embeddings of individual words or n-grams (short sequences of words).
+- Relevance Scoring: Based on the similarity scores, KeyBERT ranks the keywords that best represent the input text.
+In simple terms, from every sentence, from every keyword, you have one word that is the most vital one. That’s what KeyBERT tries to identify.
+Additional Resources
+I highly recommend learning directly from the person, who created KeyBERT, Maarten Grootendorst. Here are some great resources to get you started with KeyBERT (besides this tutorial, of course):
+- Maarten’s video tutorial on working with KeyBERT
+- Written tutorial on working with KeyBERT
+- KeyBERT Documentation and GitHub Repo
+How to work with KeyBERT in Google Colab (Python)
+In the following section, we’ll go through how to work with KeyBERT with Python, using a demo Google Colab Notebook.
+Prerequisites
+There really isn’t much you need to get started working with this API. But the basics apply:
+- Google Account: Ensure you have a Google account for accessing Google Colab.
+- Google Colab: Get familiar with Google Colab as it will be the platform for executing Python code.
+- Basic Python Knowledge: Have a fundamental understanding of Python programming to follow the code snippets and their execution.
+Install the ML model and select a transformer
+First step is importing the model by doing a pypi installation. You can install mode models to configure the transformer and language backends you’d like to use.
+You then import the model and create a shortcut for using it in functions.
+from keybert import KeyBERT
+kw_model = KeyBERT()
+KeyBERT generic API use cases for text analysis
+Use KeyBERT for keyword extraction
+Once you have installed, imported KeyBERT into your Python script and initialized the model, provide your input text, and KeyBERT will extract keywords based on their semantic relevance.
+The model evaluates candidates against the original text using cosine similarity, ensuring that the extracted keywords capture the essential themes.
+#Basic usage - keyword extraction
+from keybert import KeyBERT
+doc = """"""
+Supervised learning is the machine learning task of learning a function that
+maps an input to an output based on example input-output pairs. It infers a
+function from labeled training data consisting of a set of training examples.
+In supervised learning, each example is a pair consisting of an input object
+(typically a vector) and a desired output value (also called the supervisory signal).
+A supervised learning algorithm analyzes the training data and produces an inferred function,
+which can be used for mapping new examples. An optimal scenario will allow for the
+algorithm to correctly determine the class labels for unseen instances. This requires
+the learning algorithm to generalize from the training data to unseen situations in a
+'reasonable' way (see inductive bias).
+""""""
+kw_model = KeyBERT()
+keywords = kw_model.extract_keywords(doc)
+print(keywords)
+This approach not only provides relevant keywords but also offers flexibility in specifying keywords or allowing the model to generate them autonomously.
+Use KeyBERT for #n-gram specified keyword extraction
+N-gram specified keyword extraction using KeyBERT allows for the identification of keywords at both the unigram and bigram levels. This approach enhances the contextual understanding of the text by capturing single words (unigrams) and pairs of consecutive words (bigrams) as keywords.
+To extract unigrams using KeyBERT, you can specify the extraction of individual keywords while setting the top_n
+parameter to control the number of keywords returned. Here’s how to implement unigram extraction:
+#n-gram specified keyword extraction
+kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 1), stop_words=None)
+In unigram extraction, each individual word is treated as a separate keyword. This method is straightforward and allows for a quick analysis of the most semantically important terms within a document.
+For bigram extraction, you can adjust the keyphrase_ngram_range
+parameter to (2, 2) in KeyBERT, allowing the model to focus on pairs of consecutive words. This helps capture meaningful phrases in the text. Here’s an example:
+kw_model.extract_keywords(doc, keyphrase_ngram_range=(2, 2), top_n=10, stop_words=None)
+With KeyBERT for both unigram and bigram keyword extraction, you can enhance your analysis, capturing essential terms and phrases that contribute to a deeper understanding of the text. You can specify other lengths of the n-grams, as well and customise this implementation further.
+Use KeyBERT to highlight the most important terms in a document, paragraph or content piece
+To highlight the most important terms in a document, you can use KeyBERT’s extract_keywords
+function with the highlight=True
+parameter. This feature allows you to visually emphasize the relevant keywords directly within the text. Here’s a concise example:
+#highlight keywords in the document
+keywords = kw_model.extract_keywords(doc, highlight=True)
+This makes it easier to identify key concepts and themes within the content at a glance, and help you identify if you’re stuffing keywords in your text. This can also be applied for the content of your competitors, but also for personal uses like email or social text analysis to improve readibility.
+KeyBERT for SEO Keyword Clustering in csv/Excel- SEO Use case
+In this notebook, we’ll use the KeyBERT library to automatically extract keyphrases from a list of keywords. The keyphrases are derived from the text data using pre-trained BERT models, making this approach highly accurate for identifying meaningful keywords.
+Function explaination
+Here are the steps we’ll execute:
+- Upload your file
+You can upload a CSV or Excel file that contains a column named Keywords. The notebook supports both file formats, so you can upload .csv, .xls, or .xlsx files directly.
+2. Keyword Extraction
+The KeyBERT model will analyze the Keywords column and extract
+- Core (1-gram): The most relevant single-word keyword.
+- Core (2-gram): The most relevant two-word phrase.
+2. Get the results and download your csv file
+After processing, two new columns will be added to the DataFrame:
+- Core (1-gram): The top 1-word keyphrase.
+- Core (2-gram): The top 2-word keyphrase.
+The DataFrame, with the new columns, will be saved as a CSV file and automatically downloaded.
+Functions used
+- KeyBERT: A simple and powerful library that uses BERT embeddings to extract keyphrases that are most representative of the input text.
+- File Upload: You will be prompted to upload a file containing your keywords. The file should contain a column named Keywords where the keyword or text data resides.
+- Output: Once the keywords are processed, you will receive a CSV file with the original keywords and their corresponding main 1-gram and 2-gram keyphrases.
+Code to use
+Click on the image below to go to the Colab notebook with the code to use.
+Alternatively, feel free to copy and modify this code as you see fit.
+# Install the necessary libraries
+#!pip install keybert
+#!pip install transformers
+!pip install openpyxl # For handling Excel files
+import pandas as pd
+from keybert import KeyBERT
+from google.colab import files
+from google.colab import drive
+# Initialize the KeyBERT model
+kw_model = KeyBERT()
+# Function to load a dataframe from a file uploaded by the user
+def load_dataframe():
+# User uploads either a CSV or Excel file
+print(""Please upload a CSV or Excel file:"")
+uploaded = files.upload()
+filename = list(uploaded.keys())[0] # Get the name of the uploaded file
+# Check the file extension and load accordingly
+if filename.endswith('.csv'):
+df = pd.read_csv(filename)
+elif filename.endswith(('.xls', '.xlsx')):
+df = pd.read_excel(filename)
+else:
+print(""Unsupported file type. Please upload a CSV or Excel file."")
+return None
+return df
+# Function to apply KeyBERT on the 'Keywords' column
+def apply_keybert(df):
+if 'Keywords' not in df.columns:
+print(""Error: The dataframe must contain a column named 'Keywords'."")
+return None
+# Create new columns for unigrams and bigrams
+def extract_ngram(text, ngram_range):
+# Extract keywords with specified ngram range, handle the case where no keywords are found
+keywords = kw_model.extract_keywords(text, keyphrase_ngram_range=ngram_range, stop_words='english')
+return keywords[0][0] if keywords else """" # Return the keyword or an empty string if none found
+# Apply to the 'Keywords' column
+df['Core (1-gram)'] = df['Keywords'].apply(lambda x: extract_ngram(x, (1, 1)) if len(x) > 0 else """")
+df['Core (2-gram)'] = df['Keywords'].apply(lambda x: extract_ngram(x, (2, 2)) if len(x) > 0 else """")
+return df
+# Main function to upload the file and apply the transformations
+def main():
+df = load_dataframe()
+if df is not None:
+# Apply KeyBERT to extract keywords
+df_with_keybert = apply_keybert(df)
+if df_with_keybert is not None:
+# Show the modified dataframe
+print(df_with_keybert.head())
+# Save the modified dataframe to a new CSV
+df_with_keybert.to_csv('keywords_with_keybert.csv', index=False)
+print(""File saved as 'keywords_with_keybert.csv'."")
+files.download('keywords_with_keybert.csv')
+# Call the main function
+main()
+Results
+After uploading your file, the notebook will automatically apply KeyBERT to extract keywords and download the processed file.
+Provided that your input looks like the image on the left, your downloaded file will look like the image on the right, with two columns added: Core (1-gram) and Core (2-gram).
+Visualise
+You can then visualise this data, or use it for keyword or page tagging purposes.
+Ideally, what you’d like to do with this data would be to incorporate the keyword labels into your keyword research or semantic keyword universe, so that your visualisations can reflect other metrics (not only count of keywords per cluster) like
+- sum of search volume per cluster, helping you prioritize clusters that can drive the most traffic
+- average keyword difficulty per cluster, , allowing you to strategize your SEO efforts based on competitiveness
+- most important entities per cluster, which helps to understand the main topics and themes, which can guide content creation and optimization
+- competitors per cluster, analyzing which competitors are targeting the same keywords allows you to evaluate the competitive landscape, identify gaps in your strategy, and refine your approach to outperform them.
+- average cost-per-click (CPC) per cluster, helping to evaluate the advertising potential of keywords;
+- trends over time per cluster, enabling you to identify seasonal shifts in keyword performance;
+- social media mentions per cluster, which can highlight brand sentiment and visibility within social channels.
+Key Takeaways on KeyBERT for keyword extraction and clustering
+In this KeyBERT tutorial, we explored the powerful capabilities of KeyBERT for keyword extraction, text analysis, and keyword clustering. Here are the key takeaways:
+- KeyBERT leverages BERT embeddings to identify the most relevant keywords from any given text, ensuring a contextual understanding that surpasses traditional frequency-based methods.
+- By using KeyBERT, you can perform n-gram specified keyword extraction, allowing you to capture both unigrams and bigrams. This flexibility helps in analyzing single words and meaningful phrases, enriching your content strategy.
+- KeyBERT’s
+extract_keywords
+function with thehighlight=True
+parameter enables users to visually emphasize important terms within their documents, enhancing readability and focus. - Incorporating keyword labels into your keyword research allows for a richer semantic keyword universe, facilitating deeper insights through various metrics.
+- Utilizing metrics such as the sum of search volume, average keyword difficulty, most important entities, and competitors per cluster can lead to better-informed decision-making and strategic planning.
+By analyzing keyword performance, competition, and contextual relevance, you can develop more effective content optimization strategies that align with user intent and market demands.
+Overall, KeyBERT serves as a robust tool for keyword extraction and analysis, empowering marketers, content creators, and SEO professionals to enhance their strategies through data-driven insights.
+MLforSEO Academy
+Take your skills further — pick your path
+Semantic ML-enabled Keyword Research
+by Lazarina Stoy
+Query understanding, search intent and semantic clustering for how people and AI really search.
+View course →AI Search Optimisation & Agentic SEO
+by Beatrice Gamba
+How agentic systems retrieve, evaluate and select — and how to become the source they cite.
+View course →AI Search, LLMs, Entity SEO & Knowledge Graph Strategies
+by Beatrice Gamba
+Build the entity authority and knowledge-graph presence that makes AI recognise and trust your brand.
+View course →Introduction to Machine Learning for SEO
+by Lazarina Stoy
+Ship practical ML workflows — classification, clustering, entity extraction — no CS degree required.
+View course →",How to do keyword clustering with KeyBERT,keybert keyword clustering
+https://www.mlforseo.com/machine-learning-implementation-guides/onpage-seo/how-to-automatically-optimize-your-seo-metadata-with-fuzzywuzzy-and-openai-in-google-colab/,"If you’re looking to enhance your website’s SEO without spending hours manually tweaking metadata, you’re in the right place. In this tutorial, I’ll introduce you to a variation of a method that I’ve created years ago and named “Fuzzy Booster”.
+In this tutorial, we’ll automatically optimize your SEO metadata by analyzing top-performing queries and crafting better titles, headers, and descriptions. You will learn how to use Python, FuzzyWuzzy, and OpenAI in Google Colab.
+About the method: What is Fuzzy Booster?
+The main idea is to ensure that your page titles, headers (h1), and descriptions match the search queries that bring you the most visitors. By doing so, we can improve out site’s click-through rates and rankings on search engines.
+Normally, optimizing these elements involves a lot of manual labor, but with the power of Python and some python libraries, we can automate this process. We’ll extract top-performing queries from Google Search Console, check how well they align with your current metadata using FuzzyWuzzy, and even generate new, optimized content using OpenAI. Pretty cool, right?
+Tools and libraries
+Google Search Console API
+This API provides access to detailed performance data about your website. We’ll use it to retrieve the top-performing queries for each URL, based on the number of clicks.
+BeautifulSoup
+BeautifulSoup is a Python library that helps us scrape and extract HTML data from web pages. We’ll use it to pull existing SEO metadata from your site.
+FuzzyWuzzy
+FuzzyWuzzy is a library that performs fuzzy string matching, ideal for comparing your current SEO metadata to top search queries to identify areas for improvement.
+The token_set_ratio function is particularly effective because it measures similarity between strings regardless of word order, making it useful for assessing how well your metadata matches search queries.
+OpenAI
+OpenAI provides us with advanced language models like GPT, which we’ll use to automatically generate new SEO metadata that’s more aligned with top queries.
+Additional Resources
+Check out also the following resources to see documentation on the modules we’ll be using. This can be useful for troubleshooting if you run into errors with the code at any point:
+- Google Search Console API Documentation
+- BeautifulSoup Documentation
+- FuzzyWuzzy Documentation
+- OpenAI API Documentation
+Step-by-step guide on using Fuzzy Booster for SEO metadata optimization in Google Colab
+Prerequisites
+Before you start, you’ll need:
+- A Google Cloud account with billing enabled.
+- A project in Google Cloud Console with the Search Console API enabled.
+- An OAuth 2.0 Client ID and JSON credentials file.
+- An OpenAI API Key
+How to set up your Google Cloud Console project
+- Create a project in Google Cloud Console:
+- Head over to Google Cloud Console.
+- Create a new project or use an existing one.
+- Enable the Search Console API:
+- Go to API & Services > Library.
+- Search for “Google Search Console API” and enable it.
+- Create OAuth 2.0 Credentials:
+- Navigate to API & Services > Credentials.
+- Click Create Credentials > OAuth 2.0 Client ID.
+- Set up the OAuth consent screen if it’s your first time and add User Scopes to Google Search Console Api > Read Only.
+- Create a new OAuth 2.0 Client ID for desktop applications.
+- Download the JSON credentials file.
+How to Set up your OpenAI API Key
+To use OpenAI for generating optimized SEO metadata, you’ll need to create an API key. Follow these steps to set up your OpenAI account and obtain the key:
+- Create an OpenAI account:
+- Go to the OpenAI website.
+- Sign up for a new account if you don’t have one. If you already have an account, just log in.
+- Generate an API Key:
+- In the API dashboard, look for the “API Keys” section.
+- Click on “Create API Key” or “New Secret Key” to generate a new key.
+- Give your key a name for easy identification.
+- Save your API Key:
+- Once the key is generated, make sure to copy it and save it in a secure location. You will use this key to authenticate requests to the OpenAI API in your Google Colab environment.
+- Configure billing:
+- Configure billing settings to ensure you have access to the API features.
+How to use the Fuzzy Booster Google Colab for meta data optimization
+Complete steps from above, then, make a copy of the Google Colab template.
+Step 1: Define query parameters
+In this analysis, we usually exclude branded queries—those that include the brand name or specific product names. The reason for this is that branded searches are generally influenced by existing brand awareness and marketing efforts, which might not reflect your site’s organic search performance accurately. The goal here is to identify organic, non-branded SEO keywords that potential customers use to find your site.
+However, feel free to modify this approach if you wish to include branded queries, especially if brand visibility and recognition are part of your core objectives.
+The home page is often excluded from this analysis because it’s usually optimized for broad and general terms, which might not be as actionable as insights gathered from more specific internal pages. If your strategy requires insights from the home page or you believe there’s potential for further optimization, you can choose not to exclude it.
+Step 2: Upload your credentials file
+Once you have set up the data for the analysis, Colab will ask you to upload the JSON credentials file you downloaded before.
+Step 3: Scrape metadata with BeautifulSoup
+Using BeautifulSoup, we can pull existing SEO metadata from your site, like title, h1 and descriptions.
+It’s very important to note whether you can scrape a website beforehand by checking the terms of use. Some websites (although public) do not allow scraping and will ban you if you scrape their content or metadata.
+If you find yourself banned by a website during scraping, you can use the curl_cffi library to change your user agent. This helps you rotate user agents and avoid detection, allowing you to continue accessing the site. Check this Python library here.
+Step 4: Clean and prepare text data
+In this step, we focus on cleaning the text data extracted from your website to make it easier to analyze and compare with search queries.
+lang = ‘spanish’ # Language for stopwords
+We set the language to Spanish, which helps us identify common words (stopwords) that don’t add much meaning to our analysis, such as “and,” “the,” and “is.” Change this to the language of your website.
+This function performs several operations to clean the text:
+- Lowercasing: Converts all characters to lowercase for consistency.
+- Number removal: Strips out numerical digits.
+- Punctuation removal: Eliminates punctuation marks.
+- Whitespace normalization: Ensures consistent spacing between words.
+- Accent removal: Converts accented characters to their non-accented versions.
+- Stopwords removal: The function filters out these stopwords from the text, keeping only the meaningful words.
+Step 5: Compute similarity using Fuzzy matching
+In this step, we use the fuzzywuzzy library to measure how closely the cleaned SEO metadata (titles, meta descriptions, and headers) matches the top-performing search queries. This helps us identify areas where the content might not be optimized for relevant search terms.
+We use token_set_ratio from the fuzzywuzzy library, which compares strings based on their content, ignoring the order and repeated words. This method is ideal for analyzing how well the cleaned text matches the search queries, as it provides a robust similarity score.
+We loop through each row of the DataFrame, comparing the cleaned search query (query_clean) with each cleaned SEO element (title, meta, h1).
+For each comparison, we calculate a similarity score using token_set_ratio. The score ranges from 0 to 100, where 100 indicates an exact match.
+The similarity scores are stored in new columns (title_similarity, meta_similarity, h1_similarity) for each corresponding SEO element.
+Step 6: Generate new titles using OpenAI (Optional)
+In this optional step, we aim to enhance our website’s relevance by generating new titles for pages where the existing titles don’t align well with top-performing queries. This involves using the OpenAI API to automatically create more relevant and optimized SEO content.
+We filter the DataFrame to identify pages where the similarity score between the current title and the top-performing query is 60 or below. These low scores indicate a poor match and an opportunity for improvement.
+You can adjust the similarity threshold based on your observations and needs. If the results suggest that a different threshold is more effective, feel free to modify it.
+Use your OpenAI API key to set up the client and specify the model and temperature for generating content. The temperature controls the randomness of the output, with lower values producing more deterministic results.
+This template guides the AI to generate a new title that includes the top query, is concise, and maintains the original title’s context. You can modify this prompt if needed to suit your specific requirements or preferences.
+Using the OpenAI API may incur costs, especially with large datasets, so consider your budget and usage limits.
+You can apply the same process to h1 tags and meta descriptions. Simply adjust the filtering and prompts to target these elements.
+If necessary, you can apply this method to any other content scraped from the page, such as subheadings or paragraph text, by adjusting the prompt and process accordingly.
+Benefits of using Fuzzy Booster with FuzzyWuzzy and OpenAI in Google Colab
+Here’s how it can make a significant difference in your SEO strategy:
+- Time savings and efficiency: By automating the analysis and optimization of SEO metadata, you can save hours of manual work. This allows you to focus more on strategic planning and less on repetitive tasks.
+- Data-Driven insights: Fuzzy Booster provides clear, actionable insights by identifying which SEO elements are underperforming. The use of similarity scoring helps highlight opportunities for optimization that might otherwise be overlooked.
+- Improved SEO performance: By focusing on non-branded keywords, you can boost your site’s visibility to new audiences. Optimized metadata increases click-through rates and enhances search rankings, driving more organic traffic to your site.
+- Flexibility and customization: The approach is adaptable, allowing you to adjust thresholds and prompts according to your specific needs. Whether you want to include branded queries or optimize specific page elements
+Next Steps: Incorporate Fuzzy Booster into your organic strategy
+Now that you’ve completed this tutorial, here are some ideas on how to incorporate the Fuzzy Booster method into your broader organic strategy:
+- Apply to other content types: Beyond just titles and meta descriptions, consider using this approach for other content on your site, like blog headings or product descriptions. The principles can also apply to external content platforms, such as optimizing YouTube video titles or organizing forum posts.
+- Continuous improvement: Use Fuzzy Booster as a regular part of your SEO audits to continually enhance your metadata. Regularly update your data collection and analysis processes to adapt to changing search patterns.
+MLforSEO Academy
+Take your skills further — pick your path
+Introduction to Machine Learning for SEO
+by Lazarina Stoy
+Ship practical ML workflows — classification, clustering, entity extraction — no CS degree required.
+View course →AI Search Optimisation & Agentic SEO
+by Beatrice Gamba
+How agentic systems retrieve, evaluate and select — and how to become the source they cite.
+View course →AI Search, LLMs, Entity SEO & Knowledge Graph Strategies
+by Beatrice Gamba
+Build the entity authority and knowledge-graph presence that makes AI recognise and trust your brand.
+View course →Semantic ML-enabled Keyword Research
+by Lazarina Stoy
+Query understanding, search intent and semantic clustering for how people and AI really search.
+View course →",How to Automatically Optimize your SEO Metadata with FuzzyWuzzy and OpenAI in Google Colab,automate meta descriptions
+https://www.mlforseo.com/glossary-term/bert-bidirectional-encoder-representations-from-transformers/,"BERT is a language model developed by Google, introduced by researchers in October 2018. It belongs to the category of transformer models. Its fundamental purpose is to understand unstructured text and extract insights from it. It represents a modern approach to neural embeddings, improving topic quality and flexibility. BERT embeddings capture contextual meanings, grouping synonyms and related concepts, which aligns the resulting topics closely with human comprehension of themes.
+As a core component in advanced ML techniques, BERT (or similar pre-trained transformer models) is used to create dense vector representations of texts before they are clustered. For instance, BERTopic, a topic modeling technique, leverages BERT embeddings to create dense clusters for easily interpretable topics. BERT embeddings are also crucial in keyword extraction techniques like KeyBERT, which uses them to identify phrases and words most relevant to the content by calculating cosine similarity between the document embedding and each n-gram embedding.
+BERT serves as a drop-in replacement for earlier methods for general language understanding tasks, such as text classification. Models based on BERT, like LinkBERT, are pre-trained to capture document links and citation links to improve knowledge that spans across multiple documents. The Multitask Unified Model (MUM), introduced by Google in 2021, is noted as being similar to BERT but using a more powerful T5 text-to-text framework to not only understand language but also generate it, making it 1,000 times more powerful than BERT.",BERT (Bidirectional Encoder Representations from Transformers),what is bert

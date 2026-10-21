@@ -1,0 +1,14 @@
+# Tested 2026-10-21 (Python 3.9 locally, notebooks also target Google Colab / Python 3.12)
+pandas>=2.0
+trafilatura>=2.0
+# 01 - BERT extractive (original 2021 method)
+bert-extractive-summarizer==0.10.1
+spacy<3.8            # needed by bert-extractive-summarizer; 3.8+ has no wheels for Python 3.9
+torch>=2.2
+transformers>=4.51   # 4.51+ needed for Qwen3
+# 02 - embeddings + small open LLM
+sentence-transformers>=3.0
+accelerate>=0.30
+nltk>=3.9
+# 03 - LLM-assisted (hosted)
+anthropic            # 1.x needs Python 3.10+ (Colab is fine)
