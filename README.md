@@ -7,6 +7,7 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 | Folder | Tutorial | What's inside |
 |---|---|---|
 | [`fuzzy-matching-for-seo/`](fuzzy-matching-for-seo/) | What fuzzy matching is, and where it fits in SEO | RapidFuzz / TheFuzz / PolyFuzz comparison, redirect & duplicate matching, phonetic matching |
+| [`pytrends-google-trends-api/`](pytrends-google-trends-api/) | The ultimate guide to PyTrends: the Google Trends API (with Python code examples) | Tested 2026 PyTrends methods, 429 handling, TrendSpy fallbacks, share of search |
 | [`meta-descriptions-python/`](meta-descriptions-python/) | How to automatically generate meta descriptions with Python: from BERT to LLMs | BERT extractive (refreshed), embeddings + small open model, LLM with guardrails |
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
