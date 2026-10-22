@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 """
 Automate internal linking with AI: a scriptable companion to the MLforSEO guide
-"7 ways to automate internal linking with AI" (Lazarina Stoy, October 2026).
+"10 ways to automate internal linking with AI" (Lazarina Stoy, October 2026).
 
 Subcommands (run `python automate_internal_linking.py <command> -h` for options):
 
   orphans   Orphan and weak-page detection: crawl vs XML sitemap (vs a Search Console export).
   suggest   Embedding-based link suggestions placed at passage level, with anchor text
             chosen extractively or by an LLM, and every anchor checked by guardrails.
-  apply     Insert APPROVED suggestions into WordPress posts (dry run by default).
+  queries   Link opportunities from Search Console: pages ranking in striking distance for a
+            query, linked from other pages that already use that query's words.
+  linkcheck Broken, redirected and non-canonical internal links, with the URL to point to instead.
+  related   Embedding-based "related posts" lists for a widget or static block (plus the vectors).
+  apply     Insert APPROVED suggestions (or href fixes from linkcheck) into WordPress posts
+            (dry run by default).
   measure   Before/after impact of the links you added, against a control group of pages
             you didn't touch (difference in differences on a Search Console export).
 
@@ -313,7 +318,8 @@ LLM_SYSTEM = (
     "and a description of a target page. Pick the span of the passage that would make the best anchor "
     "text for a link to the target page.\n"
     "Rules: copy the span exactly as it appears in the passage, character for character; never rewrite, "
-    "add or invent words. 2 to 7 words. It must describe what the target page is about, so a reader knows "
+    "add or invent words. 2 to 7 words; don't start or end the span with an article, preposition or "
+    "conjunction (a, the, of, for, and...). It must describe what the target page is about, so a reader knows "
     "where the link goes. No generic phrases (click here, read more, this article) and no brand name on its own. "
     "If no span in the passage is a natural, honest anchor for this target, return an empty anchor."
 )
@@ -329,23 +335,94 @@ LLM_SCHEMA = {
 }
 
 
+# Models that accept the `effort` setting and the server-side refusal fallback (Haiku 4.5 accepts neither)
+EFFORT_MODELS = ("claude-opus-5-5", "claude-opus-5", "claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6",
+                 "claude-sonnet-5-5", "claude-sonnet-5", "claude-sonnet-4-6", "claude-fable-5", "claude-fable-5-1")
+FALLBACK_MODELS = ("claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5", "claude-fable-5-1")
+
+
 def llm_anchor(client, model, passage, target_title, target_summary):
     """Ask Claude for an anchor. Structured output keeps the reply parseable; the guardrails still check it."""
+    output_config = {"format": {"type": "json_schema", "schema": LLM_SCHEMA}}
+    extra = {}
+    if model in EFFORT_MODELS:
+        output_config["effort"] = "low"     # a short extraction task: low effort is plenty and keeps it cheap
+    if model in FALLBACK_MODELS:
+        extra = {"betas": ["server-side-fallback-2026-07-01"],
+                 "fallbacks": "default"}    # if the model declines, the API retries on a fallback model
     response = client.beta.messages.create(
         model=model,
         max_tokens=1024,
-        betas=["server-side-fallback-2026-07-01"],
-        fallbacks="default",            # if the model declines, the API retries on a fallback model
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": LLM_SCHEMA}},
+        output_config=output_config,
+        **extra,
         system=LLM_SYSTEM,
         messages=[{"role": "user", "content":
                    f"<passage>\n{passage}\n</passage>\n<target_page>\nTitle: {target_title}\n"
                    f"Summary: {target_summary}\n</target_page>"}],
     )
+    u = response.usage
+    usage = {"input": u.input_tokens or 0, "output": u.output_tokens or 0, "model": response.model}
     if response.stop_reason == "refusal":
-        return {"anchor": "", "confidence": 0, "reason": "model declined"}
+        return {"anchor": "", "confidence": 0, "reason": "model declined", "_usage": usage}
+    if response.stop_reason == "max_tokens":
+        return {"anchor": "", "confidence": 0, "reason": "hit max_tokens before answering", "_usage": usage}
     text = next((b.text for b in response.content if b.type == "text"), "{}")
-    return json.loads(text)
+    out = json.loads(text)
+    out["_usage"] = usage
+    return out
+
+
+# USD per million tokens (input, output); used only to print an estimate of what the run cost
+PRICES = {"claude-opus-5-5": (4, 20), "claude-opus-5": (5, 25), "claude-sonnet-5-5": (2, 10),
+          "claude-sonnet-5": (2, 10), "claude-haiku-4-5": (1, 5), "claude-fable-5-1": (10, 50)}
+
+
+def match_passage_span(anchor, passage):
+    """Models sometimes "tidy" typography: a straight apostrophe for the passage's curly one, or a hyphen
+    for a dash. If the anchor matches the passage once quotes, dashes and spacing are ignored, return the
+    passage's own characters (so `apply` can find it). Words are never changed; anything else is left for
+    the verbatim guardrail to reject."""
+    if not anchor or anchor.lower() in passage.lower():
+        return anchor
+    pattern = ""
+    for ch in anchor:
+        if ch in "'’‘`":
+            pattern += "['’‘`]"
+        elif ch in '"“”':
+            pattern += '["“”]'
+        elif ch in "-–—":
+            pattern += "[-–—]"
+        elif ch.isspace():
+            pattern += r"\s+"
+        else:
+            pattern += re.escape(ch)
+    m = re.search(r"(?<![\w])" + pattern + r"(?![\w])", passage, flags=re.IGNORECASE)
+    return m.group(0) if m else anchor
+
+
+def page_canonical(url):
+    """The rel=canonical a page declares (None if it can't be fetched or has none)."""
+    try:
+        r = requests.get(url, headers=UA, timeout=20)
+        m = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]*>', r.text, flags=re.IGNORECASE)
+        h = m and re.search(r'href=["\']([^"\']+)', m.group(0))
+        return normalise_url(h.group(1)) if h else None
+    except requests.RequestException:
+        return None
+
+
+def pick_canonical(pages, a, b, inl):
+    """Of two near-duplicate pages, which one should links point to?
+    1. the one the other declares as its canonical; 2. no '-2'-style slug suffix; 3. more inlinks."""
+    ua, ub = pages.at[a, "url"], pages.at[b, "url"]
+    if page_canonical(ub) == normalise_url(ua):
+        return a, b
+    if page_canonical(ua) == normalise_url(ub):
+        return b, a
+    suffix = re.compile(r"-\d+/?$")
+    if bool(suffix.search(ua)) != bool(suffix.search(ub)):
+        return (b, a) if suffix.search(ua) else (a, b)
+    return (a, b) if int(inl.get(ua, 0)) >= int(inl.get(ub, 0)) else (b, a)
 
 
 def cmd_suggest(args):
@@ -386,8 +463,9 @@ def cmd_suggest(args):
     # near-duplicate pages (>= --duplicate) are a consolidation job, not a linking job: keep one of each
     dupes = set()
     for a, b in zip(*np.where(np.triu(sim, 1) >= args.duplicate)):
-        dupes.add(int(b))
-        print(f"Possible duplicates, skipping the second: {pages.at[int(a), 'url']} | {pages.at[int(b), 'url']}",
+        keep, drop = pick_canonical(pages, int(a), int(b), inl)
+        dupes.add(drop)
+        print(f"Possible duplicates, keeping {pages.at[keep, 'url']} | skipping {pages.at[drop, 'url']}",
               file=sys.stderr)
 
     candidates = []
@@ -404,8 +482,15 @@ def cmd_suggest(args):
     candidates.sort(key=lambda c: (min(int(inl.get(pages.at[c[1], "url"], 0)), 5), -c[2]))
 
     rows, llm_calls = [], 0
+    llm_tokens = {"input": 0, "output": 0}
+    llm_log = []
+    llm_stats = {"accepted": 0, "declined": 0, "rejected": 0, "errors": 0}
+    cost = 0.0
+    per_target = {}
     for i, j, s in candidates:
         src, dst = pages.at[i, "url"], pages.at[j, "url"]
+        if per_target.get(dst, 0) >= args.max_per_target:
+            continue
         ids = [c for c in by_page.get(i, []) if dst not in chunk_rows[c]["links_to"]]
         if not ids:
             continue
@@ -438,15 +523,43 @@ def cmd_suggest(args):
             try:
                 out = llm_anchor(client, args.llm_model, passage, pages.at[j, "title"], summary)
             except Exception as e:                     # network or API error: keep the extractive anchor
-                out = {"anchor": "", "reason": f"LLM error: {type(e).__name__}"}
-            ok, reasons = guard.check(out.get("anchor", ""), passage, chunk_id, src, dst, anchors_to.get(dst, ()))
-            if ok:
-                anchor, method = out["anchor"], "llm"
+                out = {"anchor": "", "reason": f"LLM error: {type(e).__name__}: {str(e)[:120]}"}
+                llm_stats["errors"] += 1
+            usage = out.pop("_usage", None)
+            if usage:
+                llm_tokens["input"] += usage["input"]
+                llm_tokens["output"] += usage["output"]
+                pin, pout = PRICES.get(usage["model"], PRICES.get(args.llm_model, (0, 0)))
+                cost += (usage["input"] * pin + usage["output"] * pout) / 1e6
+            llm_anchor_text = (out.get("anchor") or "").strip()
+            # deterministic repair: drop a leading article ("A semantic keyword universe" -> "semantic
+            # keyword universe"). The result is still a verbatim span of the passage, so nothing is invented.
+            llm_anchor_text = re.sub(r"^(?:a|an|the)\s+", "", llm_anchor_text, flags=re.IGNORECASE)
+            llm_anchor_text = match_passage_span(llm_anchor_text, passage)
+            conf = out.get("confidence")
+            if not llm_anchor_text:                    # the model said no natural anchor exists (allowed)
+                if not out.get("reason", "").startswith("LLM error"):
+                    llm_stats["declined"] += 1
+                rejected = f"LLM gave no anchor: {out.get('reason', '')}"
             else:
-                rejected = f"LLM anchor '{out.get('anchor', '')}' rejected: {'; '.join(reasons) or out.get('reason', '')}"
+                ok, reasons = guard.check(llm_anchor_text, passage, chunk_id, src, dst, anchors_to.get(dst, ()))
+                if isinstance(conf, (int, float)) and conf < args.llm_min_confidence:
+                    ok = False
+                    reasons = reasons + [f"model's own confidence {conf:.2f} < {args.llm_min_confidence}"]
+                if ok:
+                    anchor, method = llm_anchor_text, "llm"
+                    llm_stats["accepted"] += 1
+                else:
+                    llm_stats["rejected"] += 1
+                    rejected = f"LLM anchor '{llm_anchor_text}' rejected: {'; '.join(reasons)}"
+            llm_log.append({"source_url": src, "target_url": dst, "llm_anchor": llm_anchor_text,
+                            "confidence": out.get("confidence", ""), "reason": out.get("reason", ""),
+                            "outcome": "accepted" if method == "llm" else (rejected or ""),
+                            "extractive_anchor": extractive, "passage": passage[:600]})
         if not anchor:
             continue
         guard.accept(anchor, chunk_id, src, dst)
+        per_target[dst] = per_target.get(dst, 0) + 1
         rows.append({
             "approve": "", "source_url": src, "source_title": pages.at[i, "title"],
             "target_url": dst, "target_title": pages.at[j, "title"],
@@ -460,7 +573,191 @@ def cmd_suggest(args):
     out.to_csv(args.out, index=False)
     print(f"{len(candidates)} unlinked similar pairs -> {len(out)} suggestions that passed the guardrails "
           f"({out['source_url'].nunique() if len(out) else 0} source pages). LLM calls: {llm_calls}.")
+    if llm_calls:
+        print(f"LLM anchors: {llm_stats['accepted']} passed the guardrails, {llm_stats['rejected']} rejected, "
+              f"{llm_stats['declined']} 'no natural anchor', {llm_stats['errors']} errors. "
+              f"Tokens: {llm_tokens['input']:,} in / {llm_tokens['output']:,} out, about ${cost:.3f}.")
+        log_path = os.path.splitext(args.out)[0] + "_llm_log.csv"
+        pd.DataFrame(llm_log).to_csv(log_path, index=False)
+        print(f"Every LLM answer (accepted or not) is in {log_path}.")
     print(f"Saved {args.out}. Fill the 'approve' column (yes/no) before running `apply`.")
+
+
+# --------------------------------------------------------------------------------------------
+# 2b. Search Console queries: link the page Google already ranks, with the words people search
+# --------------------------------------------------------------------------------------------
+def read_gsc_queries(path):
+    """A page + query export (Search Console API, Search Analytics for Sheets, BigQuery bulk export)."""
+    g = pd.read_csv(path)
+    cols = {c.lower().strip(): c for c in g.columns}
+
+    def pick(*names):
+        for n in names:
+            if n in cols:
+                return cols[n]
+        sys.exit(f"{path}: need a column named one of {names}")
+
+    g = g.rename(columns={pick("page", "url", "landing page", "address"): "page", pick("query", "queries", "top queries"): "query",
+                          pick("impressions"): "impressions", pick("position", "average position", "avg. position"): "position"})
+    g["clicks"] = g[cols["clicks"]] if "clicks" in cols else 0
+    g["page"] = g["page"].map(normalise_url)
+    g["query"] = g["query"].astype(str).str.strip()
+    return g[["page", "query", "clicks", "impressions", "position"]]
+
+
+def cmd_queries(args):
+    pages, links = load(args)
+    g = read_gsc_queries(args.gsc_queries)
+    g = g[(g["impressions"] >= args.min_impressions) & g["position"].between(args.min_position, args.max_position)]
+    # a query that several of your pages rank for is a cannibalisation question first: send links to the
+    # page that does best for it, and flag the rest
+    g = g.sort_values(["query", "position", "clicks"], ascending=[True, True, False])
+    ranking_pages = g.groupby("query")["page"].nunique()
+    g = g.drop_duplicates("query", keep="first")
+    n_words = g["query"].str.split().str.len()
+    g = g[(n_words >= 2) & (n_words <= 7)]
+    print(f"{len(g)} striking-distance queries (positions {args.min_position:g}-{args.max_position:g}, "
+          f">= {args.min_impressions} impressions)", file=sys.stderr)
+
+    existing = set(zip(links["Source"], links["Destination"]))
+    anchors_to = links.groupby("Destination")["Anchor"].apply(list).to_dict()
+    known = set(pages["url"])
+    guard = Guardrails(args.brand, args.max_links_per_source, args.max_same_anchor)
+    chunks = {i: chunks_for(row) for i, row in pages.iterrows()}
+    rows = []
+    # biggest opportunities first: lots of impressions, ranking just off the top spots
+    for _, q in g.sort_values("impressions", ascending=False).iterrows():
+        target = q["page"]
+        if target not in known and not args.allow_unknown_targets:
+            continue
+        pat = re.compile(r"(?<![\w])" + re.escape(q["query"]) + r"(?![\w])", flags=re.IGNORECASE)
+        found = 0
+        for i, row in pages.iterrows():
+            src = row["url"]
+            if src == target or (src, target) in existing:
+                continue
+            for k, (text, linked) in enumerate(chunks[i]):
+                m = pat.search(text)
+                if not m or target in linked:
+                    continue
+                anchor = m.group(0)                       # the source page's own words, not the query's casing
+                ok, reasons = guard.check(anchor, text, (i, k), src, target, anchors_to.get(target, ()))
+                if not ok:
+                    continue
+                guard.accept(anchor, (i, k), src, target)
+                found += 1
+                rows.append({
+                    "approve": "", "source_url": src, "source_title": row["title"], "target_url": target,
+                    "query": q["query"], "impressions": int(q["impressions"]), "clicks": int(q["clicks"]),
+                    "position": round(float(q["position"]), 1), "pages_ranking_for_query": int(ranking_pages[q["query"]]),
+                    "anchor": anchor, "anchor_method": "search console query", "passage": text[:600],
+                    "source_post_id": row["post_id"] if "post_id" in pages.columns else "",
+                })
+                break                                     # one paragraph per source page is enough
+            if found >= args.max_sources_per_query:
+                break
+    out = pd.DataFrame(rows)
+    out.to_csv(args.out, index=False)
+    print(f"{len(out)} suggestions for {out['target_url'].nunique() if len(out) else 0} target pages "
+          f"from {out['query'].nunique() if len(out) else 0} queries. Saved {args.out}; review, then `apply`.")
+    if len(out) and (out["pages_ranking_for_query"] > 1).any():
+        print("Some queries rank with more than one of your pages (see pages_ranking_for_query): "
+              "check for cannibalisation before you add links.")
+
+
+# --------------------------------------------------------------------------------------------
+# 2c. Link health: broken, redirected and non-canonical internal links
+# --------------------------------------------------------------------------------------------
+def fetch_status(url, timeout=20):
+    """First-hop status, final URL and status after redirects, number of hops, and the final page's canonical."""
+    try:
+        r = requests.get(url, headers=UA, timeout=timeout, allow_redirects=True)
+    except requests.RequestException as e:
+        return {"first_status": "error", "final_url": "", "final_status": type(e).__name__, "hops": 0, "canonical": ""}
+    canonical = ""
+    if r.status_code == 200 and "html" in r.headers.get("Content-Type", ""):
+        m = re.search(r'<link[^>]+rel=["\']canonical["\'][^>]*>', r.text, flags=re.IGNORECASE)
+        h = m and re.search(r'href=["\']([^"\']+)', m.group(0))
+        canonical = normalise_url(h.group(1)) if h else ""
+    first = r.history[0].status_code if r.history else r.status_code
+    return {"first_status": first, "final_url": normalise_url(r.url), "final_status": r.status_code,
+            "hops": len(r.history), "canonical": canonical}
+
+
+def cmd_linkcheck(args):
+    pages, links = load(args)
+    links = links.copy()
+    links["href"] = links["raw_destination"].astype(str).str.split("#").str[0]
+    links = links[links["href"].str.startswith("http")]
+    hrefs = links["href"].drop_duplicates().tolist()[:args.max_urls]
+    print(f"Checking {len(hrefs)} unique internal link targets", file=sys.stderr)
+    status = {}
+    for n, h in enumerate(hrefs, 1):
+        status[h] = fetch_status(h)
+        time.sleep(args.delay)                            # be polite to your own server
+        if n % 50 == 0:
+            print(f"  {n}/{len(hrefs)}", file=sys.stderr)
+    rows = []
+    for _, l in links[links["href"].isin(status)].iterrows():
+        s = status[l["href"]]
+        issue, fix = "", ""
+        if s["first_status"] == "error" or (isinstance(s["final_status"], int) and s["final_status"] >= 400):
+            issue = f"broken ({s['final_status']})"
+            fix = ""                                     # needs a human: pick a replacement (try `suggest`)
+        elif s["hops"] > 1:
+            issue, fix = f"redirect chain ({s['hops']} hops)", s["final_url"]
+        elif s["hops"] == 1:
+            issue, fix = f"redirect ({s['first_status']})", s["final_url"]
+        elif s["canonical"] and s["canonical"] != normalise_url(l["href"]):
+            issue, fix = "points to a non-canonical URL", s["canonical"]
+        if not issue:
+            continue
+        rows.append({"approve": "", "source_url": l["Source"], "anchor": l["Anchor"], "old_href": l["raw_destination"],
+                     "issue": issue, "fix_href": fix, "final_status": s["final_status"],
+                     "link_position": l.get("Link Position", "")})
+    out = pd.DataFrame(rows)
+    out.to_csv(args.out, index=False)
+    print(out["issue"].str.replace(r" \(.*", "", regex=True).value_counts().to_string() if len(out)
+          else "No broken, redirected or non-canonical internal links found.")
+    print(f"Saved {args.out}. Rows with a fix_href can go through `apply` (it swaps the href); "
+          "broken links need a replacement chosen by a person.")
+
+
+# --------------------------------------------------------------------------------------------
+# 2d. Related posts: embedding-based "read next" lists for a widget or a static block
+# --------------------------------------------------------------------------------------------
+def cmd_related(args):
+    from sentence_transformers import SentenceTransformer
+
+    pages, links = load(args)
+    model = SentenceTransformer(args.model)
+    text = (pages["title"] + ". " + pages["content"].str.split().str[:args.max_words].str.join(" ")).tolist()
+    emb = model.encode(text, batch_size=16, normalize_embeddings=True)
+    sim = emb @ emb.T
+    np.fill_diagonal(sim, -1)
+    inl = links[links["Source"].isin(set(pages["url"]))].groupby("Destination")["Source"].nunique()
+    rows, out_json = [], {}
+    for i in range(len(pages)):
+        picks = []
+        for j in np.argsort(-sim[i]):
+            if sim[i, j] >= args.duplicate:              # a near-copy isn't "related", it's a consolidation job
+                continue
+            if any(sim[j, p] >= args.diversity for p in picks):   # don't show three versions of one topic
+                continue
+            picks.append(int(j))
+            if len(picks) == args.k:
+                break
+        out_json[pages.at[i, "url"]] = [pages.at[j, "url"] for j in picks]
+        for rank, j in enumerate(picks, 1):
+            rows.append({"url": pages.at[i, "url"], "rank": rank, "related_url": pages.at[j, "url"],
+                         "related_title": pages.at[j, "title"], "similarity": round(float(sim[i, j]), 3),
+                         "related_unique_inlinks": int(inl.get(pages.at[j, "url"], 0))})
+    pd.DataFrame(rows).to_csv(args.out, index=False)
+    with open(os.path.splitext(args.out)[0] + ".json", "w") as f:
+        json.dump(out_json, f, indent=1)
+    np.save(os.path.splitext(args.out)[0] + "_embeddings.npy", emb)
+    print(f"{len(pages)} pages x {args.k} related posts. Saved {args.out}, a JSON map for your template, "
+          f"and the embeddings (load them into a vector database if you want live lookups).")
 
 
 # --------------------------------------------------------------------------------------------
@@ -492,6 +789,13 @@ def insert_link(html: str, anchor: str, href: str):
     return html, False
 
 
+def replace_href(html: str, old: str, new: str):
+    """Point existing links at `new` instead of `old` (redirected or non-canonical URLs). Anchors are untouched."""
+    pat = re.compile(r'(href=)(["\'])' + re.escape(old) + r'(#[^"\']*)?\2')
+    out, n = pat.subn(lambda m: f"{m.group(1)}{m.group(2)}{new}{m.group(3) or ''}{m.group(2)}", html)
+    return out, n > 0
+
+
 def cmd_apply(args):
     df = pd.read_csv(args.suggestions).fillna("")
     df = df[df["approve"].astype(str).str.strip().str.lower().isin(["y", "yes", "1", "true", "x"])]
@@ -515,6 +819,13 @@ def cmd_apply(args):
         post = r.json()[0]
         before = after = post["content"]["raw"]
         for _, row in group.iterrows():
+            if row.get("fix_href"):                       # a row from `linkcheck`: swap the href, keep the anchor
+                after, ok = replace_href(after, row["old_href"], row["fix_href"])
+                log.append({"source_url": src, "target_url": row["fix_href"], "anchor": row["anchor"],
+                            "result": "href updated" if ok else "skipped (old href not found)"})
+                continue
+            if "target_url" not in row or not row["target_url"]:
+                continue
             after, ok = insert_link(after, row["anchor"], row["target_url"])
             log.append({"source_url": src, "target_url": row["target_url"], "anchor": row["anchor"],
                         "result": "inserted" if ok else "skipped (anchor not found as plain text, or already linked)"})
@@ -605,8 +916,44 @@ def main(argv=None):
     p.add_argument("--llm", action="store_true", help="ask Claude for the anchor (needs ANTHROPIC_API_KEY)")
     p.add_argument("--llm-model", default="claude-opus-5-5")
     p.add_argument("--llm-limit", type=int, default=50, help="max LLM calls per run (cost cap)")
+    p.add_argument("--llm-min-confidence", type=float, default=0.5,
+                   help="reject LLM anchors the model itself rates below this")
+    p.add_argument("--max-per-target", type=int, default=3,
+                   help="max new links to one target page per batch (stops one page soaking up every link)")
     p.add_argument("--out", default="link_suggestions.csv")
     p.set_defaults(func=cmd_suggest)
+
+    p = sub.add_parser("queries", help="link opportunities from Search Console page + query data")
+    add_source(p)
+    p.add_argument("--gsc-queries", required=True, help="CSV with page, query, clicks, impressions, position")
+    p.add_argument("--min-impressions", type=int, default=50)
+    p.add_argument("--min-position", type=float, default=4)
+    p.add_argument("--max-position", type=float, default=20)
+    p.add_argument("--max-sources-per-query", type=int, default=3)
+    p.add_argument("--allow-unknown-targets", action="store_true", help="keep targets that aren't in the crawl")
+    p.add_argument("--brand", nargs="*", default=["mlforseo", "ml for seo", "lazarina", "lazarina stoy"])
+    p.add_argument("--max-links-per-source", type=int, default=3)
+    p.add_argument("--max-same-anchor", type=int, default=2)
+    p.add_argument("--out", default="query_link_suggestions.csv")
+    p.set_defaults(func=cmd_queries)
+
+    p = sub.add_parser("linkcheck", help="broken, redirected and non-canonical internal links")
+    add_source(p)
+    p.add_argument("--max-urls", type=int, default=2000)
+    p.add_argument("--delay", type=float, default=0.2, help="seconds between requests")
+    p.add_argument("--out", default="link_health.csv")
+    p.set_defaults(func=cmd_linkcheck)
+
+    p = sub.add_parser("related", help="embedding-based related posts (for a widget or static block)")
+    add_source(p)
+    p.add_argument("--model", default="BAAI/bge-small-en-v1.5")
+    p.add_argument("--max-words", type=int, default=350)
+    p.add_argument("--k", type=int, default=4)
+    p.add_argument("--duplicate", type=float, default=0.95)
+    p.add_argument("--diversity", type=float, default=0.92,
+                   help="skip a candidate this similar to one already picked")
+    p.add_argument("--out", default="related_posts.csv")
+    p.set_defaults(func=cmd_related)
 
     p = sub.add_parser("apply", help="insert approved links into WordPress (dry run unless --write)")
     p.add_argument("--site", required=True)

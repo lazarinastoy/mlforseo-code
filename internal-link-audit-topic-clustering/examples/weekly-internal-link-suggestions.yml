@@ -1,5 +1,5 @@
 # Example GitHub Actions workflow: every Monday, rebuild the orphan report and the link
-# suggestions for your site and attach them to the run as a downloadable artifact.
+# suggestions and link health report for your site and attach them to the run as a downloadable artifact.
 # Nothing is written to your site: a human reviews the CSV, marks `approve`, and runs `apply`.
 #
 # Copy to .github/workflows/ in your own repo, next to automate_internal_linking.py and requirements.txt.
@@ -23,9 +23,12 @@ jobs:
         run: python automate_internal_linking.py suggest --site https://www.example.com --brand "example brand"
         # env:
         #   ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Broken, redirected and non-canonical internal links
+        run: python automate_internal_linking.py linkcheck --site https://www.example.com
       - uses: actions/upload-artifact@v4
         with:
           name: internal-link-review
           path: |
             orphan_report.csv
             link_suggestions.csv
+            link_health.csv

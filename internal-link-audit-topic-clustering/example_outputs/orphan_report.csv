@@ -1,56 +1,8 @@
 url,status,unique_inlinks,content_inlinks,found_in
-https://www.mlforseo.com/blog/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,sitemap
-https://www.mlforseo.com/knowledge-graph-strategy/how-entity-blueprints-turn-brand-knowledge-into-search-signals/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/knowledge-graph-strategy/the-three-tier-entity-prioritisation-framework/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/knowledge-graph-strategy/what-it-takes-to-earn-a-google-knowledge-panel/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/knowledge-graph-strategy/why-entity-relationship-mapping-is-critical-for-brand-visibility/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/knowledge-graph-strategy/wikidata-for-brands-notability-criteria-and-a-realistic-path/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/5-steps-to-identify-and-fix-entity-recognition-gaps-that-block-llm-visibility/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/audience-no-longer-only-human-agentic-seo/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/chunk-not-the-page/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/consistency-beats-completeness-structured-data/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/dark-ai-traffic-hidden-in-direct/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/five-stage-retrieval-funnel/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/how-entities-power-query-fan-out-in-ai-search-2/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/indexed-is-not-selected/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/rank-tracker-ai-search-measurement/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/robots-txt-silent-killer-ai-traffic/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/trust-is-not-a-schema-field/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/vagueness-is-a-disqualifier/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/web-scraping-screaming-frog/,crawled but missing from the XML sitemap,8,8,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/youtube-seo-audit/,crawled but missing from the XML sitemap,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/youtube-seo-audit/,weak: one contextual inlink,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/content-creation/how-to-use-generative-ai-with-structured-data-for-programmatic-seo/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/content-creation/youtube-seo-guide/,crawled but missing from the XML sitemap,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/content-creation/youtube-seo-guide/,weak: one contextual inlink,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/how-to-find-ml-enabled-automation-in-your-seo-workflow/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/indexnow-api-python/,crawled but missing from the XML sitemap,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/indexnow-api-python/,weak: one contextual inlink,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/internal-link-analysis/seo-internal-link-audit-topic-clustering-machine-learning/,crawled but missing from the XML sitemap,9,9,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/how-to-structure-and-categorise-keyword-data-for-semantic-analysis/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/how-to-turn-semantic-keyword-research-into-an-actionable-seo-workflow/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/pytrends-google-trends-api-python/,crawled but missing from the XML sitemap,0,0,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/pytrends-google-trends-api-python/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/what-does-a-good-semantic-keyword-universe-actually-look-like/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/what-is-implicit-user-feedback-in-seo-how-behavioural-signals-shape-search-rankings/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-implementation-guides/onpage-seo/automatically-generate-meta-descriptions-python/,crawled but missing from the XML sitemap,3,3,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/onpage-seo/image-seo-multimodal-search-guide/,crawled but missing from the XML sitemap,0,0,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/onpage-seo/image-seo-multimodal-search-guide/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/onpage-seo/search-intent-first-website-architecture/,crawled but missing from the XML sitemap,2,2,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/serp-analysis/serp-competitor-analysis-machine-learning/,crawled but missing from the XML sitemap,11,11,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/structured-data-audit/structured-data-automation-python/,crawled but missing from the XML sitemap,1,1,crawl
-https://www.mlforseo.com/machine-learning-implementation-guides/structured-data-audit/structured-data-automation-python/,weak: one contextual inlink,1,1,crawl
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/5-steps-to-identify-and-fix-entity-recognition-gaps-that-block-llm-visibility-2/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/entity-based-search-in-the-llm-era-how-google-structures-and-interprets-entities/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/entity-based-search-in-the-llm-era/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/entity-disambiguation-in-practice/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/how-to-audit-entity-structure-in-modern-search/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/why-navigation-elements-outrank-your-brand-in-entity-analysis/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/404-and-redirect-mapping-with-fuzzy-matching-in-google-colab-python/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/machine-learning-tutorials/sentiment-analysis/sentiment-analysis-theory-methods-applications/,crawled but missing from the XML sitemap,8,8,crawl
-https://www.mlforseo.com/machine-learning-tutorials/syntax-analysis/syntax-analysis-with-google-natural-language-api-in-google-sheets/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/ml-fundamentals/characteristics-of-a-machine-learning-problem-seo/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/ml-fundamentals/what-is-query-augmentation-in-seo/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/ml-fundamentals/what-is-query-context-and-session-context-in-seo/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
-https://www.mlforseo.com/ml-fundamentals/what-is-search-query-sequence-and-query-path/,weak: one contextual inlink,1,1,"crawl, sitemap"
-https://www.mlforseo.com/ml-fundamentals/what-is-the-eav-model-in-seo-a-practical-framework-for-semantic-keyword-research/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
+https://www.example.com/blog/vector-search-basics/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,"crawl, sitemap"
+https://www.example.com/blog/old-webinar-recap/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,sitemap
+https://www.example.com/blog/schema-markup-checklist/,no contextual inlinks (only navigation; footer or related-post links),3,0,"crawl, sitemap"
+https://www.example.com/blog/keyword-clustering-guide/,weak: one contextual inlink,2,1,"crawl, sitemap"
+https://www.example.com/blog/entity-seo-primer/,weak: one contextual inlink,1,1,"crawl, sitemap, search console"
+https://www.example.com/blog/new-launch-post/,crawled but missing from the XML sitemap,1,1,crawl
+https://www.example.com/blog/2019/legacy-guide/,"no in-content links from any other post (WP API: menus, footers and archives not seen)",0,0,search console
