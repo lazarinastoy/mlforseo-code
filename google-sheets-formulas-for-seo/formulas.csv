@@ -1,0 +1,67 @@
+id,what it does,input cells,formula
+informational,Label keywords for informational search intent,C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(how|why|does|which|when|who|guide|tutorial|learn|examples|resource|ideas|tips|difference between|strategies|ways|example|directory|news|basics|concepts|troubleshoot|resolve|risks|beginners|upgrade|improve|optimize|case study|best practices|templates|pros and cons|analysis|articles|audit|benefits|blogs|build|calculate|campaign|choose|common questions|consider|cost|create|definition|definitive guide|earn|easy steps|essential|events|explainer video|factors|find|fix|grow|hacks|how to|ideal|importance of|increase|infographic|information|meaning|measure|metrics|mistakes|myths|opportunities|popular|practices|questions|remove|set up|shortcuts|stats|strategy|study|successful|tactics|techniques|terms|things to know|time|trends|tricks|types|updates|well explained|tutorials|framework|checklist|process|plan|test|glossary|sample|survey|exercises|report|certification|webinar|calendar|quiz|directories|to do list|design basics|what|where)\b""), ""Informational Intent"", ""Other"")"
+commercial,Label keywords for commercial search intent,C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(best|top|vs|versus|review|reviews|compare|comparison|ratings|recommendation|buyer's guide|alternatives?|features?|benefits?|cost-effective|affordable|premium|quality|deal|offers|savings|discount|value|choice|selection|rankings|user ratings|testimonials|feedback|pros|cons|evaluation|assessment|analysis|benchmark|brand|models|versions|upgrade|update|launch|new|latest|innovative|technology|solutions|providers|vendors|suppliers|applications|software|platform|systems|tools|equipment|machinery|accessories|devices|gadgets|electronics|appliances|products|materials|suppli\w*|kit|package|bundle)\b""), ""Commercial Intent"", ""Other"")"
+transactional,Label keywords for transactional search intent,C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(buy|purchase|order|price|quote|for sale|sale|deal|offers|discount|coupon|promo code|voucher|bargain|cost|pricing|cheap|affordable|expensive|premium|near me|online|e-commerce|shopping cart|checkout|shop|store|retailer|dealer|supplier|marketplace|auction|bid|buy now|pay|payment|finance|leasing|rent|rental|subscribe|subscription|free trial|book|reserve|enquire|inquiry|estimate|cost calculator|shipping|delivery|available|in stock|out of stock|pre-order|backorder|special offer|limited time offer|flash sale|clearance|wholesale|bulk buy|group buy|membership|reward|loyalty|gift card|cashback|trade-in|renew|secure checkout)\b""), ""Transactional Intent"", ""Other"")"
+local_us,Label keywords for localised intent (US states),C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming)\b""), ""Localised Intent - US"", ""Other"")"
+local_uk,Label keywords for localised intent (UK cities),C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(London|Edinburgh|Manchester|Birmingham|Glasgow|Liverpool|Bristol|Newcastle|Leeds|Belfast|Cardiff|Sheffield|Nottingham|Leicester|Southampton|Brighton|Plymouth|Stoke-on-Trent|Wolverhampton|Derby)\b""), ""Localised Intent - UK"", ""Other"")"
+local_uk_range,Localised intent from a full list of cities kept in another tab,C2 = keyword; Cities!A2:A = one city per row,"=IF(REGEXMATCH(C2, ""(?i)\b("" & TEXTJOIN(""|"", TRUE, Cities!A2:A) & "")\b""), ""Localised Intent - UK"", ""Other"")"
+navigational,Label keywords for navigational intent,C2 = keyword,"=IF(REGEXMATCH(C2, ""(?i)\b(login|log in|sign in|homepage|website|facebook|youtube|gmail|instagram|twitter|wikipedia)\b|www\.|\.(com|org|net|edu|gov|co\.uk|uk)\b""), ""Navigational Intent"", ""Other"")"
+intent_first_match,One intent label per keyword (first match wins),C2 = keyword,"=IFNA(IFS(
+  REGEXMATCH(C2, ""(?i)\b(how|why|does|which|when|who|guide|tutorial|learn|examples|resource|ideas|tips|difference between|strategies|ways|example|directory|news|basics|concepts|troubleshoot|resolve|risks|beginners|upgrade|improve|optimize|case study|best practices|templates|pros and cons|analysis|articles|audit|benefits|blogs|build|calculate|campaign|choose|common questions|consider|cost|create|definition|definitive guide|earn|easy steps|essential|events|explainer video|factors|find|fix|grow|hacks|how to|ideal|importance of|increase|infographic|information|meaning|measure|metrics|mistakes|myths|opportunities|popular|practices|questions|remove|set up|shortcuts|stats|strategy|study|successful|tactics|techniques|terms|things to know|time|trends|tricks|types|updates|well explained|tutorials|framework|checklist|process|plan|test|glossary|sample|survey|exercises|report|certification|webinar|calendar|quiz|directories|to do list|design basics|what|where)\b""), ""Informational"",
+  REGEXMATCH(C2, ""(?i)\b(buy|purchase|order|price|quote|for sale|sale|deal|offers|discount|coupon|promo code|voucher|bargain|cost|pricing|cheap|affordable|expensive|premium|near me|online|e-commerce|shopping cart|checkout|shop|store|retailer|dealer|supplier|marketplace|auction|bid|buy now|pay|payment|finance|leasing|rent|rental|subscribe|subscription|free trial|book|reserve|enquire|inquiry|estimate|cost calculator|shipping|delivery|available|in stock|out of stock|pre-order|backorder|special offer|limited time offer|flash sale|clearance|wholesale|bulk buy|group buy|membership|reward|loyalty|gift card|cashback|trade-in|renew|secure checkout)\b""), ""Transactional"",
+  REGEXMATCH(C2, ""(?i)\b(best|top|vs|versus|review|reviews|compare|comparison|ratings|recommendation|buyer's guide|alternatives?|features?|benefits?|cost-effective|affordable|premium|quality|deal|offers|savings|discount|value|choice|selection|rankings|user ratings|testimonials|feedback|pros|cons|evaluation|assessment|analysis|benchmark|brand|models|versions|upgrade|update|launch|new|latest|innovative|technology|solutions|providers|vendors|suppliers|applications|software|platform|systems|tools|equipment|machinery|accessories|devices|gadgets|electronics|appliances|products|materials|suppli\w*|kit|package|bundle)\b""), ""Commercial"",
+  REGEXMATCH(C2, ""(?i)\b(Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming|London|Edinburgh|Manchester|Birmingham|Glasgow|Liverpool|Bristol|Newcastle|Leeds|Belfast|Cardiff|Sheffield|Nottingham|Leicester|Southampton|Brighton|Plymouth|Stoke-on-Trent|Wolverhampton|Derby)\b""), ""Localised"",
+  REGEXMATCH(C2, ""(?i)\b(login|log in|sign in|homepage|website|facebook|youtube|gmail|instagram|twitter|wikipedia)\b|www\.|\.(com|org|net|edu|gov|co\.uk|uk)\b""), ""Navigational""
+), ""Unclassified"")"
+intent_rules_table,"Every matching intent label, from a rules tab (whole column, BYROW + LAMBDA)","C2:C = keywords; Rules!A2:A = label, Rules!B2:B = pipe-separated words","=BYROW(C2:C, LAMBDA(kw, IF(kw="""", ,
+  IFERROR(TEXTJOIN("", "", TRUE,
+    FILTER(Rules!A2:A, Rules!B2:B<>"""", REGEXMATCH(kw, ""(?i)\b("" & Rules!B2:B & "")\b""))),
+  ""Unclassified""))))"
+serp_intent,SERP features as search intent signals (all matching labels),J2 = SERP features,"=LET(labels, TEXTJOIN("", "", TRUE,
+  IF(REGEXMATCH(J2, ""(?i)Featured snippet|People also ask|Instant answer|Knowledge panel|Carousel|Thumbnail|Video preview|AI overview""), ""Informational Intent"", ),
+  IF(REGEXMATCH(J2, ""(?i)Site ?links|Knowledge Graph""), ""Navigational Intent"", ),
+  IF(REGEXMATCH(J2, ""(?i)Local pack|Shopping ads|Local teaser pack|Shopping results|Popular products""), ""Transactional Intent"", ),
+  IF(REGEXMATCH(J2, ""(?i)Top ads|Bottom ads|AdWords top|AdWords bottom""), ""Commercial Intent"", ),
+  IF(REGEXMATCH(J2, ""(?i)Reviews|Video|Top stories|Images|Twitter|Featured video|Image pack|Discussions and forums""), ""Engagement/Entertainment Intent"", )),
+  IF(labels="""", ""No SERP feature signal"", labels))"
+branded,"Split keywords into own brand, competitor brand and non-branded",C2 = keyword,"=IFS(
+  REGEXMATCH(C2, ""(?i){brand name}|{brand variations and misspellings}""), ""Branded - own"",
+  REGEXMATCH(C2, ""(?i){competitor brand names and variations}""), ""Branded - competitor"",
+  TRUE, ""Non-branded"")"
+serp_content,"Content types Google is featuring, from SERP features",J2 = SERP features,"=LET(labels, TEXTJOIN("", "", TRUE,
+  IF(REGEXMATCH(J2, ""(?i)Video|Featured video""), ""Videos"", ),
+  IF(REGEXMATCH(J2, ""(?i)Images|Image pack|Thumbnail""), ""Images"", ),
+  IF(REGEXMATCH(J2, ""(?i)Top ads|Bottom ads|AdWords top|AdWords bottom|Shopping ads""), ""Ads"", ),
+  IF(REGEXMATCH(J2, ""(?i)AI overview|AI Mode|AI summary""), ""AI features"", ),
+  IF(REGEXMATCH(J2, ""(?i)Featured snippet|People also ask|Instant answer|Knowledge panel|Carousel|Video preview""), ""Informational Features"", ),
+  IF(REGEXMATCH(J2, ""(?i)Site ?links|Knowledge Graph""), ""Navigational Features"", ),
+  IF(REGEXMATCH(J2, ""(?i)Local pack|Local teaser pack|Shopping results""), ""Local Features"", ),
+  IF(REGEXMATCH(J2, ""(?i)Reviews|Top stories|Twitter|Discussions and forums""), ""Social/News Features"", )),
+  IF(labels="""", ""No features"", labels))"
+url_section,Classify pages per site section from the URL,A2 = URL,"=IFS(
+  REGEXMATCH(A2, ""/blog/""), ""Blog Posts"",
+  REGEXMATCH(A2, ""/white-papers/""), ""White papers"",
+  REGEXMATCH(A2, ""/news/""), ""News"",
+  REGEXMATCH(A2, ""/case-studies/""), ""Case studies"",
+  REGEXMATCH(A2, ""/insights/""), ""Insights"",
+  REGEXMATCH(A2, ""/(careers|about-us|contact|job-opportunities|clients|reviews|our-work|our-team|join-team)(/|$)""), ""Branded Pages"",
+  REGEXMATCH(A2, ""/(services?|expertise|hospitality-travel-tourism|economic-development|energy|higher-education|technology|financial-services)(/|$)""), ""Services Pages"",
+  REGEXMATCH(A2, ""/tag/""), ""Tag Pages"",
+  REGEXMATCH(A2, ""/page/[0-9]+""), ""Paginated"",
+  TRUE, ""Unclassified"")"
+url_section_table,"Site sections from a rules tab (first match wins, XLOOKUP)","A2 = URL; Sections!A2:A20 = label, Sections!B2:B20 = regex","=XLOOKUP(TRUE, ARRAYFORMULA(REGEXMATCH(A2, Sections!B2:B20)), Sections!A2:A20, ""Unclassified"")"
+url_language,Label URLs by language subfolder,A2 = URL,"=LET(code, IFERROR(REGEXEXTRACT(LOWER(A2), ""^https?://[^/]+/([a-z]{2}(?:-[a-z]{2})?)(?:/|$)""), """"),
+  SWITCH(LEFT(code, 2), ""es"", ""Spanish"", ""fr"", ""French"", ""de"", ""German"", ""it"", ""Italian"", ""English""))"
+rank_buckets,Classify rankings into opportunity buckets (handles decimal positions),A2 = position (rank tracker or Search Console average position),"=IFS(
+  NOT(ISNUMBER(A2)), ""Not ranked"",
+  A2 < 1, ""Not ranked"",
+  A2 <= 3, ""Money Keywords - Protect (1-3)"",
+  A2 <= 10, ""High-Potential Keywords - Move to top (4-10)"",
+  A2 <= 20, ""Striking Distance Keywords - Prioritise improvements (11-20)"",
+  A2 <= 50, ""Need Improvements (21-50)"",
+  A2 <= 100, ""Low Ranked - Heavy content edits needed (51-100)"",
+  TRUE, ""Not ranked"")"
+brand_from_url,Extract the brand (registrable domain name) from a URL,A2 = URL,"=LET(host, REGEXEXTRACT(LOWER(A2), ""^(?:https?://)?(?:www\.)?([^/:?#]+)""),
+  IFERROR(REGEXEXTRACT(host, ""([^.]+)\.(?:(?:co|com|org|net|gov|ac|edu)\.[a-z]{2}|[a-z]{2,})$""), host))"
+brand_from_url_2024,"Brand from URL, the 2024 version (kept for comparison)",A2 = URL,"=TRIM(REGEXEXTRACT(REGEXREPLACE(REGEXREPLACE(A2, ""https?://"", """"), ""^www\."", """"), ""([^\.]+)""))"
+whole_column,"Any single-cell formula above, for the whole column (MAP + LAMBDA)",C2:C = keywords,"=MAP(C2:C, LAMBDA(kw, IF(kw="""", , IF(REGEXMATCH(kw, ""(?i)\b(how|why|guide|tutorial)\b""), ""Informational Intent"", ""Other""))))"

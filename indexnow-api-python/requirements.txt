@@ -1,0 +1,4 @@
+requests>=2.31
+# only needed for check_indexation_gsc.py
+google-api-python-client>=2.100
+google-auth>=2.23

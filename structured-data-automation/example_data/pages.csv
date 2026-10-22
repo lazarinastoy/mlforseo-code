@@ -1,0 +1,6 @@
+url,type,title,name,description,image,datePublished,dateModified,author_name,author_url,price,priceCurrency,availability,sku,brand,startDate,endDate,location_name,location_address,online_url
+https://www.example.com/blog/structured-data-automation/,BlogPosting,Structured data automation with Python,,How to detect structured data opportunities and generate and validate JSON-LD at scale.,https://www.example.com/img/sd.png,2026-10-22,2026-10-22,Jane Doe,https://www.example.com/author/jane-doe/,,,,,,,,,,
+https://www.example.com/shop/seo-workbook/,Product,,SEO Audit Workbook,A printable workbook for technical SEO audits.,https://www.example.com/img/workbook.png,,,,,29.00,EUR,InStock,WB-001,Example Academy,,,,,
+https://www.example.com/events/schema-workshop/,Event,,Schema Markup Workshop,A two-hour live workshop on JSON-LD.,https://www.example.com/img/workshop.png,,,,,,,,,,2026-11-20T15:00:00+01:00,2026-11-20T17:00:00+01:00,,,https://www.example.com/live/
+https://www.example.com/courses/technical-seo/,Course,,Technical SEO Foundations,Crawling indexing and rendering explained for beginners.,,,,,,,,,,,,,,,
+https://www.example.com/blog/broken-example/,BlogPosting,,,,,,,,,,,,,,,,,,

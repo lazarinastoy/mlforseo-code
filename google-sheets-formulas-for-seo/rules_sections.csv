@@ -1,0 +1,10 @@
+label,regex
+Blog Posts,/blog/
+White papers,/white-papers/
+News,/news/
+Case studies,/case-studies/
+Insights,/insights/
+Branded Pages,/(careers|about-us|contact|job-opportunities|clients|reviews|our-work|our-team|join-team)(/|$)
+Services Pages,/(services?|expertise|hospitality-travel-tourism|economic-development|energy|higher-education|technology|financial-services)(/|$)
+Tag Pages,/tag/
+Paginated,/page/[0-9]+

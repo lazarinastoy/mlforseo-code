@@ -1,0 +1,8 @@
+{
+  "name": "Example Academy",
+  "url": "https://www.example.com/",
+  "logo": "https://www.example.com/logo.png",
+  "sameAs": ["https://www.linkedin.com/company/example", "https://www.youtube.com/@example"],
+  "language": "en",
+  "breadcrumb_names": {"blog": "Blog", "courses": "Courses", "shop": "Shop", "events": "Events"}
+}

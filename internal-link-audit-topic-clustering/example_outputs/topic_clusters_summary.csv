@@ -1,0 +1,19 @@
+cluster,cluster_name,pages,avg_unique_inlinks,pillar_candidate
+1,"entity, entities, search, brand",14,0.8571428571428571,How LLMs Co-Cite: Building Authority by Association
+5,"sentiment, text, analysis, language api",8,5.625,How to do Entity Extraction with Google’s Natural Language API in Google Sheets (Apps Script)
+2,"keyword, meta descriptions, semantic, keyword research",7,1.7142857142857142,How to do keyword clustering with KeyBERT
+9,"chunk, funnel, retrieval, search",5,0.4,What Are Synthetic Queries? Why They Matter for Semantic SEO and AI Search
+3,"query, augmentation, search, fan",4,1.5,How Entities Power Query Fan-Out in AI Search
+7,"serp, intent, search, serp features",4,1.0,What Is Search Intent in SEO? A Practical Guide to Using It in Semantic Keyword Research
+11,"machine learning, learning, task, machine",4,2.75,"What Machine Learning Clustering Is, and Where It Fits in SEO"
+4,"schema, entity, trust, acme",3,0.3333333333333333,What Schema.org @id Does and Why Your Entity Graph Falls Apart Without It
+6,"context, information gain, gain, user",3,1.0,What Is Information Gain in SEO? How Google Measures Content Uniqueness
+8,"fuzzy, fuzzy matching, matching, fuzzywuzzy",3,2.3333333333333335,"What Fuzzy Matching Is, and Where It Fits in SEO"
+13,"traffic, analytics, line, ai",2,0.0,Your robots.txt might be the silent killer of your AI traffic
+16,"entities, tier, entity, external",2,1.5,"Entity Audit Cadence: What to Check Weekly, Monthly, Quarterly"
+14,"selected, indexed selected, indexed, agentic",2,0.0,Indexed is not selected: your AI search problem isn’t ranking
+0,"knowledge, panel, knowledge panel, graph",2,1.0,What Is a Knowledge Graph? How to Use It for Smarter Keyword Strategy
+12,"lda, bertopic, topic, class based",2,2.0,Topic Modelling for SEO with BERTopic
+15,"product, prompt, color, price",1,0.0,How to use generative AI with structured data for programmatic SEO
+10,"google trends, trends, google, pytrends",1,0.0,The Ultimate Guide to PyTrends: the Google Trends API (with Python code examples)
+17,"audio, transcription, whisper, whisper api",1,0.0,How to transcribe audio with OpenAI’s Whisper API in Google Colab (Python)
