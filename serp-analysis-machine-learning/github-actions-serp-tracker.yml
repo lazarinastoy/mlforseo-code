@@ -1,0 +1,38 @@
+# Weekly SERP + AI citation tracker.
+# Copy to .github/workflows/serp-tracker.yml in your own (private) repo, next to
+# serp_automation.py, run_pipeline.py and a keywords.txt file. Add the secrets
+# DATAFORSEO_LOGIN and DATAFORSEO_PASSWORD (and ANTHROPIC_API_KEY if you use --classify)
+# under Settings -> Secrets and variables -> Actions.
+name: serp-tracker
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"     # Mondays 06:17 UTC (off the top of the hour)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write            # to commit the updated snapshot CSVs
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas requests scikit-learn scipy
+      - name: Collect and report
+        env:
+          DATAFORSEO_LOGIN: ${{ secrets.DATAFORSEO_LOGIN }}
+          DATAFORSEO_PASSWORD: ${{ secrets.DATAFORSEO_PASSWORD }}
+        run: python run_pipeline.py --keywords keywords.txt --data-dir data --ai-mode --my-domain example.com --max-spend 0.25
+      - name: Commit snapshots
+        run: |
+          git config user.name "serp-tracker"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "SERP snapshot $(date -u +%F)" || echo "no changes"
+          git push
+      - name: Job summary
+        run: cat data/report.md >> "$GITHUB_STEP_SUMMARY"

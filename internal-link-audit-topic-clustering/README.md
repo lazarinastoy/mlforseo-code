@@ -1,10 +1,13 @@
-# Internal link audit + topic clustering with machine learning (2026 refresh)
+# Internal link audit, topic clustering and internal linking automation with AI
 
-Companion code for the MLforSEO guide **"How to do an SEO internal link audit and topic clustering using machine learning"** by Lazarina Stoy (first published 2022 as a write-up of her BrightonSEO Spring 2022 talk; refreshed October 2026).
+Companion code for the MLforSEO guide **"7 ways to automate internal linking with AI"** by Lazarina Stoy (October 2026). The strategy behind it, and the audit framework from her BrightonSEO Spring 2022 talk, is written up on [lazarinastoy.com](https://lazarinastoy.com/how-to-incorporate-machine-learning-in-internal-linking-audits/).
 
-The 2022 version pointed to LDA/LSA tutorials, a no-code LDA web app and a Google Sheets template. This notebook replaces that workflow with modern sentence embeddings, so you can do the whole audit in one place.
+Two pieces of code live here:
 
-## What it does
+* **`internal_link_audit_topic_clustering.ipynb`**: the audit. Link metrics, anchor text classification, embeddings, topic clusters (hubs), bridge pages and unlinked similar pages. Colab-ready, no API keys.
+* **`automate_internal_linking.py`**: the automation. A command-line script for the repeatable jobs: orphan and weak-page detection, passage-level link suggestions with anchor text (extractive or LLM) checked by guardrails, applying approved links to WordPress, and measuring the impact. Built to run on a schedule or be called by an agent.
+
+## The audit notebook: what it does
 
 `internal_link_audit_topic_clustering.ipynb` (Colab-ready, free CPU runtime is fine):
 
@@ -18,6 +21,52 @@ The 2022 version pointed to LDA/LSA tutorials, a no-code LDA web app and a Googl
 | 8. Bridge pages | Pages close to two clusters (inter-cluster link candidates) | cosine similarity to cluster centroids |
 | 9. Link opportunities | Similar page pairs that aren't linked yet, prioritised (pillars and pages without in-content inlinks first), with an anchor phrase found in the source page's own text | numpy, regex |
 | 10. Export | CSVs + PNG for your audit deliverable | pandas, matplotlib |
+
+## The automation script: `automate_internal_linking.py`
+
+```bash
+pip install -r requirements.txt          # plus `pip install anthropic` if you want LLM anchors
+python automate_internal_linking.py orphans --site https://www.example.com --sitemap https://www.example.com/post-sitemap.xml
+python automate_internal_linking.py suggest --site https://www.example.com --brand "example" "example brand"
+# review link_suggestions.csv, put "yes" in the approve column for the links you want
+WP_USER=me WP_APP_PASSWORD=xxxx python automate_internal_linking.py apply --site https://www.example.com            # dry run: prints a diff
+WP_USER=me WP_APP_PASSWORD=xxxx python automate_internal_linking.py apply --site https://www.example.com --write    # saves
+python automate_internal_linking.py measure --gsc-daily gsc_pages_by_date.csv --changes changed_pages.csv
+```
+
+Every command reads either a WordPress site's public REST API (`--site`, posts only, in-content links only) or Screaming Frog exports (`--sf-pages` custom extraction + `--sf-inlinks` All Inlinks, which also gives you menus, footers and `Crawl Depth`).
+
+| Command | What it does | Output |
+|---|---|---|
+| `orphans` | Compares the crawl with your XML sitemap (and optionally a Search Console Pages export). Flags pages with no internal links, pages with no *contextual* links (only nav/footer/related posts), pages with one contextual link, pages deeper than 4 clicks (SF only) and crawled pages missing from the sitemap. | `orphan_report.csv` |
+| `suggest` | Embeds every page and every paragraph (`BAAI/bge-small-en-v1.5`). For each similar page pair that isn't linked yet (top 10% of the site's similarity distribution, duplicates >= 0.95 excluded), finds the paragraph in the source that best matches the target, then picks an anchor: by default an **extractive** span from that paragraph ranked by similarity to the target title; with `--llm`, Claude picks the span. Pages with the fewest inlinks get first pick. | `link_suggestions.csv` with an empty `approve` column |
+| `apply` | For rows marked `yes`: fetches the post's raw content (application password), links the first plain-text occurrence of the anchor inside a `<p>`/`<li>` (never inside an existing link, heading, code or button; skips posts that already link to the target), prints a diff. Saves only with `--write`; WordPress keeps a revision. | diff + `apply_log.csv` |
+| `measure` | Daily Search Console clicks/impressions for the pages that got links vs pages you didn't touch, before vs after (with a lag for recrawling): a difference-in-differences sanity check. | `impact_summary.csv` |
+
+### Anchor guardrails
+
+Every anchor, from either method, must pass all of these or it is dropped with a reason in `llm_rejected`:
+
+* found **verbatim** in the paragraph (the LLM may not rewrite or invent copy),
+* 2 to 7 words, not generic ("click here", "read more"...), not the brand on its own, no stop word at either end,
+* at most 3 new links per source page per run, one new link per paragraph (no chained links),
+* the same anchor used for a target at most twice (counting existing links), and never one anchor pointing to two different targets from the same page.
+
+These follow Google's guidance that good anchor text is "descriptive, reasonably concise, and relevant", and its warnings against keyword-stuffed anchors and chained links ([Link best practices](https://developers.google.com/search/docs/crawling-indexing/links-crawlable)).
+
+### LLM anchors (`--llm`)
+
+Uses the Anthropic Python SDK (`pip install anthropic`, `ANTHROPIC_API_KEY` set). Default model `claude-opus-5-5` at low effort with JSON structured output; change it with `--llm-model`. `--llm-limit` (default 50) caps the calls per run. Server-side refusal fallback is switched on (`fallbacks="default"`). If the call fails or the anchor fails the guardrails, the extractive anchor is kept and the rejection is logged.
+
+### Scheduling and agents
+
+`examples/weekly-internal-link-suggestions.yml` is a GitHub Actions workflow that runs `orphans` + `suggest` every Monday and attaches the CSVs to the run. The same commands work as tools for an agent (Claude Code, or an MCP client alongside the Screaming Frog SEO Spider MCP server in v24+): let the agent run the crawl and the script, and keep `apply --write` behind a human approval.
+
+### Tested (automation script)
+
+22 October 2026 on mlforseo.com via the REST API (79 posts, 643 in-content links, 5,375 paragraphs): `orphans` found 24 posts with no in-content links from other posts, 19 with one, and 12 crawled posts missing from the XML sitemap; `suggest` turned 432 unlinked similar pairs into 153 guardrail-passing suggestions across 64 source posts in under 2 minutes on a laptop CPU, and skipped 3 duplicate post pairs. `apply` was tested offline on sample block markup (it was not run against a live site). `measure` was tested on synthetic data with a known uplift. The `--llm` path was tested with a mocked client (request shape, JSON parsing, guardrail rejections of invented and generic anchors); it has not been run against the live API. Samples: `example_outputs/orphan_report.csv`, `example_outputs/link_suggestions_sample.csv`.
+
+Honest caveat from the test run: the extractive anchors are a shortlist. Some read well ("semantic keyword research", "entity recognition"), others are clumsy fragments of a sentence. That's why `approve` starts empty.
 
 ## Using your own crawl (Screaming Frog SEO Spider)
 
@@ -55,6 +104,8 @@ Example outputs from the demo run are in `example_outputs/` (18 clusters chosen 
 
 ## Files
 
-* `internal_link_audit_topic_clustering.ipynb`: the notebook (outputs cleared)
-* `requirements.txt`
-* `example_outputs/`: cluster map, cluster summary, link opportunities and duplicates from the demo run
+* `internal_link_audit_topic_clustering.ipynb`: the audit notebook (outputs cleared)
+* `automate_internal_linking.py`: the automation script (orphans, suggest, apply, measure)
+* `examples/weekly-internal-link-suggestions.yml`: scheduled GitHub Actions example
+* `requirements.txt` (`anthropic` is optional, only for `--llm`)
+* `example_outputs/`: cluster map, cluster summary, link opportunities and duplicates from the notebook demo run; orphan report and a link-suggestion sample from the script

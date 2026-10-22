@@ -1,0 +1,31 @@
+# Example GitHub Actions workflow: every Monday, rebuild the orphan report and the link
+# suggestions for your site and attach them to the run as a downloadable artifact.
+# Nothing is written to your site: a human reviews the CSV, marks `approve`, and runs `apply`.
+#
+# Copy to .github/workflows/ in your own repo, next to automate_internal_linking.py and requirements.txt.
+name: Weekly internal link suggestions
+on:
+  schedule:
+    - cron: "17 6 * * 1"        # Mondays 06:17 UTC
+  workflow_dispatch:
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Orphans and weak pages
+        run: python automate_internal_linking.py orphans --site https://www.example.com --sitemap https://www.example.com/post-sitemap.xml
+      - name: Link suggestions (add --llm and the ANTHROPIC_API_KEY secret for LLM anchors)
+        run: python automate_internal_linking.py suggest --site https://www.example.com --brand "example brand"
+        # env:
+        #   ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: internal-link-review
+          path: |
+            orphan_report.csv
+            link_suggestions.csv

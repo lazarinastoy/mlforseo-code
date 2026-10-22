@@ -1,0 +1,284 @@
+The statistics behind Google's relentless pursuit of optimisation are staggering: in 2023 alone, Google ran more than 700,000 experiments that resulted in more than 4,000 improvements to Search, according to its own How Search Works  pages. That is thousands of changes to the search engine results pages (SERPs) every year, a testament to Google's dedication to evolution and user satisfaction (and, let's be honest, to keeping people on Google).
+
+Despite emerging competitors like TikTok and, more recently, AI assistants like ChatGPT and Perplexity, Google still dominates the search engine market, with around 90% of worldwide search traffic in 2026 (StatCounter ). This figure is not just a number; it represents the immense quantity of data Google collects and analyses to enhance user interactions on the SERP. Google is more than a search engine; it's a dynamic platform constantly changing the way information is presented and accessed, now with AI Overviews and AI Mode sitting on top of the classic blue links.
+
+This relentless innovation is what makes Google's SERP immensely valuable for analysis and insights extraction to improve your organic search strategy. Instead of relying on producing content aimlessly, let's discuss strategies for analysing search results, ranked pages, and their attributes to extract insights to use for SEO strategies, all with the help of machine learning models!
+
+In this guide, I'll cover four ways to do that:
+
+- Categorise your search competitors by site type and intent, and calculate share of search per domain, category and intent.
+
+- Extract the prominent entities from ranking titles and meta descriptions with Google's Natural Language API.
+
+- Analyse the sentiment of ranking results to uncover patterns, and spot the advocates and opponents of your brand.
+
+- Analyse language structures with n-grams to find the title and meta description patterns Google rewards for your keywords.
+
+Updated October 2026: what changed since the first version
+
+I first presented this as a talk at BrightonSEO in October 2022 and wrote it up in 2023. The four methods still hold, so I re-ran every one of them and updated the tools:
+
+- All four analyses now live in one runnable notebook (Python, Colab-ready) in the MLforSEO code hub, with real sample SERP data so you can run it before plugging in your own.
+
+- Competitor categorisation starts with a free rule-based taxonomy, then uses an LLM with structured outputs, so the model can only answer from your category list. In 2022 this was GPT-4 in Google Sheets.
+
+- Share of search now comes in two flavours: share of ranking slots, and a click-weighted share.
+
+- Google's Natural Language API has a v2, and it dropped entity salience. For entity analysis, stay on v1. Details below.
+
+- The n-gram formula I generated in the OpenAI playground is now a clean, tested =NGRAMS() custom function for Google Sheets, plus a Python version.
+
+Want to follow along by re-creating the analysis and visualisations? Grab the notebook from the MLforSEO code hub , flick through the original BrightonSEO deck , and get your copy of the Data Studio template:
+
+Get the ML-enabled SERP analysis Data Studio template ✨ 
+
+Prefer to watch? Here is the walkthrough video (the methods are the same; the tooling updates are in the written version below):
+
+https://www.youtube.com/watch?v=KboWMZc_FDk
+SERP Analysis: Entity Extraction, Sentiment Analysis, Search Intent & More, by Lazarina Stoy. More walkthroughs on my YouTube channel .
+
+## Identify your search competitors and categorise them based on intent with an LLM
+
+In the process of competitor analysis, it's crucial to begin tagging the sites we observe or consider as our competitors, based on the type of site we are competing against. For instance, sites like Wikipedia and Investopedia are primarily wiki-based and have an informational intent. They don't aim to sell a product but serve as resources for explanatory content. Other examples include educational platforms like Coursera and Udemy, which offer courses and learning opportunities. There are also news websites, review platforms like G2 or TechTarget, and various technology or business competitors. This categorisation is important as it paints a clear picture of what is ranking for the topics and keywords being analysed.
+
+
+
+This approach aids in understanding where the opportunities lie and how Google positions different types of websites. With ongoing updates to Google's search algorithm, a significant factor in Google's assessment of topical authority is how consistently a website focuses on its primary content or "stays in its lane."
+
+This context emphasises why it's important to analyse SERPs by classifying competitors into their intent category using a classification algorithm or even building a custom taxonomy of websites and their intent labels. This can help you identify the real competition in the SERP, as some positions might be reserved for certain 'big players' in their niches, as Google still would like to surface a diverse set of results, particularly for ambiguous queries.
+
+Here's how to get started:
+
+- Tagging websites based on intent: In your competitor analysis, it's essential to tag websites based on their intent categories: informational, commercial (or transactional), or navigational. This provides a holistic view of intent.
+
+- Understanding search intent analysis : It's important to note that while these categories are comprehensive, they are not exclusive. Most queries can be assigned to one dominant intent, but plenty carry mixed intent. Treat your labels as the dominant intent, not the only one.
+
+These initial steps will allow you to plot your ranked websites in buckets, showing you which types of websites are given more visibility for your target keywords, and what their average position is.
+
+
+
+3. Calculate share of search: Additionally, calculate the share of search per domain, per site category, or per intent category. This involves a straightforward calculation and is an integral part of understanding the competitive landscape.
+
+
+
+In 2026 I calculate it two ways, and I'd suggest you do the same:
+
+- Share of ranking slots: the percentage of all the top-10 positions a domain, site type or intent holds. Simple, and free of assumptions.
+
+- Click-weighted share: each slot weighted by an estimated click-through rate for its position, so a position 1 counts for far more than a position 9. The CTR curve is an assumption, so use your own Search Console data or a CTR study you trust, and say which one you used.
+
+Here is what that looks like on the sample data in the notebook (the US top 10 for six machine-learning keywords, pulled in October 2026), using only the free, rule-based first pass:
+
+From the 2026 notebook run. Note the large "unclassified" bucket: that is exactly the gap the LLM step below fills.
+
+Two things jumped out at me from that run. Courses and learning sites own the biggest slice for this topic, and forums (Reddit, Quora) hold an average position of 2.5, so for these keywords you're competing with community discussion as much as with other publishers. And for "what is machine learning", Google showed an AI Overview above every one of those results, which is why I'd always pair this with a SERP feature analysis .
+
+4. Provide custom classification categories with an LLM: To enhance our competitor analysis, we can use a large language model for classifying site categories and analysing the search intent of titles and meta descriptions. When I first built this, I used GPT-4 with a really useful script Danny Richman developed  that allows for custom categories (special thanks, Danny).
+
+Provide categories for website domains like technologies, news, reviews, wiki, courses, learning, social media, or others, based on their published content. By providing sample classifications, we can generate accurate labels for these websites.
+
+
+
+With this data, we can then move on to more advanced visualisations, gaining a better understanding of the top categories in terms of the domains within them and the keywords these domains rank for. This approach significantly enriches our SEO analysis and strategy development.
+
+
+
+## How I'd run the categorisation today
+
+The principle hasn't changed: you define the categories, the model applies them. What has changed is how reliable you can make that.
+
+- Start with a rule-based lookup. You already know a lot of your competitors. Put them in a simple domain-to-category list (Wikipedia is a wiki, Reddit is a forum, .edu is learning) and match URL patterns like /best- or /vs- for comparison pages. It is free, instant and explainable, and those known domains double as examples for the model.
+
+- Send the model the domain and a couple of its ranking titles. "What does this site publish?" is far easier to answer from titles than from a bare domain name.
+
+- Use structured outputs. Current models from Anthropic, OpenAI and Google can be constrained to a JSON schema. Put your categories in the schema as an allowed list, and the model physically cannot invent a new category or return a chatty paragraph instead of a label. This one change removes most of the clean-up I used to do by hand.
+
+- Spot-check a sample by hand before you trust the totals, especially for the "other" bucket.
+
+In the notebook, the schema part looks like this (it uses Claude, but any model with structured outputs works the same way):
+
+schema = {"type": "object", "additionalProperties": False, "required": ["labels"],
+          "properties": {"labels": {"type": "array", "items": {
+              "type": "object", "additionalProperties": False,
+              "required": ["domain", "category", "intent"],
+              "properties": {"domain": {"type": "string"},
+                             "category": {"type": "string", "enum": CATEGORIES},
+                             "intent": {"type": "string", "enum": INTENTS}}}}}}
+
+resp = client.messages.create(
+    model=LLM_MODEL, max_tokens=4000,
+    output_config={"effort": "low", "format": {"type": "json_schema", "schema": schema}},
+    messages=[{"role": "user", "content": prompt}])
+
+A word of caution, because I'm a broken record on this: a general-purpose LLM is great for custom categories that no off-the-shelf classifier knows about. For standard tasks with a purpose-built API (entities, sentiment), use the purpose-built API. Which brings us neatly to the next two methods. If you want to go deeper on the classification side, I compare the rule-based, classic ML and transformer approaches in search-intent classification with machine learning .
+
+Learn the methods properly
+
+If you're really serious about your machine learning journey as a search marketer, the Introduction to Machine Learning for SEO course walks you through classification, entity extraction, sentiment analysis and fuzzy matching, with templates and notebooks for each.
+
+Explore the course on the MLforSEO Academy → 
+
+## Identify prominent entities from ranking web results with Google's Natural Language API
+
+Entity extraction using Google's Natural Language API  is an underutilised but highly effective tool in SEO. This process can be applied in SERP analysis to analyse titles and meta descriptions, and it's straightforward to set up.
+
+Essentially what this analysis does is to demonstrate the most prominent entities that are mentioned throughout the titles and meta descriptions in the ranked results, which might indicate a content direction for your strategy. Of course, for a more detailed analysis, you can scrape the content from the pages , then analyse the content itself for entities.
+
+If you want to know more ways to incorporate entity analysis in SEO, check out my guide to what entity extraction is and where it fits in SEO .
+
+Here's how to get started:
+
+Set up the prerequisites: You'll need an API key, which can be obtained by following Google's setup guide . Then use the entity analysis Google Sheets template , which, although not originally created by me, is based on code available in Google's documentation  for the Natural Language API. The step-by-step walkthrough is in entity extraction with Google's Natural Language API in Google Sheets . The first 5,000 units a month are free per feature (a unit is 1,000 characters), which covers a lot of titles and meta descriptions.
+
+Input data: Enter URLs (or another ID column) and meta descriptions into the tool. The entities and sentiments are then extracted automatically.
+
+
+
+
+
+Understanding the output:
+
+- Entity: recognised thing or concept, based on Google's database and model training.
+
+- Salience: the importance or relevance of the entity in the context of the snippet.
+
+- Sentiment score and magnitude: these indicate the polarity and the strength of the expressed emotion.
+
+- Number of mentions: this shows the prominence of the entity in the snippet.
+
+One 2026 caveat on versions. Google released v2 of the Natural Language API in August 2023, running on a newer model. For this analysis, stick with v1: v2 dropped the salience score and the Wikipedia URL metadata, and it doesn't have the entity sentiment method at all (release notes ). The Sheets template and my notebook both use v1's analyzeEntitySentiment, so you get entities, salience and per-entity sentiment in one call. If you do use v2 for entities, the number of mentions is the closest stand-in for salience.
+
+Visualisation: Analyse the most common entities mentioned in all meta descriptions for the SERPs collected. This requires careful keyword and topic research beforehand to ensure relevant and targeted analysis.
+
+
+
+
+
+
+
+Data integration: Blend this data with other sources, like the data from your bulk SERP analysis, to get a comprehensive view.
+
+
+
+This approach allows for a deeper understanding of the topics and keywords in your analysis, enabling more precise SEO strategies. It can also help you uncover entities that are not captured by popular keyword research tools like Semrush .
+
+Prefer Python, or no API key yet? The notebook runs the same v1 call over every title and description and summarises each entity: how many results mention it, for how many keywords, its average position and salience, and whether it shows up in titles or only in descriptions. With no key, it falls back to the free spaCy library. Treat that fallback as a first look: on the sample data, the small spaCy model tagged "machine learning" as a person. Which is a pretty good illustration of why I prefer a purpose-built, knowledge-graph-backed API for this job, and why I compared the options in which NLP API to use for entity and sentiment analysis .
+
+## Analyse the sentiment of the SERP's results to uncover ranking patterns
+
+Sentiment analysis  using Google's Natural Language API is a valuable tool for brand reputation management. See the detailed blog post for practical ways to implement sentiment analysis in your digital marketing and SEO strategy . It allows you to analyse the sentiment of titles and meta descriptions for a set of keywords, providing insights into how your brand is perceived.
+
+Instructions:
+
+- Setup: Obtain your API key following Google's setup guide  and use the Google Sheets template for sentiment analysis . The template uses an Apps Script to analyse your text and provide sentiment scores and tags for titles and meta descriptions.
+
+- Input data: Enter the titles and meta descriptions you collected for your set of keywords into the template. Adjust the sentiment tags based on your understanding of sentiment magnitude if necessary.
+
+
+
+Analysis and visualisation:
+
+
+
+
+
+- Analyse sentiment for titles and meta descriptions.
+
+- Visualise the data using simple graphs, plotting titles based on their sentiment score and rank.
+
+- The size of the graph's bubbles represents the magnitude of sentiment expressed.
+
+Filter for brand insights:
+
+- Filter data for negative or positive sentiments to identify opponents or advocates of your brand in SERPs.
+
+- Analyse the frequency of publishing and the general sentiment towards your organisation from different domains.
+
+
+
+
+
+Keyword and entity focus:
+
+- Filter for specific important keywords and entities from your dataset.
+
+- Analyse the predominant sentiment of titles associated with these keywords or entities.
+
+When delving into the realm of content strategy, particularly in the face of prevalent negative sentiments, often echoed in forum discussions, it becomes imperative to craft content aimed at addressing user concerns and rectifying misconceptions. This approach isn't just about countering negativity; it's about engaging in a meaningful dialogue with your audience. Delving deeper, analysing discussions that revolve around pricing or the usage of products can provide invaluable insights, guiding necessary business conversations and strategic adjustments. But don't stop at just titles and meta descriptions.
+
+Understand the sentiment and position relationship.
+
+To gain a more rounded and comprehensive understanding, consider a page analysis approach. This involves scraping content from specifically selected pages , be they positively or negatively skewed, to fully grasp the narrative surrounding your brand or product. This holistic view can be instrumental in shaping a robust and responsive content strategy.
+
+This type of analysis, while optional, can greatly influence your content strategy by providing a deeper understanding of public sentiment toward your brand, enabling more targeted and effective communication and business strategies.
+
+What's new in 2026. The notebook scores every title and description with v2's analyzeSentiment (sentiment is where the newer model is a clear upgrade, and v2 still returns both score and magnitude), then labels each one as positive, negative, neutral or mixed. That last label matters: a score near zero with a high magnitude isn't neutral at all, it's strong positive and negative statements cancelling each other out, which is often exactly the review or forum thread you want to read. The thresholds are parameters, so tune them to your data rather than taking mine as gospel. It also plots score against position (bubble size is magnitude) and filters the whole SERP for your brand terms.
+
+## Analyse the language structures using n-grams
+
+In exploring language use analysis, consider the power of n-grams, a string-matching approach  that can reveal much about keyword combinations and their effectiveness. Even if coding isn't your forte, an LLM can be immensely helpful here. Back when I built this, I used a prompt in OpenAI's playground to create an Apps Script formula in JavaScript to identify the main n-grams (groups of words) in a text. The process required a few tries to refine the prompt, but the resulting function performed the intended analysis.
+
+The original 2022 approach: a GPT-3-generated Apps Script function.
+
+That first version split text into n-grams but didn't count them, lowercase them or strip punctuation, so I've replaced it with a tested custom function. Paste ngrams.gs from the code hub  into Extensions → Apps Script, save, and use it like any formula:
+
+=NGRAMS(B2:B100, 2)            top bigrams in a column of titles
+=NGRAMS(C2:C100, 3, 20, TRUE)  top 20 trigrams, stop words removed
+
+It returns each n-gram, how many times it appears, and in how many titles, which is the number I care about most (one spammy title repeating a phrase five times shouldn't win).
+
+The key here is to analyse bigrams (pairs of words) or trigrams (triplets) in titles or meta descriptions, uncovering the most prevalent keyword combinations. This analysis, especially when refined to exclude common stop words, can yield intriguing results.
+
+
+
+For example, in my analysis of a specific set of keywords, the expression "what is" emerged as a frequent occurrence across titles. This insight can be pivotal in understanding the type of content Google favours for your chosen keywords. Extend this analysis to focus on specific aspects like commercial intent or product-related keywords, and you'll uncover the n-grams that dominate in these contexts.
+
+Here is the nuance I'd add today: run it twice. "What is" is made entirely of stop words, so if you strip stop words first (as most tutorials tell you to), that insight disappears. Keep stop words to see title patterns ("what is", "how to", "vs", "best... 2026"), and remove them to see topics ("machine learning", "artificial intelligence"). On the 2026 sample data, "what is" still appears in 11 of 52 ranking titles (eight of them for "what is machine learning", the rest for "machine learning examples" and "machine learning vs ai"), every one an informational result, while the commercial results lean on "vs", "top" and "2026". Same method, three years later, same lesson.
+
+Such analysis, simple yet profound, should be an integral part of your SERP analysis and can help you formulate the title and meta description  structures to generate as part of your content strategy.
+
+## Key takeaways
+
+I hope you feel fired up and inspired to try machine learning yourself. Something I might have said at the start is that correlation does not equal causation. Just because you're seeing a relationship doesn't mean that that's the reason why that content is ranking as it is. Your SERP analysis should help guide your overall strategy but it does not replace a strategy. In other words, the analysis does not replace keyword research or content  strategy.
+
+Here is a summary of what you can utilise machine learning  for in your SERP analysis:
+
+- Build custom search intent and site-type categories with a rule-based taxonomy, a classifier, or an LLM with structured outputs.
+
+- Understand the search landscape, based on topics and keyword clusters, not just keywords, and measure share of search per domain, site type and intent.
+
+- Extract the prominent entities with Google's Natural Language API (v1, for salience).
+
+- Analyse the sentiment of ranked search results with Google's Natural Language API.
+
+- Analyse language structures with an n-gram approach to identify pattern structures for titles and meta descriptions.
+
+All of it is in one notebook in the MLforSEO code hub , and don't forget to get the Data Studio dashboard for ML-enabled search engine results page (SERP) analysis  ✨
+
+## Where to take SERP analysis next
+
+Each of the four methods has its own deep dive on MLforSEO: search-intent classification , entity extraction , semantic analysis of customer reviews  (the same entity and sentiment toolkit, pointed at reviews) and fuzzy matching and n-grams . The Introduction to Machine Learning for SEO course on the MLforSEO Academy  takes you through all four hands-on, and the resources library  has the templates and notebooks, including a lab notebook for identifying desired content formats and platforms from SERP data .
+
+## Frequently asked questionsWhat is SERP competitor analysis?
+SERP competitor analysis means studying the pages that rank for your target keywords (who they are, what type of site they are, what intent they serve, what they talk about and how they phrase it) so you can see where the opportunities are and what Google rewards for those queries. Your search competitors are often not your business competitors: wikis, course platforms, forums and review sites all compete for the same positions.How can machine learning improve SERP analysis?
+Machine learning lets you do at scale what would take days by hand: classify hundreds of ranking domains by site type and intent, extract the entities mentioned across every title and meta description, score their sentiment, and find the most common word patterns. You end up with a structured picture of the SERP you can measure and track, rather than a gut feel from scrolling through results.Can I do ML-enabled SERP analysis without coding?
+Yes. Entity and sentiment analysis run in Google Sheets with free templates and a Google Natural Language API key, the n-gram analysis is a single =NGRAMS() custom function, and the Data Studio template handles the visualisation. The notebook is there for when your keyword lists get big or you want everything in one place.Should I use v1 or v2 of Google's Natural Language API for entity analysis?
+For entity analysis, v1. Version 2 (released in August 2023) dropped the salience score and Wikipedia URL metadata, and it has no entity sentiment method. For document-level sentiment, v2's newer model is a good choice. Both share the same free tier: 5,000 units a month per feature, where a unit is 1,000 characters.How do you calculate share of search from SERP data?
+The simplest version is share of ranking slots: count how many of the top-10 positions across your keyword set each domain (or site type, or intent) holds, and divide by the total. A click-weighted version multiplies each slot by an estimated click-through rate for its position before summing, so higher rankings count for more. Say which CTR curve you used, because it is an assumption.Is ChatGPT (or another LLM) good for classifying SERP competitors?
+It is good for custom categories that no ready-made classifier knows, as long as you give it your category list, a few examples and some ranking titles per domain, and constrain it with structured outputs so it can only answer from your list. Spot-check the results. For standard tasks like entity extraction and sentiment, a purpose-built API is more consistent and gives you richer metadata.
+
+## Related glossary terms
+
+- Search intent 
+
+- Google Cloud Natural Language API 
+
+- Entity salience score 
+
+- Sentiment analysis 
+
+- Sentiment magnitude 
+
+- N-gram 
+
+- Stop words
