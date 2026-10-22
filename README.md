@@ -24,6 +24,7 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 | [`youtube-seo-audit-benchmark/`](youtube-seo-audit-benchmark/) | How to do a YouTube SEO audit | YouTube Data API competitor benchmark table for channel audits |
 | [`google-sheets-formulas-for-seo/`](google-sheets-formulas-for-seo/) | 12 Google Sheets formulas for SEO keyword research & content analysis | Copyable modern formulas (LET/LAMBDA/BYROW), rules tabs, sample data, 107-check test script |
 | [`image-seo-multimodal/`](image-seo-multimodal/) | Image SEO in 2026: advanced tactics and multimodal search | Page image audit (format, size, alt), vision-model alt-text drafts, CLIP classification + near-duplicate detection |
+| [`blog-architecture-audit/`](blog-architecture-audit/) | Blog and site architecture for SEO and conversions in the AI search era | Click depth vs URL depth, orphans, category balance, hub coverage from a sitemap crawl or Screaming Frog export |
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
 
