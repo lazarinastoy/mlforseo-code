@@ -2,7 +2,9 @@
 
 Every resource in the [MLforSEO Resource Library](https://www.mlforseo.com/resources-library/). Free resources link straight to the file; Academy resources link to their page on mlforseo.com (access comes with the course).
 
-## Free (28)
+## Free (29)
+
+All search intent notebooks (rule-based from the query, SERP features, semantic with Google NL + spaCy, BART zero-shot, content formats and platforms from SERP) are also mirrored on GitHub in [`search-intent-classification/`](search-intent-classification/).
 
 | Resource | Type | Platform | Creator |
 |---|---|---|---|
@@ -19,6 +21,7 @@ Every resource in the [MLforSEO Resource Library](https://www.mlforseo.com/resou
 | [Google Sheets Text Classification Template with Google Cloud Natural Language API for Automated Content Categorization](https://drive.google.com/open?id=159wpcHHlWNDEwF2k7_bynAKX4sOkvOxfpZ46PCPMu7M&usp=drive_copy) | No-Code Template | Apps Script, Google Sheets | Lazarina Stoy |
 | [IBM Watson NLU Complete API Implementation Template for Multi-Feature Text Analysis (Notebook)](https://colab.research.google.com/drive/1ihMNHGjZJ4txZ_gFHGJU7_UqfpesuiuW?usp=sharing) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [IBM Watson NLU Sentiment and Emotion Analysis Template for Google Sheets with Multi-Dimensional Affect Detection](https://drive.google.com/open?id=1hUeRRzlSjbQTnba9k--qbriCNZb6sv16GyfqVlJe-Ek&usp=drive_copy) | No-Code Template | Apps Script, Google Sheets | Lazarina Stoy |
+| [Identifying Desired Content Formats & Platforms from SERP Data (Lab Notebook)](https://colab.research.google.com/drive/18lc5xCba8lqU0c1assXil2gcCie8CTho?usp=sharing) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [KeyBERT for SEOs: Google Colab Template](https://colab.research.google.com/drive/1eRpd-dXPtKTw8dmR7DjSnYxntnP_TQIl?usp=sharing) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [Keyword Cluster (KeyBERT) Looker Studio Demo Visualization Dashboard for SEO](https://lookerstudio.google.com/s/puZ8VBwYi9w) | Visualization Template | Looker Studio | Lazarina Stoy |
 | [Knowledge Graph API Extraction and Entity Relationship Analysis for Semantic Keyword Research (Notebook)](https://drive.google.com/open?id=1zOUfGKUa99uUaA1Gc2upVtGyncX-pxII&usp=drive_copy) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
@@ -35,7 +38,7 @@ Every resource in the [MLforSEO Resource Library](https://www.mlforseo.com/resou
 | [Transitioning from Traditional to Semantic Keyword Universe (Checklist)](https://drive.google.com/open?id=1E4tOO2AEzZgjwAGy1sP97a_uK9p98-Z6zbOp__N1Jgs&usp=drive_copy) | Checklist | Google Sheets | Lazarina Stoy |
 | [When to use Machine Learning in SEO – Decision Checklist](https://docs.google.com/spreadsheets/d/1SrNzNUuP-brEOuMfFF94qDSYgyPDgFSLdv6AWahb-1w/edit?usp=sharing) | Checklist | Google Sheets | Lazarina Stoy |
 
-## With an MLforSEO Academy course (31)
+## With an MLforSEO Academy course (30)
 
 | Resource | Type | Platform | Creator |
 |---|---|---|---|
@@ -56,7 +59,6 @@ Every resource in the [MLforSEO Resource Library](https://www.mlforseo.com/resou
 | [Extraction Readiness Audit](https://www.mlforseo.com/resource/extraction-readiness-audit/) | Checklist | Google Docs / Word | Beatrice Gamba |
 | [Fuzzy Matching for Content Gap Analysis & Competitive Opportunity Identification](https://www.mlforseo.com/resource/fuzzy-matching-for-content-gap-analysis-competitive-opportunity-identification/) | Coding Script or Notebook | Google Colab | — |
 | [Fuzzy Matching: Map Keywords to Seed Terms or Topics (Notebook)](https://www.mlforseo.com/resource/fuzzy-matching-map-keywords-to-seed-terms-or-topics-notebook/) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
-| [Identifying Desired Content Formats & Platforms from SERP Data (Lab Notebook)](https://www.mlforseo.com/resource/identifying-desired-content-formats-platforms-from-serp-data-lab-notebook/) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [Image Clustering by Color with Three Machine Learning Approaches for Visual Content Organization](https://www.mlforseo.com/resource/image-clustering-by-color-with-three-machine-learning-approaches-for-visual-content-organization/) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [Introduction to Machine Learning for SEOs (E-Book) — by Lazarina Stoy](https://www.mlforseo.com/resource/introduction-to-machine-learning-for-seos-ebook/) | E-book | PDF | Lazarina Stoy |
 | [Knowledge Graph Foundation – Step 1 Template](https://www.mlforseo.com/resource/knowledge-graph-foundation-step-1-template/) | Workbook | Google Sheets | Beatrice Gamba |
