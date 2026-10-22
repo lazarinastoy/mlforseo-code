@@ -1,0 +1,17 @@
+# Core audit (crawl, format/size/alt checks)
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+pandas>=2.0
+pillow>=11.3        # 11.3+ wheels decode AVIF natively; older Pillow: pip install pillow-avif-plugin
+numpy>=1.26
+
+# Optional: --suggest-alt (hf backend) and --dedupe
+torch>=2.4
+torchvision>=0.19   # needed by Qwen3-VL processors
+transformers>=4.57  # tested on 5.20.2; uses AutoModelForImageTextToText
+accelerate>=1.0
+ImageHash>=4.3
+
+# Tested 22 Oct 2026 on Python 3.12 with: torch 2.14.1, torchvision 0.29.1,
+# transformers 5.20.2, pillow 13.0.0, pandas 3.1.0, ImageHash 4.3.2
