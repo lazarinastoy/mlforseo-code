@@ -1,0 +1,21 @@
+[
+ {"platform": "chat_gpt", "user_prompt": "What are the best tools for SERP analysis? Give a short list with one line on each.",
+  "model_name": "gpt-4.1-mini-2025-04-14", "web_search": false, "money_spent": 0.0002632, "datetime": "2026-10-22 14:44:26 +00:00",
+  "items": [{"type": "message", "sections": [{"type": "text", "annotations": null,
+   "text": "Sure! Here are some of the best tools for SERP analysis:\n\n1. **Ahrefs** – Comprehensive SEO tool with detailed SERP analysis and keyword insights.\n2. **SEMrush** – Offers robust SERP tracking, competitive analysis, and keyword research.\n3. **Moz Pro** – Provides SERP tracking, keyword difficulty, and page optimization suggestions.\n4. **Serpstat** – All-in-one SEO platform with SERP analysis and competitor comparison.\n5. **AccuRanker** – Fast and accurate keyword rank tracking with in-depth SERP features.\n6. **SpyFu** – Focuses on competitor analysis and SERP history tracking.\n7. **Google Search Console** – Free tool offering performance data directly from Google SERPs."}]}]},
+ {"platform": "perplexity", "user_prompt": "What are the best tools for SERP analysis? Give a short list with one line on each.",
+  "model_name": "sonar", "web_search": true, "money_spent": 0.005233, "datetime": "2026-10-22 14:44:35 +00:00",
+  "items": [{"type": "message", "sections": [{"type": "text",
+   "text": "- **Semrush** — Best all-around option for SERP features, competitor research, keyword intent, and organic/paid visibility.[1][3]\n- **Ahrefs** — Strongest for backlink context, ranking-page analysis, traffic potential, and content opportunities.[1][3]\n- **SE Ranking** — Cost-effective all-in-one platform combining SERP tracking, competitor analysis, and reporting.[1][3]\n- **Mangools SERPChecker** — User-friendly and affordable for quick SERP breakdowns and localized searches.[2][4]\n- **Surfer SEO** — Best for analyzing competing content and turning SERP patterns into on-page recommendations.[1][3]\n- **STAT Search Analytics** — Best for enterprise-scale tracking across large keyword sets, locations, and devices.[3]\n- **Google Search Console** — The essential free baseline for analyzing your site’s actual Google impressions, clicks, queries, and average positions.[9]",
+   "annotations": [
+    {"title": "Best SERP Analyzer Tools for SEO Teams… | SERP Strategists", "url": "https://serpstrategists.com/blog/best-serp-analyzer-tools-2026"},
+    {"title": "Best SERP Analysis Tools 2026: 6 Scored - Smarter Ranking", "url": "https://www.smarterranking.com/software/best-serp-analysis-tools-2026/"},
+    {"title": "Best SERP Analysis Tools in 2026 | Single Grain", "url": "https://www.singlegrain.com/artificial-intelligence/best-serp-analysis-tools-in-2026/"},
+    {"title": "The 6 best SERP analysis tools for 2026", "url": "https://www.eesel.ai/blog/serp-analysis-tools"},
+    {"title": "18 Best SEO Analytics Tools in 2026", "url": "https://www.seo.com/tools/analytics/"},
+    {"title": "15 Best SEO Tools for 2026 (Tested for Every SEO Task)", "url": "https://resourcera.com/guide/best-seo-tools/"},
+    {"title": "6 Best SERP Analysis Tools for 2025 (Ranked & Reviewed)", "url": "https://blog.topicranker.com/serp-analysis-tools/"},
+    {"title": "10 Best SEO Tools To Rank on Google SERP In 2026 - The CMO", "url": "https://thecmo.com/tools/best-seo-tools/"},
+    {"title": "Best SERP Monitoring Tools 2026: Rank + AI Overview Tracking", "url": "https://visualping.io/blog/best-serp-monitoring-tools"},
+    {"title": "10 Best SERP Analysis Tools for Smarter, Competitive SEO", "url": "https://lowfruits.io/blog/best-serp-analysis-tools/"}]}]}]}
+]

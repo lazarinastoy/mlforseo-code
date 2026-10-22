@@ -5,7 +5,7 @@ agent is for the open question on top: "what changed for these keywords, and
 what should we do about it?" It gets read-only tools over your snapshot store,
 plus (optionally) one paid tool for a live SERP pull, capped by --max-live.
 
-  python serp_agent.py --data-dir sample_data --my-domain mlforseo.com
+  python serp_agent.py --data-dir sample_data --my-domain example.com
   python serp_agent.py --data-dir data --live --max-live 3 --question "Why did we lose the AI Overview citation?"
 
 Needs ANTHROPIC_API_KEY (and DataForSEO keys for --live). Uses the Anthropic
@@ -117,10 +117,12 @@ Finish with a short brief: what changed, what it likely means, 3 concrete next a
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data-dir", default="sample_data")
-    ap.add_argument("--my-domain", default="mlforseo.com")
+    ap.add_argument("--my-domain", default="example.com")
     ap.add_argument("--question", default="What changed in the SERPs and AI answers we track, and what should we do next?")
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--max-live", type=int, default=2)
+    ap.add_argument("--max-turns", type=int, default=8, help="hard cap on model calls")
+    ap.add_argument("--effort", default="medium", choices=["low", "medium", "high"])
     args = ap.parse_args()
     STATE.update(data_dir=args.data_dir, live=args.live, max_live=args.max_live)
 
@@ -129,13 +131,26 @@ def main() -> None:
         model=MODEL,
         max_tokens=16000,
         system=SYSTEM,
-        output_config={"effort": "medium"},
+        output_config={"effort": args.effort},
+        cache_control={"type": "ephemeral"},   # tools + history are re-sent every turn
+        max_iterations=args.max_turns,
         tools=[list_tracked_keywords, ranking_history, share_of_search, ai_citations,
                serp_features, fetch_live_serp],
         messages=[{"role": "user", "content": f"My site: {args.my_domain}. {args.question}"}],
     )
-    final = runner.until_done()
+    final = None
+    for message in runner:                      # one iteration per model call
+        sa.log_usage(message, "agent")
+        calls = [b.name for b in message.content if b.type == "tool_use"]
+        if calls:
+            print(f"[turn {len(sa.LLM_USAGE)}] tools: {', '.join(calls)}")
+        final = message
+    print()
     print("\n".join(b.text for b in final.content if b.type == "text"))
+    if final.stop_reason == "tool_use":
+        print(f"\n(Stopped at the --max-turns cap of {args.max_turns} before the agent finished.)")
+    cost = sum(r["usd"] for r in sa.LLM_USAGE)
+    print(f"\n{len(sa.LLM_USAGE)} model calls, est. ${cost:.3f} (prices in sa.LLM_PRICES)")
 
 
 if __name__ == "__main__":

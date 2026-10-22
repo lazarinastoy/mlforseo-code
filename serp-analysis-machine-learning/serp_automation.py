@@ -1,7 +1,8 @@
 """Automated SERP analysis: collection, AI classification, gaps, AI citations,
-share of search over time and SERP-overlap clustering.
+share of search over time, SERP-overlap clustering, People Also Ask mining,
+volatility alerts and brand monitoring in LLM answers.
 
-Companion code for the MLforSEO guide "7 ways to automate SERP analysis with AI"
+Companion code for the MLforSEO guide "10 ways to automate SERP analysis with AI"
 by Lazarina Stoy. Every function works on plain pandas DataFrames, so you can
 use the pieces on their own, from the scripted pipeline (run_pipeline.py) or
 as tools for an agent (serp_agent.py).
@@ -9,7 +10,9 @@ as tools for an agent (serp_agent.py).
 Tables used throughout (one row each):
   organic    date, keyword, rank_group, rank_absolute, domain, url, title, description
   features   date, keyword, item_type, rank_absolute
-  citations  date, keyword, surface (ai_overview | ai_mode), citation_order, domain, url, title
+  citations  date, keyword, surface (ai_overview | ai_mode | chat_gpt | perplexity ...),
+             citation_order, domain, url, title
+  questions  date, keyword, position, question, seed_question   (People Also Ask)
 
 Keys, all optional, read from environment variables:
   DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD   live collection
@@ -39,13 +42,32 @@ CTR_CURVE = {1: 0.28, 2: 0.15, 3: 0.10, 4: 0.07, 5: 0.05,
              6: 0.04, 7: 0.03, 8: 0.025, 9: 0.02, 10: 0.018}
 
 LLM_MODEL = "claude-opus-5-5"   # any model with structured outputs works
+# USD per million tokens (input, output), October 2026. Check
+# https://www.anthropic.com/pricing before relying on it.
+LLM_PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0),
+              "claude-haiku-4-5": (1.0, 5.0)}
+LLM_USAGE: list[dict] = []      # one row per API call, so you can see what a run cost
+
+
+def log_usage(resp, label: str = "") -> dict:
+    """Record the tokens (and the estimated cost) of one Messages API response."""
+    u = resp.usage
+    pin, pout = LLM_PRICES.get(resp.model, LLM_PRICES[LLM_MODEL])
+    inp = (u.input_tokens or 0) + (getattr(u, "cache_creation_input_tokens", 0) or 0) * 1.25 \
+        + (getattr(u, "cache_read_input_tokens", 0) or 0) * 0.1
+    row = dict(label=label, model=resp.model, input_tokens=u.input_tokens,
+               output_tokens=u.output_tokens, usd=round((inp * pin + u.output_tokens * pout) / 1e6, 5))
+    LLM_USAGE.append(row)
+    return row
 
 SNAPSHOT_FILES = {"organic": "serp_snapshots.csv",
                   "features": "serp_features.csv",
-                  "citations": "ai_citations.csv"}
+                  "citations": "ai_citations.csv",
+                  "questions": "paa_questions.csv"}
 KEYS = {"organic": ["date", "keyword", "url"],
         "features": ["date", "keyword", "item_type", "rank_absolute"],
-        "citations": ["date", "keyword", "surface", "url"]}
+        "citations": ["date", "keyword", "surface", "url"],
+        "questions": ["date", "keyword", "question"]}
 
 
 # --------------------------------------------------------------------------
@@ -85,13 +107,17 @@ class DataForSEO:
         raise RuntimeError("unreachable")
 
     def organic(self, keyword: str, location_code: int = 2840, language_code: str = "en",
-                device: str = "desktop", depth: int = 10, ai_overview: bool = True) -> dict:
+                device: str = "desktop", depth: int = 10, ai_overview: bool = True,
+                paa_clicks: int = 0) -> dict:
         """Google organic SERP, advanced (all SERP features). `ai_overview=True`
         asks DataForSEO to load asynchronous AI Overviews (a small surcharge, refunded
-        when there is none)."""
-        return self._post("/serp/google/organic/live/advanced", {
-            "keyword": keyword, "location_code": location_code, "language_code": language_code,
-            "device": device, "depth": depth, "load_async_ai_overview": ai_overview})
+        when there is none). `paa_clicks` (1-4) expands People Also Ask for more
+        questions, at $0.00015 per click."""
+        task = {"keyword": keyword, "location_code": location_code, "language_code": language_code,
+                "device": device, "depth": depth, "load_async_ai_overview": ai_overview}
+        if paa_clicks:
+            task["people_also_ask_click_depth"] = paa_clicks
+        return self._post("/serp/google/organic/live/advanced", task)
 
     def ai_mode(self, keyword: str, location_code: int = 2840, language_code: str = "en",
                 device: str = "desktop") -> dict:
@@ -108,6 +134,18 @@ class DataForSEO:
             "keyword": keyword, "location_code": location_code,
             "language_code": language_code, "date_from": date_from})
         return res.get("items") or []
+
+    def llm_response(self, prompt: str, platform: str = "chat_gpt", model: str = "gpt-4.1-mini",
+                     web_search: bool = False, max_output_tokens: int = 600) -> dict:
+        """One answer from an LLM (DataForSEO AI Optimization API). platform is
+        "chat_gpt", "perplexity" (model "sonar"; always searches the web), "gemini"
+        or "claude". The cost is a small base fee plus the provider's token price."""
+        task = {"user_prompt": prompt, "model_name": model, "max_output_tokens": max_output_tokens}
+        if web_search and platform == "chat_gpt":
+            task["web_search"] = True
+        res = self._post(f"/ai_optimization/{platform}/llm_responses/live", task)
+        res["platform"], res["user_prompt"] = platform, prompt
+        return res
 
 
 def _references(ai_item: dict) -> list[dict]:
@@ -129,7 +167,7 @@ def parse_serp(result: dict, surface: str = "organic", snapshot_date: str | None
     snapshot) into the three tidy tables."""
     d = snapshot_date or (result.get("datetime") or str(_date.today()))[:10]
     kw = result.get("keyword", "")
-    organic, features, citations = [], [], []
+    organic, features, citations, questions = [], [], [], []
     for it in result.get("items") or []:
         t = it.get("type")
         if surface == "organic":
@@ -145,8 +183,13 @@ def parse_serp(result: dict, surface: str = "organic", snapshot_date: str | None
                 citations.append(dict(date=d, keyword=kw, surface=surf, citation_order=i,
                                       domain=r.get("domain") or "", url=r["url"],
                                       title=r.get("title") or ""))
+        elif t == "people_also_ask":
+            for q in it.get("items") or []:
+                if q.get("title"):
+                    questions.append(dict(date=d, keyword=kw, position=len(questions) + 1,
+                                          question=q["title"], seed_question=q.get("seed_question") or ""))
     return {"organic": pd.DataFrame(organic), "features": pd.DataFrame(features),
-            "citations": pd.DataFrame(citations)}
+            "citations": pd.DataFrame(citations), "questions": pd.DataFrame(questions)}
 
 
 def clean_snippet(text: str) -> str:
@@ -178,10 +221,10 @@ def load_snapshots(data_dir: str | Path) -> dict:
 
 
 def collect(keywords: list[str], client: DataForSEO, data_dir: str | Path,
-            ai_mode: bool = False) -> dict:
+            ai_mode: bool = False, paa_clicks: int = 0) -> dict:
     """One scheduled run: pull every keyword, parse, append to the store."""
     for kw in keywords:
-        save_snapshot(parse_serp(client.organic(kw)), data_dir)
+        save_snapshot(parse_serp(client.organic(kw, paa_clicks=paa_clicks)), data_dir)
         if ai_mode:
             save_snapshot(parse_serp(client.ai_mode(kw), surface="ai_mode"), data_dir)
     return load_snapshots(data_dir)
@@ -211,9 +254,11 @@ CLASSIFY_SCHEMA = {
 
 
 def serp_prompt(keyword: str, organic: pd.DataFrame, features: pd.DataFrame) -> str:
+    o = organic.assign(description=organic.get("description", "")).fillna({"description": ""})
     rows = "\n".join(f"{int(r.rank_group)}. {r.domain} | {r.title} | {r.description}"
-                     for r in organic.sort_values("rank_group").itertuples())
-    feats = ", ".join(sorted(set(features["item_type"]))) if not features.empty else "unknown"
+                     for r in o.sort_values("rank_group").itertuples())
+    feats = (", ".join(sorted(set(features["item_type"])))
+             if features is not None and not features.empty else "unknown")
     return (f"Keyword: {keyword}\nSERP features present: {feats}\n\nOrganic results "
             f"(rank. domain | title | snippet):\n{rows}\n\nLabel every result's page type and "
             "intent from the allowed values only. Then give the SERP's dominant intent and "
@@ -230,8 +275,11 @@ def classify_serp(keyword: str, organic: pd.DataFrame, features: pd.DataFrame,
         model=model, max_tokens=4000,
         output_config={"effort": "low", "format": {"type": "json_schema", "schema": CLASSIFY_SCHEMA}},
         messages=[{"role": "user", "content": serp_prompt(keyword, organic, features)}])
+    log_usage(resp, f"classify: {keyword}")
     if resp.stop_reason == "refusal":
         raise RuntimeError(f"Model declined to classify {keyword!r}")
+    if resp.stop_reason == "max_tokens":
+        raise RuntimeError(f"Ran out of tokens classifying {keyword!r}; raise max_tokens")
     text = next(b.text for b in resp.content if b.type == "text")
     return json.loads(text)
 
@@ -458,6 +506,9 @@ def change_report(snap: dict, my_domain: str | None = None) -> str:
             b = set(g.loc[g["date"] == last, "domain"])
             lines.append(f"- Since {prev}: {len(b - a)} new domains in the top 10 "
                          f"({', '.join(sorted(b - a)) or 'none'}); dropped out: {', '.join(sorted(a - b)) or 'none'}.")
+            v = serp_volatility(g).iloc[-1]
+            flag = " ALERT" if v["volatility"] >= ALERT_THRESHOLD else ""
+            lines.append(f"- Volatility {v['volatility']:.2f} (0 = unchanged, 1 = a whole new top 10).{flag}")
         if not feat.empty:
             f = feat[(feat["keyword"] == kw) & (feat["date"] == dates[-1])]
             lines.append(f"- SERP features now: {', '.join(sorted(set(f['item_type'])))}.")
@@ -471,3 +522,134 @@ def change_report(snap: dict, my_domain: str | None = None) -> str:
                 lines.append(f"- {my_domain} cited: {'yes' if not mine.empty else 'no'} (latest answers).")
         lines.append("")
     return "\n".join(lines)
+
+
+# --------------------------------------------------------------------------
+# 8. People Also Ask mining and clustering
+# --------------------------------------------------------------------------
+QUESTION_USES = ["section in the main page", "FAQ entry", "separate page", "off-topic (skip)"]
+QUESTION_SCHEMA = {
+    "type": "object", "additionalProperties": False, "required": ["themes"],
+    "properties": {"themes": {"type": "array", "items": {
+        "type": "object", "additionalProperties": False,
+        "required": ["theme", "questions", "use"],
+        "properties": {"theme": {"type": "string"},
+                       "questions": {"type": "array", "items": {"type": "string"}},
+                       "use": {"type": "string", "enum": QUESTION_USES}}}}}}
+
+
+def question_table(questions: pd.DataFrame) -> pd.DataFrame:
+    """De-duplicated PAA questions: in how many keyword (x market) SERPs and
+    snapshots each appeared. Questions that recur across SERPs are the core of the topic."""
+    q = questions.assign(q_norm=questions["question"].str.lower().str.strip(" ?"))
+    q["source"] = q["keyword"] + (" | " + q["market"].astype(str) if "market" in q else "")
+    out = (q.groupby("q_norm").agg(question=("question", "first"), sources=("source", "nunique"),
+                                   seen=("date", "count"), best_position=("position", "min"))
+           .sort_values(["sources", "seen", "best_position"], ascending=[False, False, True]))
+    return out.reset_index(drop=True)
+
+
+def cluster_questions(questions: list[str], topic: str, client=None, model: str = LLM_MODEL) -> dict:
+    """Group questions into themes and say how a page about `topic` should use
+    each theme. One structured-output call; the enum stops invented 'uses'."""
+    import anthropic
+    client = client or anthropic.Anthropic()
+    prompt = (f"Topic of the page: {topic}\n\nPeople Also Ask questions collected from Google:\n"
+              + "\n".join(f"- {q}" for q in questions)
+              + "\n\nGroup questions that ask the same thing or closely related things into themes "
+              "(use every question exactly once, copied verbatim). For each theme, choose how a page "
+              "about the topic should use it. Mark questions that drifted away from the topic as off-topic.")
+    resp = client.messages.create(
+        model=model, max_tokens=4000,
+        output_config={"effort": "low", "format": {"type": "json_schema", "schema": QUESTION_SCHEMA}},
+        messages=[{"role": "user", "content": prompt}])
+    log_usage(resp, f"questions: {topic}")
+    if resp.stop_reason in ("refusal", "max_tokens"):
+        raise RuntimeError(f"Question clustering stopped early: {resp.stop_reason}")
+    out = json.loads(next(b.text for b in resp.content if b.type == "text"))
+    placed = {q for t in out["themes"] for q in t["questions"]}
+    out["unplaced"] = [q for q in questions if q not in placed]   # check, don't assume
+    return out
+
+
+# --------------------------------------------------------------------------
+# 9. Volatility scores and alerts
+# --------------------------------------------------------------------------
+ALERT_THRESHOLD = 0.5   # tune on your own history: alert on what's unusual for YOUR keywords
+
+
+def serp_volatility(organic: pd.DataFrame, top_n: int = 10) -> pd.DataFrame:
+    """Per keyword and consecutive pair of snapshots: how much the top `top_n`
+    changed. url_turnover = 1 - Jaccard similarity of the URL sets.
+    volatility = total position change, where a URL that entered or left counts as
+    moving to position top_n + 1, divided by the change if every URL had been
+    replaced. 0 = identical, 1 = a whole new top 10; moves near the top weigh more."""
+    rows = []
+    o = organic[organic["rank_group"] <= top_n]
+    for kw, g in o.groupby("keyword"):
+        dates = sorted(g["date"].unique())
+        for prev, cur in zip(dates, dates[1:]):
+            a = dict(zip(g.loc[g["date"] == prev, "url"].str.rstrip("/"), g.loc[g["date"] == prev, "rank_group"]))
+            b = dict(zip(g.loc[g["date"] == cur, "url"].str.rstrip("/"), g.loc[g["date"] == cur, "rank_group"]))
+            urls = set(a) | set(b)
+            moves = sum(abs(a.get(u, top_n + 1) - b.get(u, top_n + 1)) for u in urls)
+            worst = sum(top_n + 1 - r for r in a.values()) + sum(top_n + 1 - r for r in b.values())
+            rows.append(dict(keyword=kw, date_from=prev, date_to=cur,
+                             url_turnover=round(1 - len(set(a) & set(b)) / len(urls), 2),
+                             volatility=round(moves / worst, 2) if worst else 0.0,
+                             entered=len(set(b) - set(a)), left=len(set(a) - set(b))))
+    return pd.DataFrame(rows)
+
+
+def volatility_alerts(vol: pd.DataFrame, threshold: float = ALERT_THRESHOLD) -> pd.DataFrame:
+    """The keyword/date pairs worth a human look."""
+    return vol[vol["volatility"] >= threshold].sort_values("volatility", ascending=False)
+
+
+def compare_markets(organic: pd.DataFrame, keyword: str, market_col: str = "market",
+                    top_n: int = 10) -> pd.DataFrame:
+    """Same keyword, different markets (or devices): shared URLs and domains in
+    the top `top_n`, for every pair of markets. Add a `market` column when you
+    store each pull (e.g. "US", "UK", "US-mobile")."""
+    o = organic[(organic["keyword"] == keyword) & (organic["rank_group"] <= top_n)]
+    sets = {m: (set(g["url"].str.rstrip("/")), set(g["domain"].str.replace("www.", "", regex=False)))
+            for m, g in o.groupby(market_col)}
+    ms = sorted(sets)
+    return pd.DataFrame([dict(market_a=a, market_b=b, shared_urls=len(sets[a][0] & sets[b][0]),
+                              shared_domains=len(sets[a][1] & sets[b][1]),
+                              url_jaccard=round(len(sets[a][0] & sets[b][0]) / len(sets[a][0] | sets[b][0]), 2))
+                         for i, a in enumerate(ms) for b in ms[i + 1:]])
+
+
+# --------------------------------------------------------------------------
+# 10. Brand mentions and citations in LLM answers (ChatGPT, Perplexity ...)
+# --------------------------------------------------------------------------
+def parse_llm_answer(result: dict, snapshot_date: str | None = None) -> dict:
+    """One DataForSEO LLM-responses result -> an answers row and citations rows
+    (same citations table as AI Overviews, with surface = the platform)."""
+    d = snapshot_date or (result.get("datetime") or str(_date.today()))[:10]
+    platform, prompt = result.get("platform", "llm"), result.get("user_prompt", "")
+    text, cites = [], []
+    for item in result.get("items") or []:
+        for sec in item.get("sections") or []:
+            text.append(sec.get("text") or "")
+            for a in sec.get("annotations") or []:
+                if a.get("url") and a["url"] not in {c["url"] for c in cites}:
+                    cites.append(dict(date=d, keyword=prompt, surface=platform, citation_order=len(cites) + 1,
+                                      domain=re.sub(r"^https?://([^/]+).*", r"\1", a["url"]),
+                                      url=a["url"], title=a.get("title") or ""))
+    answer = dict(date=d, platform=platform, model=result.get("model_name"), prompt=prompt,
+                  web_search=result.get("web_search"), text="\n".join(text))
+    return {"answers": pd.DataFrame([answer]), "citations": pd.DataFrame(cites)}
+
+
+def brand_mentions(answers: pd.DataFrame, brands: dict[str, str]) -> pd.DataFrame:
+    """Which brands each answer mentions, and where (1 = mentioned first).
+    `brands` maps a display name to a regex, e.g. {"Semrush": r"sem ?rush"}."""
+    rows = []
+    for r in answers.itertuples():
+        hits = {b: m.start() for b, pat in brands.items() if (m := re.search(pat, r.text, re.I))}
+        order = {b: i + 1 for i, b in enumerate(sorted(hits, key=hits.get))}
+        rows.append({"date": r.date, "platform": r.platform, "prompt": r.prompt,
+                     **{b: order.get(b, 0) for b in brands}})
+    return pd.DataFrame(rows)

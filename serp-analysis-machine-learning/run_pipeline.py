@@ -4,11 +4,12 @@ Run it by hand, from cron, or from GitHub Actions (see github-actions-serp-track
 Deterministic and cheap: the only paid calls are the SERP pulls (and the
 optional LLM classification).
 
-  python run_pipeline.py --keywords keywords.txt --data-dir data --ai-mode --my-domain mlforseo.com
+  python run_pipeline.py --keywords keywords.txt --data-dir data --ai-mode --my-domain example.com
   python run_pipeline.py --demo        # no keys: runs the analysis steps on sample_data/
 
 Outputs in --data-dir: the snapshot CSVs, share_of_search.csv,
-citation_overlap.csv, serp_clusters.csv, (serp_labels.csv) and report.md.
+citation_overlap.csv, volatility.csv, paa_questions_summary.csv,
+serp_clusters.csv, (serp_labels.csv) and report.md.
 """
 from __future__ import annotations
 
@@ -24,6 +25,7 @@ def main() -> None:
     ap.add_argument("--keywords", help="text file, one keyword per line")
     ap.add_argument("--data-dir", default="data")
     ap.add_argument("--ai-mode", action="store_true", help="also pull Google AI Mode answers")
+    ap.add_argument("--paa-clicks", type=int, default=0, help="expand People Also Ask (1-4 clicks, $0.00015 each)")
     ap.add_argument("--classify", action="store_true", help="LLM-label the latest SERPs (needs ANTHROPIC_API_KEY)")
     ap.add_argument("--my-domain", default=None)
     ap.add_argument("--max-spend", type=float, default=0.50, help="USD cap for DataForSEO calls in this run")
@@ -37,7 +39,7 @@ def main() -> None:
     if not args.demo:
         keywords = [k.strip() for k in open(args.keywords) if k.strip() and not k.startswith("#")]
         client = sa.DataForSEO(max_spend_usd=args.max_spend)
-        sa.collect(keywords, client, data_dir, ai_mode=args.ai_mode)
+        sa.collect(keywords, client, data_dir, ai_mode=args.ai_mode, paa_clicks=args.paa_clicks)
         print(f"Collected {len(keywords)} keywords, DataForSEO spend this run: ${client.spent:.4f}")
 
     snap = sa.load_snapshots(data_dir)
@@ -48,6 +50,10 @@ def main() -> None:
 
     if not snap["citations"].empty:
         sa.citation_overlap(snap["citations"], org).to_csv(out_dir / "citation_overlap.csv", index=False)
+
+    sa.serp_volatility(org).to_csv(out_dir / "volatility.csv", index=False)
+    if not snap["questions"].empty:
+        sa.question_table(snap["questions"]).to_csv(out_dir / "paa_questions_summary.csv", index=False)
 
     if org["keyword"].nunique() > 1:
         overlap = sa.serp_overlap(org)
