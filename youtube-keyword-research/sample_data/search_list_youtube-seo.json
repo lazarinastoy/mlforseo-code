@@ -1,0 +1,693 @@
+{
+ "_sample_note": "SAMPLE DATA, not real YouTube results: fictional channels and fake video IDs, written by MLforSEO to match the official YouTube Data API v3 response shape. Run the notebook with your own API key for real data.",
+ "kind": "youtube#searchListResponse",
+ "etag": "3559d7accf00360971961ca1898",
+ "nextPageToken": "CBQQAA",
+ "regionCode": "GB",
+ "pageInfo": {
+  "totalResults": 1000000,
+  "resultsPerPage": 20
+ },
+ "items": [
+  {
+   "kind": "youtube#searchResult",
+   "etag": "aa222c4bab7eabba57918208212",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEcfcd2"
+   },
+   "snippet": {
+    "publishedAt": "2026-01-14T15:00:12Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step)",
+    "description": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step). In this video we cover youtube seo, youtube seo 2026, how to rank youtube videos. (Sample descrip",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-01-14T15:00:12Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "0fa3cd3f30a61d50a73b2f93714",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc4ca4"
+   },
+   "snippet": {
+    "publishedAt": "2025-09-03T13:30:00Z",
+    "channelId": "UCSAMPLE21a39d8537a4daa1",
+    "title": "YouTube SEO for Beginners: The Complete Guide",
+    "description": "YouTube SEO for Beginners: The Complete Guide. In this video we cover youtube seo, youtube seo for beginners, youtube seo tutorial. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Small Channel Studio",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-09-03T13:30:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "8cafb549cc32658544f61736589",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc81e7"
+   },
+   "snippet": {
+    "publishedAt": "2025-11-20T17:00:00Z",
+    "channelId": "UCSAMPLE7c49af86030581c7",
+    "title": "7 YouTube SEO Tips That Actually Work",
+    "description": "7 YouTube SEO Tips That Actually Work. In this video we cover youtube seo, youtube seo tips, youtube tips. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Video Marketing Weekly",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-11-20T17:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "4d68c27d6d9d47a7ec765d75d69",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEeccbc"
+   },
+   "snippet": {
+    "publishedAt": "2025-06-11T15:00:00Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "How to Find Keywords for YouTube Videos (Free Tools)",
+    "description": "How to Find Keywords for YouTube Videos (Free Tools). In this video we cover youtube keyword research, youtube seo, youtube keyword tool. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-06-11T15:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "56c0b87f62c08e7c942eba90401",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEa87ff"
+   },
+   "snippet": {
+    "publishedAt": "2025-12-02T18:00:00Z",
+    "channelId": "UCSAMPLEcc9f85b067b9cab5",
+    "title": "YouTube Tags: Do They Still Matter? (I Tested It)",
+    "description": "YouTube Tags: Do They Still Matter? (I Tested It). In this video we cover youtube tags, youtube seo, do youtube tags matter. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "The Upload Test",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-12-02T18:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "59fae7b027bd8e9b9136690322c",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEe4da3"
+   },
+   "snippet": {
+    "publishedAt": "2026-03-09T09:00:00Z",
+    "channelId": "UCSAMPLEbe2a789f79f3e075",
+    "title": "YouTube SEO Crash Course | Titles, Descriptions, Tags &amp; Chapters",
+    "description": "YouTube SEO Crash Course | Titles, Descriptions, Tags & Chapters. In this video we cover youtube seo, youtube seo crash course, youtube seo full course. (Sample",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Digital Skills Hub",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-03-09T09:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "45c9e1c2d46bc65f8a09197d772",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE16790"
+   },
+   "snippet": {
+    "publishedAt": "2026-02-18T16:00:00Z",
+    "channelId": "UCSAMPLE16bb384f5802fff4",
+    "title": "Best YouTube SEO Tools in 2026 (Free and Paid)",
+    "description": "Best YouTube SEO Tools in 2026 (Free and Paid). In this video we cover best youtube seo tools, youtube seo tools, youtube seo. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Tool Review Desk",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-02-18T16:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "22a4d53b6c946bdbd78f03c6e45",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE8f14e"
+   },
+   "snippet": {
+    "publishedAt": "2025-08-27T14:00:00Z",
+    "channelId": "UCSAMPLE7e272db3345bd07c",
+    "title": "How YouTube Search Works (Explained by a Former Ads Analyst)",
+    "description": "How YouTube Search Works (Explained by a Former Ads Analyst). In this video we cover how youtube seo works, youtube search, youtube algorithm. (Sample descripti",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Signal & Noise Media",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-08-27T14:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "2cdd2f8db94afddf4f5bab397e1",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc9f0f"
+   },
+   "snippet": {
+    "publishedAt": "2026-05-06T12:00:00Z",
+    "channelId": "UCSAMPLE0fb984501f9ed0d6",
+    "title": "YouTube SEO with AI: Write Titles and Descriptions in Minutes",
+    "description": "YouTube SEO with AI: Write Titles and Descriptions in Minutes. In this video we cover youtube seo with ai, youtube seo ai tool, chatgpt for youtube. (Sample des",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "AI Workflow Studio",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-05-06T12:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "c4a3aaad17ba4fb3f897e0319b7",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE45c48"
+   },
+   "snippet": {
+    "publishedAt": "2026-04-01T17:00:00Z",
+    "channelId": "UCSAMPLE7c49af86030581c7",
+    "title": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish",
+    "description": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish. In this video we cover youtube seo checklist, youtube seo, youtube upload checklist. (Sample desc",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Video Marketing Weekly",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-04-01T17:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "35b375af18cd1441d02bc63b124",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEd3d94"
+   },
+   "snippet": {
+    "publishedAt": "2025-10-15T08:00:00Z",
+    "channelId": "UCSAMPLE97f89b3a6a3eeceb",
+    "title": "What Is YouTube SEO? (Explained in 5 Minutes)",
+    "description": "What Is YouTube SEO? (Explained in 5 Minutes). In this video we cover what is youtube seo, youtube seo, youtube seo explained. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Marketing in Minutes",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-10-15T08:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "ce4378d755d6b4b5cda78c99ed1",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE6512b"
+   },
+   "snippet": {
+    "publishedAt": "2026-06-24T13:30:00Z",
+    "channelId": "UCSAMPLE21a39d8537a4daa1",
+    "title": "YouTube Shorts SEO: How to Get Shorts Found in Search",
+    "description": "YouTube Shorts SEO: How to Get Shorts Found in Search. In this video we cover youtube shorts seo, youtube shorts, youtube seo. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Small Channel Studio",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-06-24T13:30:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "c37d41762fe6207b8c934caa373",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc20ad"
+   },
+   "snippet": {
+    "publishedAt": "2025-07-22T09:00:00Z",
+    "channelId": "UCSAMPLEbe2a789f79f3e075",
+    "title": "YouTube Channel SEO: Keywords, Playlists and Your About Page",
+    "description": "YouTube Channel SEO: Keywords, Playlists and Your About Page. In this video we cover youtube channel seo, youtube seo, youtube channel keywords. (Sample descrip",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Digital Skills Hub",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-07-22T09:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "56b58a1b4d61c7c5667fcbba165",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc51ce"
+   },
+   "snippet": {
+    "publishedAt": "2026-08-12T18:00:00Z",
+    "channelId": "UCSAMPLEcc9f85b067b9cab5",
+    "title": "I Fixed the SEO on 50 Old Videos. Here&#39;s What Happened",
+    "description": "I Fixed the SEO on 50 Old Videos. Here's What Happened. In this video we cover youtube seo, youtube seo case study, update old youtube videos. (Sample descripti",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "The Upload Test",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-08-12T18:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "6b70145be456505198ca1fa8c23",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEaab32"
+   },
+   "snippet": {
+    "publishedAt": "2024-11-05T10:00:00Z",
+    "channelId": "UCSAMPLEe54c80158254b07f",
+    "title": "YouTube Video SEO: Rank #1 in YouTube Search",
+    "description": "YouTube Video SEO: Rank #1 in YouTube Search. In this video we cover youtube video seo, youtube seo, rank youtube videos. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Rank Ready",
+    "liveBroadcastContent": "none",
+    "publishTime": "2024-11-05T10:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "c99b450d1d2f02db4036a45eaff",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE9bf31"
+   },
+   "snippet": {
+    "publishedAt": "2026-01-29T10:00:00Z",
+    "channelId": "UCSAMPLEe54c80158254b07f",
+    "title": "YouTube Keyword Research in 2026 (Step by Step)",
+    "description": "YouTube Keyword Research in 2026 (Step by Step). In this video we cover youtube keyword research, youtube seo, youtube seo 2026. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Rank Ready",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-01-29T10:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "c623d1221e42cb9744be4c87679",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLEc74d9"
+   },
+   "snippet": {
+    "publishedAt": "2025-04-08T15:00:00Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "YouTube Descriptions: The SEO Template I Use",
+    "description": "YouTube Descriptions: The SEO Template I Use. In this video we cover youtube description, youtube seo, youtube description template. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-04-08T15:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "e5e474cab8dba23cf873cfa4717",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE70efd"
+   },
+   "snippet": {
+    "publishedAt": "2025-05-19T07:00:00Z",
+    "channelId": "UCSAMPLEe5d3a9278aa7ecf3",
+    "title": "YouTube SEO Full Course for Beginners (2 Hours)",
+    "description": "YouTube SEO Full Course for Beginners (2 Hours). In this video we cover youtube seo full course, youtube seo course, youtube seo for beginners. (Sample descript",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Learn Video Online",
+    "liveBroadcastContent": "none",
+    "publishTime": "2025-05-19T07:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "929aa2239f9a7be538e82d9615e",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE6f492"
+   },
+   "snippet": {
+    "publishedAt": "2026-07-02T08:00:00Z",
+    "channelId": "UCSAMPLE97f89b3a6a3eeceb",
+    "title": "Stop Doing This YouTube SEO Mistake",
+    "description": "Stop Doing This YouTube SEO Mistake. In this video we cover youtube seo mistakes, youtube seo, youtube tips. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Marketing in Minutes",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-07-02T08:00:00Z"
+   }
+  },
+  {
+   "kind": "youtube#searchResult",
+   "etag": "248a44724d34c39e8cd58f859c3",
+   "id": {
+    "kind": "youtube#video",
+    "videoId": "SAMPLE1f0e3"
+   },
+   "snippet": {
+    "publishedAt": "2026-09-16T14:00:00Z",
+    "channelId": "UCSAMPLE7e272db3345bd07c",
+    "title": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals",
+    "description": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals. In this video we cover video SEO signals. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Signal & Noise Media",
+    "liveBroadcastContent": "none",
+    "publishTime": "2026-09-16T14:00:00Z"
+   }
+  }
+ ]
+}

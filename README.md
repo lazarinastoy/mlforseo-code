@@ -27,6 +27,14 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 | [`blog-architecture-audit/`](blog-architecture-audit/) | Blog and site architecture for SEO and conversions in the AI search era | Click depth vs URL depth, orphans, category balance, hub coverage from a sitemap crawl or Screaming Frog export |
 | [`seo-metadata-fuzzy-matching-openai/`](seo-metadata-fuzzy-matching-openai/) | How to automatically optimize your SEO metadata with FuzzyWuzzy and OpenAI in Google Colab | "Fuzzy Booster": Search Console top query per page vs title/meta/h1 (RapidFuzz), OpenAI title rewrites, sample data |
 | [`whisper-audio-transcription/`](whisper-audio-transcription/) | How to transcribe audio with OpenAI's Whisper API in Google Colab (Python) | Current OpenAI SDK, single + bulk transcription, 25 MB chunking with pydub, SRT captions |
+| [`dataforseo-serp-collection/`](dataforseo-serp-collection/) | DataForSEO SERP collection starter | Live or Standard-queue SERP pulls with a spend cap, flattened to organic / features / PAA / AI Overview / related-search tables |
+| [`ai-overview-tracker/`](ai-overview-tracker/) | AI search measurement: tracking AI Overviews | AI Overview presence per keyword, cited domains and URLs, your citation share, gaps and a run-over-run history |
+| [`keyword-clustering-serp-embeddings/`](keyword-clustering-serp-embeddings/) | Keyword clustering: SERP overlap vs embeddings | Embedding clusters, SERP-overlap clusters and a hybrid, with disagreement tables, cluster labels and volume totals |
+| [`query-fan-out-coverage/`](query-fan-out-coverage/) | How entities power query fan-out | Simulated fan-out (rules or any LLM) and passage-level coverage scoring with embeddings + a reranker: covered / partial / gap |
+| [`ai-crawler-access-checker/`](ai-crawler-access-checker/) | Your robots.txt might be the silent killer of your AI traffic | robots.txt rules for 27 AI crawlers and control tokens (RFC 9309 matching), llms.txt checks, common-mistake flags |
+| [`youtube-keyword-research/`](youtube-keyword-research/) | YouTube SEO keyword research | YouTube autocomplete expansions, competitor tags and titles via the Data API v3, tag co-occurrence and gaps |
+| [`keyword-cannibalization-checker/`](keyword-cannibalization-checker/) | Search intent-first website architecture | Search Console query/page splits, severity score, legitimate-case detection, suggested action and an xlsx report |
+| [`entity-salience-checker/`](entity-salience-checker/) | The AI-powered Entity Audit (Clarity) | Google NL API v1 salience for your target entity vs competitor pages, MIDs, clarity tips and a 0-3 clarity score |
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
 

@@ -1,0 +1,978 @@
+{
+ "entities": [
+  {
+   "name": "Brewly",
+   "type": "ORGANIZATION",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 33
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 57
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 90
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 121
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 157
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 229
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 263
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 359
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 560
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 611
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 678
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 2008
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 2036
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 2119
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly",
+      "beginOffset": 2166
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.307268
+  },
+  {
+   "name": "cafetière",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Cafetière",
+      "beginOffset": 13
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cafetière",
+      "beginOffset": 431
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cafetière",
+      "beginOffset": 715
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cafetière",
+      "beginOffset": 1719
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Cafetière",
+      "beginOffset": 1752
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cafetière",
+      "beginOffset": 1830
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.068985
+  },
+  {
+   "name": "coffee",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/02vqfm",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coffee"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 133
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 287
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1160
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Coffee",
+      "beginOffset": 1405
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1658
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 2096
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.067814
+  },
+  {
+   "name": "coffee beans",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/05bzrs",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coffee_bean"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "coffee beans",
+      "beginOffset": 685
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee beans",
+      "beginOffset": 785
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee beans",
+      "beginOffset": 961
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.037848
+  },
+  {
+   "name": "kettle",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/03s_tn",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kettle"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "Kettle",
+      "beginOffset": 149
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "kettle",
+      "beginOffset": 837
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "gooseneck kettle",
+      "beginOffset": 1973
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.035631
+  },
+  {
+   "name": "water",
+   "type": "OTHER",
+   "metadata": {
+    "mid": "/m/0838f",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Water"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 857
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 918
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 1186
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.035622
+  },
+  {
+   "name": "grind",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 829
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Grind",
+      "beginOffset": 943
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 1022
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 1121
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 1365
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.034753
+  },
+  {
+   "name": "filter",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "filters",
+      "beginOffset": 460
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "filter",
+      "beginOffset": 848
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh",
+      "beginOffset": 1046
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh filter",
+      "beginOffset": 1603
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh",
+      "beginOffset": 1685
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.033841
+  },
+  {
+   "name": "Brewly Classic",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Brewly Classic",
+      "beginOffset": 753
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Brewly Classic",
+      "beginOffset": 1921
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.033294
+  },
+  {
+   "name": "team",
+   "type": "PERSON",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "team",
+      "beginOffset": 236
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "team",
+      "beginOffset": 316
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.029719
+  },
+  {
+   "name": "brewers",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "brewers",
+      "beginOffset": 344
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "brewer",
+      "beginOffset": 533
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.028354
+  },
+  {
+   "name": "newsletter",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "newsletter",
+      "beginOffset": 97
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "newsletter",
+      "beginOffset": 618
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "newsletter subscribers",
+      "beginOffset": 2043
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Newsletter",
+      "beginOffset": 2178
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.026009
+  },
+  {
+   "name": "burr grinder",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "burr grinder",
+      "beginOffset": 800
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "burr grinder",
+      "beginOffset": 1081
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.024139
+  },
+  {
+   "name": "cup",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 210
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 749
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 1065
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.023734
+  },
+  {
+   "name": "order",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "orders",
+      "beginOffset": 64
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "order",
+      "beginOffset": 669
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "orders",
+      "beginOffset": 2015
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.02191
+  },
+  {
+   "name": "French press",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/01p1qs",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/French_press"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1765
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1880
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.016732
+  },
+  {
+   "name": "grinder",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Grinder",
+      "beginOffset": 140
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.01543
+  },
+  {
+   "name": "kitchen",
+   "type": "LOCATION",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "kitchen",
+      "beginOffset": 366
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.014481
+  },
+  {
+   "name": "free shipping",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Free shipping",
+      "beginOffset": 40
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Free shipping",
+      "beginOffset": 1991
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.014105
+  },
+  {
+   "name": "customers",
+   "type": "PERSON",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "customers",
+      "beginOffset": 567
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.013638
+  },
+  {
+   "name": "UK",
+   "type": "LOCATION",
+   "metadata": {
+    "mid": "/m/07ssc",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/United_Kingdom"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "UK",
+      "beginOffset": 1811
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.013463
+  },
+  {
+   "name": "US",
+   "type": "LOCATION",
+   "metadata": {
+    "mid": "/m/09c7w0",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/United_States"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "US",
+      "beginOffset": 1854
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.013174
+  },
+  {
+   "name": "press pot",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "plunger pot",
+      "beginOffset": 885
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "press pot",
+      "beginOffset": 1526
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.013148
+  },
+  {
+   "name": "plunger",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 1251
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 1304
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.012785
+  },
+  {
+   "name": "Brewly Burr Grinder Pro",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Brewly Burr Grinder Pro",
+      "beginOffset": 1941
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.01259
+  },
+  {
+   "name": "grounds",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grounds",
+      "beginOffset": 1432
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grounds",
+      "beginOffset": 1546
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.01172
+  },
+  {
+   "name": "jug",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "jug",
+      "beginOffset": 1507
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.009691
+  },
+  {
+   "name": "cookies",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Cookie",
+      "beginOffset": 2231
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cookies",
+      "beginOffset": 2254
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.007923
+  },
+  {
+   "name": "sea salt",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "sea salt",
+      "beginOffset": 1005
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.007079
+  },
+  {
+   "name": "compost",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "compost",
+      "beginOffset": 1564
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.005671
+  },
+  {
+   "name": "oils",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "oils",
+      "beginOffset": 1665
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.005416
+  },
+  {
+   "name": "privacy policy",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Privacy policy",
+      "beginOffset": 2214
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.004033
+  },
+  {
+   "name": "£30",
+   "type": "PRICE",
+   "metadata": {
+    "value": "30.000000",
+    "currency": "GBP"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "£30",
+      "beginOffset": 76
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "£30",
+   "type": "PRICE",
+   "metadata": {
+    "value": "30.000000",
+    "currency": "GBP"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "£30",
+      "beginOffset": 2027
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "8",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "8"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "8",
+      "beginOffset": 747
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "30",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "30"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "30",
+      "beginOffset": 949
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "500",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "500"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "500",
+      "beginOffset": 1176
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  }
+ ],
+ "language": "en"
+}

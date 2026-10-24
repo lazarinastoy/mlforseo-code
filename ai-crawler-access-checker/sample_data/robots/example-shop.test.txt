@@ -1,0 +1,33 @@
+# Fictional robots.txt for example-shop.test, written for this notebook.
+# It contains the AI-crawler mistakes we see most often.
+
+User-agent: *
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /search
+
+# "Block AI": training AND search bots blocked together
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+Disallow: /
+
+# Meant to keep the shop out of AI Overviews (it doesn't do that)
+User-agent: Google-Extended
+Disallow: /
+
+# Meant to stop Apple Intelligence training (this blocks Siri/Spotlight search instead)
+User-agent: Applebot
+Disallow: /
+
+# Typo: the real token is PerplexityBot
+User-agent: Perplexity-Bot
+Disallow: /
+
+# Outdated and partial tokens
+User-agent: anthropic-ai
+User-agent: Claude
+Disallow: /
+
+Sitemap: https://example-shop.test/sitemap.xml

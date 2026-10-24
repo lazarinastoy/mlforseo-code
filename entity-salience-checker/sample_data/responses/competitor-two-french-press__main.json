@@ -1,0 +1,424 @@
+{
+ "entities": [
+  {
+   "name": "coffee",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/02vqfm",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coffee"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 13
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Coffee",
+      "beginOffset": 48
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 225
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 339
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 377
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 406
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.237582
+  },
+  {
+   "name": "French press",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/01p1qs",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/French_press"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 0
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 62
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 309
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 658
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 853
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.176918
+  },
+  {
+   "name": "brew time",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "brew time",
+      "beginOffset": 38
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "brew time",
+      "beginOffset": 265
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "brew time",
+      "beginOffset": 620
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "steep",
+      "beginOffset": 671
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "steep",
+      "beginOffset": 708
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.098659
+  },
+  {
+   "name": "water",
+   "type": "OTHER",
+   "metadata": {
+    "mid": "/m/0838f",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Water"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 235
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 363
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 924
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.094474
+  },
+  {
+   "name": "grind",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 28
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind size",
+      "beginOffset": 246
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 449
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 474
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.090425
+  },
+  {
+   "name": "ratio",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "ratio",
+      "beginOffset": 21
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "ratio",
+      "beginOffset": 216
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "ratio",
+      "beginOffset": 280
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.07461
+  },
+  {
+   "name": "filter",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "mesh",
+      "beginOffset": 121
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "filter",
+      "beginOffset": 546
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh filter",
+      "beginOffset": 895
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.055971
+  },
+  {
+   "name": "cup",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 162
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 796
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.0388
+  },
+  {
+   "name": "blade grinders",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Blade grinders",
+      "beginOffset": 481
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.032274
+  },
+  {
+   "name": "burr grinder",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "burr grinder",
+      "beginOffset": 559
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.029955
+  },
+  {
+   "name": "baristas",
+   "type": "PERSON",
+   "metadata": {
+    "mid": "/m/01f1n4",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Barista"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "baristas",
+      "beginOffset": 683
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.026269
+  },
+  {
+   "name": "grounds",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grounds",
+      "beginOffset": 145
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.025358
+  },
+  {
+   "name": "particles",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "dust",
+      "beginOffset": 518
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.018705
+  },
+  {
+   "name": "1",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "1"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "1",
+      "beginOffset": 301
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "60",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "60"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "60",
+      "beginOffset": 327
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "900",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "900"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "900",
+      "beginOffset": 350
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  }
+ ],
+ "language": "en"
+}

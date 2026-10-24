@@ -1,0 +1,31 @@
+URL: https://www.homebaristahq.example/guides/how-to-descale-an-espresso-machine/
+TITLE: How to Descale an Espresso Machine (Step by Step)
+
+# How to Descale an Espresso Machine
+
+Limescale is the most common reason home espresso machines lose temperature stability, brew slowly or break down early. Minerals in tap water build up inside the boiler, pipes and valves, and the harder your water, the faster it happens.
+
+## How often should you descale?
+
+In soft water areas, every three to four months is usually enough. In hard water areas, descale every four to six weeks, or follow the reminder on your machine if it has one. Using filtered or softened water slows the build-up considerably.
+
+## What you need
+
+A descaling solution made for espresso machines (citric or lactic acid based), a large jug, and about thirty minutes. Avoid vinegar: it is hard to rinse out, it leaves a taste, and it can damage seals and gaskets.
+
+## Step by step
+
+1. Empty the water tank and the drip tray, and remove the portafilter.
+2. Mix the descaler with water in the tank, following the dilution on the bottle.
+3. Turn the machine on and let it heat up.
+4. Run about half of the solution through the group head and the rest through the steam wand, in short bursts.
+5. Switch the machine off and leave the solution to work for 15 to 20 minutes.
+6. Run the remaining solution through, then rinse the tank and flush at least two full tanks of fresh water through the group head and the steam wand.
+
+## Descaling is not the same as cleaning
+
+Descaling removes minerals. Coffee oils and grounds are a separate job: backflush the group head with a blind basket and espresso cleaning tablets every week or two, and wipe and purge the steam wand after every use.
+
+## Signs your machine needs descaling
+
+Water flows slowly from the group head, the machine takes longer to heat up, the steam is weaker than it used to be, or you can see white deposits in the tank. Descaling regularly keeps your machine running for years and protects your warranty, since many manufacturers will not cover scale damage.

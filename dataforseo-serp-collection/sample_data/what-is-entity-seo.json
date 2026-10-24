@@ -1,0 +1,454 @@
+{
+ "version": "0.1.20261022",
+ "status_code": 20000,
+ "status_message": "Ok.",
+ "time": "2.8713 sec.",
+ "cost": 0.002,
+ "tasks_count": 1,
+ "tasks_error": 0,
+ "tasks": [
+  {
+   "id": "10241024-3375-0139-0000-196812d9dede",
+   "status_code": 20000,
+   "status_message": "Ok.",
+   "time": "2.8713 sec.",
+   "cost": 0.002,
+   "result_count": 1,
+   "path": [
+    "v3",
+    "serp",
+    "google",
+    "organic",
+    "live",
+    "advanced"
+   ],
+   "data": {
+    "api": "serp",
+    "function": "live",
+    "se": "google",
+    "se_type": "organic",
+    "keyword": "what is entity seo",
+    "location_code": 2840,
+    "language_code": "en",
+    "device": "desktop",
+    "depth": 10,
+    "load_async_ai_overview": true,
+    "os": "windows"
+   },
+   "result": [
+    {
+     "keyword": "what is entity seo",
+     "type": "organic",
+     "se_domain": "google.com",
+     "location_code": 2840,
+     "language_code": "en",
+     "datetime": "2026-10-24 10:25:01 +00:00",
+     "item_types": [
+      "ai_overview",
+      "organic",
+      "people_also_ask",
+      "related_searches"
+     ],
+     "se_results_count": 116,
+     "items_count": 12,
+     "items": [
+      {
+       "type": "ai_overview",
+       "rank_group": 1,
+       "rank_absolute": 1,
+       "page": 1,
+       "position": "left",
+       "asynchronous_ai_overview": false,
+       "items": [
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "Entity SEO is a search optimization strategy that focuses on distinct, well-defined \"things\" (people, places, organizations, products, or concepts) and the relationships between them, rather than relying solely on isolated keywords.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Neil Patel",
+           "domain": "neilpatel.com",
+           "url": "https://neilpatel.com/blog/entity-based-seo/",
+           "title": "Why Entity",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Demand Spring",
+           "domain": "demandspring.com",
+           "url": "https://demandspring.com/glossary/entity-seo/",
+           "title": "Entity SEO",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "Search engines like Google use knowledge graphs, natural language processing, and semantic search to map entities and understand the real-world context of content.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "InLinks",
+           "domain": "inlinks.com",
+           "url": "https://inlinks.com/help/entity-based-seo/",
+           "title": "Entity SEO: the Guide to Understanding - InLinks",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Schema App",
+           "domain": "www.schemaapp.com",
+           "url": "https://www.schemaapp.com/schema-markup/what-is-entity-seo/",
+           "title": "What is Entity SEO and How Do I Implement It?",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Ahrefs",
+           "domain": "ahrefs.com",
+           "url": "https://ahrefs.com/seo/glossary/entity-based-seo",
+           "title": "What is Entity-Based SEO?",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "Core Concepts: Keywords vs. Entities",
+         "text": "Keywords (Strings): literal words or phrases users type into a search bar. Entities (Things): singular, unique, and distinguishable concepts that carry unique machine-readable IDs.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=XBGhmgor_S4&t=37",
+           "title": "Entity SEO Explained (With Tactics You Can Actually Use)",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Neil Patel",
+           "domain": "neilpatel.com",
+           "url": "https://neilpatel.com/blog/entity-based-seo/",
+           "title": "Why Entity",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "WTF is SEO?",
+           "domain": "www.seoforjournalism.com",
+           "url": "https://www.seoforjournalism.com/p/entity-seo",
+           "title": "What is entity SEO?",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "StudioHawk",
+           "domain": "studiohawk.com.au",
+           "url": "https://studiohawk.com.au/blog/entity-seo/",
+           "title": "Entity SEO: Using Entities & Entity-Based Search",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "InLinks",
+           "domain": "inlinks.com",
+           "url": "https://inlinks.com/help/entity-based-seo/",
+           "title": "Entity SEO: the Guide to Understanding - InLinks",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "Why Entity SEO Matters",
+         "text": "AI and Knowledge Panels; Topical Authority; Disambiguation.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Schema App",
+           "domain": "www.schemaapp.com",
+           "url": "https://www.schemaapp.com/schema-markup/what-is-entity-seo/",
+           "title": "What is Entity SEO and How Do I Implement It?",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Neil Patel",
+           "domain": "neilpatel.com",
+           "url": "https://neilpatel.com/blog/entity-based-seo/",
+           "title": "Why Entity",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=XBGhmgor_S4&t=37",
+           "title": "Entity SEO Explained (With Tactics You Can Actually Use)",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "Key Tactics for Implementation",
+         "text": "Schema Markup; Topic Clusters; Entity-Based Internal Linking; Authoritative Citations.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Schema App",
+           "domain": "www.schemaapp.com",
+           "url": "https://www.schemaapp.com/schema-markup/what-is-an-entity-in-seo/",
+           "title": "What are Entities in SEO? | Schema App Solutions",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "InLinks",
+           "domain": "inlinks.com",
+           "url": "https://inlinks.com/help/entity-based-seo/",
+           "title": "Entity SEO: the Guide to Understanding - InLinks",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Neil Patel",
+           "domain": "neilpatel.com",
+           "url": "https://neilpatel.com/blog/entity-based-seo/",
+           "title": "Why Entity",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=l-vy9bNn7nI&t=5",
+           "title": "Entity SEO: Connect the Dots and Rank Higher",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "If you'd like to put this into practice, let me know what type of business or website you are working on.",
+         "references": null
+        }
+       ],
+       "references": [
+        {
+         "type": "ai_overview_reference",
+         "source": "InLinks",
+         "domain": "inlinks.com",
+         "url": "https://inlinks.com/help/entity-based-seo/",
+         "title": "Entity SEO: the Guide to Understanding - InLinks",
+         "text": ""
+        },
+        {
+         "type": "ai_overview_reference",
+         "source": "YouTube",
+         "domain": "www.youtube.com",
+         "url": "https://www.youtube.com/watch?v=XBGhmgor_S4&t=37",
+         "title": "Entity SEO Explained (With Tactics You Can Actually Use)",
+         "text": ""
+        },
+        {
+         "type": "ai_overview_reference",
+         "source": "Neil Patel",
+         "domain": "neilpatel.com",
+         "url": "https://neilpatel.com/blog/entity-based-seo/",
+         "title": "Why Entity",
+         "text": ""
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 1,
+       "rank_absolute": 2,
+       "page": 1,
+       "position": "left",
+       "domain": "inlinks.com",
+       "title": "Entity SEO: the Guide to Understanding",
+       "url": "https://inlinks.com/help/entity-based-seo/",
+       "website_name": "InLinks",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Jan 13, 2025 — Entity based SEO is an unexplored approach to Search Engine Optimization. This guide provides a practical path to increasing web traffic.",
+       "timestamp": "2025-01-13 00:00:00 +00:00"
+      },
+      {
+       "type": "people_also_ask",
+       "rank_group": 1,
+       "rank_absolute": 3,
+       "page": 1,
+       "position": "left",
+       "items": [
+        {
+         "type": "people_also_ask_element",
+         "title": "What are four types of SEO?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "Is SEO dead now with AI?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "What is an example of an entity?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "What does SEO mean in simple terms?",
+         "seed_question": null
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 2,
+       "rank_absolute": 4,
+       "page": 1,
+       "position": "left",
+       "domain": "neilpatel.com",
+       "title": "Entity-Based SEO: What Is Entity SEO & Why Does It Matter?",
+       "url": "https://neilpatel.com/blog/entity-based-seo/",
+       "website_name": "Neil Patel",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "May 5, 2026 — Entity SEO is the practice of optimizing content around recognizable concepts, not just keywords, so search engines better understand and rank ...",
+       "timestamp": "2026-05-05 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 3,
+       "rank_absolute": 5,
+       "page": 1,
+       "position": "left",
+       "domain": "searchengineland.com",
+       "title": "Entity SEO: The definitive guide",
+       "url": "https://searchengineland.com/entity-seo-guide-395264",
+       "website_name": "Search Engine Land",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Apr 6, 2023 — Entity SEO is the future of where search engines are headed with regard to choosing what content to rank and determining its meaning.",
+       "timestamp": "2023-04-06 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 4,
+       "rank_absolute": 6,
+       "page": 1,
+       "position": "left",
+       "domain": "ahrefs.com",
+       "title": "What is Entity-Based SEO?",
+       "url": "https://ahrefs.com/seo/glossary/entity-based-seo",
+       "website_name": "Ahrefs",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Entity-based SEO is an approach in search engine optimization that focuses on the concept of entities as the central element, rather than relying solely on ... Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 5,
+       "rank_absolute": 7,
+       "page": 1,
+       "position": "left",
+       "domain": "www.schemaapp.com",
+       "title": "What is Entity SEO and How Do I Implement It?",
+       "url": "https://www.schemaapp.com/schema-markup/what-is-entity-seo/",
+       "website_name": "Schema App",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Jul 9, 2026 — Entity SEO is an approach to search optimization that focuses on entities — unique, well-defined concepts such as people, places, organizations, ... Read more",
+       "timestamp": "2026-07-09 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 6,
+       "rank_absolute": 8,
+       "page": 1,
+       "position": "left",
+       "domain": "www.youtube.com",
+       "title": "Entity SEO: Connect the Dots and Rank Higher",
+       "url": "https://www.youtube.com/watch?v=l-vy9bNn7nI",
+       "website_name": "YouTube · Rank Math SEO",
+       "is_video": true,
+       "is_featured_snippet": false,
+       "description": null,
+       "timestamp": "2025-02-28 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 7,
+       "rank_absolute": 9,
+       "page": 1,
+       "position": "left",
+       "domain": "www.clearscope.io",
+       "title": "What Is an Entity and Why Does It Matter for SEO",
+       "url": "https://www.clearscope.io/blog/what-is-an-entity-in-SEO",
+       "website_name": "Clearscope",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Aug 29, 2024 — In the world of search engine optimization (SEO), an entity is any distinct, singular, and well-defined thing or concept that search engines can ... Read more",
+       "timestamp": "2024-08-29 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 8,
+       "rank_absolute": 10,
+       "page": 1,
+       "position": "left",
+       "domain": "www.found.co.uk",
+       "title": "Entity SEO Guide: What is Entity Based SEO | Found",
+       "url": "https://www.found.co.uk/blog/entity-seo-guide/",
+       "website_name": "Digital Marketing Agency London",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Feb 4, 2026 — Entity SEO helps you stay visible by optimising for the “things” that matter, like your brand, products, and services.",
+       "timestamp": "2026-02-04 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 9,
+       "rank_absolute": 11,
+       "page": 1,
+       "position": "left",
+       "domain": "www.seoforjournalism.com",
+       "title": "What is entity SEO?",
+       "url": "https://www.seoforjournalism.com/p/entity-seo",
+       "website_name": "WTF is SEO?",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Sep 28, 2026 — Entity SEO is the concept that publishers should create and optimize content on clearly defined, real-world topics rather than focusing on ... Read more",
+       "timestamp": "2026-09-28 00:00:00 +00:00"
+      },
+      {
+       "type": "related_searches",
+       "rank_group": 1,
+       "rank_absolute": 12,
+       "page": 1,
+       "position": "left",
+       "items": [
+        "What is entity seo example",
+        "What is semantic SEO",
+        "Entity first SEO",
+        "Entity optimization",
+        "Is SEO real",
+        "Entity checker",
+        "Google entity checker",
+        "Seo entities generator"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

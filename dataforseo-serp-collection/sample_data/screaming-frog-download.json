@@ -1,0 +1,382 @@
+{
+ "version": "0.1.20261022",
+ "status_code": 20000,
+ "status_message": "Ok.",
+ "time": null,
+ "cost": 0.002,
+ "tasks_count": 1,
+ "tasks_error": 0,
+ "tasks": [
+  {
+   "id": "10241025-3375-0139-0000-72fe54151dcf",
+   "status_code": 20000,
+   "status_message": "Ok.",
+   "time": "n/a sec.",
+   "cost": 0.002,
+   "result_count": 1,
+   "path": [
+    "v3",
+    "serp",
+    "google",
+    "organic",
+    "live",
+    "advanced"
+   ],
+   "data": {
+    "api": "serp",
+    "function": "live",
+    "se": "google",
+    "se_type": "organic",
+    "keyword": "screaming frog download",
+    "location_code": 2840,
+    "language_code": "en",
+    "device": "desktop",
+    "depth": 10,
+    "load_async_ai_overview": true,
+    "os": "windows"
+   },
+   "result": [
+    {
+     "keyword": "screaming frog download",
+     "type": "organic",
+     "se_domain": "google.com",
+     "location_code": 2840,
+     "language_code": "en",
+     "datetime": "2026-10-24 10:25:00 +00:00",
+     "item_types": [
+      "ai_overview",
+      "organic",
+      "people_also_ask",
+      "video",
+      "related_searches"
+     ],
+     "se_results_count": null,
+     "items_count": 12,
+     "items": [
+      {
+       "type": "ai_overview",
+       "rank_group": 1,
+       "rank_absolute": 1,
+       "page": 1,
+       "position": "left",
+       "asynchronous_ai_overview": false,
+       "items": [
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "You can download the official Screaming Frog SEO Spider from the Screaming Frog Website.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Screaming Frog",
+           "domain": "www.screamingfrog.co.uk",
+           "url": "https://www.screamingfrog.co.uk/seo-spider/",
+           "title": "Screaming Frog SEO Spider Website Crawler",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Screaming Frog",
+           "domain": "www.screamingfrog.co.uk",
+           "url": "https://www.screamingfrog.co.uk/",
+           "title": "Screaming Frog: SEO Agency",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "Download Options & Pricing",
+         "text": "Free Version: crawl up to 500 URLs for free. Paid Licence: removes the 500-URL limit and unlocks advanced features.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Screaming Frog",
+           "domain": "www.screamingfrog.co.uk",
+           "url": "https://www.screamingfrog.co.uk/seo-spider/",
+           "title": "Screaming Frog SEO Spider Website Crawler",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Screaming Frog",
+           "domain": "www.screamingfrog.co.uk",
+           "url": "https://www.screamingfrog.co.uk/seo-tools/",
+           "title": "SEO Tools - Screaming Frog",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "Supported Operating Systems",
+         "text": "Windows (64-bit installer) macOS (Standard and Apple Silicon builds) Linux / Ubuntu (.deb or package installer)",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=Pi1pUFSlLCM",
+           "title": "How to Install Screaming Frog [2026 Full Guide]",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=7trsaBLvhss",
+           "title": "Download and installing screaming for SEO (Search Engine Optimization)",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": "How to Install",
+         "text": "Go to the Screaming Frog SEO Spider page. Click the Download button. Run the installer file. Follow the on-screen setup prompts.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "Screaming Frog",
+           "domain": "www.screamingfrog.co.uk",
+           "url": "https://www.screamingfrog.co.uk/blog/seo-spider-24/",
+           "title": "Screaming Frog SEO Spider Update – Version 24.0",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=7trsaBLvhss",
+           "title": "Download and installing screaming for SEO (Search Engine Optimization)",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=Pi1pUFSlLCM",
+           "title": "How to Install Screaming Frog [2026 Full Guide]",
+           "text": ""
+          }
+         ]
+        }
+       ],
+       "references": [
+        {
+         "type": "ai_overview_reference",
+         "source": "Screaming Frog",
+         "domain": "www.screamingfrog.co.uk",
+         "url": "https://www.screamingfrog.co.uk/seo-spider/",
+         "title": "Screaming Frog SEO Spider Website Crawler",
+         "text": ""
+        },
+        {
+         "type": "ai_overview_reference",
+         "source": "Screaming Frog",
+         "domain": "www.screamingfrog.co.uk",
+         "url": "https://www.screamingfrog.co.uk/seo-tools/",
+         "title": "SEO Tools - Screaming Frog",
+         "text": ""
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 1,
+       "rank_absolute": 2,
+       "page": 1,
+       "position": "left",
+       "domain": "seo-spider.en.softonic.com",
+       "title": "SEO Spider - Download",
+       "url": "https://seo-spider.en.softonic.com/",
+       "website_name": "Softonic",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Feb 27, 2024 — Navigating the complex web of SEO intricacies becomes a breeze with the Screaming Frog's SEO Spider, a robust and speedy site audit tool. ... Free ... Read more",
+       "timestamp": "2024-02-27 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 2,
+       "rank_absolute": 3,
+       "page": 1,
+       "position": "left",
+       "domain": "appsumo.com",
+       "title": "Screaming Frog - Optimize your site for SEO",
+       "url": "https://appsumo.com/products/screaming-frog/",
+       "website_name": "AppSumo",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Digital download of Screaming Frog ; Yours forever if you download and save within 60 days of purchase. Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 3,
+       "rank_absolute": 4,
+       "page": 1,
+       "position": "left",
+       "domain": "community.chocolatey.org",
+       "title": "Chocolatey Software | screamingfrog 19.8.0",
+       "url": "https://community.chocolatey.org/packages/screamingfrog/19.8.0",
+       "website_name": "Chocolatey Software | Community",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Apr 15, 2024 — Chocolatey is software management automation for Windows that wraps installers, executables, zips, and scripts into compiled packages.",
+       "timestamp": "2024-04-15 00:00:00 +00:00"
+      },
+      {
+       "type": "people_also_ask",
+       "rank_group": 1,
+       "rank_absolute": 5,
+       "page": 1,
+       "position": "left",
+       "items": [
+        {
+         "type": "people_also_ask_element",
+         "title": "How to get Screaming Frog for free?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "How much does a Screaming Frog license cost?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "How to export data from Screaming Frog?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "How to find broken links on Screaming Frog?",
+         "seed_question": null
+        }
+       ]
+      },
+      {
+       "type": "video",
+       "rank_group": 1,
+       "rank_absolute": 6,
+       "page": 1,
+       "position": "left",
+       "items": [
+        {
+         "type": "video_element",
+         "source": "YouTube · BM Tech Tutorials",
+         "title": "How to Install Screaming Frog [2026 Full Guide]",
+         "url": "https://www.youtube.com/watch?v=Pi1pUFSlLCM"
+        },
+        {
+         "type": "video_element",
+         "source": "YouTube · Shakzee",
+         "title": "Download and installing screaming frog for SEO",
+         "url": "https://www.youtube.com/watch?v=r1vcZFYmmp4"
+        },
+        {
+         "type": "video_element",
+         "source": "YouTube · Shakzee",
+         "title": "Download and installing screaming for SEO (Search Engine ...",
+         "url": "https://www.youtube.com/watch?v=7trsaBLvhss"
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 4,
+       "rank_absolute": 7,
+       "page": 1,
+       "position": "left",
+       "domain": "www.manageengine.com",
+       "title": "Silent Installation of Screaming Frog SEO Spider (19.4)",
+       "url": "https://www.manageengine.com/products/desktop-central/software-installation/silent_install_Screaming-Frog-SEO-Spider-(19.4).html",
+       "website_name": "ManageEngine",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Version, 19.4 ; Platform, Windows ; Vendor, Screaming Frog SEO Spider ; Architecture, 64-bit. Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 5,
+       "rank_absolute": 8,
+       "page": 1,
+       "position": "left",
+       "domain": "seo-hacker.com",
+       "title": "Screaming Frog SEO Spider Version 20.0: AI-Powered Features",
+       "url": "https://seo-hacker.com/screaming-frog-seo-spider-20/",
+       "website_name": "seo-hacker.com",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Aligning with digital sustainability trends, Screaming Frog SEO Spider version 20.0 includes features to measure and optimize your website's carbon footprint. Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 6,
+       "rank_absolute": 9,
+       "page": 1,
+       "position": "left",
+       "domain": "screaming-frog-seo-spider.software.informer.com",
+       "title": "Screaming Frog SEO Spider 15.1 Download (Free trial)...",
+       "url": "https://screaming-frog-seo-spider.software.informer.com/15.1/",
+       "website_name": "Informer Technologies, Inc.",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Aug 12, 2026 — Screaming Frog SEO Spider version 15.1 (ScreamingFrogSEOSpider.exe). Screaming Frog SEO Spider is a website crawler that can scan websites, ...",
+       "timestamp": "2026-08-12 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 7,
+       "rank_absolute": 10,
+       "page": 1,
+       "position": "left",
+       "domain": "www.manageengine.com",
+       "title": "Silent Installation of Screaming Frog SEO Spider (16.7)",
+       "url": "https://www.manageengine.com/products/desktop-central/software-installation/silent_install_Screaming-Frog-SEO-Spider-(16.7).html",
+       "website_name": "ManageEngine",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Version, 16.7 ; Platform, Windows ; Vendor, Screaming Frog SEO Spider ; Architecture, 64-bit. Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 8,
+       "rank_absolute": 11,
+       "page": 1,
+       "position": "left",
+       "domain": "download.cnet.com",
+       "title": "Screaming Frog SEO Spider for Windows",
+       "url": "https://download.cnet.com/screaming-frog-seo-spider/3000-windows-screaming-frog-seo-spider.html",
+       "website_name": "CNET",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Feb 21, 2026 — Download Screaming Frog SEO Spider latest version for Windows free.",
+       "timestamp": "2026-02-21 00:00:00 +00:00"
+      },
+      {
+       "type": "related_searches",
+       "rank_group": 1,
+       "rank_absolute": 12,
+       "page": 1,
+       "position": "left",
+       "items": [
+        "Screaming frog download free",
+        "Screaming frog download for pc",
+        "Screaming frog download apk",
+        "Screaming frog download for windows 10",
+        "Screaming Frog 19.8 version",
+        "Screaming frog old version",
+        "Screaming Frog update",
+        "Screaming Frog github"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

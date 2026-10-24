@@ -51,7 +51,7 @@ python ai_transcript_audit.py transcripts/ --dry-run   # list files, no API call
 
 ## Quota
 
-Default quota: 10,000 units per day per project. One channel costs about 4 units (channels, playlistItems, videos, playlists: 1 unit each). The optional keyword search costs 100 units per keyword.
+Default quota: 10,000 units per day per project. One channel costs about 4 units (channels, playlistItems, videos, playlists: 1 unit each). The optional keyword search (`search.list`) now has its own bucket: 1 unit per call, 100 calls per day by default ([quota costs](https://developers.google.com/youtube/v3/determine_quota_cost), updated 15 Oct 2026).
 
 ## Caveats
 

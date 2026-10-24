@@ -1,0 +1,4 @@
+url,role,target_entity,target_aliases,target_wikipedia_url,sample_id
+https://www.brewly.example/blog/how-to-use-a-cafetiere/,yours,French press,cafetière;cafetiere;press pot;plunger pot,https://en.wikipedia.org/wiki/French_press,yours-brewly-cafetiere
+https://www.coffee-one.example/guides/how-to-use-a-french-press/,competitor,French press,cafetière;cafetiere;press pot;plunger pot,https://en.wikipedia.org/wiki/French_press,competitor-one-french-press
+https://www.dailygrindnotes.example/brew/french-press-coffee/,competitor,French press,cafetière;cafetiere;press pot;plunger pot,https://en.wikipedia.org/wiki/French_press,competitor-two-french-press

@@ -1,0 +1,1172 @@
+{
+ "_sample_note": "SAMPLE DATA, not real YouTube results: fictional channels and fake video IDs, written by MLforSEO to match the official YouTube Data API v3 response shape. Run the notebook with your own API key for real data.",
+ "kind": "youtube#videoListResponse",
+ "etag": "f6e185795f7879d1daa94ee6833",
+ "items": [
+  {
+   "kind": "youtube#video",
+   "etag": "f5656dfd10537157cc2800247d8",
+   "id": "SAMPLEcfcd2",
+   "snippet": {
+    "publishedAt": "2026-01-14T15:00:12Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step)",
+    "description": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step). In this video we cover youtube seo, youtube seo 2026, how to rank youtube videos. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEcfcd2/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step)",
+     "description": "YouTube SEO 2026: How to Rank Videos in Search (Step by Step). In this video we cover youtube seo, youtube seo 2026, how to rank youtube videos. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo",
+     "youtube seo 2026",
+     "how to rank youtube videos",
+     "youtube seo tips",
+     "youtube algorithm",
+     "rank youtube videos",
+     "youtube keyword research",
+     "youtube growth"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT18M42S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "412000",
+    "likeCount": "15100",
+    "favoriteCount": "0",
+    "commentCount": "862"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "acfe59339646a3da47946500394",
+   "id": "SAMPLEc4ca4",
+   "snippet": {
+    "publishedAt": "2025-09-03T13:30:00Z",
+    "channelId": "UCSAMPLE21a39d8537a4daa1",
+    "title": "YouTube SEO for Beginners: The Complete Guide",
+    "description": "YouTube SEO for Beginners: The Complete Guide. In this video we cover youtube seo, youtube seo for beginners, youtube seo tutorial. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc4ca4/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Small Channel Studio",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO for Beginners: The Complete Guide",
+     "description": "YouTube SEO for Beginners: The Complete Guide. In this video we cover youtube seo, youtube seo for beginners, youtube seo tutorial. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo",
+     "youtube seo for beginners",
+     "youtube seo tutorial",
+     "youtube seo full course",
+     "how to grow on youtube",
+     "youtube tips for beginners",
+     "youtube algorithm"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT24M05S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "286000",
+    "likeCount": "9800",
+    "favoriteCount": "0",
+    "commentCount": "611"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "e8445b8f7d9389c07eb155a79b4",
+   "id": "SAMPLEc81e7",
+   "snippet": {
+    "publishedAt": "2025-11-20T17:00:00Z",
+    "channelId": "UCSAMPLE7c49af86030581c7",
+    "title": "7 YouTube SEO Tips That Actually Work",
+    "description": "7 YouTube SEO Tips That Actually Work. In this video we cover youtube seo, youtube seo tips, youtube tips. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc81e7/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Video Marketing Weekly",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "7 YouTube SEO Tips That Actually Work",
+     "description": "7 YouTube SEO Tips That Actually Work. In this video we cover youtube seo, youtube seo tips, youtube tips. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo",
+     "youtube seo tips",
+     "youtube tips",
+     "youtube growth",
+     "get more views on youtube",
+     "youtube algorithm"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT12M31S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "198000",
+    "likeCount": "7200",
+    "favoriteCount": "0",
+    "commentCount": "403"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "9b360d6fed025206e805a02307b",
+   "id": "SAMPLEeccbc",
+   "snippet": {
+    "publishedAt": "2025-06-11T15:00:00Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "How to Find Keywords for YouTube Videos (Free Tools)",
+    "description": "How to Find Keywords for YouTube Videos (Free Tools). In this video we cover youtube keyword research, youtube seo, youtube keyword tool. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEeccbc/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "How to Find Keywords for YouTube Videos (Free Tools)",
+     "description": "How to Find Keywords for YouTube Videos (Free Tools). In this video we cover youtube keyword research, youtube seo, youtube keyword tool. (Sample description.)"
+    },
+    "tags": [
+     "youtube keyword research",
+     "youtube seo",
+     "youtube keyword tool",
+     "free youtube seo tools",
+     "youtube search",
+     "keyword research"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT14M10S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "156000",
+    "likeCount": "6100",
+    "favoriteCount": "0",
+    "commentCount": "377"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "34155c393d4395f831f43c784ee",
+   "id": "SAMPLEa87ff",
+   "snippet": {
+    "publishedAt": "2025-12-02T18:00:00Z",
+    "channelId": "UCSAMPLEcc9f85b067b9cab5",
+    "title": "YouTube Tags: Do They Still Matter? (I Tested It)",
+    "description": "YouTube Tags: Do They Still Matter? (I Tested It). In this video we cover youtube tags, youtube seo, do youtube tags matter. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEa87ff/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "The Upload Test",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Tags: Do They Still Matter? (I Tested It)",
+     "description": "YouTube Tags: Do They Still Matter? (I Tested It). In this video we cover youtube tags, youtube seo, do youtube tags matter. (Sample description.)"
+    },
+    "tags": [
+     "youtube tags",
+     "youtube seo",
+     "do youtube tags matter",
+     "youtube tags 2026",
+     "youtube metadata",
+     "youtube algorithm"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT9M48S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "121000",
+    "likeCount": "4300",
+    "favoriteCount": "0",
+    "commentCount": "512"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "fafc86bd7b8571b9b4ecb814f59",
+   "id": "SAMPLEe4da3",
+   "snippet": {
+    "publishedAt": "2026-03-09T09:00:00Z",
+    "channelId": "UCSAMPLEbe2a789f79f3e075",
+    "title": "YouTube SEO Crash Course | Titles, Descriptions, Tags & Chapters",
+    "description": "YouTube SEO Crash Course | Titles, Descriptions, Tags & Chapters. In this video we cover youtube seo, youtube seo crash course, youtube seo full course. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEe4da3/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Digital Skills Hub",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO Crash Course | Titles, Descriptions, Tags & Chapters",
+     "description": "YouTube SEO Crash Course | Titles, Descriptions, Tags & Chapters. In this video we cover youtube seo, youtube seo crash course, youtube seo full course. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo",
+     "youtube seo crash course",
+     "youtube seo full course",
+     "youtube title",
+     "youtube description",
+     "youtube chapters",
+     "youtube tags"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT41M22S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "98000",
+    "likeCount": "3900",
+    "favoriteCount": "0",
+    "commentCount": "244"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "37413b6d76ad6413b19b2fc51f7",
+   "id": "SAMPLE16790",
+   "snippet": {
+    "publishedAt": "2026-02-18T16:00:00Z",
+    "channelId": "UCSAMPLE16bb384f5802fff4",
+    "title": "Best YouTube SEO Tools in 2026 (Free and Paid)",
+    "description": "Best YouTube SEO Tools in 2026 (Free and Paid). In this video we cover best youtube seo tools, youtube seo tools, youtube seo. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE16790/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Tool Review Desk",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "Best YouTube SEO Tools in 2026 (Free and Paid)",
+     "description": "Best YouTube SEO Tools in 2026 (Free and Paid). In this video we cover best youtube seo tools, youtube seo tools, youtube seo. (Sample description.)"
+    },
+    "tags": [
+     "best youtube seo tools",
+     "youtube seo tools",
+     "youtube seo",
+     "youtube seo 2026",
+     "youtube keyword tool",
+     "youtube seo ai tool"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT16M37S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "87000",
+    "likeCount": "2100",
+    "favoriteCount": "0",
+    "commentCount": "198"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "9788b10603518d8f98678948248",
+   "id": "SAMPLE8f14e",
+   "snippet": {
+    "publishedAt": "2025-08-27T14:00:00Z",
+    "channelId": "UCSAMPLE7e272db3345bd07c",
+    "title": "How YouTube Search Works (Explained by a Former Ads Analyst)",
+    "description": "How YouTube Search Works (Explained by a Former Ads Analyst). In this video we cover how youtube seo works, youtube search, youtube algorithm. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE8f14e/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Signal & Noise Media",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "How YouTube Search Works (Explained by a Former Ads Analyst)",
+     "description": "How YouTube Search Works (Explained by a Former Ads Analyst). In this video we cover how youtube seo works, youtube search, youtube algorithm. (Sample description.)"
+    },
+    "tags": [
+     "how youtube seo works",
+     "youtube search",
+     "youtube algorithm",
+     "youtube seo",
+     "youtube recommendations"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT21M14S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "76000",
+    "likeCount": "3300",
+    "favoriteCount": "0",
+    "commentCount": "289"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "751714f76161f64624ad6df1f0f",
+   "id": "SAMPLEc9f0f",
+   "snippet": {
+    "publishedAt": "2026-05-06T12:00:00Z",
+    "channelId": "UCSAMPLE0fb984501f9ed0d6",
+    "title": "YouTube SEO with AI: Write Titles and Descriptions in Minutes",
+    "description": "YouTube SEO with AI: Write Titles and Descriptions in Minutes. In this video we cover youtube seo with ai, youtube seo ai tool, chatgpt for youtube. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc9f0f/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "AI Workflow Studio",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO with AI: Write Titles and Descriptions in Minutes",
+     "description": "YouTube SEO with AI: Write Titles and Descriptions in Minutes. In this video we cover youtube seo with ai, youtube seo ai tool, chatgpt for youtube. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo with ai",
+     "youtube seo ai tool",
+     "chatgpt for youtube",
+     "youtube seo",
+     "youtube title generator",
+     "youtube description"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT11M02S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "64000",
+    "likeCount": "2400",
+    "favoriteCount": "0",
+    "commentCount": "151"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "c5341026188bdbfa7dd6371eedc",
+   "id": "SAMPLE45c48",
+   "snippet": {
+    "publishedAt": "2026-04-01T17:00:00Z",
+    "channelId": "UCSAMPLE7c49af86030581c7",
+    "title": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish",
+    "description": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish. In this video we cover youtube seo checklist, youtube seo, youtube upload checklist. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE45c48/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Video Marketing Weekly",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish",
+     "description": "YouTube SEO Checklist: 20 Things to Do Before You Hit Publish. In this video we cover youtube seo checklist, youtube seo, youtube upload checklist. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo checklist",
+     "youtube seo",
+     "youtube upload checklist",
+     "youtube seo tips",
+     "youtube title",
+     "youtube thumbnail"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT13M45S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "52000",
+    "likeCount": "2600",
+    "favoriteCount": "0",
+    "commentCount": "97"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "9cdb0e8be6ecd888644f687113f",
+   "id": "SAMPLEd3d94",
+   "snippet": {
+    "publishedAt": "2025-10-15T08:00:00Z",
+    "channelId": "UCSAMPLE97f89b3a6a3eeceb",
+    "title": "What Is YouTube SEO? (Explained in 5 Minutes)",
+    "description": "What Is YouTube SEO? (Explained in 5 Minutes). In this video we cover what is youtube seo, youtube seo, youtube seo explained. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEd3d94/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Marketing in Minutes",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "What Is YouTube SEO? (Explained in 5 Minutes)",
+     "description": "What Is YouTube SEO? (Explained in 5 Minutes). In this video we cover what is youtube seo, youtube seo, youtube seo explained. (Sample description.)"
+    },
+    "tags": [
+     "what is youtube seo",
+     "youtube seo",
+     "youtube seo explained",
+     "video seo"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT5M12S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "47000",
+    "likeCount": "1500",
+    "favoriteCount": "0",
+    "commentCount": "66"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "f842f9dc68d063a855a96b20d3f",
+   "id": "SAMPLE6512b",
+   "snippet": {
+    "publishedAt": "2026-06-24T13:30:00Z",
+    "channelId": "UCSAMPLE21a39d8537a4daa1",
+    "title": "YouTube Shorts SEO: How to Get Shorts Found in Search",
+    "description": "YouTube Shorts SEO: How to Get Shorts Found in Search. In this video we cover youtube shorts seo, youtube shorts, youtube seo. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6512b/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Small Channel Studio",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Shorts SEO: How to Get Shorts Found in Search",
+     "description": "YouTube Shorts SEO: How to Get Shorts Found in Search. In this video we cover youtube shorts seo, youtube shorts, youtube seo. (Sample description.)"
+    },
+    "tags": [
+     "youtube shorts seo",
+     "youtube shorts",
+     "youtube seo",
+     "shorts algorithm"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT0M58S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "230000",
+    "likeCount": "11800",
+    "favoriteCount": "0",
+    "commentCount": "140"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "27db5d6c05bc08cddb0be2d6f1f",
+   "id": "SAMPLEc20ad",
+   "snippet": {
+    "publishedAt": "2025-07-22T09:00:00Z",
+    "channelId": "UCSAMPLEbe2a789f79f3e075",
+    "title": "YouTube Channel SEO: Keywords, Playlists and Your About Page",
+    "description": "YouTube Channel SEO: Keywords, Playlists and Your About Page. In this video we cover youtube channel seo, youtube seo, youtube channel keywords. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc20ad/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Digital Skills Hub",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Channel SEO: Keywords, Playlists and Your About Page",
+     "description": "YouTube Channel SEO: Keywords, Playlists and Your About Page. In this video we cover youtube channel seo, youtube seo, youtube channel keywords. (Sample description.)"
+    },
+    "tags": [
+     "youtube channel seo",
+     "youtube seo",
+     "youtube channel keywords",
+     "youtube playlists"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT17M30S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "39000",
+    "likeCount": "1400",
+    "favoriteCount": "0",
+    "commentCount": "81"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "e02169a8f7360ef472d287a7485",
+   "id": "SAMPLEc51ce",
+   "snippet": {
+    "publishedAt": "2026-08-12T18:00:00Z",
+    "channelId": "UCSAMPLEcc9f85b067b9cab5",
+    "title": "I Fixed the SEO on 50 Old Videos. Here's What Happened",
+    "description": "I Fixed the SEO on 50 Old Videos. Here's What Happened. In this video we cover youtube seo, youtube seo case study, update old youtube videos. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc51ce/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "The Upload Test",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "I Fixed the SEO on 50 Old Videos. Here's What Happened",
+     "description": "I Fixed the SEO on 50 Old Videos. Here's What Happened. In this video we cover youtube seo, youtube seo case study, update old youtube videos. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo",
+     "youtube seo case study",
+     "update old youtube videos",
+     "youtube growth"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT15M19S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "143000",
+    "likeCount": "6900",
+    "favoriteCount": "0",
+    "commentCount": "734"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "d75bb14fbf745cd45a332cf8244",
+   "id": "SAMPLEaab32",
+   "snippet": {
+    "publishedAt": "2024-11-05T10:00:00Z",
+    "channelId": "UCSAMPLEe54c80158254b07f",
+    "title": "YouTube Video SEO: Rank #1 in YouTube Search",
+    "description": "YouTube Video SEO: Rank #1 in YouTube Search. In this video we cover youtube video seo, youtube seo, rank youtube videos. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEaab32/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Rank Ready",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Video SEO: Rank #1 in YouTube Search",
+     "description": "YouTube Video SEO: Rank #1 in YouTube Search. In this video we cover youtube video seo, youtube seo, rank youtube videos. (Sample description.)"
+    },
+    "tags": [
+     "youtube video seo",
+     "youtube seo",
+     "rank youtube videos",
+     "youtube ranking",
+     "youtube seo tips",
+     "youtube seo 2025"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT19M54S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "168000",
+    "likeCount": "4700",
+    "favoriteCount": "0",
+    "commentCount": "520"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "1bf38ffce31a6f1fee90b46ffe1",
+   "id": "SAMPLE9bf31",
+   "snippet": {
+    "publishedAt": "2026-01-29T10:00:00Z",
+    "channelId": "UCSAMPLEe54c80158254b07f",
+    "title": "YouTube Keyword Research in 2026 (Step by Step)",
+    "description": "YouTube Keyword Research in 2026 (Step by Step). In this video we cover youtube keyword research, youtube seo, youtube seo 2026. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE9bf31/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Rank Ready",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Keyword Research in 2026 (Step by Step)",
+     "description": "YouTube Keyword Research in 2026 (Step by Step). In this video we cover youtube keyword research, youtube seo, youtube seo 2026. (Sample description.)"
+    },
+    "tags": [
+     "youtube keyword research",
+     "youtube seo",
+     "youtube seo 2026",
+     "keyword research",
+     "youtube search"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT22M08S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "58000",
+    "likeCount": "2300",
+    "favoriteCount": "0",
+    "commentCount": "133"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "3c039f083e93215616303bb5d9b",
+   "id": "SAMPLEc74d9",
+   "snippet": {
+    "publishedAt": "2025-04-08T15:00:00Z",
+    "channelId": "UCSAMPLE5285982fc81dfd77",
+    "title": "YouTube Descriptions: The SEO Template I Use",
+    "description": "YouTube Descriptions: The SEO Template I Use. In this video we cover youtube description, youtube seo, youtube description template. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLEc74d9/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Creator Lab Academy",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube Descriptions: The SEO Template I Use",
+     "description": "YouTube Descriptions: The SEO Template I Use. In this video we cover youtube description, youtube seo, youtube description template. (Sample description.)"
+    },
+    "tags": [
+     "youtube description",
+     "youtube seo",
+     "youtube description template",
+     "youtube seo tips"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT10M26S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "61000",
+    "likeCount": "2500",
+    "favoriteCount": "0",
+    "commentCount": "141"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "69f9c4cec0b3cf7d1817e814b59",
+   "id": "SAMPLE70efd",
+   "snippet": {
+    "publishedAt": "2025-05-19T07:00:00Z",
+    "channelId": "UCSAMPLEe5d3a9278aa7ecf3",
+    "title": "YouTube SEO Full Course for Beginners (2 Hours)",
+    "description": "YouTube SEO Full Course for Beginners (2 Hours). In this video we cover youtube seo full course, youtube seo course, youtube seo for beginners. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE70efd/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Learn Video Online",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "YouTube SEO Full Course for Beginners (2 Hours)",
+     "description": "YouTube SEO Full Course for Beginners (2 Hours). In this video we cover youtube seo full course, youtube seo course, youtube seo for beginners. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo full course",
+     "youtube seo course",
+     "youtube seo for beginners",
+     "youtube seo",
+     "youtube seo tutorial",
+     "youtube marketing"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT2H03M11S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "133000",
+    "likeCount": "5200",
+    "favoriteCount": "0",
+    "commentCount": "402"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "2e22af08b55fa675587bec5e3c3",
+   "id": "SAMPLE6f492",
+   "snippet": {
+    "publishedAt": "2026-07-02T08:00:00Z",
+    "channelId": "UCSAMPLE97f89b3a6a3eeceb",
+    "title": "Stop Doing This YouTube SEO Mistake",
+    "description": "Stop Doing This YouTube SEO Mistake. In this video we cover youtube seo mistakes, youtube seo, youtube tips. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE6f492/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Marketing in Minutes",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "Stop Doing This YouTube SEO Mistake",
+     "description": "Stop Doing This YouTube SEO Mistake. In this video we cover youtube seo mistakes, youtube seo, youtube tips. (Sample description.)"
+    },
+    "tags": [
+     "youtube seo mistakes",
+     "youtube seo",
+     "youtube tips"
+    ]
+   },
+   "contentDetails": {
+    "duration": "PT7M40S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "29000",
+    "likeCount": "1100",
+    "favoriteCount": "0",
+    "commentCount": "88"
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "fdcad4166c26f9610649136b99c",
+   "id": "SAMPLE1f0e3",
+   "snippet": {
+    "publishedAt": "2026-09-16T14:00:00Z",
+    "channelId": "UCSAMPLE7e272db3345bd07c",
+    "title": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals",
+    "description": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals. In this video we cover video SEO signals. (Sample description.)",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/SAMPLE1f0e3/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "channelTitle": "Signal & Noise Media",
+    "categoryId": "27",
+    "liveBroadcastContent": "none",
+    "defaultAudioLanguage": "en",
+    "localized": {
+     "title": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals",
+     "description": "Chapters, Captions and Transcripts: The Underrated YouTube SEO Signals. In this video we cover video SEO signals. (Sample description.)"
+    }
+   },
+   "contentDetails": {
+    "duration": "PT12M58S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "true",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "statistics": {
+    "viewCount": "18000",
+    "likeCount": "900",
+    "favoriteCount": "0",
+    "commentCount": "47"
+   }
+  }
+ ],
+ "pageInfo": {
+  "totalResults": 20,
+  "resultsPerPage": 20
+ }
+}

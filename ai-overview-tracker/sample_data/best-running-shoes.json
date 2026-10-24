@@ -1,0 +1,312 @@
+{
+ "version": "0.1.20261022",
+ "status_code": 20000,
+ "status_message": "Ok.",
+ "time": "5.3893 sec.",
+ "cost": 0.002,
+ "tasks_count": 1,
+ "tasks_error": 0,
+ "tasks": [
+  {
+   "id": "10241025-3375-0139-0000-7b4c6dfad02b",
+   "status_code": 20000,
+   "status_message": "Ok.",
+   "time": "5.3893 sec.",
+   "cost": 0.002,
+   "result_count": 1,
+   "path": [
+    "v3",
+    "serp",
+    "google",
+    "organic",
+    "live",
+    "advanced"
+   ],
+   "data": {
+    "api": "serp",
+    "function": "live",
+    "se": "google",
+    "se_type": "organic",
+    "keyword": "best running shoes",
+    "location_code": 2840,
+    "language_code": "en",
+    "device": "desktop",
+    "depth": 10,
+    "load_async_ai_overview": true,
+    "os": "windows"
+   },
+   "result": [
+    {
+     "keyword": "best running shoes",
+     "type": "organic",
+     "se_domain": "google.com",
+     "location_code": 2840,
+     "language_code": "en",
+     "datetime": "2026-10-24 10:25:07 +00:00",
+     "item_types": [
+      "ai_overview",
+      "organic",
+      "people_also_ask",
+      "related_searches"
+     ],
+     "se_results_count": 101,
+     "items_count": 12,
+     "items": [
+      {
+       "type": "ai_overview",
+       "rank_group": 1,
+       "rank_absolute": 1,
+       "page": 1,
+       "position": "left",
+       "asynchronous_ai_overview": false,
+       "items": [
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "The best running shoes for 2026 span top categories based on testing and runner consensus:",
+         "references": null
+        },
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "Overall Best: Adidas Adizero EVO SL. Best Daily Trainer: New Balance Fresh Foam X 1080 (v15). Best Tempo Shoe: Saucony Endorphin Speed 5. Best Race Super Shoe: Nike Vaporfly 4. Best Stability Shoe: ASICS Gel-Kayano 33. Best Max-Cushion / Long Distance: ASICS Megablast.",
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "source": "RunRepeat",
+           "domain": "runrepeat.com",
+           "url": "https://runrepeat.com/guides/best-running-shoes",
+           "title": "7 Best Running Shoes in 2026 | RunRepeat",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "Fleet Feet",
+           "domain": "www.fleetfeet.com",
+           "url": "https://www.fleetfeet.com/running-shoe-buyers-guide",
+           "title": "The 10 Best Running Shoes of 2026 | Tested & Reviewed",
+           "text": ""
+          },
+          {
+           "type": "ai_overview_reference",
+           "source": "RTINGS.com",
+           "domain": "www.rtings.com",
+           "url": "https://www.rtings.com/running-shoes/reviews/best/for-men",
+           "title": "The 6 Best Running Shoes For Men of 2026 - RTINGS.com",
+           "text": ""
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "title": null,
+         "text": "If you share your type of run and whether you need stability or wide sizing, I can recommend the exact right pair for you.",
+         "references": null
+        }
+       ],
+       "references": [
+        {
+         "type": "ai_overview_reference",
+         "source": "RunRepeat",
+         "domain": "runrepeat.com",
+         "url": "https://runrepeat.com/guides/best-running-shoes",
+         "title": "7 Best Running Shoes in 2026 | RunRepeat",
+         "text": ""
+        },
+        {
+         "type": "ai_overview_reference",
+         "source": "Fleet Feet",
+         "domain": "www.fleetfeet.com",
+         "url": "https://www.fleetfeet.com/running-shoe-buyers-guide",
+         "title": "The 10 Best Running Shoes of 2026 | Tested & Reviewed",
+         "text": ""
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 1,
+       "rank_absolute": 2,
+       "page": 1,
+       "position": "left",
+       "domain": "weartesters.com",
+       "title": "Best Long Distance Running Shoes",
+       "url": "https://weartesters.com/best-long-distance-running-shoes/",
+       "website_name": "WearTesters",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Nov 13, 2025 — Best Long Distance Running Shoes for Everyday Use: · adidas Evo SL · Puma MagMax Nitro · Asics Superblast 2 · Asics Megablast · adidas Boston 13. Read more",
+       "timestamp": "2025-11-13 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 2,
+       "rank_absolute": 3,
+       "page": 1,
+       "position": "left",
+       "domain": "www.treelinereview.com",
+       "title": "Best Road Running Shoes for Men of 2026",
+       "url": "https://www.treelinereview.com/gearreviews/best-road-running-shoes-men",
+       "website_name": "Treeline Review",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Aug 13, 2026 — We like the HOKA Mach 6, Salomon Aero Glide 4, and On Cloudeclipse for speed workouts and intervals. Read more",
+       "timestamp": "2026-08-13 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 3,
+       "rank_absolute": 4,
+       "page": 1,
+       "position": "left",
+       "domain": "www.reddit.com",
+       "title": "Best running shoes that you've ever used? What do ...",
+       "url": "https://www.reddit.com/r/XXRunning/comments/1p2f0y2/best_running_shoes_that_youve_ever_used_what_do/",
+       "website_name": "Reddit · r/XXRunning",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Before buying a new pair of shoes for serious running, it's good for you to know these main things.",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 4,
+       "rank_absolute": 5,
+       "page": 1,
+       "position": "left",
+       "domain": "www.runnersworld.com",
+       "title": "The 7 Best Running Shoes for Beginners in 2026, Tested ...",
+       "url": "https://www.runnersworld.com/beginner/g45653268/best-running-shoes-for-beginners/",
+       "website_name": "Runner's World",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Sep 25, 2026 — Best Overall Beginner Shoe: Brooks Ghost 18. Best Value Beginner Shoe: New Balance Ellipse.",
+       "timestamp": "2026-09-25 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 5,
+       "rank_absolute": 6,
+       "page": 1,
+       "position": "left",
+       "domain": "www.runnersworld.com",
+       "title": "The Best Running Shoes for Men 2026",
+       "url": "https://www.runnersworld.com/uk/gear/shoes/a64779699/running-shoes-for-men/",
+       "website_name": "Runner's World",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Jul 20, 2026 — The best running shoes for men. The Megablast is easily one of the best super trainers on the market.",
+       "timestamp": "2026-07-20 00:00:00 +00:00"
+      },
+      {
+       "type": "organic",
+       "rank_group": 6,
+       "rank_absolute": 7,
+       "page": 1,
+       "position": "left",
+       "domain": "www.roadrunnersports.com",
+       "title": "Best Running Shoe Brands for Men and Women (2026)",
+       "url": "https://www.roadrunnersports.com/blog/best-running-shoe-brands-for-men-and-women/",
+       "website_name": "Road Runner Sports",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Oct 9, 2026 — There is no single best running shoe brand. The best brand is the one whose fit matches your foot. Read more",
+       "timestamp": "2026-10-09 00:00:00 +00:00"
+      },
+      {
+       "type": "people_also_ask",
+       "rank_group": 1,
+       "rank_absolute": 8,
+       "page": 1,
+       "position": "left",
+       "items": [
+        {
+         "type": "people_also_ask_element",
+         "title": "How do I clean my running shoes?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "Is Asics or Nike better?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "How many miles should running shoes last?",
+         "seed_question": null
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "Can running shoes be used for walking?",
+         "seed_question": null
+        }
+       ]
+      },
+      {
+       "type": "organic",
+       "rank_group": 7,
+       "rank_absolute": 9,
+       "page": 1,
+       "position": "left",
+       "domain": "theruntesters.com",
+       "title": "The Best Beginner Running Shoes 2026",
+       "url": "https://theruntesters.com/the-best-running-shoes-for-beginners/",
+       "website_name": "The Run Testers",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "The Puma Velocity Nitro 4 is one of our favourite shoes for runners of all levels, and one of the best value shoes on the market as well. Read more",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 8,
+       "rank_absolute": 10,
+       "page": 1,
+       "position": "left",
+       "domain": "www.brooksrunning.com",
+       "title": "Most Popular Running Shoes & Gear",
+       "url": "https://www.brooksrunning.com/en_us/featured/best-sellers/",
+       "website_name": "Brooks Running",
+       "is_video": false,
+       "is_featured_snippet": false,
+       "description": "Explore our best sellers for the most popular running shoes, clothing, and accessories so you can stay on-trend and ready for the run.",
+       "timestamp": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 9,
+       "rank_absolute": 11,
+       "page": 1,
+       "position": "left",
+       "domain": "www.youtube.com",
+       "title": "The BEST DAILY RUNNING SHOES (at every price point)",
+       "url": "https://www.youtube.com/watch?v=OndB1Bs_GVY",
+       "website_name": "YouTube · Ben Parkes",
+       "is_video": true,
+       "is_featured_snippet": false,
+       "description": null,
+       "timestamp": "2025-10-26 00:00:00 +00:00"
+      },
+      {
+       "type": "related_searches",
+       "rank_group": 1,
+       "rank_absolute": 12,
+       "page": 1,
+       "position": "left",
+       "items": [
+        "Best running shoes brands",
+        "Best running shoes for beginners",
+        "Best running shoes DICK'S",
+        "Best running shoes for long-distance marathon",
+        "Best running shoes for teens",
+        "Best running shoes for beginners with bad knees",
+        "Best running shoes for 5k and 10k",
+        "Best running shoes for men marathon"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

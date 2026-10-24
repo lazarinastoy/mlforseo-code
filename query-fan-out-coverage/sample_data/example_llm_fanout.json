@@ -1,0 +1,24 @@
+{
+  "_note": "ILLUSTRATIVE EXAMPLE, NOT A LIVE MODEL RESPONSE. Written by hand for the sample run to show the JSON shape the fan-out prompt asks for and the kind of sub-queries an LLM tends to return. Run the notebook with an API key to generate real ones.",
+  "seed_query": "best espresso machine for beginners",
+  "sub_queries": [
+    {"sub_query": "what to look for in a beginner espresso machine", "facet": "buying criteria", "intent": "commercial"},
+    {"sub_query": "semi automatic vs super automatic espresso machine", "facet": "comparison", "intent": "commercial"},
+    {"sub_query": "how much does a good beginner espresso machine cost", "facet": "price", "intent": "commercial"},
+    {"sub_query": "single boiler vs dual boiler espresso machine", "facet": "comparison", "intent": "informational"},
+    {"sub_query": "is a 15 bar espresso machine good", "facet": "specifications", "intent": "informational"},
+    {"sub_query": "what is PID temperature control on an espresso machine", "facet": "specifications", "intent": "informational"},
+    {"sub_query": "do I need a separate grinder for an espresso machine", "facet": "implicit need", "intent": "informational"},
+    {"sub_query": "what grind size for espresso", "facet": "implicit need", "intent": "informational"},
+    {"sub_query": "espresso machine vs nespresso for beginners", "facet": "comparison", "intent": "commercial"},
+    {"sub_query": "breville bambino vs gaggia classic", "facet": "entity expansion", "intent": "commercial"},
+    {"sub_query": "best espresso machine brands for home", "facet": "entity expansion", "intent": "commercial"},
+    {"sub_query": "how to steam milk with an espresso machine steam wand", "facet": "follow-up", "intent": "informational"},
+    {"sub_query": "how to clean and descale a home espresso machine", "facet": "follow-up", "intent": "informational"},
+    {"sub_query": "how to dial in espresso as a beginner", "facet": "follow-up", "intent": "informational"},
+    {"sub_query": "espresso accessories every beginner needs", "facet": "implicit need", "intent": "commercial"},
+    {"sub_query": "is buying a used espresso machine worth it", "facet": "alternative", "intent": "commercial"},
+    {"sub_query": "how long does a home espresso machine last", "facet": "follow-up", "intent": "informational"},
+    {"sub_query": "can you make an americano with an espresso machine", "facet": "follow-up", "intent": "informational"}
+  ]
+}

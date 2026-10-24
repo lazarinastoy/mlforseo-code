@@ -1,0 +1,2 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Reddit</title></head><body><!-- Stub standing in for the HTML page www.reddit.com served at /llms.txt with a 200 status on 24 October 2026 (a soft 404). --></body></html>

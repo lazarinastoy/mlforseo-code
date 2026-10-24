@@ -1,0 +1,6 @@
+pandas>=2.0
+requests>=2.31
+beautifulsoup4>=4.12
+trafilatura>=2.0
+lxml_html_clean>=0.4
+openpyxl>=3.1

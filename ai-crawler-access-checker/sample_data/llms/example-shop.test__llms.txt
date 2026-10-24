@@ -1,0 +1,19 @@
+# Example Shop
+
+> Example Shop sells refurbished cameras and lenses in the UK. This file lists the pages that best explain our products, policies and buying guides.
+
+Every product is tested and comes with a 12-month warranty.
+
+## Buying guides
+
+- [How to choose a mirrorless camera](https://example-shop.test/guides/choose-a-mirrorless-camera/): sensor size, lens mounts and budget
+- [Lens buying guide](https://example-shop.test/guides/lenses/): focal lengths explained with sample photos
+
+## Policies
+
+- [Warranty](https://example-shop.test/warranty/): what the 12-month warranty covers
+- [Returns](https://example-shop.test/returns/): 30-day returns process
+
+## Optional
+
+- [About us](https://example-shop.test/about/)

@@ -1,0 +1,6 @@
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3      # 1.3+ includes HDBSCAN
+sentence-transformers>=3.0
+openpyxl>=3.1          # Excel export
+requests>=2.31         # optional DataForSEO fetch

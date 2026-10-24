@@ -1,0 +1,700 @@
+{
+ "entities": [
+  {
+   "name": "French press",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/01p1qs",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/French_press"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "French Press",
+      "beginOffset": 13
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 87
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 102
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 182
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 305
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 422
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 446
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 543
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 650
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 846
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 945
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 984
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1216
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1331
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1397
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "French press",
+      "beginOffset": 1491
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.297617
+  },
+  {
+   "name": "coffee",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/02vqfm",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coffee"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 162
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 209
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 368
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 731
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1043
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1295
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1317
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1410
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "coffee",
+      "beginOffset": 1457
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.150899
+  },
+  {
+   "name": "water",
+   "type": "OTHER",
+   "metadata": {
+    "mid": "/m/0838f",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Water"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 223
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 754
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 1006
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "water",
+      "beginOffset": 1062
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.071648
+  },
+  {
+   "name": "Coffee One",
+   "type": "ORGANIZATION",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Coffee One",
+      "beginOffset": 42
+     },
+     "type": "PROPER"
+    },
+    {
+     "text": {
+      "content": "Coffee One",
+      "beginOffset": 1609
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.05546
+  },
+  {
+   "name": "filter",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "mesh",
+      "beginOffset": 243
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "metal filter",
+      "beginOffset": 325
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh",
+      "beginOffset": 920
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "mesh filter",
+      "beginOffset": 1440
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.043623
+  },
+  {
+   "name": "grind",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 510
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 673
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "grind",
+      "beginOffset": 774
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "Grind",
+      "beginOffset": 1238
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.042175
+  },
+  {
+   "name": "plunger",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 248
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 1117
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 1167
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "plunger",
+      "beginOffset": 1266
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.038906
+  },
+  {
+   "name": "Bodum",
+   "type": "ORGANIZATION",
+   "metadata": {
+    "mid": "/m/0cb7xp",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bodum"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "Bodum",
+      "beginOffset": 563
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.031526
+  },
+  {
+   "name": "brew time",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "steep",
+      "beginOffset": 195
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "steep",
+      "beginOffset": 1133
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.022549
+  },
+  {
+   "name": "ratio",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "ratio",
+      "beginOffset": 663
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "ratio",
+      "beginOffset": 692
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.022403
+  },
+  {
+   "name": "coffee beans",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/05bzrs",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Coffee_bean"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "coffee beans",
+      "beginOffset": 460
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.020634
+  },
+  {
+   "name": "particles",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "particles",
+      "beginOffset": 811
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "particles",
+      "beginOffset": 893
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.02051
+  },
+  {
+   "name": "grinder",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grinder",
+      "beginOffset": 476
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.02049
+  },
+  {
+   "name": "kettle",
+   "type": "CONSUMER_GOOD",
+   "metadata": {
+    "mid": "/m/03s_tn",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Kettle"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "kettle",
+      "beginOffset": 519
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.020101
+  },
+  {
+   "name": "timer",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "timer",
+      "beginOffset": 532
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.019984
+  },
+  {
+   "name": "oils",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "oils",
+      "beginOffset": 377
+     },
+     "type": "COMMON"
+    },
+    {
+     "text": {
+      "content": "oils",
+      "beginOffset": 1464
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.019767
+  },
+  {
+   "name": "burr grinder",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "burr grinder",
+      "beginOffset": 783
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.017715
+  },
+  {
+   "name": "UK",
+   "type": "LOCATION",
+   "metadata": {
+    "mid": "/m/07ssc",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/United_Kingdom"
+   },
+   "mentions": [
+    {
+     "text": {
+      "content": "UK",
+      "beginOffset": 1538
+     },
+     "type": "PROPER"
+    }
+   ],
+   "salience": 0.017428
+  },
+  {
+   "name": "brewers",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "brewers",
+      "beginOffset": 872
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.016911
+  },
+  {
+   "name": "grounds",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "grounds",
+      "beginOffset": 270
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.013411
+  },
+  {
+   "name": "cup",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "cup",
+      "beginOffset": 397
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.012722
+  },
+  {
+   "name": "cafetière",
+   "type": "CONSUMER_GOOD",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "cafetière",
+      "beginOffset": 1521
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.011046
+  },
+  {
+   "name": "press pot",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "press pot",
+      "beginOffset": 1547
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.006487
+  },
+  {
+   "name": "privacy policy",
+   "type": "OTHER",
+   "metadata": {},
+   "mentions": [
+    {
+     "text": {
+      "content": "Privacy",
+      "beginOffset": 1639
+     },
+     "type": "COMMON"
+    }
+   ],
+   "salience": 0.005988
+  },
+  {
+   "name": "30",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "30"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "30",
+      "beginOffset": 719
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  },
+  {
+   "name": "450",
+   "type": "NUMBER",
+   "metadata": {
+    "value": "450"
+   },
+   "salience": 0,
+   "mentions": [
+    {
+     "text": {
+      "content": "450",
+      "beginOffset": 741
+     },
+     "type": "TYPE_UNKNOWN"
+    }
+   ]
+  }
+ ],
+ "language": "en"
+}
