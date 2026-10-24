@@ -38,6 +38,9 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 | [`geo-checklist/`](geo-checklist/) | Generative engine optimisation (AI search) | 44-check GEO checklist with evidence levels, AI crawler tab, prompt tracker and progress summary (Google Sheets-ready xlsx) |
 | [`knowledge-panel-audit-checklist/`](knowledge-panel-audit-checklist/) | Knowledge panels and brand SERPs | 36-check audit, cross-platform fact sheet with mismatch flags, brand SERP and KG lookup logs, action plan |
 | [`site-migration-checklist/`](site-migration-checklist/) | SEO site migrations and redirect mapping | 43-check migration checklist + 2,000-row redirect map that takes the fuzzy-matching notebooks' output and flags chains, loops and weak matches |
+| [`keyword-mapping-template/`](keyword-mapping-template/) | Keyword mapping | Keyword → URL map with intent rules, priority score and five automatic flags (cannibalisation, overloaded URLs, intent/page-type mismatch…) |
+| [`topical-map-eav-template/`](topical-map-eav-template/) | The EAV model for topical maps | Entity–attribute–value inputs → formula-generated pillar / cluster / supporting map with links, intent, format and coverage gaps |
+| [`content-audit-template/`](content-audit-template/) | Content audits | Crawl + Search Console + GA4 merged by URL → Keep / Update / Merge / Prune / Redirect with editable rules, plus an export-prep script |
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
 

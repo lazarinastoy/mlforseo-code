@@ -1,0 +1,33 @@
+# ----------------------------------------
+# Landing page
+# Account: Stride & Co (sample)
+# Property: stride-example.com
+# ----------------------------------------
+#
+# Start date: 20260720
+# End date: 20261019
+Landing page + query string,Sessions,Active users,New users,Average engagement time per session,Key events,Total revenue
+/,2610,2088,1566,48.2,61,0
+/trail-running-shoes/,1330,1064,798,41.0,34,0
+/trail-running-shoes/?utm_source=newsletter&utm_medium=email,120,101,30,41.0,3,0
+/road-running-shoes/,980,784,588,39.5,30,0
+/blog/best-trail-running-shoes/,300,240,180,71.3,4,0
+/blog/trail-running-for-beginners/,70,56,42,66.0,0,0
+/blog/wide-feet-guide/,210,168,126,83.1,3,0
+/wide-fit-running-shoes/,520,416,312,37.2,19,0
+/blog/hoka-vs-brooks/,160,128,96,75.4,2,0
+/blog/hoka-vs-brooks-2023/,11,8,6,51.0,0,0
+/blog/best-marathon-shoes-2022/,6,4,3,22.0,0,0
+/marathon-running-shoes/,430,344,258,36.0,21,0
+/blog/running-shoe-sizing-chart/,44,35,26,58.0,1,0
+/blog/london-store-opening-2019/,3,2,1,12.0,0,0
+/blog/staff-picks-may-2020/,2,1,1,9.0,0,0
+/tag/shoes/,1,0,0,4.0,0,0
+/blog/how-to-lace-running-shoes/,20,16,12,5.0,0,0
+/services/gait-analysis/,240,192,144,62.0,40,0
+/blog/replace-running-shoes/,520,416,312,88.0,6,0
+/stores/london/,330,264,198,44.0,25,0
+/blog/running-glossary/,18,14,10,70.0,0,0
+/blog/winter-running-tips/,15,12,9,95.0,1,0
+/blog/parkrun-guide/,95,76,57,80.0,1,0
+(not set),40,38,30,3.2,0,0
