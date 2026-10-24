@@ -25,6 +25,8 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 | [`google-sheets-formulas-for-seo/`](google-sheets-formulas-for-seo/) | 12 Google Sheets formulas for SEO keyword research & content analysis | Copyable modern formulas (LET/LAMBDA/BYROW), rules tabs, sample data, 107-check test script |
 | [`image-seo-multimodal/`](image-seo-multimodal/) | Image SEO in 2026: advanced tactics and multimodal search | Page image audit (format, size, alt), vision-model alt-text drafts, CLIP classification + near-duplicate detection |
 | [`blog-architecture-audit/`](blog-architecture-audit/) | Blog and site architecture for SEO and conversions in the AI search era | Click depth vs URL depth, orphans, category balance, hub coverage from a sitemap crawl or Screaming Frog export |
+| [`seo-metadata-fuzzy-matching-openai/`](seo-metadata-fuzzy-matching-openai/) | How to automatically optimize your SEO metadata with FuzzyWuzzy and OpenAI in Google Colab | "Fuzzy Booster": Search Console top query per page vs title/meta/h1 (RapidFuzz), OpenAI title rewrites, sample data |
+| [`whisper-audio-transcription/`](whisper-audio-transcription/) | How to transcribe audio with OpenAI's Whisper API in Google Colab (Python) | Current OpenAI SDK, single + bulk transcription, 25 MB chunking with pydub, SRT captions |
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
 
