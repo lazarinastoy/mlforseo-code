@@ -1,0 +1,9 @@
+page,query,clicks,ctr,impressions,position,title,meta,h1
+https://www.example.com/blog/que-es-el-seo-tecnico/,seo técnico,412,6.81,6050,3.4,Qué es el SEO técnico y cómo empezar | Example,"Guía de SEO técnico: rastreo, indexación, velocidad y datos estructurados explicados paso a paso.",Qué es el SEO técnico
+https://www.example.com/blog/que-es-el-seo-tecnico/,auditoría seo técnica,58,2.10,2762,8.9,Qué es el SEO técnico y cómo empezar | Example,"Guía de SEO técnico: rastreo, indexación, velocidad y datos estructurados explicados paso a paso.",Qué es el SEO técnico
+https://www.example.com/blog/enlazado-interno/,enlazado interno,233,5.02,4641,4.1,Cómo mejorar tu arquitectura web | Example,"Aprende a organizar las páginas de tu web para que Google y los usuarios encuentren lo importante.",Arquitectura web para SEO
+https://www.example.com/blog/core-web-vitals/,core web vitals,190,4.44,4279,5.6,Core Web Vitals: qué son y cómo medirlas en 2026,"LCP, INP y CLS: qué miden las Core Web Vitals, cómo medirlas y cómo mejorarlas.",Core Web Vitals
+https://www.example.com/blog/core-web-vitals/,que es inp,41,3.05,1344,6.2,Core Web Vitals: qué son y cómo medirlas en 2026,"LCP, INP y CLS: qué miden las Core Web Vitals, cómo medirlas y cómo mejorarlas.",Core Web Vitals
+https://www.example.com/blog/canibalizacion-keywords/,canibalización de palabras clave,121,3.90,3103,7.3,Por qué dos páginas compiten en Google | Example,No meta description,Dos páginas para la misma búsqueda
+https://www.example.com/blog/redirecciones-301/,redireccion 301,96,4.75,2021,4.8,Redirecciones 301: guía completa,"Cuándo usar una redirección 301, cómo implementarla en Apache, Nginx y WordPress y errores comunes.",Redirecciones 301
+https://www.example.com/blog/datos-estructurados/,schema markup,77,2.64,2917,9.1,Datos estructurados para SEO | Example,"Qué son los datos estructurados, qué tipos de schema.org usar y cómo validarlos.",Datos estructurados

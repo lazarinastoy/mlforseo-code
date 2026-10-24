@@ -1,0 +1,11 @@
+pandas>=2.0
+rapidfuzz>=3.0
+nltk>=3.8
+requests>=2.31
+beautifulsoup4>=4.12
+chardet>=5.0
+python-dateutil>=2.8
+google-api-python-client>=2.100
+google-auth>=2.20
+google-auth-oauthlib>=1.0
+openai>=1.40
