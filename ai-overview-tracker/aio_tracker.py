@@ -47,7 +47,11 @@ def aio_presence(tables: dict[str, pd.DataFrame], my_domain: str) -> pd.DataFram
             "your_organic_rank": int(mine_o["rank_group"].min()) if not mine_o.empty else None,
             "top_cited_domains": ", ".join(c["domain"].drop_duplicates().head(3)) if not c.empty else "",
         })
-    return pd.DataFrame(rows)
+    out = pd.DataFrame(rows)
+    for col in ("your_first_citation_position", "your_organic_rank"):   # 1 not 1.0; blank, not NaN
+        if col in out:
+            out[col] = out[col].astype("Int64")
+    return out
 
 
 def citation_share(citations: pd.DataFrame, my_domain: str, n_aio_keywords: int) -> pd.DataFrame:
@@ -147,6 +151,9 @@ def append_history(presence: pd.DataFrame, history_csv: str | Path, run_date: st
     if p.exists():
         today = pd.concat([pd.read_csv(p), today], ignore_index=True)
         today = today.drop_duplicates(subset=["run_date", "keyword"], keep="last")
+        for col in ("your_first_citation_position", "your_organic_rank"):   # CSV reads them back as floats
+            if col in today:
+                today[col] = pd.to_numeric(today[col], errors="coerce").astype("Int64")
     p.parent.mkdir(parents=True, exist_ok=True)
     today.to_csv(p, index=False)
     return today
