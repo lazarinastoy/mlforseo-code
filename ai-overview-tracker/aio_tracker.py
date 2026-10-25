@@ -54,6 +54,7 @@ def citation_share(citations: pd.DataFrame, my_domain: str, n_aio_keywords: int)
     """Share of all AI Overview citations by domain.
 
     citations       = cited URLs from that domain, across all keywords
+                      (your subdomains are rolled up into your domain's row)
     share_of_citations = citations / all citations in the set
     keywords_cited_in  = AI Overviews that cite the domain at least once
     keyword_coverage   = keywords_cited_in / keywords with an AI Overview
@@ -61,6 +62,11 @@ def citation_share(citations: pd.DataFrame, my_domain: str, n_aio_keywords: int)
     if citations.empty:
         return pd.DataFrame(columns=["domain", "citations", "share_of_citations",
                                      "keywords_cited_in", "keyword_coverage", "is_you"])
+    # Count your subdomains (help.example.com, blog.example.com) under your domain,
+    # so this table agrees with aio_presence(), which already treats them as you.
+    me = bare_domain(my_domain)
+    citations = citations.assign(domain=citations["domain"].apply(
+        lambda d: me if is_domain(d, my_domain) else d))
     g = (citations.groupby("domain")
          .agg(citations=("url", "size"), keywords_cited_in=("keyword", "nunique"))
          .reset_index())
