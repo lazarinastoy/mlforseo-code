@@ -122,7 +122,8 @@ def main() -> None:
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--max-live", type=int, default=2)
     ap.add_argument("--max-turns", type=int, default=8, help="hard cap on model calls")
-    ap.add_argument("--effort", default="medium", choices=["low", "medium", "high"])
+    ap.add_argument("--effort", default="medium", choices=["low", "medium", "high", "none"],
+                    help="'none' for models without the effort setting, e.g. Haiku 4.5")
     args = ap.parse_args()
     STATE.update(data_dir=args.data_dir, live=args.live, max_live=args.max_live)
 
@@ -131,7 +132,7 @@ def main() -> None:
         model=MODEL,
         max_tokens=16000,
         system=SYSTEM,
-        output_config={"effort": args.effort},
+        **({} if args.effort == "none" else {"output_config": {"effort": args.effort}}),
         cache_control={"type": "ephemeral"},   # tools + history are re-sent every turn
         max_iterations=args.max_turns,
         tools=[list_tracked_keywords, ranking_history, share_of_search, ai_citations,

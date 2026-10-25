@@ -49,10 +49,20 @@ LLM_PRICES = {"claude-opus-5-5": (4.0, 20.0), "claude-sonnet-5-5": (2.0, 10.0),
 LLM_USAGE: list[dict] = []      # one row per API call, so you can see what a run cost
 
 
+def output_config(schema: dict, model: str) -> dict:
+    """Structured-output config. Haiku 4.5 has no effort parameter (it returns a 400), so
+    effort is only sent to models that support it."""
+    cfg = {"format": {"type": "json_schema", "schema": schema}}
+    if not model.startswith("claude-haiku-4"):
+        cfg["effort"] = "low"
+    return cfg
+
+
 def log_usage(resp, label: str = "") -> dict:
     """Record the tokens (and the estimated cost) of one Messages API response."""
     u = resp.usage
-    pin, pout = LLM_PRICES.get(resp.model, LLM_PRICES[LLM_MODEL])
+    # resp.model can be a dated ID ("claude-haiku-4-5-20251001"), so match on the prefix
+    pin, pout = next((p for m, p in LLM_PRICES.items() if resp.model.startswith(m)), LLM_PRICES[LLM_MODEL])
     inp = (u.input_tokens or 0) + (getattr(u, "cache_creation_input_tokens", 0) or 0) * 1.25 \
         + (getattr(u, "cache_read_input_tokens", 0) or 0) * 0.1
     row = dict(label=label, model=resp.model, input_tokens=u.input_tokens,
@@ -273,7 +283,7 @@ def classify_serp(keyword: str, organic: pd.DataFrame, features: pd.DataFrame,
     client = client or anthropic.Anthropic()
     resp = client.messages.create(
         model=model, max_tokens=4000,
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": CLASSIFY_SCHEMA}},
+        output_config=output_config(CLASSIFY_SCHEMA, model),
         messages=[{"role": "user", "content": serp_prompt(keyword, organic, features)}])
     log_usage(resp, f"classify: {keyword}")
     if resp.stop_reason == "refusal":
@@ -561,7 +571,7 @@ def cluster_questions(questions: list[str], topic: str, client=None, model: str 
               "about the topic should use it. Mark questions that drifted away from the topic as off-topic.")
     resp = client.messages.create(
         model=model, max_tokens=4000,
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": QUESTION_SCHEMA}},
+        output_config=output_config(QUESTION_SCHEMA, model),
         messages=[{"role": "user", "content": prompt}])
     log_usage(resp, f"questions: {topic}")
     if resp.stop_reason in ("refusal", "max_tokens"):
