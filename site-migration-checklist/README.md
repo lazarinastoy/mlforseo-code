@@ -2,7 +2,7 @@
 
 A free, phase-by-phase site migration checklist (43 checks from scoping to month twelve) linked to a redirect mapping workbook that takes the output of MLforSEO's fuzzy-matching notebooks and tracks QA for every URL. By [Lazarina Stoy](https://www.mlforseo.com/experts/lazarina-stoy/) for [MLforSEO](https://www.mlforseo.com/). Built on [Google's site move documentation](https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes). Checked October 2026.
 
-**Google Sheets version:** *(Make a copy link coming soon. Until then, download `site-migration-checklist.xlsx` and open it in Google Sheets or Excel.)*
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/1Cz6jwcPd7ZKIBHTM6fTsAuA74sQkRfP3O_RZKaHUx_4/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`site-migration-checklist.xlsx`](site-migration-checklist.xlsx); see [SETUP.md](SETUP.md).
 **Read it on GitHub:** [`checklist.md`](checklist.md)
 
 ## What's inside

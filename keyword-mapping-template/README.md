@@ -2,7 +2,7 @@
 
 A free Google Sheets template by **Lazarina Stoy, MLforSEO**. It maps every keyword (or cluster) to one existing or planned URL, labels search intent, scores priority, and flags the mapping mistakes that turn into keyword cannibalisation. It's the step between [keyword clustering](https://www.mlforseo.com/glossary-term/keyword-clustering/) and content briefs.
 
-**Get the Google Sheet:** the copy link will go here once the sheet is in Drive. Until then, download [`keyword-mapping-template.xlsx`](keyword-mapping-template.xlsx) and open it in Google Sheets or Excel (see [SETUP.md](SETUP.md)).
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/1d8qUzJQ27phgrq05kMmBFRz__m-qk55-N72I4091O5g/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`keyword-mapping-template.xlsx`](keyword-mapping-template.xlsx); see [SETUP.md](SETUP.md).
 
 ## What's inside
 

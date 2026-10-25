@@ -2,7 +2,7 @@
 
 A free Google Sheets template by **Lazarina Stoy, MLforSEO**. You describe one central entity, the attributes people use to describe or filter it, and the values each attribute takes. The sheet generates a topical map from that: a pillar page, one cluster (hub) page per attribute and one supporting page per value, each with a suggested title, slug, intent, format, internal links, coverage against your existing URLs and a priority score.
 
-**Get the Google Sheet:** the copy link will go here once the sheet is in Drive. Until then, download [`topical-map-eav-template.xlsx`](topical-map-eav-template.xlsx) and open it in Google Sheets or Excel (see [SETUP.md](SETUP.md)).
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/13UYd3SMuj9bc9b9OtdoNW0BLtEFE_hvjhnS8TDo71HA/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`topical-map-eav-template.xlsx`](topical-map-eav-template.xlsx); see [SETUP.md](SETUP.md).
 
 ## Why EAV
 

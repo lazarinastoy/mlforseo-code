@@ -2,7 +2,7 @@
 
 A free, 44-point checklist for getting your content found, understood, trusted and cited by AI search systems: Google AI Overviews and AI Mode, ChatGPT, Perplexity, Claude, Gemini and Copilot. By [Lazarina Stoy](https://www.mlforseo.com/experts/lazarina-stoy/) for [MLforSEO](https://www.mlforseo.com/), built on [Beatrice Gamba](https://www.mlforseo.com/experts/beatrice-gamba/)'s AI search series. Checked October 2026.
 
-**Google Sheets version:** *(Make a copy link coming soon. Until then, download `geo-checklist.xlsx` and open it in Google Sheets or Excel.)*
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/16MLr320FedNWxch1qwO53sDXTq70S4xnVR8_T5HdC-o/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`geo-checklist.xlsx`](geo-checklist.xlsx); see [SETUP.md](SETUP.md).
 **Read it on GitHub:** [`checklist.md`](checklist.md)
 
 ## What's inside

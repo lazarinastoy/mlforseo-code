@@ -2,7 +2,7 @@
 
 A free Google Sheets template by **Lazarina Stoy, MLforSEO**. Paste a Screaming Frog crawl, two Search Console exports and a GA4 landing page export. The sheet joins them per URL, checks every page for decay, striking distance, thin content, overlap with another page and conversions, and suggests a decision with a plain-English reason. Every threshold sits on a **Rules** tab, and your **Override** column always wins.
 
-**Get the Google Sheet:** the copy link will go here once the sheet is in Drive. Until then, download [`content-audit-template.xlsx`](content-audit-template.xlsx) and open it in Google Sheets or Excel (see [SETUP.md](SETUP.md)).
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/1ku3ToibZyXpQJmIO9G6lG3oS-BwJRqxXVIW5jzQ5eWg/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`content-audit-template.xlsx`](content-audit-template.xlsx); see [SETUP.md](SETUP.md).
 
 ## What's inside
 

@@ -2,7 +2,7 @@
 
 A free, step-by-step audit of your Google knowledge panel eligibility and brand SERP: what page one shows for your name, whether Google's Knowledge Graph recognises you, Wikidata status, sameAs and markup, cross-platform consistency, claiming the panel, and a prioritised action plan. By [Lazarina Stoy](https://www.mlforseo.com/experts/lazarina-stoy/) for [MLforSEO](https://www.mlforseo.com/), built on [Beatrice Gamba](https://www.mlforseo.com/experts/beatrice-gamba/)'s entity SEO articles. Checked October 2026.
 
-**Google Sheets version:** *(Make a copy link coming soon. Until then, download `knowledge-panel-audit-checklist.xlsx` and open it in Google Sheets or Excel.)*
+**Get the Google Sheet:** [Make a copy](https://docs.google.com/spreadsheets/d/1pCT24lzWy11DvELqvYhlWY1aoD20gxop8_YAc6T6hlQ/copy) (opens a copy in your own Google Drive). Prefer Excel? Download [`knowledge-panel-audit-checklist.xlsx`](knowledge-panel-audit-checklist.xlsx); see [SETUP.md](SETUP.md).
 **Read it on GitHub:** [`checklist.md`](checklist.md)
 **Companion article:** [What it takes to earn a Google knowledge panel](https://www.mlforseo.com/knowledge-graph-strategy/what-it-takes-to-earn-a-google-knowledge-panel/)
 
