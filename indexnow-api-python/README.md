@@ -80,6 +80,7 @@ Tested on 22 October 2026 with Python 3.9 and requests 2.32:
 * Full submit flow against a local mock endpoint: sitemap index, then child sitemap, then `--since` filter, then off-host URL removal, then key file check, then 3 batches, with one simulated 429 retried and recovered. The script stopped correctly on a simulated 403. All file formats (`.txt`, `.csv`, `.json`, `.jsonl`) were parsed.
 * Dry run against a live 300-URL Rank Math sitemap index.
 * Live error responses from `api.indexnow.org`, using a dummy key for `www.example.com` (no real site submitted): wrong key → 403 `UserForbiddedToAccessSite`, off-host URL → 422, malformed key → 422, non-JSON body → 400.
+* Real submissions (25 October 2026): 219 new URLs on www.mlforseo.com and 412 URLs from the datastudioformarketers.com sitemap (two redirecting URLs filtered out first), both using Rank Math's existing IndexNow key file. Key check passed on both sites and each batch returned HTTP 200 ("URLs received").
 
 We didn't send a real submission, because that needs a key file hosted on a site you own. Run `--limit 5` first on your own site.
 
