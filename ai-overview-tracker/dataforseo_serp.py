@@ -150,7 +150,15 @@ class DataForSEOClient:
             if r.status_code in (429, 500, 502, 503, 504) and attempt < retries - 1:
                 time.sleep(2 ** attempt * 2)           # back off: 2s, 4s ...
                 continue
-            r.raise_for_status()
+            if r.status_code >= 400:                   # show DataForSEO's own message, not a bare HTTP error
+                try:
+                    msg = r.json().get("status_message") or r.reason
+                except ValueError:
+                    msg = r.reason
+                hint = (" Check DATAFORSEO_LOGIN (your account email) and DATAFORSEO_PASSWORD: it must be the "
+                        "API password from https://app.dataforseo.com/api-access, not your dashboard password."
+                        if r.status_code == 401 else "")
+                raise RuntimeError(f"DataForSEO HTTP {r.status_code}: {msg}{hint}")
             data = r.json()
             if data.get("status_code") != 20000:       # account-level problems (auth, balance)
                 raise RuntimeError(f"DataForSEO {data.get('status_code')}: {data.get('status_message')}")
