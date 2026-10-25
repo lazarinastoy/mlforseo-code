@@ -21,7 +21,7 @@ Google describes AI Mode and AI Overviews as using a "query fan-out" technique: 
 
 * Python 3.10+ (tested 24 October 2026 on Python 3.12 with sentence-transformers 6.2, trafilatura 2.3 and pandas 3.1, on a CPU; the sample run takes about a minute including model downloads). Colab works out of the box.
 * No API key for the sample run or for rule-based fan-out.
-* Optional LLM fan-out: an OpenAI, Anthropic or Gemini API key, read at runtime from Colab secrets (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`) or a hidden prompt. One short call per seed query. Default models (October 2026): `gpt-6-luna`, `claude-haiku-5-5`, `gemini-3.5-flash-lite`; change them in `LLM_MODELS`.
+* Optional LLM fan-out: an OpenAI, Anthropic or Gemini API key, read at runtime from Colab secrets or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`), or a hidden prompt. One short call per seed query. Default models (October 2026): `gpt-6-luna`, `claude-haiku-4-5`, `gemini-3.5-flash-lite`; change them in `LLM_MODELS`.
 
 ```bash
 pip install -r requirements.txt

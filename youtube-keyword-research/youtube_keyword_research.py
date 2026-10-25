@@ -187,6 +187,9 @@ def _api_get(endpoint: str, params: dict, api_key: str) -> dict:
             "quotaExceeded": "Daily quota used up. It resets at midnight Pacific Time.",
             "keyInvalid": "Check the API key.",
             "accessNotConfigured": "Enable 'YouTube Data API v3' for this Google Cloud project.",
+            "forbidden": "If the message says requests are blocked, the key's API restrictions don't include "
+                         "YouTube Data API v3: add it under Credentials > API restrictions, or use another key.",
+            "API_KEY_SERVICE_BLOCKED": "This key isn't allowed to call YouTube Data API v3 (check its API restrictions).",
         }.get(reason, "")
         raise YouTubeAPIError(f"{endpoint}: HTTP {r.status_code} {reason} {msg} {hint}".strip())
     return r.json()
@@ -346,9 +349,13 @@ def suggest_tags(seed: str, groups: pd.DataFrame, tags: pd.DataFrame, limit_char
     cands += [(t, "competitor tag (2+ top videos)") for t in comp_only]
     cands += [(s, "autocomplete + competitor tag") for s in both if used[s] < 2]
     cands += [(s, "autocomplete") for s in sorted(auto, key=lambda s: -auto[s])]
+    this_year = pd.Timestamp.now().year
     chosen, seen = [], set()
     for tag, why in cands:
         if tag in seen or len(chosen) >= max_tags:
+            continue
+        years = [int(y) for y in re.findall(r"\b(20\d\d)\b", tag)]
+        if years and max(years) < this_year:      # skip stale phrases like "... 2023"
             continue
         if tag_field_length([c[0] for c in chosen] + [tag]) > limit_chars:
             continue

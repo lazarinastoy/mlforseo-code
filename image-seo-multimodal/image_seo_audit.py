@@ -364,6 +364,18 @@ def _b64_jpeg(img: Image.Image) -> str:
     return base64.b64encode(buf.getvalue()).decode()
 
 
+def _raise_for_api_error(r: requests.Response) -> None:
+    """Like raise_for_status(), but keeps the API's own reason (e.g. no credit, unknown model)."""
+    if r.status_code != 200:
+        try:
+            err = r.json().get("error", {})
+            detail = err.get("code") or err.get("status") or ""
+            msg = err.get("message", "")
+        except ValueError:
+            detail, msg = "", r.text[:200]
+        raise RuntimeError(f"HTTP {r.status_code} {detail}: {msg[:200]}".strip())
+
+
 class OpenAIBackend(AltBackend):
     """Needs OPENAI_API_KEY in the environment. Model via OPENAI_VISION_MODEL."""
 
@@ -380,7 +392,7 @@ class OpenAIBackend(AltBackend):
                                                 "detail": "low"}}]}]}
         r = requests.post("https://api.openai.com/v1/chat/completions", json=body, timeout=60,
                           headers={"Authorization": f"Bearer {self.key}"})
-        r.raise_for_status()
+        _raise_for_api_error(r)
         return clean_alt(r.json()["choices"][0]["message"]["content"])
 
 
@@ -399,7 +411,7 @@ class GeminiBackend(AltBackend):
             {"text": ALT_PROMPT.format(title=title, context=context[:300])},
             {"inline_data": {"mime_type": "image/jpeg", "data": _b64_jpeg(img)}}]}]}
         r = requests.post(url, json=body, timeout=60, headers={"x-goog-api-key": self.key})
-        r.raise_for_status()
+        _raise_for_api_error(r)
         return clean_alt(r.json()["candidates"][0]["content"]["parts"][0]["text"])
 
 
