@@ -276,7 +276,12 @@ def fetch(url: str, user_agent: str = USER_AGENT, timeout: int = 20) -> Fetched:
                     break
             # Decoded size. (Content-Length is the compressed size, so we don't use it.)
             out.size_bytes = len(body)
-            out.text = body.decode(r.encoding or "utf-8", errors="replace")
+            # Servers sometimes declare charsets Python doesn't know (HubSpot's llms.txt
+            # says 'x-macroman'), so fall back to UTF-8 instead of crashing.
+            try:
+                out.text = body.decode(r.encoding or "utf-8", errors="replace")
+            except LookupError:
+                out.text = body.decode("utf-8", errors="replace")
     except requests.RequestException as e:
         out.error = type(e).__name__ + ": " + str(e)[:200]
     return out
@@ -631,10 +636,13 @@ def audit_domains(domains: list[str], paths: list[str] | None = None,
         flags = find_mistakes(origin, robots, dec)
         lrows = [check_llms(llms, origin, "llms.txt"), check_llms(llms_full, origin, "llms-full.txt")]
         home = dec[dec["path"] == paths[0]]
-        by_cat = home.groupby("category")["decision"].apply(lambda s: f"{(s == 'blocked').sum()}/{len(s)} blocked")
+        # If robots.txt couldn't be fetched every decision is 'unknown': say so instead of '0/7 blocked'.
+        by_cat = home.groupby("category")["decision"].apply(
+            lambda s: "unknown" if (s == "unknown").all() else f"{(s == 'blocked').sum()}/{len(s)} blocked")
         summary.append(dict(
             site=origin, robots_status=robots.status, robots_bytes=robots.size_bytes,
-            agents_blocked_on_home=int((home["decision"] == "blocked").sum()), agents_checked=len(home),
+            agents_blocked_on_home=int((home["decision"] == "blocked").sum()),
+            agents_checked=int((home["decision"] != "unknown").sum()),
             training_bots=by_cat.get("AI training", ""), search_answer_bots=by_cat.get("AI search / answers", ""),
             user_fetchers=by_cat.get("User-initiated fetch", ""),
             googlebot=home.set_index("token")["decision"].get("Googlebot", ""),

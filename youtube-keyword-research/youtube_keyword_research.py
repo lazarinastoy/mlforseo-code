@@ -147,11 +147,11 @@ def topic_bucket(mod: str) -> str:
         ("question", r"^(how|what|why|when|where|which|who|can|does|do|is|are|should)\b"),
         ("year / freshness", r"\b20\d\d\b|\blatest\b|\bnew\b|\bupdate"),
         ("tools / software", r"\btools?\b|\bsoftware\b|\bextension\b|\bapp\b|\bplugin\b|\bai\b|\bgenerator\b|\bchecker\b|\banalyzer\b"),
-        ("learning / course", r"\bcourse\b|\btutorial\b|\bguide\b|\bfor beginners\b|\bclass\b|\btraining\b|\bexplained\b|\blearn"),
-        ("tips / tactics", r"\btips?\b|\btricks?\b|\bhacks?\b|\bstrateg|\bchecklist\b|\boptimi[sz]ation\b|\branking\b|\brank\b"),
+        ("learning / course", r"\bcourses?\b|\btutorials?\b|\bguides?\b|\bbeginners?\b|\bclass(es)?\b|\btraining\b|\bexplained\b|\blearn"),
+        ("tips / tactics", r"\btips?\b|\btricks?\b|\bhacks?\b|\bstrateg|\bchecklists?\b|\boptimi[sz]ation\b|\branking\b|\brank\b"),
         ("career / money", r"\bjobs?\b|\bcareer\b|\bfreelanc|\bclients?\b|\bmonetization\b|\bmonetisation\b|\bearn|\bservices?\b|\bagency\b|\bsalary\b|\bfiverr\b|\bupwork\b"),
         ("comparison", r"\bvs\b|\bversus\b|\balternative|\bbest\b|\btop\b"),
-        ("format / feature", r"\bshorts?\b|\btags?\b|\btitles?\b|\bdescription\b|\bthumbnail|\bkeywords?\b|\bhashtags?\b|\bchapters?\b"),
+        ("format / feature", r"\bshorts?\b|\btags?\b|\btitles?\b|\bdescriptions?\b|\bthumbnail|\bkeywords?\b|\bhashtags?\b|\bchapters?\b"),
     ]
     for name, rx in rules:
         if re.search(rx, mod):

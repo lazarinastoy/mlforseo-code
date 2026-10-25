@@ -11,7 +11,7 @@ Google describes AI Mode and AI Overviews as using a "query fan-out" technique: 
 | Section | What you get |
 |---|---|
 | 1. Settings | Seed query, page URLs, fan-out method, LLM provider and model, thresholds |
-| 2. Fan-out | Sub-queries from (a) a free rule-based expansion (product and concept template sets) and/or (b) an LLM via a documented, editable prompt. Pluggable provider: OpenAI (Responses API), Anthropic (Messages API) or Gemini (Google Gen AI SDK) |
+| 2. Fan-out | Sub-queries from (a) a free rule-based expansion (product, concept and "how to" template sets) and/or (b) an LLM via a documented, editable prompt. Pluggable provider: OpenAI (Responses API), Anthropic (Messages API) or Gemini (Google Gen AI SDK) |
 | 3. Passages | Fetches each page, extracts the main content (trafilatura, BeautifulSoup fallback) and splits it into heading-aware passages |
 | 4. Coverage | Stage 1: `multi-qa-MiniLM-L6-cos-v1` embeddings shortlist the closest passages by cosine similarity. Stage 2: `ms-marco-MiniLM-L6-v2` cross-encoder reranks them. Each sub-query is labelled covered / partial / gap (cosine-only mode available) |
 | 5. Gaps | Gap list with suggested actions, and a per-page view of which page "owns" which sub-queries |
