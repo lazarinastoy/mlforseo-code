@@ -72,12 +72,13 @@ async function embedTexts(texts, onStep){
   }
   return out;
 }
-// cosine between sentence embeddings, mapped from -1..1 to 0..100
+// cosine between sentence embeddings as 0..100 (below zero counts as 0). Not (c+1)/2: that put every
+// unrelated pair near 55, so High and Extreme drift could never be reached with Semantic Boost on.
 function useSimilarity(a, b){
   let dot = 0, na = 0, nb = 0;
   for (let i = 0; i < a.length; i++){ dot += a[i]*b[i]; na += a[i]*a[i]; nb += b[i]*b[i]; }
   if (!na || !nb) return 0;
-  return Math.max(0, Math.min(1, (dot / Math.sqrt(na*nb) + 1) / 2)) * 100;
+  return Math.max(0, Math.min(1, dot / Math.sqrt(na*nb))) * 100;
 }
 // final = lexical alone, or lexical x 0.4 + USE x 0.6 with Semantic Boost
 function score(target, fan, vecs){
@@ -292,11 +293,11 @@ function renderCalc(){
     <div><h3>2. Word coverage</h3><p>How much of the target&rsquo;s vocabulary appears in the fan-out. 30%.</p></div>
     <div><h3>3. Character 3-gram cosine</h3><p>Catches close word forms such as &ldquo;running&rdquo; and &ldquo;runner&rdquo;. 30%.</p></div>
     ${on
-      ? `<div><h3>4. Semantic Boost<span class="tag">On</span></h3><p>Universal Sentence Encoder cosine, scaled to 0&ndash;100. Final = word overlap &times; 0.4 + encoder &times; 0.6.</p></div>`
+      ? `<div><h3>4. Semantic Boost<span class="tag">On</span></h3><p>Universal Sentence Encoder cosine &times; 100 (below zero counts as 0). Final = word overlap &times; 0.4 + encoder &times; 0.6.</p></div>`
       : `<div><h3>4. Final score</h3><p>(Jaccard &times; 0.4 + coverage &times; 0.3 + 3-gram &times; 0.3) &times; 100. Drift = 100 &minus; similarity.</p></div>`}`;
   $("calcNote").innerHTML = on
     ? "<p><strong>Why the encoder helps:</strong> it scores meaning, not wording, so &ldquo;footwear&rdquo; sits close to &ldquo;shoes&rdquo;. It runs in this tab; your queries are not sent anywhere.</p>"
-      + "<p><strong>Reading boosted scores:</strong> the encoder&rsquo;s cosine is rescaled from &minus;1&ndash;1 to 0&ndash;100, and real queries rarely score below zero, so even an unrelated fan-out usually lands around 30&ndash;45% similarity. Compare fan-outs with each other rather than against a fixed cut-off.</p>"
+      + "<p><strong>Reading boosted scores:</strong> off-topic queries still share a little meaning in the encoder (a cosine of about 0.2), so an unrelated fan-out lands at around 85&ndash;90% drift rather than 100%. Close rewordings of the target usually stay under 35%.</p>"
     : "<p><strong>Tip:</strong> switch on Semantic Boost to catch synonyms and context that word overlap misses. Words shorter than three letters are ignored.</p>";
 }
 
