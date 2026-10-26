@@ -1,29 +1,29 @@
-<!-- wp:uagb/container {"block_id":"6b26e01b","variationSelected":true,"isBlockRootParent":true} -->
-<div class="wp-block-uagb-container uagb-block-6b26e01b alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@34a30c2f0409b606a465f30919f0f31f9d6276d4/academy-tools/dist/mlfs-chrome.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@34a30c2f0409b606a465f30919f0f31f9d6276d4/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.css">
+<!-- wp:uagb/container {"block_id":"82cddd02","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-82cddd02 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@1d4948b9d064c3ab1b5e5dfb0c5c272cab30e8f3/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@1d4948b9d064c3ab1b5e5dfb0c5c272cab30e8f3/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.css">
 <div class="mlfs-page">
   <p class="mlfs-eyebrow">MLforSEO Academy &middot; Semantic AI-powered SEO Keyword Research</p>
   <h1>Synthetic vs User-generated Queries Classifier</h1>
-  <p class="mlfs-lede">Sort a keyword list into the short queries people type and the longer, denser ones AI search generates, and see which signals drove each label.</p>
+  <p class="mlfs-lede">Sort a keyword list into the queries people type and the ones AI search generates with the four methods from the course notebooks, test them against your own labels, and find the templates and fan-out batches that give generated queries away.</p>
 
   <dl class="mlfs-glance">
-      <div><dt>What you need</dt><dd>Nothing: it runs in your browser</dd></div>
+      <div><dt>What you need</dt><dd>Nothing: it runs in your browser. The optional embeddings method downloads the all-MiniLM-L6-v2 model once (about 23 MB, plus about 4 MB for the runtime), and only when you switch it on.</dd></div>
       <div><dt>Cost</dt><dd>Free</dd></div>
-      <div><dt>Feed it</dt><dd>One query, or a CSV with one query per line or a column named keyword or query</dd></div>
-      <div><dt>You get back</dt><dd>A label, score and reasons for each query, plus a CSV export of every feature and result</dd></div>
+      <div><dt>Feed it</dt><dd>One query, a pasted list, or a CSV or TSV export with a keyword or query column (up to 20,000 rows). Add a label column such as User / Synthetic to evaluate the methods and train your own model.</dd></div>
+      <div><dt>You get back</dt><dd>A score, label and the signals behind it from each method for every query, metrics against your labels, repeated templates and fan-out batches, and a CSV export of each</dd></div>
   </dl>
 
   <h2>How to use it</h2>
   <ol class="mlfs-steps">
-      <li>Start in Feature extraction with one query to see the signals the classifiers read.</li>
-      <li>Open the Rule-based classifier and compare a short query with a long technical one.</li>
-      <li>Upload your keyword CSV and check the split between user and synthetic queries.</li>
-      <li>Adjust the rule thresholds or the ML threshold. The results on screen update as you go.</li>
-      <li>Export the results CSV and check a sample of each label by eye.</li>
+      <li>Inspect one query to see every method&#x27;s score and the signals behind it.</li>
+      <li>In Classify a list, paste your queries or upload a keyword export, or press Try a sample.</li>
+      <li>Switch on embeddings to add the embeddings method, seven embedding features for the ensemble and fan-out batches. The model downloads once.</li>
+      <li>If your file has a label column, open Evaluate &amp; train: compare each method with the word-count baseline, set thresholds and train a model on your labels.</li>
+      <li>Open Batch patterns for repeated templates and fan-out batches, export the CSVs and check a sample of each label by eye.</li>
   </ol>
 
-  <p class="mlfs-note"><b>Worth knowing.</b> Both classifiers use fixed rules and weights, not a model trained on your data, and entity detection relies on capital letters, so use the labels to sort a list rather than as proof of where a query came from.</p>
+  <p class="mlfs-note"><b>Worth knowing.</b> The scores come from hand-set heuristics and a model trained on generated queries plus labelled searches from one niche, so use them to sort a list, not as proof of where a query came from. On the course&#x27;s test set, word count alone separates most queries, so compare every method with that baseline and read a sample of each label before you act on it.</p>
 
   <div class="mlfs-toolwrap">
 <div class="mlfs-tool" data-theme="light">
@@ -31,172 +31,298 @@
   <div class="masthead">
     <div class="eyebrow">MLforSEO &middot; Semantic AI-powered SEO Keyword Research</div>
     <h1>Synthetic vs User-generated Queries Classifier</h1>
-    <p>Tell the short queries people type apart from the longer, denser ones AI search generates, with feature extraction, a rule-based score and a weighted model. Runs entirely in your browser.</p>
+    <p>Score queries with the four methods from the course notebooks: rule-based heuristics, entity and linguistic features, embeddings and an ensemble model. Check them against your own labels, train your own model, and find the templates and fan-out batches that give synthetic queries away. Everything runs in your browser.</p>
   </div>
 
-  <div class="modes" role="tablist" aria-label="Analysis mode">
-    <button type="button" role="tab" id="tab-features" data-tab="features" aria-controls="features-tab" aria-selected="true">Feature extraction</button>
-    <button type="button" role="tab" id="tab-rules" data-tab="rules" aria-controls="rules-tab" aria-selected="false" tabindex="-1">Rule-based classifier</button>
-    <button type="button" role="tab" id="tab-ml" data-tab="ml" aria-controls="ml-tab" aria-selected="false" tabindex="-1">ML classifier</button>
+  <section class="panel settings" aria-label="Settings">
+    <div class="setgrid">
+      <div class="setcol">
+        <div class="k">Methods shown</div>
+        <label class="check"><input type="checkbox" id="m-nb1" checked> Rule-based heuristics <span class="nbtag">NB1</span></label>
+        <label class="check"><input type="checkbox" id="m-nb2" checked> Entity &amp; linguistic <span class="nbtag">NB2</span></label>
+        <label class="check"><input type="checkbox" id="m-ens" checked> Ensemble model <span class="nbtag">NB4</span></label>
+      </div>
+      <div class="setcol">
+        <div class="k">Embeddings <span class="nbtag">NB3</span></div>
+        <label class="switch"><input type="checkbox" id="emb-toggle" role="switch"> Use sentence embeddings</label>
+        <div class="hint" id="emb-status">Off. Switching on downloads the all-MiniLM-L6-v2 model once (about 23 MB, plus about 4 MB for the runtime) and runs it in this tab. It adds the embeddings method, embedding features for the ensemble and fan-out batches.</div>
+        <progress id="emb-prog" max="1" value="0" hidden></progress>
+      </div>
+      <div class="setcol">
+        <div class="k">Threshold</div>
+        <label for="thr" class="flabel">Labelled synthetic at or above <output id="thr-out" for="thr">0.50</output></label>
+        <input type="range" id="thr" min="0.05" max="0.95" step="0.01" value="0.5">
+        <div class="hint" id="thr-note">One cut-off for every method. Evaluate &amp; train can set one per method.</div>
+      </div>
+    </div>
+    <details class="refs" id="refs">
+      <summary>Notebook 3 reference queries</summary>
+      <div class="hint">The embeddings method scores a query by how close it sits to these examples. The defaults are Notebook 3&rsquo;s domain-agnostic set; examples from your own niche usually work better. The ensemble always uses the defaults, because its weights were trained on them.</div>
+      <div class="row">
+        <div class="field"><label for="ref-syn">Synthetic examples <span class="hint" id="ref-syn-n"></span></label><textarea id="ref-syn" spellcheck="false"></textarea></div>
+        <div class="field"><label for="ref-hum">User examples <span class="hint" id="ref-hum-n"></span></label><textarea id="ref-hum" spellcheck="false"></textarea></div>
+      </div>
+      <div class="actions">
+        <button type="button" class="ghost small" id="ref-apply">Use these references</button>
+        <button type="button" class="ghost small" id="ref-reset">Restore the defaults</button>
+        <button type="button" class="ghost small" id="ref-labels" hidden>Draw 40 of each from my labelled rows</button>
+        <span class="hint" id="ref-status">Using Notebook 3&rsquo;s defaults.</span>
+      </div>
+    </details>
+  </section>
+
+  <div class="modes" role="tablist" aria-label="Views">
+    <button type="button" role="tab" id="tab-inspect" data-tab="inspect" aria-controls="view-inspect" aria-selected="true">Inspect a query</button>
+    <button type="button" role="tab" id="tab-list" data-tab="list" aria-controls="view-list" aria-selected="false" tabindex="-1">Classify a list<span class="count" id="count-list"></span></button>
+    <button type="button" role="tab" id="tab-eval" data-tab="eval" aria-controls="view-eval" aria-selected="false" tabindex="-1">Evaluate &amp; train</button>
+    <button type="button" role="tab" id="tab-batch" data-tab="batch" aria-controls="view-batch" aria-selected="false" tabindex="-1">Batch patterns</button>
   </div>
 
-  <!-- Feature extraction -->
-  <section id="features-tab" role="tabpanel" aria-labelledby="tab-features">
+  <!-- Inspect a query -->
+  <section id="view-inspect" role="tabpanel" aria-labelledby="tab-inspect">
     <div class="panel">
-      <h2>Feature extraction</h2>
-      <div class="sub">See the signals both classifiers read: length, stop words, entities, reading grade, question words and technical vocabulary.</div>
-      <div class="seg" data-for="features" role="group" aria-label="Input method">
-        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
-        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+      <h2>Inspect one query</h2>
+      <div class="sub">Every method&rsquo;s score for one query, and the signals behind each.</div>
+      <div class="qrow">
+        <input type="text" id="iq" aria-label="Query" placeholder="e.g. best espresso machine for small kitchens under 300 dollars in 2025" autocomplete="off" spellcheck="false">
+        <button type="button" class="accent" id="iq-run">Inspect</button>
       </div>
-      <div id="features-single-input">
-        <div class="field">
-          <label for="features-query-input">Query</label>
-          <div class="qrow">
-            <input type="text" id="features-query-input" placeholder="e.g. best running shoes" autocomplete="off">
-            <button type="button" class="accent" id="features-run">Analyse features</button>
-          </div>
-          <span class="hint" id="features-status"></span>
-        </div>
-      </div>
-      <div id="features-csv-input" hidden>
-        <div class="actions">
-          <label class="file">Choose CSV<input type="file" id="features-csv-file" accept=".csv,.txt"></label>
-          <span class="hint" id="features-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
-        </div>
-      </div>
-      <div class="keynote">Entities are found by capital letters (any word after the first) plus a short list of known names such as Google, iPhone and Python. Keyword exports in all lower case will under-count them.</div>
+      <div class="chips" id="iq-examples" aria-label="Example queries"></div>
+      <div class="hint" id="iq-status" aria-live="polite"></div>
     </div>
-    <div id="features-results" hidden></div>
+    <div id="iq-result" hidden></div>
   </section>
 
-  <!-- Rule-based classifier -->
-  <section id="rules-tab" role="tabpanel" aria-labelledby="tab-rules" hidden>
+  <!-- Classify a list -->
+  <section id="view-list" role="tabpanel" aria-labelledby="tab-list" hidden>
     <div class="panel">
-      <h2>Rule-based classifier</h2>
-      <div class="sub">Seven readable rules add points to a synthetic score out of 8.5. A query that reaches the classification threshold is labelled synthetic.</div>
-      <div class="seg" data-for="rules" role="group" aria-label="Input method">
-        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
-        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+      <h2>Your queries</h2>
+      <div class="sub">Paste one query per line or upload a CSV or TSV export (up to 20,000 rows). A label column such as User / Synthetic, human / AI or 0 / 1 is picked up and unlocks Evaluate &amp; train.</div>
+      <div class="seg" role="group" aria-label="Input">
+        <button type="button" data-in="paste" aria-pressed="true">Paste a list</button>
+        <button type="button" data-in="file" aria-pressed="false">Upload a file</button>
+        <button type="button" data-in="sample" aria-pressed="false">Try a sample</button>
       </div>
-      <div id="rules-single-input">
+      <div id="in-paste">
         <div class="field">
-          <label for="rules-query-input">Query</label>
-          <div class="qrow">
-            <input type="text" id="rules-query-input" placeholder="e.g. biomechanical running shoe support features" autocomplete="off">
-            <button type="button" class="accent" id="rules-run">Classify query</button>
-          </div>
-          <span class="hint" id="rules-status"></span>
+          <label for="paste">Queries <span class="hint">one per line; columns copied from a spreadsheet work too</span></label>
+          <textarea id="paste" spellcheck="false" placeholder="best running shoes&#10;what are the best running shoes for flat feet in 2026&#10;nike pegasus vs brooks ghost"></textarea>
         </div>
+        <div class="actions"><button type="button" class="accent" id="paste-run">Classify the list</button></div>
       </div>
-      <div id="rules-csv-input" hidden>
+      <div id="in-file" hidden>
         <div class="actions">
-          <label class="file">Choose CSV<input type="file" id="rules-csv-file" accept=".csv,.txt"></label>
-          <span class="hint" id="rules-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
+          <label class="file">Choose a CSV or TSV<input type="file" id="file" accept=".csv,.tsv,.txt,text/csv,text/plain"></label>
+          <span class="hint" id="file-info">Quoted fields, semicolons, tabs and UTF-16 exports are fine.</span>
         </div>
+        <div class="row" id="colpick" hidden>
+          <div class="field"><label for="col-q">Query column</label><select id="col-q"></select></div>
+          <div class="field"><label for="col-l">Label column</label><select id="col-l"></select></div>
+        </div>
+        <div class="hint" id="col-note"></div>
+        <div class="actions"><button type="button" class="accent" id="file-run" disabled>Classify the file</button></div>
       </div>
-      <div class="opts">
-        <h3>Classification rules</h3>
-        <div class="row">
-          <div class="field">
-            <label for="rules-length-threshold">Long query threshold (words)</label>
-            <input type="number" id="rules-length-threshold" value="5" min="3" max="10">
-          </div>
-          <div class="field">
-            <label for="rules-grade-threshold">Reading grade threshold</label>
-            <input type="number" id="rules-grade-threshold" value="10" min="5" max="15">
-          </div>
-          <div class="field">
-            <label for="rules-entity-threshold">Entity density threshold</label>
-            <input type="number" id="rules-entity-threshold" value="0.35" min="0.1" max="1" step="0.05">
-          </div>
-          <div class="field">
-            <label for="rules-class-threshold">Classification threshold (score)</label>
-            <input type="number" id="rules-class-threshold" value="4" min="2" max="8">
-          </div>
-        </div>
-        <div class="hint">Points: 1 for a long query, 1 for stop words under 20%, 2 for a reading grade above the threshold, 2 for entity density above the threshold, 1 for any technical term, 0.5 for no question word in a query of four or more words, 1 for two or more entities. Changing a value re-runs the result on screen.</div>
+      <div id="in-sample" hidden>
+        <p class="hint">Forty-three made-up queries about home espresso: some written the way people search, some the way AI search fans a question out, including one templated batch. Each carries a label, so Evaluate &amp; train works too. The labels are the author&rsquo;s judgement, not ground truth from a log.</p>
+        <div class="actions"><button type="button" class="accent" id="sample-run">Load and classify the sample</button></div>
+      </div>
+      <div id="runbar" hidden>
+        <progress id="prog" max="1" value="0"></progress>
+        <div class="actions"><span class="hint" id="run-status" aria-live="polite"></span><button type="button" class="ghost small" id="stop">Stop</button></div>
       </div>
     </div>
-    <div id="rules-results" hidden></div>
+
+    <div id="list-results" hidden>
+      <div class="tiles" id="list-tiles"></div>
+      <div class="section-head">
+        <h2>Results</h2>
+        <div class="actions">
+          <button type="button" class="ghost small" id="dl-results">Results CSV</button>
+          <button type="button" class="ghost small" id="dl-templates">Templates CSV</button>
+          <button type="button" class="ghost small" id="dl-clusters" disabled title="Find fan-out batches in Batch patterns first">Batches CSV</button>
+        </div>
+      </div>
+      <div class="filters" role="group" aria-label="Filter results">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="syn" aria-pressed="false">Synthetic</button>
+        <button type="button" data-filter="user" aria-pressed="false">User</button>
+        <button type="button" data-filter="split" aria-pressed="false">Methods disagree</button>
+        <button type="button" data-filter="wrong" aria-pressed="false" id="f-wrong" hidden>Wrong against labels</button>
+        <span class="grow"></span>
+        <label class="hint" for="sort">Sort</label>
+        <select id="sort">
+          <option value="score-desc">Most synthetic first</option>
+          <option value="score-asc">Most user-like first</option>
+          <option value="order">File order</option>
+          <option value="words">Most words first</option>
+          <option value="template">Repeated templates first</option>
+        </select>
+      </div>
+      <div class="tablewrap"><table class="data" id="list-table"></table></div>
+      <div class="actions"><button type="button" class="ghost small" id="more" hidden>Show 500 more</button><span class="hint" id="shown"></span></div>
+    </div>
   </section>
 
-  <!-- ML classifier -->
-  <section id="ml-tab" role="tabpanel" aria-labelledby="tab-ml" hidden>
-    <div class="panel">
-      <h2>ML classifier</h2>
-      <div class="sub">A weighted model scores eight normalised features together and returns the probability that a query is synthetic. A question word cuts the probability by 30%.</div>
-      <div class="seg" data-for="ml" role="group" aria-label="Input method">
-        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
-        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+  <!-- Evaluate & train -->
+  <section id="view-eval" role="tabpanel" aria-labelledby="tab-eval" hidden>
+    <div class="panel" id="eval-empty">
+      <h2>Evaluate against your labels</h2>
+      <div class="sub">Classify a list that has a label column (values such as User / Synthetic, human / AI, user_generated / synthetic or 0 / 1). This view then shows each method&rsquo;s confusion matrix, accuracy, precision, recall and F1, the threshold with the best F1, and lets you train a model on your labels.</div>
+      <div class="actions"><button type="button" class="accent" id="eval-sample">Try it with the labelled sample</button></div>
+    </div>
+    <div id="eval-body" hidden>
+      <div class="panel">
+        <h2>Labels</h2>
+        <div class="sub" id="label-summary"></div>
+        <div class="actions"><button type="button" class="ghost small" id="swap">Swap the two labels</button><span class="hint" id="eval-note"></span></div>
       </div>
-      <div id="ml-single-input">
-        <div class="field">
-          <label for="ml-query-input">Query</label>
-          <div class="qrow">
-            <input type="text" id="ml-query-input" placeholder="e.g. smartphone battery optimization techniques" autocomplete="off">
-            <button type="button" class="accent" id="ml-run">Classify with ML</button>
+      <div class="section-head"><h2>Method comparison</h2><span class="hint" id="cmp-note"></span></div>
+      <div class="tablewrap"><table class="data" id="cmp"></table></div>
+      <div class="keynote warn" id="wc-note"></div>
+
+      <div class="section-head"><h2>One method in detail</h2></div>
+      <div class="panel">
+        <div class="seg" id="ev-methods" role="group" aria-label="Method"></div>
+        <div class="evgrid">
+          <div>
+            <label for="ev-thr" class="flabel">Threshold <output id="ev-thr-out" for="ev-thr"></output></label>
+            <input type="range" id="ev-thr" min="0" max="1" step="0.005" value="0.5">
+            <div class="actions">
+              <button type="button" class="ghost small" id="ev-best">Use the best-F1 threshold</button>
+              <button type="button" class="ghost small" id="ev-apply-all">Apply every method&rsquo;s best threshold</button>
+              <button type="button" class="ghost small" id="ev-reset">Back to one threshold</button>
+            </div>
+            <div class="cm" id="ev-cm"></div>
+            <div class="mt" id="ev-metrics"></div>
           </div>
-          <span class="hint" id="ml-status"></span>
+          <div>
+            <div class="lbl">Scores by true label</div>
+            <div id="ev-hist"></div>
+            <div class="legend"><span class="is-user"><i class="sw"></i>User</span><span class="is-synth"><i class="sw"></i>Synthetic</span><span>dashed line: threshold</span></div>
+          </div>
         </div>
       </div>
-      <div id="ml-csv-input" hidden>
-        <div class="actions">
-          <label class="file">Choose CSV<input type="file" id="ml-csv-file" accept=".csv,.txt"></label>
-          <span class="hint" id="ml-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
-        </div>
-      </div>
-      <div class="opts">
-        <h3>Model configuration</h3>
+
+      <div class="section-head"><h2>Train on your labels</h2></div>
+      <div class="panel">
+        <div class="sub">Fits the ensemble&rsquo;s logistic regression to your labelled rows, with the same standardised features, then scores the held-out share it never saw. If it beats the shipped model, use it for the list and export the weights to reuse later.</div>
         <div class="row">
           <div class="field">
-            <label for="ml-feature-weight">Feature weighting</label>
-            <select id="ml-feature-weight">
-              <option value="balanced">Balanced (default weights)</option>
-              <option value="semantic">Semantic focus (entities and reading grade)</option>
-              <option value="lexical">Lexical focus (words and complexity)</option>
-            </select>
+            <label for="tr-share">Held-out share <output id="tr-share-out" for="tr-share">20%</output></label>
+            <input type="range" id="tr-share" min="0.1" max="0.5" step="0.05" value="0.2">
           </div>
           <div class="field">
-            <label for="ml-sensitivity">Classification threshold <output id="ml-sensitivity-value" for="ml-sensitivity">0.50 &middot; balanced</output></label>
-            <input type="range" id="ml-sensitivity" min="0.3" max="0.7" step="0.05" value="0.5">
-            <span class="hint">A query is labelled synthetic when its probability reaches this value. Lower it to flag more queries as synthetic, raise it to flag fewer.</span>
+            <label for="tr-c">Regularisation (C)</label>
+            <select id="tr-c"><option value="0.1">0.1 (strong)</option><option value="1" selected>1 (default)</option><option value="10">10 (weak)</option></select>
+          </div>
+          <div class="field">
+            <span class="flabel">Options</span>
+            <label class="check"><input type="checkbox" id="tr-bal" checked> Balance the two classes</label>
+            <label class="check"><input type="checkbox" id="tr-group" checked> Keep each slot-mask template on one side</label>
           </div>
         </div>
+        <div class="actions">
+          <button type="button" class="accent" id="tr-run">Train a model</button>
+          <button type="button" class="ghost small" id="tr-use" hidden aria-pressed="false">Use my model for the list</button>
+          <button type="button" class="ghost small" id="tr-export" hidden>Export weights JSON</button>
+          <label class="file">Import weights JSON<input type="file" id="tr-import" accept=".json,application/json"></label>
+          <span class="hint" id="tr-status" aria-live="polite"></span>
+        </div>
+        <div id="tr-result" hidden></div>
       </div>
-      <div class="keynote warn">The weights are fixed in the tool, not learned from your data. Use it to sort and sample a keyword list, then check a handful of each label by eye.</div>
     </div>
-    <div id="ml-results" hidden></div>
   </section>
+
+  <!-- Batch patterns -->
+  <section id="view-batch" role="tabpanel" aria-labelledby="tab-batch" hidden>
+    <div class="panel" id="batch-empty">
+      <h2>Patterns across a list</h2>
+      <div class="sub">Classify a list first. This view then shows the slot-mask templates that repeat, the fan-out batches in the embeddings, the part-of-speech entropy split and each method&rsquo;s score distribution.</div>
+    </div>
+    <div id="batch-body" hidden>
+      <div class="section-head">
+        <h2>Repeated templates <span class="nbtag">NB1</span></h2>
+        <div class="actions">
+          <label class="hint" for="tpl-min">Repeats at least</label>
+          <select id="tpl-min"><option value="2">2 times</option><option value="3" selected>3 times</option><option value="5">5 times</option></select>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="sub">Numbers, prices and years are masked, so queries built from the same skeleton collapse into one template. A skeleton that repeats is the fingerprint of generated fan-out: one parent, many children with the slots swapped.</div>
+        <div id="tpl-out"></div>
+      </div>
+
+      <div class="section-head"><h2>Fan-out batches <span class="nbtag">NB3</span></h2></div>
+      <div class="panel">
+        <div class="sub">Clusters the embeddings with HDBSCAN, then ranks each cluster by how much tighter it is than random groups of the same size (cohesion) times how differently its members are worded (facet spread). Fan-out children share a parent intent but each covers a different facet; near-duplicate searches share the words too. Treat the ranking as a shortlist and read the members.</div>
+        <div class="row">
+          <div class="field">
+            <label for="cl-min">Smallest batch</label>
+            <input type="number" id="cl-min" min="2" max="500" value="5">
+            <span class="hint">Notebook 3 uses a tenth of the list, which suits one fan-out export. For a mixed keyword list, 4 to 8 finds more.</span>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="accent" id="cl-run">Find fan-out batches</button>
+          <button type="button" class="ghost small" id="cl-stop" hidden>Stop</button>
+          <span class="hint" id="cl-status" aria-live="polite"></span>
+        </div>
+        <progress id="cl-prog" max="1" value="0" hidden></progress>
+        <div id="cl-out"></div>
+      </div>
+
+      <div class="section-head"><h2>Part-of-speech entropy <span class="nbtag">NB2</span></h2></div>
+      <div class="panel">
+        <div class="sub">How evenly a query spreads across parts of speech. Searches people type lean on nouns, so they sit low; generated queries carry determiners, verbs and prepositions, so they sit higher. On a mixed list the two humps and the valley between them show up here.</div>
+        <div id="pos-out"></div>
+      </div>
+
+      <div class="section-head"><h2>Score distributions</h2><span class="hint" id="dist-note"></span></div>
+      <div class="charts" id="dists"></div>
+    </div>
+  </section>
+
+  <div class="section-head"><h2>How the four methods work</h2></div>
+  <div class="cards">
+    <div class="card">
+      <span class="nbtag">Notebook 1</span>
+      <h3>Rule-based heuristics</h3>
+      <p>Five weighted signals: length (20%), grammatical structure (20%), patent query-type patterns (25%), the absence of human messiness such as typos and fragments (20%) and formal vocabulary (15%). No training data, fully readable, and quick to fool.</p>
+    </div>
+    <div class="card">
+      <span class="nbtag">Notebook 2</span>
+      <h3>Entity &amp; linguistic features</h3>
+      <p>Entity density and types (20%), part-of-speech balance (25%), readability and word length (25%) and fan-out n-grams (30%). The notebook uses spaCy and textstat; here compromise tags the words and the readability formula is rebuilt, so scores differ a little.</p>
+    </div>
+    <div class="card">
+      <span class="nbtag">Notebook 3</span>
+      <h3>Embeddings</h3>
+      <p>all-MiniLM-L6-v2 places each query in meaning space and compares it with synthetic and user reference queries: distance to each group&rsquo;s centre (25%), the five nearest of each (35%), the single nearest (25%) and closeness to the reference corpus&rsquo;s centre (15%).</p>
+    </div>
+    <div class="card">
+      <span class="nbtag">Notebook 4</span>
+      <h3>Ensemble model</h3>
+      <p>Notebook 4&rsquo;s 45 features in a logistic regression instead of LightGBM, so every prediction splits exactly into one push per feature. Trained offline on generated queries from the notebook&rsquo;s method plus a share of real labelled searches; 38 features without embeddings, 45 with.</p>
+    </div>
+  </div>
 
   <div class="section-head"><h2>What to do with the split</h2></div>
   <div class="cards">
-    <div class="card">
-      <h3>User queries are demand</h3>
-      <p>They are what people actually type. Treat them as direct traffic targets and answer them plainly.</p>
-    </div>
-    <div class="card">
-      <h3>Synthetic queries are expansion</h3>
-      <p>They show how AI search breaks one question into many. Covering them makes your page a source an answer can cite.</p>
-    </div>
-    <div class="card">
-      <h3>Each needs different content</h3>
-      <p>Short, direct pages suit user queries. Synthetic ones reward depth, definitions and clearly named entities.</p>
-    </div>
-    <div class="card">
-      <h3>Compare, then prioritise</h3>
-      <p>Run your keyword set and a competitor's through the same settings to see which side each of you covers.</p>
-    </div>
+    <div class="card"><h3>User queries are demand</h3><p>They are what people actually type. Treat them as direct traffic targets and answer them plainly.</p></div>
+    <div class="card"><h3>Synthetic queries are expansion</h3><p>They show how AI search breaks one question into many. Covering them makes your page a source an answer can cite.</p></div>
+    <div class="card"><h3>Each needs different content</h3><p>Short, direct pages suit user queries. Synthetic ones reward depth, definitions and clearly named entities.</p></div>
+    <div class="card"><h3>Check before you act</h3><p>Every score here is a probability-like ranking, not proof of origin. Sort by it, then read a sample of each side by eye.</p></div>
   </div>
 
   <footer>
-    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>Runs in your browser. Your queries never leave this tab; the only downloads are the libraries and, if you switch embeddings on, the model files.</span>
     <span>MLforSEO Academy</span>
   </footer>
 </div>
 </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@34a30c2f0409b606a465f30919f0f31f9d6276d4/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/compromise@14.19.0/builds/compromise.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@1d4948b9d064c3ab1b5e5dfb0c5c272cab30e8f3/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.js" defer></script>
 <!-- /wp:html --></div></div>
 <!-- /wp:uagb/container -->
