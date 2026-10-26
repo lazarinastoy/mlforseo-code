@@ -1,0 +1,149 @@
+<!-- wp:uagb/container {"block_id":"f299ed5f","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-f299ed5f alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-extractor-salience-profiler.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Entity Extractor &amp; Salience Profiler</h1>
+  <p class="lede">Pull entities out of your content with Google&#x27;s Natural Language API, then roll them up into one profile per URL — so you can see which pages are about something other than what you intended.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>A Google Cloud API key with the Cloud Natural Language API enabled</dd></div>
+      <div><dt>Cost</dt><dd>Free for most audits — 5,000 units a month, then $1 per 1,000</dd></div>
+      <div><dt>Feed it</dt><dd>Paste one page, or upload a crawl export with a URL column and a content column</dd></div>
+      <div><dt>You get back</dt><dd>entity_mentions.csv and page_entity_profiles.csv</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Paste your API key. It stays in this browser tab and is sent only to Google.</li>
+      <li>Start with a single page so you can see the shape of the data before spending anything.</li>
+      <li>Set the intended entity — what the page is supposed to be about.</li>
+      <li>Read the table: the top row is what a machine thinks the page is about.</li>
+      <li>Then upload your whole crawl and export both CSVs.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Use API version 1. Version 2 does not return a salience score at all, and every prominence measure here depends on it.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Extractor &amp; Salience Profiler</h1>
+    <p>Extract entities from your content with Google&rsquo;s Natural Language API, then roll them up into one profile per URL &mdash; so you can see which pages are about something other than what you intended.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your API key</h2>
+    <div class="sub">Held in this tab only. Never sent anywhere except Google.</div>
+    <div class="field">
+      <label for="key">Google Cloud API key <span class="note">&mdash; with the Cloud Natural Language API enabled</span></label>
+      <input type="password" id="key" placeholder="AIza…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="version">API version</label>
+        <select id="version">
+          <option value="v1" selected>v1 &mdash; returns salience (recommended)</option>
+          <option value="v2">v2 &mdash; newer model, no salience</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="floor">Salience floor for &ldquo;dominant&rdquo;</label>
+        <input type="text" id="floor" value="0.05">
+      </div>
+    </div>
+    <div class="keynote warn" id="vnote" hidden>
+      <strong>v2 has no salience field.</strong> Prominence scoring in this course depends on it,
+      so v2 falls back to ranking by mention count. Use v1 unless you have a reason not to.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your content</h2>
+    <div class="sub">Paste one page, or upload a crawl export. Browsers cannot fetch other sites directly, so content comes from your crawler &mdash; the same export Lesson 2.1 produces.</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-mode="paste">Paste text</button>
+      <button role="tab" aria-selected="false" data-mode="csv">Upload crawl CSV</button>
+    </div>
+
+    <div id="pane-paste">
+      <div class="row">
+        <div class="field">
+          <label for="purl">URL or label <span class="note">(optional)</span></label>
+          <input type="text" id="purl" placeholder="/blog/my-page">
+        </div>
+        <div class="field">
+          <label for="pintent">Intended entity <span class="note">&mdash; what should this page be about?</span></label>
+          <input type="text" id="pintent" placeholder="e.g. entity extraction">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="ptitle">Page title <span class="note">(optional)</span></label>
+          <input type="text" id="ptitle" placeholder="Entity Extraction with the Google NLP API">
+        </div>
+        <div class="field">
+          <label for="pmeta">Meta description <span class="note">(optional)</span></label>
+          <input type="text" id="pmeta" placeholder="How to extract entities from page content…">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ptext">Page text</label>
+        <textarea id="ptext" placeholder="Paste the main body content — not the nav or footer."></textarea>
+      </div>
+    </div>
+
+    <div id="pane-csv" hidden>
+      <div class="actions">
+        <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv"></label>
+        <span class="hint" id="csvinfo">Needs an address/URL column and a content column. <code>intended_entity</code> is used if present.</span>
+      </div>
+    </div>
+
+    <div class="estimate" id="est" hidden>
+      <div>Documents<b id="e-docs">0</b></div>
+      <div>Billable units<b id="e-units">0</b></div>
+      <div>Free allowance left this month<b id="e-free">5,000</b></div>
+      <div>Estimated cost<b id="e-cost">$0.00</b></div>
+    </div>
+
+    <div class="actions" style="margin-top:14px">
+      <button class="accent" id="run" disabled>Extract entities</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <span class="hint" id="status">Add a key and some content to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+
+    <div class="section-head">
+      <h2>Page profiles</h2>
+      <div class="actions">
+        <button class="ghost" id="dl-profiles">Export profiles CSV</button>
+        <button class="ghost" id="dl-entities">Export entities CSV</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="profiles"></table></div>
+
+    <div class="section-head"><h2>Every entity found</h2>
+      <span class="hint">Click a column to sort</span></div>
+    <div class="tablewrap"><table id="entities"></table></div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and content go only to Google.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-extractor-salience-profiler.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

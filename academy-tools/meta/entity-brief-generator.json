@@ -1,0 +1,19 @@
+{
+ "slug": "entity-brief-generator",
+ "title": "Entity Brief Generator",
+ "short": "Turn audit findings into a brief a writer can act on: canonical name, entities to add, entities to demote, and the placements that matter.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 5, Lesson 5.3",
+ "needs": "An Anthropic API key",
+ "cost": "Pennies per brief",
+ "inputs": "One page's audit row, plus the current page content",
+ "outputs": "A structured brief you can print or export",
+ "how": [
+  "Paste your Anthropic key and fill in the audit row for one page.",
+  "Add the missing entities from your gap matrix and the canonical name.",
+  "Paste the current content — the brief is an edit instruction, not a commission.",
+  "Read the brief, and check every factual claim it moved or kept.",
+  "Export it. It goes to a writer, not to a publish button."
+ ],
+ "note": "Never auto-publish a rewrite of a page that carries factual claims or currently ranks well."
+}

@@ -1,0 +1,202 @@
+<!-- wp:uagb/container {"block_id":"1194a80f","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-1194a80f alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; Semantic AI-powered SEO Keyword Research</p>
+  <h1>Synthetic vs User-generated Queries Classifier</h1>
+  <p class="lede">Sort a keyword list into the short queries people type and the longer, denser ones AI search generates, and see which signals drove each label.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Nothing: it runs in your browser</dd></div>
+      <div><dt>Cost</dt><dd>Free</dd></div>
+      <div><dt>Feed it</dt><dd>One query, or a CSV with one query per line or a column named keyword or query</dd></div>
+      <div><dt>You get back</dt><dd>A label, score and reasons for each query, plus a CSV export of every feature and result</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Start in Feature extraction with one query to see the signals the classifiers read.</li>
+      <li>Open the Rule-based classifier and compare a short query with a long technical one.</li>
+      <li>Upload your keyword CSV and check the split between user and synthetic queries.</li>
+      <li>Adjust the rule thresholds or the ML threshold. The results on screen update as you go.</li>
+      <li>Export the results CSV and check a sample of each label by eye.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Both classifiers use fixed rules and weights, not a model trained on your data, and entity detection relies on capital letters, so use the labels to sort a list rather than as proof of where a query came from.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; Semantic AI-powered SEO Keyword Research</div>
+    <h1>Synthetic vs User-generated Queries Classifier</h1>
+    <p>Tell the short queries people type apart from the longer, denser ones AI search generates, with feature extraction, a rule-based score and a weighted model. Runs entirely in your browser.</p>
+  </div>
+
+  <div class="modes" role="tablist" aria-label="Analysis mode">
+    <button type="button" role="tab" id="tab-features" data-tab="features" aria-controls="features-tab" aria-selected="true">Feature extraction</button>
+    <button type="button" role="tab" id="tab-rules" data-tab="rules" aria-controls="rules-tab" aria-selected="false" tabindex="-1">Rule-based classifier</button>
+    <button type="button" role="tab" id="tab-ml" data-tab="ml" aria-controls="ml-tab" aria-selected="false" tabindex="-1">ML classifier</button>
+  </div>
+
+  <!-- Feature extraction -->
+  <section id="features-tab" role="tabpanel" aria-labelledby="tab-features">
+    <div class="panel">
+      <h2>Feature extraction</h2>
+      <div class="sub">See the signals both classifiers read: length, stop words, entities, reading grade, question words and technical vocabulary.</div>
+      <div class="seg" data-for="features" role="group" aria-label="Input method">
+        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
+        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+      </div>
+      <div id="features-single-input">
+        <div class="field">
+          <label for="features-query-input">Query</label>
+          <div class="qrow">
+            <input type="text" id="features-query-input" placeholder="e.g. best running shoes" autocomplete="off">
+            <button type="button" class="accent" id="features-run">Analyse features</button>
+          </div>
+          <span class="hint" id="features-status"></span>
+        </div>
+      </div>
+      <div id="features-csv-input" hidden>
+        <div class="actions">
+          <label class="file">Choose CSV<input type="file" id="features-csv-file" accept=".csv,.txt"></label>
+          <span class="hint" id="features-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
+        </div>
+      </div>
+      <div class="keynote">Entities are found by capital letters (any word after the first) plus a short list of known names such as Google, iPhone and Python. Keyword exports in all lower case will under-count them.</div>
+    </div>
+    <div id="features-results" hidden></div>
+  </section>
+
+  <!-- Rule-based classifier -->
+  <section id="rules-tab" role="tabpanel" aria-labelledby="tab-rules" hidden>
+    <div class="panel">
+      <h2>Rule-based classifier</h2>
+      <div class="sub">Seven readable rules add points to a synthetic score out of 8.5. A query that reaches the classification threshold is labelled synthetic.</div>
+      <div class="seg" data-for="rules" role="group" aria-label="Input method">
+        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
+        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+      </div>
+      <div id="rules-single-input">
+        <div class="field">
+          <label for="rules-query-input">Query</label>
+          <div class="qrow">
+            <input type="text" id="rules-query-input" placeholder="e.g. biomechanical running shoe support features" autocomplete="off">
+            <button type="button" class="accent" id="rules-run">Classify query</button>
+          </div>
+          <span class="hint" id="rules-status"></span>
+        </div>
+      </div>
+      <div id="rules-csv-input" hidden>
+        <div class="actions">
+          <label class="file">Choose CSV<input type="file" id="rules-csv-file" accept=".csv,.txt"></label>
+          <span class="hint" id="rules-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
+        </div>
+      </div>
+      <div class="opts">
+        <h3>Classification rules</h3>
+        <div class="row">
+          <div class="field">
+            <label for="rules-length-threshold">Long query threshold (words)</label>
+            <input type="number" id="rules-length-threshold" value="5" min="3" max="10">
+          </div>
+          <div class="field">
+            <label for="rules-grade-threshold">Reading grade threshold</label>
+            <input type="number" id="rules-grade-threshold" value="10" min="5" max="15">
+          </div>
+          <div class="field">
+            <label for="rules-entity-threshold">Entity density threshold</label>
+            <input type="number" id="rules-entity-threshold" value="0.35" min="0.1" max="1" step="0.05">
+          </div>
+          <div class="field">
+            <label for="rules-class-threshold">Classification threshold (score)</label>
+            <input type="number" id="rules-class-threshold" value="4" min="2" max="8">
+          </div>
+        </div>
+        <div class="hint">Points: 1 for a long query, 1 for stop words under 20%, 2 for a reading grade above the threshold, 2 for entity density above the threshold, 1 for any technical term, 0.5 for no question word in a query of four or more words, 1 for two or more entities. Changing a value re-runs the result on screen.</div>
+      </div>
+    </div>
+    <div id="rules-results" hidden></div>
+  </section>
+
+  <!-- ML classifier -->
+  <section id="ml-tab" role="tabpanel" aria-labelledby="tab-ml" hidden>
+    <div class="panel">
+      <h2>ML classifier</h2>
+      <div class="sub">A weighted model scores eight normalised features together and returns the probability that a query is synthetic. A question word cuts the probability by 30%.</div>
+      <div class="seg" data-for="ml" role="group" aria-label="Input method">
+        <button type="button" data-mode="single" aria-pressed="true">Single query</button>
+        <button type="button" data-mode="csv" aria-pressed="false">CSV upload</button>
+      </div>
+      <div id="ml-single-input">
+        <div class="field">
+          <label for="ml-query-input">Query</label>
+          <div class="qrow">
+            <input type="text" id="ml-query-input" placeholder="e.g. smartphone battery optimization techniques" autocomplete="off">
+            <button type="button" class="accent" id="ml-run">Classify with ML</button>
+          </div>
+          <span class="hint" id="ml-status"></span>
+        </div>
+      </div>
+      <div id="ml-csv-input" hidden>
+        <div class="actions">
+          <label class="file">Choose CSV<input type="file" id="ml-csv-file" accept=".csv,.txt"></label>
+          <span class="hint" id="ml-csv-info">One query per line, or a column named <code>keyword</code> or <code>query</code>.</span>
+        </div>
+      </div>
+      <div class="opts">
+        <h3>Model configuration</h3>
+        <div class="row">
+          <div class="field">
+            <label for="ml-feature-weight">Feature weighting</label>
+            <select id="ml-feature-weight">
+              <option value="balanced">Balanced (default weights)</option>
+              <option value="semantic">Semantic focus (entities and reading grade)</option>
+              <option value="lexical">Lexical focus (words and complexity)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="ml-sensitivity">Classification threshold <output id="ml-sensitivity-value" for="ml-sensitivity">0.50 &middot; balanced</output></label>
+            <input type="range" id="ml-sensitivity" min="0.3" max="0.7" step="0.05" value="0.5">
+            <span class="hint">A query is labelled synthetic when its probability reaches this value. Lower it to flag more queries as synthetic, raise it to flag fewer.</span>
+          </div>
+        </div>
+      </div>
+      <div class="keynote warn">The weights are fixed in the tool, not learned from your data. Use it to sort and sample a keyword list, then check a handful of each label by eye.</div>
+    </div>
+    <div id="ml-results" hidden></div>
+  </section>
+
+  <div class="section-head"><h2>What to do with the split</h2></div>
+  <div class="cards">
+    <div class="card">
+      <h3>User queries are demand</h3>
+      <p>They are what people actually type. Treat them as direct traffic targets and answer them plainly.</p>
+    </div>
+    <div class="card">
+      <h3>Synthetic queries are expansion</h3>
+      <p>They show how AI search breaks one question into many. Covering them makes your page a source an answer can cite.</p>
+    </div>
+    <div class="card">
+      <h3>Each needs different content</h3>
+      <p>Short, direct pages suit user queries. Synthetic ones reward depth, definitions and clearly named entities.</p>
+    </div>
+    <div class="card">
+      <h3>Compare, then prioritise</h3>
+      <p>Run your keyword set and a competitor's through the same settings to see which side each of you covers.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/synthetic-vs-user-generated-queries-classifier.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

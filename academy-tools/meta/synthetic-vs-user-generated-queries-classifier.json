@@ -1,0 +1,19 @@
+{
+  "slug": "synthetic-vs-user-generated-queries-classifier",
+  "title": "Synthetic vs User-generated Queries Classifier",
+  "short": "Sort a keyword list into the short queries people type and the longer, denser ones AI search generates, and see which signals drove each label.",
+  "course": "semantic-ml-enabled-keyword-research",
+  "lesson": "",
+  "needs": "Nothing: it runs in your browser",
+  "cost": "Free",
+  "inputs": "One query, or a CSV with one query per line or a column named keyword or query",
+  "outputs": "A label, score and reasons for each query, plus a CSV export of every feature and result",
+  "how": [
+    "Start in Feature extraction with one query to see the signals the classifiers read.",
+    "Open the Rule-based classifier and compare a short query with a long technical one.",
+    "Upload your keyword CSV and check the split between user and synthetic queries.",
+    "Adjust the rule thresholds or the ML threshold. The results on screen update as you go.",
+    "Export the results CSV and check a sample of each label by eye."
+  ],
+  "note": "Both classifiers use fixed rules and weights, not a model trained on your data, and entity detection relies on capital letters, so use the labels to sort a list rather than as proof of where a query came from."
+}

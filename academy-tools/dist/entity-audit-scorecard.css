@@ -1,0 +1,148 @@
+.mlfs-tool{
+  --ground:#FAF8FD; --panel:#FFFFFF; --sunk:#F3EFFA;
+  --ink:#1A0B32; --ink-2:#251046; --body:#3A2E4D; --muted:#6B5F80;
+  --line:#E4DDF0; --line-strong:#CFC3E4;
+  --accent:#8448ef; --accent-ink:#FFFFFF; --signal:#ffde59;
+  --good:#2E8B6F; --warn:#D98324; --crit:#C4384F;
+  --block-off:#E4DDF0;
+  --shadow:0 1px 2px rgba(26,11,50,.06), 0 8px 24px -12px rgba(26,11,50,.18);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){.mlfs-tool:not([data-theme="light"]){
+    --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+    --ink:#F6F2FE; --ink-2:#E6DCF8; --body:#CDC1E2; --muted:#9587B0;
+    --line:#33224F; --line-strong:#462F6B;
+    --accent:#A277F5; --accent-ink:#15071F; --signal:#ffde59;
+    --good:#4FB894; --warn:#E9A24A;
+    --crit:#E86A80; --block-off:#33224F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }}
+.mlfs-tool :root[data-theme="dark"]{
+  --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+  --ink:#F6F2FE; --ink-2:#E6DCF8; --body:#CDC1E2; --muted:#9587B0;
+  --line:#33224F; --line-strong:#462F6B;
+  --accent:#A277F5; --accent-ink:#15071F; --signal:#ffde59;
+  --good:#4FB894; --warn:#E9A24A; --crit:#E86A80; --block-off:#33224F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+.mlfs-tool *{box-sizing:border-box}
+.mlfs-tool{
+  margin:0; background:var(--ground); color:var(--body);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.mlfs-tool h1, .mlfs-tool h2, .mlfs-tool h3, .mlfs-tool .display{font-family:"Bricolage Grotesque",Inter,system-ui,sans-serif;
+  color:var(--ink); text-wrap:balance; margin:0}
+.mlfs-tool .wrap{max-width:1120px; margin:0 auto; padding:32px 24px 96px}
+.mlfs-tool .eyebrow{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); font-weight:600}
+.mlfs-tool .num{font-variant-numeric:tabular-nums}
+.mlfs-tool .mono{font-family:var(--mono); font-size:12.5px}
+.mlfs-tool /* ---------- masthead ---------- */
+.masthead{display:flex; justify-content:space-between; align-items:flex-end;
+  gap:24px; flex-wrap:wrap; padding-bottom:18px; border-bottom:2px solid var(--ink);
+  margin-bottom:28px}
+.mlfs-tool .masthead h1{font-size:clamp(26px,4vw,38px); font-weight:800; letter-spacing:-.02em}
+.mlfs-tool .masthead p{margin:6px 0 0; color:var(--muted); max-width:56ch; font-size:14px}
+.mlfs-tool .brandmark{font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
+  font-size:12px; letter-spacing:.04em; color:var(--muted)}
+.mlfs-tool /* ---------- controls ---------- */
+.controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:28px}
+.mlfs-tool button{font:inherit; font-weight:600; font-size:13.5px; cursor:pointer;
+  border:1px solid var(--ink); background:var(--ink); color:var(--ground);
+  padding:9px 15px; border-radius:3px; transition:transform .08s ease, opacity .15s}
+.mlfs-tool button.ghost{background:transparent; color:var(--ink)}
+.mlfs-tool button.accent{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.mlfs-tool button:hover{opacity:.88}
+.mlfs-tool button:active{transform:translateY(1px)}
+.mlfs-tool button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.mlfs-tool label.file{display:inline-flex; align-items:center; gap:8px; font-size:13.5px;
+  font-weight:600; color:var(--ink); border:1px dashed var(--line-strong);
+  padding:8px 14px; border-radius:3px; cursor:pointer}
+.mlfs-tool label.file:hover{border-color:var(--accent); color:var(--accent)}
+.mlfs-tool input[type=file]{position:absolute; width:1px; height:1px; opacity:0}
+.mlfs-tool .hint{color:var(--muted); font-size:12.5px}
+.mlfs-tool /* ---------- verdict ---------- */
+.verdict{background:var(--ink); color:#F6F2FE; border-radius:6px; padding:28px;
+  display:grid; grid-template-columns:minmax(0,1fr) auto; gap:28px; align-items:center;
+  margin-bottom:14px}
+.mlfs-tool .verdict h2{color:#FFF; font-size:clamp(19px,2.6vw,26px); font-weight:600; line-height:1.3}
+.mlfs-tool .verdict .eyebrow{color:#B9A6DC}
+.mlfs-tool .verdict .sub{color:#C6B6E4; font-size:13.5px; margin-top:10px; max-width:52ch}
+.mlfs-tool .bigscore{text-align:right; white-space:nowrap}
+.mlfs-tool .bigscore .n{font-family:"Bricolage Grotesque",sans-serif; font-weight:800;
+  font-size:clamp(52px,9vw,84px); line-height:.86; color:var(--signal);
+  font-variant-numeric:tabular-nums}
+.mlfs-tool .bigscore .d{font-size:13px; color:#B9A6DC; margin-top:8px}
+.mlfs-tool /* the 15-block gauge: 3 blocks x 5 dimensions */
+.gauge{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 30px}
+.mlfs-tool .gauge .dim{flex:1 1 150px; min-width:130px}
+.mlfs-tool .gauge .blocks{display:flex; gap:3px; margin-bottom:7px}
+.mlfs-tool .gauge .b{height:9px; flex:1; background:var(--block-off); border-radius:1px}
+.mlfs-tool .gauge .b.on{background:var(--lvl)}
+.mlfs-tool .gauge .lbl{font-size:11.5px; font-weight:600; color:var(--ink); display:flex;
+  justify-content:space-between; gap:8px}
+.mlfs-tool .gauge .lbl span:last-child{color:var(--muted); font-variant-numeric:tabular-nums}
+.mlfs-tool /* ---------- dimension cards ---------- */
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:14px}
+.mlfs-tool .card{background:var(--panel); border:1px solid var(--line); border-radius:5px;
+  padding:20px; box-shadow:var(--shadow); position:relative; overflow:hidden}
+.mlfs-tool .card::before{content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--lvl)}
+.mlfs-tool .card h3{font-size:17px; font-weight:600; letter-spacing:-.01em}
+.mlfs-tool .card .head{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.mlfs-tool .pill{font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+  padding:3px 8px; border-radius:2px; color:#fff; background:var(--lvl); white-space:nowrap}
+.mlfs-tool .card .why{margin:10px 0 14px; font-size:13.5px; color:var(--body)}
+.mlfs-tool .metrics{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.mlfs-tool .metrics li{display:flex; justify-content:space-between; gap:14px; padding:7px 0;
+  border-bottom:1px solid var(--line); font-size:13px}
+.mlfs-tool .metrics li:last-child{border-bottom:0}
+.mlfs-tool .metrics .k{color:var(--muted)}
+.mlfs-tool .metrics .v{font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums;
+  text-align:right; white-space:nowrap}
+.mlfs-tool .metrics .v.bad{color:var(--crit)}
+.mlfs-tool .metrics .v.mid{color:var(--warn)}
+.mlfs-tool .metrics .v.ok{color:var(--good)}
+.mlfs-tool /* ---------- fixes ---------- */
+.section-head{display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; margin:40px 0 14px; flex-wrap:wrap}
+.mlfs-tool .section-head h2{font-size:22px; font-weight:600; letter-spacing:-.01em}
+.mlfs-tool .fixes{list-style:none; margin:0; padding:0; counter-reset:fix}
+.mlfs-tool .fix{background:var(--panel); border:1px solid var(--line); border-radius:5px;
+  padding:16px 18px; margin-bottom:9px; display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto; gap:16px; align-items:start}
+.mlfs-tool .fix .rank{counter-increment:fix; font-family:"Bricolage Grotesque",sans-serif;
+  font-weight:800; font-size:19px; color:var(--accent); font-variant-numeric:tabular-nums}
+.mlfs-tool .fix .rank::before{content:counter(fix)}
+.mlfs-tool .fix h4{margin:0 0 4px; font-size:15px; font-weight:600; color:var(--ink);
+  font-family:Inter,sans-serif}
+.mlfs-tool .fix p{margin:0; font-size:13.5px; color:var(--body)}
+.mlfs-tool .fix .tags{margin-top:8px; display:flex; gap:6px; flex-wrap:wrap}
+.mlfs-tool .tag{font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--line-strong); padding:2px 7px; border-radius:2px}
+.mlfs-tool .fix .effort{text-align:right; font-size:12px; color:var(--muted); white-space:nowrap}
+.mlfs-tool .fix .effort b{display:block; font-size:15px; color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.mlfs-tool /* ---------- diff ---------- */
+.diff{background:var(--sunk); border:1px solid var(--line); border-radius:5px;
+  padding:18px; margin-top:14px}
+.mlfs-tool .diffrow{display:flex; justify-content:space-between; gap:16px; padding:6px 0;
+  border-bottom:1px solid var(--line); font-size:13.5px}
+.mlfs-tool .diffrow:last-child{border-bottom:0}
+.mlfs-tool .delta{font-weight:700; font-variant-numeric:tabular-nums}
+.mlfs-tool .delta.up{color:var(--good)}
+.mlfs-tool .delta.down{color:var(--crit)}
+.mlfs-tool .delta.same{color:var(--muted)}
+.mlfs-tool footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:12.5px; display:flex; justify-content:space-between;
+  gap:16px; flex-wrap:wrap}
+.mlfs-tool a{color:var(--accent)}
+@media (max-width:640px){.mlfs-tool .verdict{grid-template-columns:1fr; gap:18px}
+.mlfs-tool .bigscore{text-align:left}
+.mlfs-tool .fix{grid-template-columns:auto minmax(0,1fr); }
+.mlfs-tool .fix .effort{grid-column:2; text-align:left}}
+@media print{.mlfs-tool{background:#fff}
+.mlfs-tool .controls, .mlfs-tool footer{display:none}
+.mlfs-tool .card, .mlfs-tool .fix{break-inside:avoid; box-shadow:none}
+.mlfs-tool .verdict{background:#1A0B32 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}}
+@media (prefers-reduced-motion:reduce){.mlfs-tool *{transition:none !important}}

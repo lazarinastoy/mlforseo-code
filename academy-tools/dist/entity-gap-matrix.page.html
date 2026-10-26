@@ -1,0 +1,84 @@
+<!-- wp:uagb/container {"block_id":"69d12859","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-69d12859 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-gap-matrix.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Entity Gap Matrix</h1>
+  <p class="lede">Compare your entity coverage against up to three competitors. Names are normalised before anything is compared — the step most gap analyses skip, and the reason most of them are wrong.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Nothing — no API calls at all</dd></div>
+      <div><dt>Cost</dt><dd>Free</dd></div>
+      <div><dt>Feed it</dt><dd>One entity export for you, and one for each competitor</dd></div>
+      <div><dt>You get back</dt><dd>A shared / missing / unique / thin matrix, exportable as CSV</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Load your own corpus into the first slot.</li>
+      <li>Add up to three competitors. Pick them for comparability, not for ranking.</li>
+      <li>Press Compare, then read the four verdicts.</li>
+      <li>Filter to missing, and require two or more competitors before you act.</li>
+      <li>Export, and use it to score Coverage.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Filter chrome and generic nouns out of every corpus first, not just your own — otherwise the top “gap” will be a word like “content”.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Gap Matrix</h1>
+    <p>Compare your entity coverage against up to three competitors. Names are normalised before anything is compared &mdash; the step most gap analyses skip, and the reason most of them are wrong.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Load the corpora</h2>
+    <div class="sub">Upload the <code>entity_mentions.csv</code> the Entity Extractor produces &mdash; one for you, up to three for competitors. Everything is computed in this tab; no API calls, no cost.</div>
+    <div class="slots" id="slots"></div>
+    <div class="keynote">
+      <strong>On competitor data:</strong> run the extractor over their public content and keep only
+      the derived entity export. Never redistribute a competitor&rsquo;s scraped page content &mdash;
+      the entity list is transformed data, the content is theirs.
+    </div>
+    <div class="actions">
+      <button class="accent" id="run" disabled>Build the matrix</button>
+      <span class="hint" id="status">Load your own corpus and at least one competitor.</span>
+    </div>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div class="keynote" id="normnote"></div>
+
+    <div class="section-head">
+      <h2>The matrix</h2>
+      <div class="actions" style="margin:0">
+        <button class="ghost" id="dl">Export CSV</button>
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="legend" style="margin-bottom:10px">
+      <span><span class="swatch" style="background:rgba(var(--heat),.85)"></span>Higher salience</span>
+      <span><span class="swatch" style="background:rgba(var(--heat),.18)"></span>Lower salience</span>
+      <span><span class="swatch" style="background:var(--line-strong)"></span>Absent</span>
+      <span>Cell shows pages &middot; mean salience</span>
+    </div>
+    <div class="tablewrap"><table id="matrix"></table></div>
+  </div>
+
+  <footer>
+    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-gap-matrix.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

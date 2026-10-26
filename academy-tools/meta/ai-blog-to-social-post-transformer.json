@@ -1,0 +1,19 @@
+{
+  "slug": "ai-blog-to-social-post-transformer",
+  "title": "AI Blog-to-Social Post Transformer",
+  "short": "Turn a blog post into three LinkedIn posts and five tweets, or a CSV of articles into one LinkedIn post and one tweet per row.",
+  "course": "introduction-to-machine-learning-for-seo",
+  "lesson": "",
+  "needs": "Your OpenAI API key",
+  "cost": "Paid per use on your own OpenAI account. Roughly 5 cents per article with chat-latest, or about $1 for a CSV of 50 full-length articles. With gpt-6-luna it is well under 1 cent per article.",
+  "inputs": "Pasted article text, or a CSV with a Content column (URL and Title columns are used when present)",
+  "outputs": "Editable LinkedIn posts and tweets with character counts, plus generated-social-posts.csv with URL, Title, LinkedIn Post and Tweet columns",
+  "how": [
+    "Paste your OpenAI API key and choose a model. The key stays in your browser and goes only to OpenAI.",
+    "Paste one article, or switch to the CSV tab and upload a file with a Content column.",
+    "Set the options: emojis, hashtags, audience, voice and an optional call to action.",
+    "Generate, then edit any post in place and copy it.",
+    "For a CSV, download the results file when the run finishes."
+  ],
+  "note": "The model is told to stay faithful to the article, but it can still overstate or invent a detail, so read every post against the source before you publish it."
+}

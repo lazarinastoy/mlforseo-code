@@ -1,0 +1,19 @@
+{
+ "slug": "entity-audit-scorecard",
+ "title": "Entity Audit Scorecard",
+ "short": "The 5C rubric as a tool: Clarity, Coverage, Consistency, Connection and Corroboration, scored 0–3 each at page and site level, with a prioritised fix list underneath.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 1, Lesson 1.3",
+ "needs": "Nothing — it runs entirely in your browser and makes no API calls",
+ "cost": "Free",
+ "inputs": "The CSVs the other tools export, or click the built-in example",
+ "outputs": "A saved scorecard (JSON) and a CSV export",
+ "how": [
+  "Click “Load the MLforSEO baseline” to see a worked example on a real site.",
+  "Read the verdict first, then the five-dimension gauge.",
+  "Open a dimension card to see the numbers driving that score.",
+  "Work the “What to fix, in order” list — it is ranked by impact against effort.",
+  "Save the scorecard. It becomes the before state you compare against in 90 days."
+ ],
+ "note": "Saving is the step people skip, and it is the one that turns a report into a measurement."
+}

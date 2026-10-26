@@ -1,0 +1,77 @@
+<!-- wp:uagb/container {"block_id":"f1635ac9","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-f1635ac9 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-consistency-checker.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Entity Consistency Checker</h1>
+  <p class="lede">Find the entities you refer to by more than one name, and the ones Google has quietly merged into something else. No API calls, no cost.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Nothing — it runs entirely in your browser</dd></div>
+      <div><dt>Cost</dt><dd>Free</dd></div>
+      <div><dt>Feed it</dt><dd>entity_mentions.csv from the Extractor</dd></div>
+      <div><dt>You get back</dt><dd>A cluster report you can export</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Upload the entity export. The MID column is what makes this work.</li>
+      <li>Read the high-severity clusters first — those share an identifier.</li>
+      <li>Decide, per cluster, whether the variants are one thing or several.</li>
+      <li>Choose one canonical form and record it.</li>
+      <li>Leave case-only differences switched off unless you have a specific reason.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Not every cluster is an error. “Google” and “Google Cloud” are different things; “LLM” and “LLMs” are not.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Consistency Checker</h1>
+    <p>Find the entities you refer to by more than one name, and the ones Google has quietly merged into something else. Runs entirely in your browser &mdash; no API calls, no cost.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Your entity export</h2>
+    <div class="sub">Upload the <code>entity_mentions.csv</code> from the Entity Extractor. The <code>mid</code> column is what makes this work: entities sharing a Knowledge Graph MID are the same thing by definition.</div>
+    <div class="actions" style="margin-top:0">
+      <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv"></label>
+      <label class="check"><input type="checkbox" id="caseonly"> Include case-only differences</label>
+      <span class="hint" id="info">Needs an entity column. Types and MIDs unlock more checks.</span>
+    </div>
+    <div class="keynote warn">
+      Case-only differences (<code>content</code> / <code>Content</code> / <code>CONTENT</code>) are excluded by
+      default. In the MLforSEO corpus they were <strong>94% of all clusters</strong> and none of it was
+      actionable. Turn them on only if you have a specific reason.
+    </div>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div class="section-head">
+      <h2>Clusters</h2>
+      <div class="actions" style="margin:0">
+        <button class="ghost" id="dl">Export clusters CSV</button>
+        <button class="ghost" id="dl-canon">Export canonical naming table</button>
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="tablewrap"><table id="table"></table></div>
+  </div>
+
+  <footer>
+    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-consistency-checker.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

@@ -1,0 +1,386 @@
+<meta charset="utf-8">
+<title>Entity Consistency Checker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --ground:#FAF8FD; --panel:#FFFFFF; --sunk:#F3EFFA;
+  --ink:#1A0B32; --body:#3A2E4D; --muted:#6B5F80;
+  --line:#E4DDF0; --line-strong:#CFC3E4;
+  --accent:#8448ef; --accent-ink:#FFFFFF; --signal:#ffde59;
+  --good:#2E8B6F; --warn:#D98324; --crit:#C4384F;
+  --shadow:0 1px 2px rgba(26,11,50,.06), 0 8px 24px -12px rgba(26,11,50,.18);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+    --ink:#F6F2FE; --body:#CDC1E2; --muted:#9587B0;
+    --line:#33224F; --line-strong:#462F6B;
+    --accent:#A277F5; --accent-ink:#15071F;
+    --good:#4FB894; --warn:#E9A24A; --crit:#E86A80;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+  --ink:#F6F2FE; --body:#CDC1E2; --muted:#9587B0;
+  --line:#33224F; --line-strong:#462F6B;
+  --accent:#A277F5; --accent-ink:#15071F;
+  --good:#4FB894; --warn:#E9A24A; --crit:#E86A80;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--body);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,system-ui,sans-serif; color:var(--ink);
+  text-wrap:balance; margin:0}
+.wrap{max-width:1180px; margin:0 auto; padding:32px 24px 96px}
+.eyebrow{font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.mono{font-family:var(--mono); font-size:12px}
+.masthead{padding-bottom:18px; border-bottom:2px solid var(--ink); margin-bottom:24px}
+.masthead h1{font-size:clamp(25px,3.6vw,35px); font-weight:800; letter-spacing:-.02em; margin-top:4px}
+.masthead p{margin:8px 0 0; color:var(--muted); max-width:64ch; font-size:14px}
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:20px;
+  box-shadow:var(--shadow); margin-bottom:14px}
+.panel h2{font-size:16px; font-weight:600; margin-bottom:4px}
+.panel .sub{font-size:13px; color:var(--muted); margin-bottom:14px}
+label.file{display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600;
+  color:var(--ink); border:1px dashed var(--line-strong); padding:8px 14px; border-radius:3px; cursor:pointer}
+label.file:hover{border-color:var(--accent); color:var(--accent)}
+input[type=file]{position:absolute; width:1px; height:1px; opacity:0}
+button{font:inherit; font-weight:600; font-size:13.5px; cursor:pointer; border:1px solid var(--ink);
+  background:var(--ink); color:var(--ground); padding:9px 15px; border-radius:3px; transition:opacity .15s}
+button.accent{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+button.ghost{background:transparent; color:var(--ink)}
+button:disabled{opacity:.45; cursor:not-allowed}
+button:hover:not(:disabled){opacity:.88}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px}
+.hint{color:var(--muted); font-size:12.5px}
+.check{display:inline-flex; align-items:center; gap:7px; font-size:13px; color:var(--ink); cursor:pointer}
+.keynote{background:var(--sunk); border-left:3px solid var(--accent); padding:11px 14px;
+  border-radius:0 3px 3px 0; font-size:12.5px; margin-top:12px}
+.keynote.warn{border-left-color:var(--warn)}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:14px}
+.tile{background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:16px;
+  box-shadow:var(--shadow); border-top:3px solid var(--lvl,var(--accent))}
+.tile .k{font-size:11.5px; color:var(--muted); font-weight:600; letter-spacing:.04em; text-transform:uppercase}
+.tile .v{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:29px; color:var(--ink);
+  line-height:1.1; margin-top:6px; font-variant-numeric:tabular-nums}
+.tile .d{font-size:12px; color:var(--muted); margin-top:3px}
+.filters{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
+.filters button{background:transparent; border:1px solid var(--line-strong); color:var(--muted);
+  font-size:12.5px; padding:6px 12px}
+.filters button[aria-pressed=true]{background:var(--ink); border-color:var(--ink); color:var(--ground)}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:5px; background:var(--panel)}
+table{border-collapse:collapse; width:100%; font-size:13px; min-width:840px}
+th{text-align:left; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+  font-weight:700; padding:11px 12px; border-bottom:1px solid var(--line-strong); background:var(--sunk); white-space:nowrap}
+td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.sev{font-size:10.5px; font-weight:700; letter-spacing:.05em; padding:2px 7px; border-radius:2px;
+  color:#fff; text-transform:uppercase; white-space:nowrap}
+.sev.high{background:var(--crit)} .sev.medium{background:var(--warn)} .sev.low{background:var(--muted)}
+.kind{font-size:10.5px; font-weight:600; letter-spacing:.04em; color:var(--muted);
+  border:1px solid var(--line-strong); padding:2px 6px; border-radius:2px; white-space:nowrap}
+.canon{font-weight:600; color:var(--ink)}
+.variants{color:var(--muted); font-size:12.5px; max-width:420px}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+  margin:34px 0 13px; flex-wrap:wrap}
+.section-head h2{font-size:21px; font-weight:600}
+footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line); color:var(--muted);
+  font-size:12.5px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Consistency Checker</h1>
+    <p>Find the entities you refer to by more than one name, and the ones Google has quietly merged into something else. Runs entirely in your browser &mdash; no API calls, no cost.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Your entity export</h2>
+    <div class="sub">Upload the <code>entity_mentions.csv</code> from the Entity Extractor. The <code>mid</code> column is what makes this work: entities sharing a Knowledge Graph MID are the same thing by definition.</div>
+    <div class="actions" style="margin-top:0">
+      <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv"></label>
+      <label class="check"><input type="checkbox" id="caseonly"> Include case-only differences</label>
+      <span class="hint" id="info">Needs an entity column. Types and MIDs unlock more checks.</span>
+    </div>
+    <div class="keynote warn">
+      Case-only differences (<code>content</code> / <code>Content</code> / <code>CONTENT</code>) are excluded by
+      default. In the MLforSEO corpus they were <strong>94% of all clusters</strong> and none of it was
+      actionable. Turn them on only if you have a specific reason.
+    </div>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div class="section-head">
+      <h2>Clusters</h2>
+      <div class="actions" style="margin:0">
+        <button class="ghost" id="dl">Export clusters CSV</button>
+        <button class="ghost" id="dl-canon">Export canonical naming table</button>
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="tablewrap"><table id="table"></table></div>
+  </div>
+
+  <footer>
+    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const STOP_ENTITIES = new Set(["one","two","three","four","five","data","content","course","lesson",
+  "thing","things","way","ways","time","part","example","examples","step","steps","page","pages",
+  "people","everything","anything","something","lot","bit","kind","type","types","number","numbers",
+  "case","cases","point","points"]);
+
+const tokens = s => new Set(String(s??"").toLowerCase().match(/[a-z0-9]+/g) || []);
+const stripCase = s => String(s??"").replace(/[^\w\s]/g,"").toLowerCase().trim();
+// Strip possessives before punctuation, so "Google's API" and "Google API"
+// collapse. Removing the apostrophe alone leaves a stray "s" and they never match.
+const stripAll  = s => String(s??"").toLowerCase()
+  .replace(/[‘’']s\b/g,"").replace(/[^a-z0-9]/g,"");
+
+let CLUSTERS = [], STATS = null, filter = "all";
+
+function parseCSV(text){
+  const rows=[]; let row=[], cell="", q=false;
+  for (let i=0;i<text.length;i++){
+    const c=text[i];
+    if (q){ if(c==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; } else cell+=c; }
+    else if (c==='"') q=true;
+    else if (c===","){ row.push(cell); cell=""; }
+    else if (c==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; }
+    else if (c!=="\r") cell+=c;
+  }
+  if (cell||row.length){ row.push(cell); rows.push(row); }
+  const raw=(rows.shift()||[]).map(h=>h.trim());
+  const {head, dupes} = dedupeHeaders(raw);
+  return {head, dupes, rows:rows.filter(r=>r.some(v=>v!=="")).map(r=>Object.fromEntries(head.map((h,i)=>[h,r[i]??""])))};
+}
+const pick = (head, names) => head.find(h => names.includes(h.trim().toLowerCase()));
+
+// Duplicate column names would silently collapse via Object.fromEntries (last
+// value wins). Suffix repeats so every column survives and the user is told.
+function dedupeHeaders(head){
+  const seen = new Map(), out = [], dupes = [];
+  for (const h of head){
+    const k = h.trim();
+    if (seen.has(k)){ const n = seen.get(k)+1; seen.set(k,n); dupes.push(k); out.push(`${k} (${n})`); }
+    else { seen.set(k,1); out.push(k); }
+  }
+  return {head: out, dupes: [...new Set(dupes)]};
+}
+
+/* ---- the clusterer: three mechanisms, because no single one works ---- */
+function cluster(rows, cols, includeCaseOnly){
+  const counts = new Map(), pages = new Map(), mids = new Map(), proper = new Map(), hasMid = new Set();
+  for (const r of rows){
+    const name = (r[cols.e]||"").trim();
+    if (!name || name.length < 3) continue;
+    counts.set(name,(counts.get(name)||0)+1);
+    if (!pages.has(name)) pages.set(name,new Set());
+    if (cols.u && r[cols.u]) pages.get(name).add(r[cols.u]);
+    const pm = cols.p ? parseInt(r[cols.p],10) : 0;
+    if (pm) proper.set(name,(proper.get(name)||0)+pm);
+    const mid = cols.m ? (r[cols.m]||"").trim() : "";
+    if (mid){
+      hasMid.add(name);
+      if (!mids.has(mid)) mids.set(mid,new Map());
+      mids.get(mid).set(name,(mids.get(mid).get(name)||0)+1);
+    }
+  }
+  const totalPages = new Set([...pages.values()].flatMap(s=>[...s])).size || 1;
+  const out = [], seen = new Set();
+
+  function emit(kind, severity, forms, key, note){
+    forms = [...new Set(forms)].filter(Boolean);
+    if (forms.length < 2) return;
+    const caseOnly = new Set(forms.map(stripCase)).size < 2;
+    if (!includeCaseOnly && caseOnly) return;
+    // The punctuation mechanism matches case variants first, which would
+    // report "content / Content / CONTENT" as a punctuation difference.
+    // Relabel it as what it actually is.
+    if (caseOnly){ kind = "case only"; severity = "low"; note = "differs only by letter case"; }
+    const sig = forms.slice().sort().join(" ");
+    if (seen.has(sig)) return;
+    seen.add(sig);
+    const ranked = forms.slice().sort((a,b)=>(counts.get(b)||0)-(counts.get(a)||0));
+    const urls = new Set(); ranked.forEach(f => (pages.get(f)||new Set()).forEach(u=>urls.add(u)));
+    out.push({kind, severity, key, canonical: ranked[0], count: ranked.length,
+      variants: ranked.map(f=>`${f} (${counts.get(f)||0})`).join(" | "),
+      forms: ranked, pages: urls.size || ranked.reduce((n,f)=>n+(counts.get(f)||0),0), note});
+  }
+
+  // 1. same MID = same thing, by definition
+  for (const [mid, forms] of mids){
+    const names = [...forms.keys()];
+    if (names.length < 2) continue;
+    const canonical = names.slice().sort((a,b)=>(counts.get(b)||0)-(counts.get(a)||0))[0];
+    const ct = tokens(canonical);
+    // 2+ tokens the canonical lacks is more likely an over-link than a variant
+    const suspect = names.filter(n => n!==canonical && [...tokens(n)].filter(t=>!ct.has(t)).length >= 2);
+    emit("mid variant","high", names.filter(n=>!suspect.includes(n)), mid, "same Knowledge Graph MID");
+    if (suspect.length)
+      emit("over-link review","medium",[canonical,...suspect],mid,
+           "same MID, divergent wording — check for entity over-linking");
+  }
+
+  // 2. containment, deliberately narrow. A loose version grouped
+  //    "course" with "Keyword Research Course" and produced only noise.
+  const candidates = [...counts.keys()].filter(n =>
+    (proper.get(n)||0) > 0 && !hasMid.has(n) &&
+    (pages.get(n)?.size||0) < totalPages*0.25 && !STOP_ENTITIES.has(n.toLowerCase()));
+  for (const short of candidates){
+    const st = tokens(short); if (!st.size) continue;
+    const group = [short];
+    for (const long of counts.keys()){
+      if (long===short || !long.toLowerCase().startsWith(short.toLowerCase())) continue;
+      const extra = [...tokens(long)].filter(t=>!st.has(t));
+      if (!extra.length || extra.length > 2) continue;
+      const shared = [...(pages.get(short)||[])].filter(u=>(pages.get(long)||new Set()).has(u));
+      if (shared.length >= Math.max(2,(pages.get(short)?.size||0)*0.5)) group.push(long);
+    }
+    emit("containment review","medium",group,short,
+         "unreconciled proper noun with a suffixed form on shared pages");
+  }
+
+  // 3. punctuation / spacing only
+  const byStripped = new Map();
+  for (const n of counts.keys()){
+    const k = stripAll(n); if (!k) continue;
+    if (!byStripped.has(k)) byStripped.set(k,[]);
+    byStripped.get(k).push(n);
+  }
+  for (const [k,names] of byStripped)
+    if (names.length>1) emit("punctuation","low",names,k,"identical ignoring punctuation and spacing");
+
+  // 4. case only, opt-in
+  if (includeCaseOnly){
+    const byCase = new Map();
+    for (const n of counts.keys()){
+      const k = n.toLowerCase();
+      if (!byCase.has(k)) byCase.set(k,[]);
+      byCase.get(k).push(n);
+    }
+    for (const [k,names] of byCase)
+      if (names.length>1) emit("case only","low",names,k,"differs only by letter case");
+  }
+
+  const rank = {high:0, medium:1, low:2};
+  out.sort((a,b)=>rank[a.severity]-rank[b.severity] || b.pages-a.pages || b.count-a.count);
+  return {clusters: out, distinct: counts.size, mentions: rows.length, withMid: hasMid.size};
+}
+
+$("csvfile").onchange = async e => {
+  const f = e.target.files[0]; if(!f) return;
+  let parsed; try { parsed = parseCSV(await f.text()); }
+  catch { $("info").innerHTML = "<strong>That file could not be read as CSV.</strong>"; return; }
+  const {head, rows, dupes} = parsed;
+  if (!rows.length){ $("info").innerHTML = "<strong>That CSV has no data rows.</strong>"; $("results").hidden=true; return; }
+  const cols = {
+    e: pick(head,["entity","name","entity_name"]),
+    u: pick(head,["url","address","page"]),
+    m: pick(head,["mid","kg_mid"]),
+    p: pick(head,["proper","proper_mentions"])
+  };
+  if (!cols.e){
+    $("info").innerHTML = `<strong>No entity column found.</strong> Looked for entity, name. Found: ${esc(head.slice(0,8).join(", "))}`;
+    $("results").hidden = true; return;
+  }
+  window.__ROWS = rows; window.__COLS = cols; window.__DUPES = dupes;
+  run();
+  $("info").innerHTML = `${window.__DUPES&&window.__DUPES.length?`<strong>Duplicate column name(s): ${esc(window.__DUPES.join(", "))}</strong> — renamed. ` : ""}<strong>${STATS.distinct.toLocaleString()}</strong> distinct forms from ${STATS.mentions.toLocaleString()} mentions`
+    + (cols.m?` · ${STATS.withMid.toLocaleString()} carry a MID`:" · no MID column, MID checks skipped")
+    + (cols.u?"":" · no URL column, using mention counts");
+};
+$("caseonly").onchange = () => { if (window.__ROWS) run(); };
+
+function run(){
+  const res = cluster(window.__ROWS, window.__COLS, $("caseonly").checked);
+  CLUSTERS = res.clusters; STATS = res;
+  render();
+}
+
+function render(){
+  if (!CLUSTERS.length){
+    $("results").hidden = false;
+    $("tiles").innerHTML = `<div class="tile" style="--lvl:var(--good)"><div class="k">Clusters</div><div class="v">0</div><div class="d">every entity has one name</div></div>`;
+    $("filters").innerHTML = ""; $("table").innerHTML = ""; return;
+  }
+  $("results").hidden = false;
+  const by = k => CLUSTERS.filter(c=>c.kind===k).length;
+  const sev = s => CLUSTERS.filter(c=>c.severity===s).length;
+  $("tiles").innerHTML = [
+    ["Clusters", CLUSTERS.length, "entities with more than one name", "var(--accent)"],
+    ["High severity", sev("high"), "same MID, different names", sev("high")?"var(--crit)":"var(--good)"],
+    ["Over-link review", by("over-link review"), "possibly merged wrongly", by("over-link review")?"var(--warn)":"var(--good)"],
+    ["Pages affected", CLUSTERS.reduce((n,c)=>n+c.pages,0).toLocaleString(), "across all clusters", "var(--accent)"]
+  ].map(([k,v,d,c])=>`<div class="tile" style="--lvl:${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join("");
+
+  const kinds = ["all",...new Set(CLUSTERS.map(c=>c.kind))];
+  $("filters").innerHTML = kinds.map(k=>{
+    const n = k==="all"?CLUSTERS.length:by(k);
+    return `<button data-f="${esc(k)}" aria-pressed="${filter===k}">${k[0].toUpperCase()+k.slice(1)} (${n})</button>`;
+  }).join("");
+  $("filters").querySelectorAll("button").forEach(b=>b.onclick=()=>{filter=b.dataset.f; render();});
+
+  const rows = CLUSTERS.filter(c=>filter==="all"||c.kind===filter).slice(0,600);
+  $("table").innerHTML = `<thead><tr>
+      <th>Suggested canonical</th><th>Variants found</th><th>Kind</th><th>Severity</th>
+      <th class="n">Forms</th><th class="n">Pages</th><th>Why</th>
+    </tr></thead><tbody>${rows.map(c=>`<tr>
+      <td class="canon">${esc(c.canonical)}</td>
+      <td class="variants">${esc(c.variants)}</td>
+      <td><span class="kind">${esc(c.kind)}</span></td>
+      <td><span class="sev ${c.severity}">${c.severity}</span></td>
+      <td class="n">${c.count}</td><td class="n">${c.pages}</td>
+      <td class="variants">${esc(c.note)}</td>
+    </tr>`).join("")}</tbody>`;
+}
+
+async function offerFile(filename, text, mime){
+  const api = (typeof claude !== "undefined" && claude.use) ? await claude.use("downloads").catch(()=>null) : null;
+  if (api){ try { await api.save({filename, data:text}); return "saved"; }
+    catch(e){ return e && e.code==="declined" ? "declined" : "failed"; } }
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([text],{type:mime}));
+  a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000); return "saved";
+}
+const q = v => `"${String(v??"").replace(/"/g,'""')}"`;
+$("dl").onclick = async () => {
+  // Canonical schema — matches freeze/derive.py so downstream tools accept
+  // output from either source. `cluster_type` is what the Scorecard detects on.
+  const cols = ["entity_norm","cluster_type","severity","suggested_canonical",
+                "variant_count","variants","pages_affected","note"];
+  const csv = [cols.map(q).join(",")].concat(CLUSTERS.map(c=>{
+    const o = {entity_norm:c.key, cluster_type:c.kind.replace(/[ -]/g,"_"),
+               severity:c.severity, suggested_canonical:c.canonical,
+               variant_count:c.count, variants:c.variants,
+               pages_affected:c.pages, note:c.note};
+    return cols.map(k=>q(o[k])).join(",");
+  })).join("\n");
+  await offerFile("consistency_clusters.csv", csv, "text/csv");
+};
+$("dl-canon").onclick = async () => {
+  // the table writers actually use: every variant mapped to one canonical form
+  const lines = [["surface_form","use_instead","cluster_kind","severity"].map(q).join(",")];
+  CLUSTERS.filter(c=>c.severity!=="low").forEach(c =>
+    c.forms.slice(1).forEach(f => lines.push([f, c.canonical, c.kind, c.severity].map(q).join(","))));
+  await offerFile("canonical_naming_table.csv", lines.join("\n"), "text/csv");
+};
+</script>

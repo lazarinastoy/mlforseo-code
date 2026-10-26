@@ -1,0 +1,19 @@
+{
+  "slug": "ai-meta-data-creator",
+  "title": "AI Meta Data Creator",
+  "short": "Turn an article, or a CSV of pages, into three title tags, three meta descriptions and an H2/H3 outline each, with character counts so you can see what fits.",
+  "course": "introduction-to-machine-learning-for-seo",
+  "lesson": "",
+  "needs": "Your OpenAI API key",
+  "cost": "Paid OpenAI usage on your own key: well under a cent per article on GPT-6 Luna, roughly 3 to 6 cents on GPT-5.6 Sol",
+  "inputs": "Pasted article text and a target keyword, or a CSV with URL, Title and Content columns",
+  "outputs": "Editable titles, meta descriptions and outlines to copy, and seo-metadata-generated.csv",
+  "how": [
+    "Paste your OpenAI API key and pick a model. The key stays in this browser tab and goes only to OpenAI.",
+    "For one page, paste the article text and enter the target keyword.",
+    "For many pages, upload a CSV with URL, Title and Content columns and check the preview.",
+    "Add the audience and content goal if you know them, then generate.",
+    "Check the character counts, edit the wording, then copy or export."
+  ],
+  "note": "The model cannot search the web, so the competitor analysis is its guess at what ranks, not a live SERP. Check any gap it names against a real search before you act on it."
+}

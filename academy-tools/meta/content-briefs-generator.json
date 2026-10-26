@@ -1,0 +1,19 @@
+{
+  "slug": "content-briefs-generator",
+  "title": "Content Briefs Generator",
+  "short": "Turn your Semantic Keyword Universe sheet into up to 20 content briefs at a time, combining the sheet's keyword, entity and SERP data with suggestions from OpenAI.",
+  "course": "semantic-ml-enabled-keyword-research",
+  "lesson": "",
+  "needs": "Your Semantic Keyword Universe Google Sheet shared as 'Anyone with the link can view', a Google Cloud API key with the Google Sheets API enabled, and your OpenAI API key",
+  "cost": "Free to use; OpenAI bills your key per request. Each brief makes 7 requests: roughly 6 US cents a brief with GPT-5.6 Terra, under 1 cent with GPT-6 Luna. Reading the sheet costs nothing.",
+  "inputs": "The URL of your keyword universe sheet, up to three of its topics, and how many briefs you want (1 to 20)",
+  "outputs": "A ZIP of briefs as Markdown-formatted .txt files, one per keyword, which you can also preview and download one at a time",
+  "how": [
+    "Share your keyword universe sheet so anyone with the link can view it. The tool reads the template's tabs by name, so keep them as they are.",
+    "Paste the sheet URL and your Google API key, then press Load topics.",
+    "Pick up to three topics and set how many briefs you want.",
+    "Add your OpenAI key, choose a model and press Generate.",
+    "Download the ZIP, and check every AI section before a writer works from it."
+  ],
+  "note": "The AI sections are suggestions, not research: competitor gaps and internal-link targets are written from the keyword alone, so check them against the live results and your own site."
+}

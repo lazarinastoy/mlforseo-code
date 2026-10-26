@@ -1,0 +1,19 @@
+{
+  "slug": "semantic-intent-drift-analyzer",
+  "title": "Semantic Intent Drift Analyzer",
+  "short": "Score how far each query fan-out drifts from the intent of your target query, and see the spread in a 3D plot.",
+  "course": "semantic-ml-enabled-keyword-research",
+  "lesson": "",
+  "needs": "Nothing: it runs in your browser",
+  "cost": "Free. Semantic Boost downloads a model of about 27 MB the first time you use it.",
+  "inputs": "A target query and its fan-outs, one per line, or a CSV with Target Query and Query Fan-Outs columns",
+  "outputs": "A similarity score, drift score and drift band per fan-out, a 3D plot, and a CSV export",
+  "how": [
+    "Enter your target query and paste the fan-outs, one per line.",
+    "Switch on Semantic Boost if synonyms and context should count, not just shared words.",
+    "Press Analyse drift and read the table from the top: the closest fan-outs come first.",
+    "Hover the nodes in the 3D plot to see each fan-out's scores.",
+    "Export the CSV, or upload a CSV of query pairs to score a whole list at once."
+  ],
+  "note": "With Semantic Boost on, even unrelated queries rarely score below about 30% similarity, so compare fan-outs with each other rather than treating the drift bands as fixed verdicts."
+}

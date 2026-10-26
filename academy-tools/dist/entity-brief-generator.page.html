@@ -1,0 +1,119 @@
+<!-- wp:uagb/container {"block_id":"424b711f","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-424b711f alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-brief-generator.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Entity Brief Generator</h1>
+  <p class="lede">Turn audit findings into a brief a writer can act on: canonical name, entities to add, entities to demote, and the placements that matter.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>An Anthropic API key</dd></div>
+      <div><dt>Cost</dt><dd>Pennies per brief</dd></div>
+      <div><dt>Feed it</dt><dd>One page&#x27;s audit row, plus the current page content</dd></div>
+      <div><dt>You get back</dt><dd>A structured brief you can print or export</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Paste your Anthropic key and fill in the audit row for one page.</li>
+      <li>Add the missing entities from your gap matrix and the canonical name.</li>
+      <li>Paste the current content — the brief is an edit instruction, not a commission.</li>
+      <li>Read the brief, and check every factual claim it moved or kept.</li>
+      <li>Export it. It goes to a writer, not to a publish button.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Never auto-publish a rewrite of a page that carries factual claims or currently ranks well.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Brief Generator</h1>
+    <p>Turn audit findings into a brief a writer can act on. Built from your data, not from a blank prompt &mdash; the brief is only as good as the diagnosis behind it.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your Claude API key</h2>
+    <div class="sub">Held in this tab only, sent only to Anthropic.</div>
+    <div class="row">
+      <div class="field">
+        <label for="key">Anthropic API key</label>
+        <input type="password" id="key" placeholder="sk-ant-…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="claude-sonnet-5" selected>Claude Sonnet 5 — recommended</option>
+          <option value="claude-opus-5">Claude Opus 5 — hardest pages</option>
+          <option value="claude-haiku-4-5">Claude Haiku 4.5 — cheapest, high volume</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; The page and what the audit found</h2>
+    <div class="sub">Every field maps to a diagnostic from an earlier tool. The more you fill in, the more specific the brief.</div>
+    <div class="row">
+      <div class="field">
+        <label for="url">Page URL</label>
+        <input type="text" id="url" placeholder="/blog/entity-extraction">
+      </div>
+      <div class="field">
+        <label for="intended">Intended entity <span class="note">&mdash; what it should be about</span></label>
+        <input type="text" id="intended" placeholder="entity extraction">
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="detected">Detected dominant entity <span class="note">&mdash; from the Extractor</span></label>
+        <input type="text" id="detected" placeholder="entities">
+      </div>
+      <div class="field">
+        <label for="dtype">Its detected type</label>
+        <input type="text" id="dtype" placeholder="LOCATION">
+      </div>
+    </div>
+    <div class="field">
+      <label for="missing">Missing entities <span class="note">&mdash; from the Gap Matrix, comma separated</span></label>
+      <textarea id="missing" style="min-height:64px" placeholder="schema markup, structured data, JSON-LD"></textarea>
+    </div>
+    <div class="field">
+      <label for="canon">Canonical naming rules <span class="note">&mdash; from the Consistency Checker</span></label>
+      <textarea id="canon" style="min-height:64px" placeholder="Use &quot;MLforSEO&quot;, not &quot;MLforSEO Academy&quot; or &quot;The MLforSEO&quot;"></textarea>
+    </div>
+    <div class="field">
+      <label for="content">Current page content <span class="note">(optional, improves specificity)</span></label>
+      <textarea id="content" placeholder="Paste the existing body copy."></textarea>
+    </div>
+    <div class="actions">
+      <button class="accent" id="run" disabled>Generate brief</button>
+      <button class="ghost" id="print" hidden>Print / PDF</button>
+      <button class="ghost" id="dl" hidden>Export brief</button>
+      <span class="hint" id="status">Add your key and at least a URL or intended entity.</span>
+    </div>
+    <progress id="prog" hidden></progress>
+    <div class="keynote warn">
+      <strong>Never auto-publish this.</strong> The brief is a starting point for a writer, not
+      finished copy. Check every factual claim it suggests adding &mdash; the model is working from
+      your audit data, not from knowledge of your product.
+    </div>
+  </div>
+
+  <div id="out" hidden></div>
+
+  <footer>
+    <span>Runs in your browser. Your key and page data go only to Anthropic.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-brief-generator.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

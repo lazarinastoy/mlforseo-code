@@ -1,0 +1,122 @@
+<!-- wp:uagb/container {"block_id":"4eb1ba03","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-4eb1ba03 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/knowledge-graph-reconciler.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Knowledge Graph Reconciler</h1>
+  <p class="lede">Match your extracted entities against Google&#x27;s Knowledge Graph, and flag the ones where the returned type contradicts the type your content implies.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>The same Google key, with the Knowledge Graph Search API also enabled</dd></div>
+      <div><dt>Cost</dt><dd>Free — 100,000 lookups a day</dd></div>
+      <div><dt>Feed it</dt><dd>entity_mentions.csv from the Extractor, or a pasted list</dd></div>
+      <div><dt>You get back</dt><dd>kg_reconciliation.csv — matched, ambiguous, unmatched, with type conflicts flagged</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Paste your key and upload the entity export.</li>
+      <li>Leave the match-score floor at 20 unless you have a reason to change it.</li>
+      <li>Read the three verdicts before you read a single row.</li>
+      <li>Filter to type conflicts — those are matches that are confidently wrong.</li>
+      <li>Export, and keep the file for the Scorecard.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> A returned match is not a correct match. Check the type and the description before you trust the score.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Knowledge Graph Reconciler</h1>
+    <p>Match your extracted entities to Google&rsquo;s Knowledge Graph, and find the three ways it goes wrong: no match at all, an ambiguous match, or a confident match to the wrong thing.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your API key</h2>
+    <div class="sub">Held in this tab only. 100,000 lookups a day are free.</div>
+    <div class="field">
+      <label for="key">Google API key <span class="note">&mdash; with the Knowledge Graph Search API enabled</span></label>
+      <input type="password" id="key" placeholder="AIza…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="keynote warn">
+      The Knowledge Graph Search API is a <strong>legacy service</strong>. Google directs new
+      projects to Cloud Enterprise Knowledge Graph and warns it is &ldquo;not suitable for use as a
+      production-critical service&rdquo;. Fine for auditing; do not build a live product on it.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your entities</h2>
+    <div class="sub">Paste one entity per line, or upload the <code>entity_mentions.csv</code> from the Entity Extractor &mdash; that adds NLP types and MIDs, which unlocks type-conflict and over-linking detection.</div>
+    <div class="actions" style="margin-bottom:12px">
+      <label class="file">Upload entity_mentions.csv<input type="file" id="csvfile" accept=".csv"></label>
+      <span class="hint" id="csvinfo">Or paste below.</span>
+    </div>
+    <div class="field">
+      <label for="list">Entity list</label>
+      <textarea id="list" placeholder="MLforSEO&#10;entity extraction&#10;knowledge graph"></textarea>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="floor">Match score floor <span class="note">&mdash; below this counts as unmatched</span></label>
+        <input type="text" id="floor" value="20">
+      </div>
+      <div class="field">
+        <label for="cap">Maximum lookups</label>
+        <input type="text" id="cap" value="500">
+      </div>
+    </div>
+    <div class="actions">
+      <button class="accent" id="run" disabled>Reconcile</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <span class="hint" id="status">Add a key and some entities to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+
+    <div class="keynote">
+      <strong>Reading resultScore correctly:</strong> it is a relevance score for <em>this lookup</em> —
+      how well the entity name matched a graph node. It is not authority, not popularity, and not a
+      ranking signal. A high score means &ldquo;confident match&rdquo;, nothing more.
+    </div>
+
+    <div class="section-head">
+      <h2>Reconciliation</h2>
+      <div class="actions"><button class="ghost" id="dl">Export CSV</button></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="tablewrap"><table id="table"></table></div>
+
+    <div id="overlinkwrap" hidden>
+      <div class="section-head">
+        <h2>Suspected over-linking</h2>
+        <span class="hint">Same MID, divergent wording</span>
+      </div>
+      <div class="keynote warn">
+        These entities were given the <em>same</em> Knowledge Graph MID by the NLP API despite
+        describing different things. An over-linked entity is worse than an unlinked one: you are
+        actively teaching machines that your thing is something else.
+      </div>
+      <div class="tablewrap" style="margin-top:12px"><table id="overlink"></table></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and entity list go only to Google.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/knowledge-graph-reconciler.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

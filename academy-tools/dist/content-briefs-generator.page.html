@@ -1,0 +1,157 @@
+<!-- wp:uagb/container {"block_id":"af6b6583","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-af6b6583 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/content-briefs-generator.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; Semantic AI-powered SEO Keyword Research</p>
+  <h1>Content Briefs Generator</h1>
+  <p class="lede">Turn your Semantic Keyword Universe sheet into up to 20 content briefs at a time, combining the sheet&#x27;s keyword, entity and SERP data with suggestions from OpenAI.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Your Semantic Keyword Universe Google Sheet shared as &#x27;Anyone with the link can view&#x27;, a Google Cloud API key with the Google Sheets API enabled, and your OpenAI API key</dd></div>
+      <div><dt>Cost</dt><dd>Free to use; OpenAI bills your key per request. Each brief makes 7 requests: roughly 6 US cents a brief with GPT-5.6 Terra, under 1 cent with GPT-6 Luna. Reading the sheet costs nothing.</dd></div>
+      <div><dt>Feed it</dt><dd>The URL of your keyword universe sheet, up to three of its topics, and how many briefs you want (1 to 20)</dd></div>
+      <div><dt>You get back</dt><dd>A ZIP of briefs as Markdown-formatted .txt files, one per keyword, which you can also preview and download one at a time</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Share your keyword universe sheet so anyone with the link can view it. The tool reads the template&#x27;s tabs by name, so keep them as they are.</li>
+      <li>Paste the sheet URL and your Google API key, then press Load topics.</li>
+      <li>Pick up to three topics and set how many briefs you want.</li>
+      <li>Add your OpenAI key, choose a model and press Generate.</li>
+      <li>Download the ZIP, and check every AI section before a writer works from it.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> The AI sections are suggestions, not research: competitor gaps and internal-link targets are written from the keyword alone, so check them against the live results and your own site.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light"><div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; Semantic AI-powered SEO Keyword Research</div>
+    <h1>Content Briefs Generator</h1>
+    <p>Turn your Semantic Keyword Universe sheet into content briefs: it picks the highest-potential keywords for up to three topics, gathers what the sheet knows about each one, adds suggestions from OpenAI and packs the briefs into a ZIP.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your keyword universe</h2>
+    <div class="sub">The Google Sheet you built with the course&rsquo;s Semantic Keyword Universe template. Share it as <strong>Anyone with the link can view</strong>: an API key can only read sheets shared that way.</div>
+    <div class="field">
+      <label for="spreadsheetUrl">Google Sheets URL</label>
+      <input type="url" id="spreadsheetUrl" placeholder="https://docs.google.com/spreadsheets/d/…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="sheetsApiKey">Google Cloud API key <span class="note">with the Google Sheets API enabled. Stays in this tab and is sent only to Google.</span></label>
+      <input type="password" id="sheetsApiKey" placeholder="AIza…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="actions">
+      <button class="ghost" id="loadTopics">Load topics</button>
+      <span class="hint" id="sheetStatus">Topics load from the Topics and Descriptions tab once both fields are filled in.</span>
+    </div>
+    <div class="keynote">
+      <details class="tabsneeded">
+        <summary>Which tabs it reads</summary>
+        <ul class="tablist">
+          <li><b>Keyword Categorisation</b><span class="req">required</span><br>metrics, intent, format, depth, persona, entities, n-grams</li>
+          <li><b>Topics and Descriptions</b><span class="req">required</span><br>the topic list and each topic&rsquo;s description</li>
+          <li><b>Keywords to Topics with sBERT</b><br>which keywords belong to which topic</li>
+          <li><b>Keyword Suggestions</b><br>related terms, by seed keyword</li>
+          <li><b>Entity Sentiment Data</b><br>attributes of the core entity and sub-entity</li>
+          <li><b>Semantic Entity Relationships</b><br>semantically related entities</li>
+          <li><b>SERP Features Analysis</b><br>intent mapping, SERP features, content formats</li>
+          <li><b>Google/YouTube Autosuggest Terms</b><br>autosuggest terms, by seed keyword</li>
+          <li><b>Query Paths - PAA</b><br>People Also Ask questions and snippets</li>
+          <li><b>Query Paths - Suggested Topics</b><br>session and context signals</li>
+          <li><b>Bulk Google SERP</b><br>the top five ranking pages</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your OpenAI key</h2>
+    <div class="sub">Used for the AI sections of each brief: query fan-out, user journeys, personas, formats, competitor gaps, internal linking, titles and headings.</div>
+    <div class="row">
+      <div class="field">
+        <label for="openaiApiKey">OpenAI API key <span class="note">Stays in this tab and is sent only to OpenAI.</span></label>
+        <input type="password" id="openaiApiKey" placeholder="sk-…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="gpt-5.6-terra">GPT-5.6 Terra (OpenAI&rsquo;s replacement for GPT-3.5 Turbo)</option>
+          <option value="gpt-6-luna" selected>GPT-6 Luna (cheaper and faster)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 &middot; What to brief</h2>
+    <div class="sub">Pick up to three topics. Briefs are shared out evenly across them, highest-potential keywords first: search volume weighed against competition.</div>
+    <div class="field">
+      <span class="lbl" id="topicsLbl">Topics <span class="note" id="topicCount">0 of 3 picked</span></span>
+      <div class="topics" id="topicList" role="group" aria-labelledby="topicsLbl">
+        <div class="empty">Load your sheet in step 1 to see its topics.</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="numBriefs">Number of briefs <span class="note">1 to 20</span></label>
+        <input type="number" id="numBriefs" min="1" max="20" step="1" value="3" inputmode="numeric">
+      </div>
+      <div class="field">
+        <span class="lbl">Each brief makes</span>
+        <span class="hint">7 OpenAI requests and reads up to 11 tabs of your sheet once per run.</span>
+      </div>
+    </div>
+
+    <div class="estimate" id="est">
+      <div>Briefs<b id="e-briefs">3</b></div>
+      <div>OpenAI requests<b id="e-calls">21</b></div>
+      <div>Rough cost<b id="e-cost">$0.17</b></div>
+    </div>
+    <div class="hint" id="e-note">Rough cost assumes about 350 input and 600 output tokens per request, at OpenAI&rsquo;s October 2026 list prices.</div>
+
+    <div class="actions spaced">
+      <button class="accent" id="generateBtn">Generate content briefs</button>
+      <button class="ghost" id="stopBtn" hidden>Stop</button>
+      <span class="hint" id="status">Fill in steps 1 to 3 to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div id="notes"></div>
+
+    <div class="section-head">
+      <h2>Your briefs</h2>
+      <div class="actions flush">
+        <button class="ghost" id="dlZip">Download all (ZIP)</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="briefTable"></table></div>
+
+    <div id="previewWrap" hidden>
+      <div class="section-head">
+        <h2 id="previewTitle">Brief preview</h2>
+        <div class="actions flush">
+          <button class="ghost" id="dlOne">Download this brief</button>
+        </div>
+      </div>
+      <pre class="brief" id="preview"></pre>
+    </div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your Google key goes only to Google, your OpenAI key only to OpenAI.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/content-briefs-generator.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

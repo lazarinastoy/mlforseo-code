@@ -1,0 +1,173 @@
+<!-- wp:uagb/container {"block_id":"ea2e5385","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-ea2e5385 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/ai-blog-to-social-post-transformer.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; Introduction to Machine Learning for SEO</p>
+  <h1>AI Blog-to-Social Post Transformer</h1>
+  <p class="lede">Turn a blog post into three LinkedIn posts and five tweets, or a CSV of articles into one LinkedIn post and one tweet per row.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Your OpenAI API key</dd></div>
+      <div><dt>Cost</dt><dd>Paid per use on your own OpenAI account. Roughly 5 cents per article with chat-latest, or about $1 for a CSV of 50 full-length articles. With gpt-6-luna it is well under 1 cent per article.</dd></div>
+      <div><dt>Feed it</dt><dd>Pasted article text, or a CSV with a Content column (URL and Title columns are used when present)</dd></div>
+      <div><dt>You get back</dt><dd>Editable LinkedIn posts and tweets with character counts, plus generated-social-posts.csv with URL, Title, LinkedIn Post and Tweet columns</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Paste your OpenAI API key and choose a model. The key stays in your browser and goes only to OpenAI.</li>
+      <li>Paste one article, or switch to the CSV tab and upload a file with a Content column.</li>
+      <li>Set the options: emojis, hashtags, audience, voice and an optional call to action.</li>
+      <li>Generate, then edit any post in place and copy it.</li>
+      <li>For a CSV, download the results file when the run finishes.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> The model is told to stay faithful to the article, but it can still overstate or invent a detail, so read every post against the source before you publish it.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light"><div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; Introduction to Machine Learning for SEO</div>
+    <h1>AI Blog-to-Social Post Transformer</h1>
+    <p>Turn one blog post into three LinkedIn posts and five tweets, or a CSV of articles into one of each per row. Runs in your browser with your own OpenAI key.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your API key and model</h2>
+    <div class="sub">Your key stays in this browser tab and is never saved. It is sent only to OpenAI, with each request.</div>
+    <div class="row">
+      <div class="field">
+        <label for="key">OpenAI API key <span class="note">&middot; kept in this tab, sent only to api.openai.com</span></label>
+        <input type="password" id="key" placeholder="sk-…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="chat-latest">chat-latest (the model ChatGPT uses)</option>
+          <option value="gpt-6-luna" selected>gpt-6-luna (fast, lowest cost)</option>
+          <option value="other">Another model ID…</option>
+        </select>
+        <span class="note" id="modelnote"></span>
+      </div>
+    </div>
+    <div class="field" id="customwrap" hidden>
+      <label for="custommodel">Model ID <span class="note">&middot; any OpenAI model your key can use with Chat Completions</span></label>
+      <input type="text" id="custommodel" placeholder="e.g. gpt-6-luna" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your content</h2>
+    <div class="sub">Paste one article for three LinkedIn posts and five tweets, or upload a CSV for one LinkedIn post and one tweet per row. Browsers cannot fetch other sites directly, so paste the text rather than a link.</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" aria-controls="pane-article" data-mode="article" id="tab-article">Paste an article</button>
+      <button role="tab" aria-selected="false" aria-controls="pane-csv" data-mode="csv" id="tab-csv">Upload a CSV</button>
+    </div>
+
+    <div id="pane-article" role="tabpanel" aria-labelledby="tab-article">
+      <div class="row">
+        <div class="field">
+          <label for="atitle">Article title <span class="note">(optional, otherwise taken from the first line)</span></label>
+          <input type="text" id="atitle" placeholder="How to cluster keywords with KeyBERT">
+        </div>
+        <div class="field">
+          <label for="aurl">Article URL <span class="note">(optional, used as context only, nothing is fetched)</span></label>
+          <input type="text" id="aurl" placeholder="https://example.com/blog/my-post" spellcheck="false">
+        </div>
+      </div>
+      <div class="field">
+        <label for="atext">Article text</label>
+        <textarea id="atext" placeholder="Paste the article body here, not the navigation or footer."></textarea>
+        <span class="note" id="textinfo">Only the first 9,000 characters are sent to the model.</span>
+      </div>
+    </div>
+
+    <div id="pane-csv" role="tabpanel" aria-labelledby="tab-csv" hidden>
+      <div class="actions flush">
+        <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv,text/csv"></label>
+        <span class="hint" id="csvinfo">Needs a <code>Content</code> column. <code>URL</code> and <code>Title</code> columns are used when present.</span>
+      </div>
+      <div class="tablewrap short" id="csvpreview" hidden><table id="csvtable"></table></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 &middot; Options</h2>
+    <div class="sub">Applied to every post you generate.</div>
+    <div class="checks">
+      <label class="check"><input type="checkbox" id="emoji"> Allow emojis</label>
+      <label class="check"><input type="checkbox" id="hashtags" checked> Auto hashtags</label>
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="audience">Audience</label>
+        <input type="text" id="audience" placeholder="e.g. SaaS founders">
+      </div>
+      <div class="field">
+        <label for="voice">Voice</label>
+        <input type="text" id="voice" placeholder="e.g. pragmatic, data-driven">
+      </div>
+      <div class="field">
+        <label for="cta">Call to action <span class="note">(optional)</span></label>
+        <input type="text" id="cta" placeholder="e.g. Read the full guide on our blog">
+      </div>
+    </div>
+
+    <div class="estimate" id="est" hidden>
+      <div>Requests<b id="e-req">0</b></div>
+      <div>Input tokens (approx.)<b id="e-in">0</b></div>
+      <div>Output tokens (approx.)<b id="e-out">0</b></div>
+      <div>Estimated cost<b id="e-cost">$0.00</b></div>
+    </div>
+
+    <div class="actions">
+      <button class="accent" id="run" disabled>Generate posts</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <button class="ghost" id="clear">Clear</button>
+      <span class="hint" id="status" role="status" aria-live="polite">Paste an article to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+    <div class="keynote crit" id="err" hidden></div>
+  </div>
+
+  <div id="results" hidden>
+    <div class="keynote warn">Read every post against the article before it goes out. The model is told to stay faithful to the source, but it can still overstate or invent a detail.</div>
+
+    <div id="res-article" hidden>
+      <div class="section-head">
+        <h2>Your posts</h2>
+        <div class="actions flush"><button class="ghost" id="dl-article">Export posts CSV</button></div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="section-head"><h2 id="li-title">LinkedIn</h2><span class="hint">Edit any post in place before you copy it.</span></div>
+      <div id="li-list"></div>
+      <div class="section-head"><h2 id="tw-title">Tweets</h2><span class="hint">X counts up to 280 characters.</span></div>
+      <div id="tw-list"></div>
+    </div>
+
+    <div id="res-csv" hidden>
+      <div class="section-head">
+        <h2>Generated posts</h2>
+        <div class="actions flush">
+          <button class="ghost" id="copy10">Copy first 10 LinkedIn posts</button>
+          <button class="accent" id="dl-csv">Download CSV</button>
+        </div>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <div class="tablewrap"><table id="outtable"></table></div>
+      <p class="hint" id="outnote"></p>
+    </div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and content go only to OpenAI.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/ai-blog-to-social-post-transformer.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

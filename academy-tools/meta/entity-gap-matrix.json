@@ -1,0 +1,19 @@
+{
+ "slug": "entity-gap-matrix",
+ "title": "Entity Gap Matrix",
+ "short": "Compare your entity coverage against up to three competitors. Names are normalised before anything is compared — the step most gap analyses skip, and the reason most of them are wrong.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 4, Lesson 4.4",
+ "needs": "Nothing — no API calls at all",
+ "cost": "Free",
+ "inputs": "One entity export for you, and one for each competitor",
+ "outputs": "A shared / missing / unique / thin matrix, exportable as CSV",
+ "how": [
+  "Load your own corpus into the first slot.",
+  "Add up to three competitors. Pick them for comparability, not for ranking.",
+  "Press Compare, then read the four verdicts.",
+  "Filter to missing, and require two or more competitors before you act.",
+  "Export, and use it to score Coverage."
+ ],
+ "note": "Filter chrome and generic nouns out of every corpus first, not just your own — otherwise the top “gap” will be a word like “content”."
+}

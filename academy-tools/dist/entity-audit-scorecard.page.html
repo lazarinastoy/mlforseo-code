@@ -1,0 +1,91 @@
+<!-- wp:uagb/container {"block_id":"ab6a3bdd","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-ab6a3bdd alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-audit-scorecard.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Entity Audit Scorecard</h1>
+  <p class="lede">The 5C rubric as a tool: Clarity, Coverage, Consistency, Connection and Corroboration, scored 0–3 each at page and site level, with a prioritised fix list underneath.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Nothing — it runs entirely in your browser and makes no API calls</dd></div>
+      <div><dt>Cost</dt><dd>Free</dd></div>
+      <div><dt>Feed it</dt><dd>The CSVs the other tools export, or click the built-in example</dd></div>
+      <div><dt>You get back</dt><dd>A saved scorecard (JSON) and a CSV export</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Click “Load the MLforSEO baseline” to see a worked example on a real site.</li>
+      <li>Read the verdict first, then the five-dimension gauge.</li>
+      <li>Open a dimension card to see the numbers driving that score.</li>
+      <li>Work the “What to fix, in order” list — it is ranked by impact against effort.</li>
+      <li>Save the scorecard. It becomes the before state you compare against in 90 days.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> Saving is the step people skip, and it is the one that turns a report into a measurement.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+
+  <div class="masthead">
+    <div>
+      <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+      <h1>Entity Audit Scorecard</h1>
+      <p>Five diagnostics that decide whether machines understand your site. Scored 0&ndash;3 each, at page and site level.</p>
+    </div>
+    <div class="brandmark">5C &middot; CLARITY / COVERAGE / CONSISTENCY / CONNECTION / CORROBORATION</div>
+  </div>
+
+  <div class="controls">
+    <button class="accent" id="demo">Load the MLforSEO baseline</button>
+    <label class="file">Upload audit CSVs<input type="file" id="files" multiple accept=".csv"></label>
+    <button class="ghost" id="save">Save scorecard</button>
+    <label class="file">Compare to saved<input type="file" id="prev" accept=".json"></label>
+    <button class="ghost" id="csv">Export CSV</button>
+    <button class="ghost" id="print">Print / PDF</button>
+    <span class="hint" id="status">Load the baseline to see a worked example.</span>
+  </div>
+
+  <div id="report" hidden>
+    <div class="verdict">
+      <div>
+        <div class="eyebrow">Site verdict</div>
+        <h2 id="headline"></h2>
+        <div class="sub" id="subline"></div>
+      </div>
+      <div class="bigscore">
+        <div class="n"><span id="total"></span><span style="font-size:.42em;color:#B9A6DC">/15</span></div>
+        <div class="d" id="captured"></div>
+      </div>
+    </div>
+
+    <div class="gauge" id="gauge"></div>
+    <div class="grid" id="cards"></div>
+
+    <div class="section-head">
+      <h2>What to fix, in order</h2>
+      <span class="hint">Ranked by impact &times; effort &times; confidence</span>
+    </div>
+    <ol class="fixes" id="fixes"></ol>
+
+    <div id="diffwrap" hidden>
+      <div class="section-head"><h2>Movement since last audit</h2></div>
+      <div class="diff" id="diff"></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Runs entirely in your browser. Nothing is uploaded.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/entity-audit-scorecard.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

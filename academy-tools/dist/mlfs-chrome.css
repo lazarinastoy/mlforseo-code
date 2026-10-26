@@ -1,0 +1,55 @@
+
+.mlfs-page{--ink:#1A0B32;--surface:#251046;--surface-2:#2e1650;--purple:#8448ef;
+  --purple-mid:#6b36c2;--lav:#CBADFF;--lav-out:#c5a4fe;--lav-soft:#f6eafe;
+  --yellow:#ffde59;--head:#f6eafe;--body:#d9c9e6;--muted:#8a7aa0;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--body);background:var(--ink);
+  padding:48px 20px 8px;margin:0 auto;max-width:1180px;box-sizing:border-box}
+.mlfs-page *{box-sizing:border-box}
+.mlfs-page .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--lav-out);font-weight:600;margin:0 0 10px}
+.mlfs-page h1{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;
+  font-size:clamp(30px,4.4vw,46px);line-height:1.08;letter-spacing:-.02em;
+  color:var(--head);margin:0 0 16px}
+.mlfs-page .lede{font-size:17px;line-height:1.6;color:var(--body);max-width:68ch;margin:0 0 30px}
+.mlfs-page .glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:12px;margin:0 0 34px}
+.mlfs-page .glance div{background:var(--surface);border:1px solid #3a2060;
+  border-radius:8px;padding:15px 17px}
+.mlfs-page .glance dt{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--lav-out);font-weight:700;margin:0 0 6px}
+.mlfs-page .glance dd{margin:0;font-size:13.5px;line-height:1.5;color:var(--head)}
+.mlfs-page h2{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:700;
+  font-size:23px;color:var(--head);margin:0 0 16px;letter-spacing:-.01em}
+.mlfs-page ol.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 28px;
+  display:grid;gap:10px}
+.mlfs-page ol.steps li{counter-increment:s;position:relative;padding:13px 16px 13px 52px;
+  background:var(--surface);border:1px solid #3a2060;border-radius:8px;
+  font-size:14.5px;line-height:1.55;color:var(--body)}
+.mlfs-page ol.steps li::before{content:counter(s);position:absolute;left:15px;top:12px;
+  width:25px;height:25px;border-radius:6px;background:var(--purple);color:#fff;
+  font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.mlfs-page .note{background:var(--surface-2);border-left:3px solid var(--yellow);
+  border-radius:0 8px 8px 0;padding:15px 18px;margin:0 0 36px;font-size:14px;
+  line-height:1.6;color:var(--head)}
+.mlfs-page .note b{color:var(--yellow)}
+.mlfs-page .toolwrap{background:var(--lav-soft);border-radius:12px;padding:6px;
+  margin:0 0 34px;border:1px solid #3a2060}
+/* The page chrome already carries the title, eyebrow and description, so the
+   tool's own masthead would repeat all three. Hide it inside the page; the
+   standalone tool file still shows it. */
+.mlfs-page .toolwrap .masthead{display:none}
+.mlfs-page .toolwrap .wrap{padding-top:26px}
+.mlfs-page .cta{background:var(--surface);border:1px solid var(--lav-out);
+  border-radius:12px;padding:26px 28px;display:flex;gap:22px;align-items:center;
+  flex-wrap:wrap;justify-content:space-between;margin:0 0 20px}
+.mlfs-page .cta h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-size:20px;
+  color:var(--head);margin:0 0 6px;font-weight:700}
+.mlfs-page .cta p{margin:0;font-size:14px;color:var(--body);max-width:56ch}
+.mlfs-page .cta a{background:var(--yellow);color:var(--ink);text-decoration:none;
+  font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:7px;white-space:nowrap}
+.mlfs-page .cta a:hover{background:#ffe985}
+.mlfs-page .backlink{font-size:13.5px;color:var(--lav-out);text-decoration:none}
+.mlfs-page .backlink:hover{color:var(--yellow)}
+@media (max-width:640px){.mlfs-page{padding:32px 14px 8px}
+  .mlfs-page .cta{flex-direction:column;align-items:flex-start}}

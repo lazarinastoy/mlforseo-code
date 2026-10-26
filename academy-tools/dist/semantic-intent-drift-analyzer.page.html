@@ -1,0 +1,147 @@
+<!-- wp:uagb/container {"block_id":"5eb9faf1","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-5eb9faf1 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/semantic-intent-drift-analyzer.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; Semantic AI-powered SEO Keyword Research</p>
+  <h1>Semantic Intent Drift Analyzer</h1>
+  <p class="lede">Score how far each query fan-out drifts from the intent of your target query, and see the spread in a 3D plot.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Nothing: it runs in your browser</dd></div>
+      <div><dt>Cost</dt><dd>Free. Semantic Boost downloads a model of about 27 MB the first time you use it.</dd></div>
+      <div><dt>Feed it</dt><dd>A target query and its fan-outs, one per line, or a CSV with Target Query and Query Fan-Outs columns</dd></div>
+      <div><dt>You get back</dt><dd>A similarity score, drift score and drift band per fan-out, a 3D plot, and a CSV export</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Enter your target query and paste the fan-outs, one per line.</li>
+      <li>Switch on Semantic Boost if synonyms and context should count, not just shared words.</li>
+      <li>Press Analyse drift and read the table from the top: the closest fan-outs come first.</li>
+      <li>Hover the nodes in the 3D plot to see each fan-out&#x27;s scores.</li>
+      <li>Export the CSV, or upload a CSV of query pairs to score a whole list at once.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> With Semantic Boost on, even unrelated queries rarely score below about 30% similarity, so compare fan-outs with each other rather than treating the drift bands as fixed verdicts.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; Semantic AI-powered SEO Keyword Research</div>
+    <h1>Semantic Intent Drift Analyzer</h1>
+    <p>See how far each query fan-out drifts from the intent of your target query, scored and plotted in 3D. Runs in your browser, with no API key.</p>
+  </div>
+
+  <div class="split">
+    <div class="panel">
+      <h2>Your queries</h2>
+      <div class="sub">One target query and the fan-outs you want to check against it. Each fan-out gets a similarity score; drift is what is left (100 minus similarity).</div>
+      <div class="field">
+        <label for="target">Target query</label>
+        <input type="text" id="target" value="best running shoes for marathon training" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="fanouts">Query fan-outs <span class="note">one per line</span></label>
+        <textarea id="fanouts" spellcheck="false">running shoes for beginners
+marathon training plans
+athletic footwear reviews
+cheap running sneakers
+how to train for 5k race
+best nike running shoes
+long distance running tips
+running shoe comparison
+waterproof trail running shoes
+compression socks for runners</textarea>
+      </div>
+      <div class="boost">
+        <label class="check"><input type="checkbox" id="useToggle"> Semantic Boost (USE)</label>
+        <div class="hint">Adds Google&rsquo;s Universal Sentence Encoder, running in this tab, so synonyms and context count, not just shared words. The first run downloads the model, about 27&nbsp;MB, so allow a minute.</div>
+      </div>
+      <div class="actions">
+        <button class="accent" id="analyzeBtn">Analyse drift</button>
+        <span class="hint" id="status" aria-live="polite">Word-overlap scoring is ready.</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>3D vector space</h2>
+      <div class="sub">The centre node is your target query. Each fan-out sits as far out as its drift score, coloured by drift band. Hover a node for its scores.</div>
+      <div class="stage" id="stage">
+        <canvas id="plot" role="img" aria-label="3D plot of each fan-out's drift from the target query. The same scores are in the results table."></canvas>
+        <div class="plotnote" id="plotnote" hidden></div>
+      </div>
+      <div class="actions">
+        <span class="hint">Drag to rotate &middot; right-drag to pan &middot; scroll to zoom</span>
+      </div>
+      <div class="legend" id="legend">
+        <span><i class="sw target"></i>Target query</span>
+        <span><i class="sw b-minimal"></i>Minimal <em>0&ndash;30%</em></span>
+        <span><i class="sw b-low"></i>Low <em>30&ndash;50%</em></span>
+        <span><i class="sw b-medium"></i>Medium <em>50&ndash;70%</em></span>
+        <span><i class="sw b-high"></i>High <em>70&ndash;85%</em></span>
+        <span><i class="sw b-extreme"></i>Extreme <em>85&ndash;100%</em></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+    <div class="section-head">
+      <h2>Drift results</h2>
+      <div class="actions">
+        <button class="ghost" id="exportBtn" disabled>Export CSV</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="table"></table></div>
+  </div>
+
+  <div class="section-head">
+    <h2>Bulk mode</h2>
+    <span class="hint">Many target and fan-out pairs at once</span>
+  </div>
+  <div class="panel">
+    <h2>Upload a CSV of query pairs</h2>
+    <div class="sub">One target query and one fan-out per row. Each row is scored on its own, Semantic Boost applies if it is switched on above, and the results download as a CSV when processing finishes.</div>
+    <div class="actions">
+      <label class="file">Choose CSV<input type="file" id="csvUpload" accept=".csv,text/csv"></label>
+      <button class="ghost" id="bulkAgain" hidden>Download results again</button>
+      <span class="hint" id="bulkStatus" aria-live="polite">Nothing uploaded yet.</span>
+    </div>
+    <progress id="bulkProg" value="0" max="100" hidden></progress>
+    <div class="keynote">
+      <p><strong>Format.</strong> The first row holds the headers <code>Target Query</code> and <code>Query Fan-Outs</code>. Wrap a query in quotes if it contains a comma.</p>
+      <div class="sample">Target Query,Query Fan-Outs
+"best running shoes","running shoes for beginners"
+"best running shoes","marathon training shoes"
+"best running shoes","athletic footwear reviews"</div>
+      <p>If those headers are missing, the first two columns are used.</p>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>How the score is calculated</h2>
+  </div>
+  <div class="panel">
+    <div class="calc" id="calc"></div>
+    <div class="keynote" id="calcNote"></div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your queries are never uploaded; the optional encoder model is downloaded to this tab.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+
+  <div class="tip" id="tip" hidden></div>
+</div>
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/semantic-intent-drift-analyzer.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

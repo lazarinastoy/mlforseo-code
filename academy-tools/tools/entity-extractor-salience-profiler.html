@@ -1,0 +1,534 @@
+<meta charset="utf-8">
+<title>Entity Extractor &amp; Salience Profiler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --ground:#FAF8FD; --panel:#FFFFFF; --sunk:#F3EFFA;
+  --ink:#1A0B32; --body:#3A2E4D; --muted:#6B5F80;
+  --line:#E4DDF0; --line-strong:#CFC3E4;
+  --accent:#8448ef; --accent-ink:#FFFFFF; --signal:#ffde59;
+  --good:#2E8B6F; --warn:#D98324; --crit:#C4384F;
+  --track:#E4DDF0;
+  --shadow:0 1px 2px rgba(26,11,50,.06), 0 8px 24px -12px rgba(26,11,50,.18);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+    --ink:#F6F2FE; --body:#CDC1E2; --muted:#9587B0;
+    --line:#33224F; --line-strong:#462F6B;
+    --accent:#A277F5; --accent-ink:#15071F;
+    --good:#4FB894; --warn:#E9A24A; --crit:#E86A80; --track:#33224F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#140823; --panel:#1E1033; --sunk:#170C29;
+  --ink:#F6F2FE; --body:#CDC1E2; --muted:#9587B0;
+  --line:#33224F; --line-strong:#462F6B;
+  --accent:#A277F5; --accent-ink:#15071F;
+  --good:#4FB894; --warn:#E9A24A; --crit:#E86A80; --track:#33224F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--body);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,system-ui,sans-serif;
+  color:var(--ink); text-wrap:balance; margin:0}
+.wrap{max-width:1180px; margin:0 auto; padding:32px 24px 96px}
+.eyebrow{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--muted); font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono); font-size:12px}
+
+.masthead{padding-bottom:18px; border-bottom:2px solid var(--ink); margin-bottom:24px}
+.masthead h1{font-size:clamp(25px,3.6vw,35px); font-weight:800; letter-spacing:-.02em; margin-top:4px}
+.masthead p{margin:8px 0 0; color:var(--muted); max-width:62ch; font-size:14px}
+
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:5px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:14px}
+.panel h2{font-size:16px; font-weight:600; margin-bottom:4px}
+.panel .sub{font-size:13px; color:var(--muted); margin-bottom:14px}
+
+.field{display:flex; flex-direction:column; gap:5px; margin-bottom:13px}
+.field label{font-size:12px; font-weight:600; color:var(--ink)}
+.field .note{font-size:12px; color:var(--muted)}
+input[type=text],input[type=password],textarea,select{
+  font:inherit; font-size:14px; color:var(--ink); background:var(--sunk);
+  border:1px solid var(--line-strong); border-radius:3px; padding:9px 11px; width:100%}
+textarea{min-height:130px; resize:vertical; font-size:13.5px; line-height:1.5}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+.row{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:13px}
+
+button{font:inherit; font-weight:600; font-size:13.5px; cursor:pointer;
+  border:1px solid var(--ink); background:var(--ink); color:var(--ground);
+  padding:9px 15px; border-radius:3px; transition:opacity .15s}
+button.accent{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+button.ghost{background:transparent; color:var(--ink)}
+button:disabled{opacity:.45; cursor:not-allowed}
+button:hover:not(:disabled){opacity:.88}
+button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+label.file{display:inline-flex; align-items:center; gap:8px; font-size:13.5px;
+  font-weight:600; color:var(--ink); border:1px dashed var(--line-strong);
+  padding:8px 14px; border-radius:3px; cursor:pointer}
+label.file:hover{border-color:var(--accent); color:var(--accent)}
+input[type=file]{position:absolute; width:1px; height:1px; opacity:0}
+.actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px}
+.hint{color:var(--muted); font-size:12.5px}
+
+.keynote{background:var(--sunk); border-left:3px solid var(--accent);
+  padding:11px 14px; border-radius:0 3px 3px 0; font-size:12.5px; color:var(--body); margin-top:10px}
+.warn{border-left-color:var(--warn)}
+.warn strong{color:var(--warn)}
+
+.estimate{display:flex; gap:22px; flex-wrap:wrap; padding:13px 16px; background:var(--sunk);
+  border:1px solid var(--line); border-radius:4px; margin-top:12px}
+.estimate div{font-size:12px; color:var(--muted)}
+.estimate b{display:block; font-size:18px; color:var(--ink);
+  font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-variant-numeric:tabular-nums}
+
+progress{width:100%; height:6px; appearance:none; border:0; margin-top:12px}
+progress::-webkit-progress-bar{background:var(--track); border-radius:3px}
+progress::-webkit-progress-value{background:var(--accent); border-radius:3px}
+progress::-moz-progress-bar{background:var(--accent); border-radius:3px}
+
+/* summary tiles */
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:14px}
+.tile{background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:16px;
+  box-shadow:var(--shadow); border-top:3px solid var(--lvl,var(--accent))}
+.tile .k{font-size:11.5px; color:var(--muted); font-weight:600; letter-spacing:.04em;
+  text-transform:uppercase}
+.tile .v{font-family:"Bricolage Grotesque",sans-serif; font-weight:800; font-size:30px;
+  color:var(--ink); line-height:1.1; margin-top:6px; font-variant-numeric:tabular-nums}
+.tile .d{font-size:12px; color:var(--muted); margin-top:3px}
+
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:5px; background:var(--panel)}
+table{border-collapse:collapse; width:100%; font-size:13px; min-width:760px}
+th{text-align:left; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); font-weight:700; padding:11px 12px; border-bottom:1px solid var(--line-strong);
+  background:var(--sunk); position:sticky; top:0; cursor:pointer; white-space:nowrap}
+th:hover{color:var(--accent)}
+td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.bar{display:inline-block; height:7px; background:var(--accent); border-radius:1px;
+  vertical-align:middle; margin-right:7px; min-width:2px}
+.type{font-size:10.5px; font-weight:700; letter-spacing:.05em; padding:2px 6px;
+  border-radius:2px; background:var(--sunk); color:var(--muted); border:1px solid var(--line-strong)}
+.flag{font-size:10.5px; font-weight:700; letter-spacing:.05em; padding:2px 6px;
+  border-radius:2px; color:#fff; background:var(--crit)}
+.flag.ok{background:var(--good)}
+.url{max-width:330px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  font-family:var(--mono); font-size:11.5px; color:var(--muted)}
+.tabs{display:flex; gap:4px; margin-bottom:12px; flex-wrap:wrap}
+.tabs button{background:transparent; border:1px solid var(--line-strong); color:var(--muted)}
+.tabs button[aria-selected=true]{background:var(--ink); border-color:var(--ink); color:var(--ground)}
+.section-head{display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; margin:34px 0 13px; flex-wrap:wrap}
+.section-head h2{font-size:21px; font-weight:600}
+footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:12.5px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+@media print{.panel,.actions,footer,.tabs{display:none} .tablewrap{border:0}}
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Entity Extractor &amp; Salience Profiler</h1>
+    <p>Extract entities from your content with Google&rsquo;s Natural Language API, then roll them up into one profile per URL &mdash; so you can see which pages are about something other than what you intended.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your API key</h2>
+    <div class="sub">Held in this tab only. Never sent anywhere except Google.</div>
+    <div class="field">
+      <label for="key">Google Cloud API key <span class="note">&mdash; with the Cloud Natural Language API enabled</span></label>
+      <input type="password" id="key" placeholder="AIza…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="row">
+      <div class="field">
+        <label for="version">API version</label>
+        <select id="version">
+          <option value="v1" selected>v1 &mdash; returns salience (recommended)</option>
+          <option value="v2">v2 &mdash; newer model, no salience</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="floor">Salience floor for &ldquo;dominant&rdquo;</label>
+        <input type="text" id="floor" value="0.05">
+      </div>
+    </div>
+    <div class="keynote warn" id="vnote" hidden>
+      <strong>v2 has no salience field.</strong> Prominence scoring in this course depends on it,
+      so v2 falls back to ranking by mention count. Use v1 unless you have a reason not to.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your content</h2>
+    <div class="sub">Paste one page, or upload a crawl export. Browsers cannot fetch other sites directly, so content comes from your crawler &mdash; the same export Lesson 2.1 produces.</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-mode="paste">Paste text</button>
+      <button role="tab" aria-selected="false" data-mode="csv">Upload crawl CSV</button>
+    </div>
+
+    <div id="pane-paste">
+      <div class="row">
+        <div class="field">
+          <label for="purl">URL or label <span class="note">(optional)</span></label>
+          <input type="text" id="purl" placeholder="/blog/my-page">
+        </div>
+        <div class="field">
+          <label for="pintent">Intended entity <span class="note">&mdash; what should this page be about?</span></label>
+          <input type="text" id="pintent" placeholder="e.g. entity extraction">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="ptitle">Page title <span class="note">(optional)</span></label>
+          <input type="text" id="ptitle" placeholder="Entity Extraction with the Google NLP API">
+        </div>
+        <div class="field">
+          <label for="pmeta">Meta description <span class="note">(optional)</span></label>
+          <input type="text" id="pmeta" placeholder="How to extract entities from page content…">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ptext">Page text</label>
+        <textarea id="ptext" placeholder="Paste the main body content — not the nav or footer."></textarea>
+      </div>
+    </div>
+
+    <div id="pane-csv" hidden>
+      <div class="actions">
+        <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv"></label>
+        <span class="hint" id="csvinfo">Needs an address/URL column and a content column. <code>intended_entity</code> is used if present.</span>
+      </div>
+    </div>
+
+    <div class="estimate" id="est" hidden>
+      <div>Documents<b id="e-docs">0</b></div>
+      <div>Billable units<b id="e-units">0</b></div>
+      <div>Free allowance left this month<b id="e-free">5,000</b></div>
+      <div>Estimated cost<b id="e-cost">$0.00</b></div>
+    </div>
+
+    <div class="actions" style="margin-top:14px">
+      <button class="accent" id="run" disabled>Extract entities</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <span class="hint" id="status">Add a key and some content to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+  </div>
+
+  <div id="results" hidden>
+    <div class="tiles" id="tiles"></div>
+
+    <div class="section-head">
+      <h2>Page profiles</h2>
+      <div class="actions">
+        <button class="ghost" id="dl-profiles">Export profiles CSV</button>
+        <button class="ghost" id="dl-entities">Export entities CSV</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="profiles"></table></div>
+
+    <div class="section-head"><h2>Every entity found</h2>
+      <span class="hint">Click a column to sort</span></div>
+    <div class="tablewrap"><table id="entities"></table></div>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and content go only to Google.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const NLP = v => `https://language.googleapis.com/${v}/documents:analyzeEntities`;
+const MAX_CHARS = 60000, FREE_UNITS = 5000, PRICE = 0.0010;
+const units = t => t ? Math.max(1, Math.ceil(t.length/1000)) : 0;
+const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm = s => String(s??"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
+
+let DOCS = [], ENTITIES = [], PROFILES = [], abort = false;
+
+/* ---- mode tabs ---- */
+document.querySelectorAll('.tabs [role=tab]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tabs [role=tab]').forEach(x => x.setAttribute('aria-selected', x===b));
+  $("pane-paste").hidden = b.dataset.mode !== "paste";
+  $("pane-csv").hidden   = b.dataset.mode !== "csv";
+  if (b.dataset.mode === "paste") { DOCS = []; refresh(); }
+});
+$("version").onchange = e => { $("vnote").hidden = e.target.value !== "v2"; };
+
+/* ---- CSV ---- */
+function parseCSV(text){
+  const rows=[]; let row=[], cell="", q=false;
+  for (let i=0;i<text.length;i++){
+    const c=text[i];
+    if (q){ if(c==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; } else cell+=c; }
+    else if (c==='"') q=true;
+    else if (c===","){ row.push(cell); cell=""; }
+    else if (c==="\n"){ row.push(cell); rows.push(row); row=[]; cell=""; }
+    else if (c!=="\r") cell+=c;
+  }
+  if (cell||row.length){ row.push(cell); rows.push(row); }
+  const raw=(rows.shift()||[]).map(h=>h.trim());
+  const {head, dupes} = dedupeHeaders(raw);
+  return {head, dupes, rows:rows.filter(r=>r.some(v=>v!==""))
+    .map(r=>Object.fromEntries(head.map((h,i)=>[h, r[i]??""])))};
+}
+const pick = (head, names) => head.find(h => names.includes(h.trim().toLowerCase()));
+
+// Duplicate column names would silently collapse via Object.fromEntries (last
+// value wins). Suffix repeats so every column survives and the user is told.
+function dedupeHeaders(head){
+  const seen = new Map(), out = [], dupes = [];
+  for (const h of head){
+    const k = h.trim();
+    if (seen.has(k)){ const n = seen.get(k)+1; seen.set(k,n); dupes.push(k); out.push(`${k} (${n})`); }
+    else { seen.set(k,1); out.push(k); }
+  }
+  return {head: out, dupes: [...new Set(dupes)]};
+}
+
+$("csvfile").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  let parsed;
+  try { parsed = parseCSV(await f.text()); }
+  catch { $("csvinfo").innerHTML = "<strong>That file could not be read as CSV.</strong>"; return; }
+  const {head, rows, dupes} = parsed;
+  if (!rows.length){ $("csvinfo").innerHTML = "<strong>That CSV has a header but no rows.</strong>"; DOCS=[]; refresh(); return; }
+  const uCol = pick(head, ["address","url","page","link"]);
+  const cCol = pick(head, ["content","body","text","main content","extracted content"]);
+  const iCol = pick(head, ["intended_entity","intended entity","target entity","intent"]);
+  const tCol = pick(head, ["title 1","title","page title"]);
+  const hCol = pick(head, ["h1-1","h1","h1 1"]);
+  const mCol = pick(head, ["meta description 1","meta description","description"]);
+  if (!cCol){
+    $("csvinfo").innerHTML = `<strong>No content column found.</strong> Looked for content, body, text. Columns present: ${esc(head.slice(0,10).join(", "))}`;
+    DOCS=[]; refresh(); return;
+  }
+  DOCS = rows.map((r,i) => ({
+    url: (uCol ? r[uCol] : "") || `row ${i+2}`,
+    text: (r[cCol]||"").slice(0, MAX_CHARS),
+    intended: iCol ? (r[iCol]||"") : "",
+    title: tCol ? (r[tCol]||"") : "", h1: hCol ? (r[hCol]||"") : "",
+    meta: mCol ? (r[mCol]||"") : ""
+  })).filter(d => d.text.trim());
+  const skipped = rows.length - DOCS.length;
+  $("csvinfo").innerHTML = `${dupes.length?`<strong>Duplicate column name(s): ${esc(dupes.join(", "))}</strong> — renamed so none are lost. ` : ""}<strong>${DOCS.length}</strong> documents ready${skipped?` · ${skipped} row(s) had no content and were skipped`:""}${uCol?"":" · no URL column, using row numbers"}${iCol?" · intended_entity found":""}${tCol||hCol||mCol?" · title/H1/meta found, placement will be scored":""}`;
+  refresh();
+};
+
+["ptext","purl","pintent","ptitle","pmeta","key"].forEach(id => $(id).addEventListener("input", refresh));
+
+function currentDocs(){
+  if (!$("pane-csv").hidden) return DOCS;
+  const t = $("ptext").value.trim();
+  return t ? [{url: $("purl").value.trim() || "pasted text", text: t.slice(0,MAX_CHARS),
+               intended: $("pintent").value.trim(), title: $("ptitle").value.trim(),
+               h1: "", meta: $("pmeta").value.trim()}] : [];
+}
+
+function refresh(){
+  const docs = currentDocs();
+  const u = docs.reduce((a,d)=>a+units(d.text),0);
+  const billable = Math.max(0, u - FREE_UNITS);
+  $("est").hidden = !docs.length;
+  $("e-docs").textContent = docs.length.toLocaleString();
+  $("e-units").textContent = u.toLocaleString();
+  $("e-free").textContent = Math.max(0, FREE_UNITS - u).toLocaleString();
+  $("e-cost").textContent = "$" + (billable*PRICE).toFixed(2);
+  $("run").disabled = !docs.length || !$("key").value.trim();
+  if (!$("key").value.trim() && docs.length) $("status").textContent = "Add your API key to run.";
+  else if (docs.length) $("status").textContent = `${docs.length} document(s) ready.`;
+}
+
+/* ---- extraction ---- */
+async function analyze(doc, key, version){
+  const res = await fetch(`${NLP(version)}?key=${encodeURIComponent(key)}`, {
+    method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({document:{type:"PLAIN_TEXT", content:doc.text}, encodingType:"UTF8"})
+  });
+  if (!res.ok){
+    let msg = `HTTP ${res.status}`;
+    try { const b = await res.json(); msg = b.error?.message || msg; } catch {}
+    const e = new Error(msg); e.status = res.status; throw e;
+  }
+  return res.json();
+}
+
+function explainError(err){
+  const m = (err.message||"").toLowerCase();
+  if (err.status === 400 && m.includes("api key")) return "That API key isn't valid. Check for stray spaces.";
+  if (err.status === 403 && m.includes("not been used")) return "The Cloud Natural Language API isn't enabled on this key's project. Enable it in the Google Cloud console, then wait a minute.";
+  if (err.status === 403 && m.includes("billing")) return "Billing isn't enabled on that Google Cloud project. The NLP API needs it even inside the free tier.";
+  if (err.status === 403) return "That key is rejected or restricted. Check its API restrictions.";
+  if (err.status === 429) return "Rate limited by Google. Wait a minute and run again — completed documents are kept.";
+  return err.message || "Request failed.";
+}
+
+$("stop").onclick = () => { abort = true; $("status").textContent = "Stopping…"; };
+
+$("run").onclick = async () => {
+  const key = $("key").value.trim(), version = $("version").value;
+  const docs = currentDocs(), floor = parseFloat($("floor").value) || 0.05;
+  abort = false;
+  ENTITIES = []; PROFILES = [];
+  $("run").disabled = true; $("stop").hidden = false;
+  $("prog").hidden = false; $("prog").max = docs.length; $("prog").value = 0;
+
+  let done = 0, failed = 0, firstError = null;
+  for (const doc of docs){
+    if (abort) break;
+    try {
+      const r = await analyze(doc, key, version);
+      const ents = (r.entities||[]).map(e => ({
+        url: doc.url, entity: e.name, type: e.type,
+        salience: e.salience ?? null,
+        mentions: (e.mentions||[]).length,
+        proper: (e.mentions||[]).filter(m=>m.type==="PROPER").length,
+        mid: e.metadata?.mid || "", wiki: e.metadata?.wikipedia_url || ""
+      }));
+      ENTITIES.push(...ents);
+      ents.sort((a,b) => (b.salience ?? b.mentions/100) - (a.salience ?? a.mentions/100));
+      const top = ents[0];
+      const dominant = top && (top.salience === null ? top.mentions >= 2 : top.salience >= floor) ? top : null;
+      const dn = dominant ? norm(dominant.entity) : "";
+      const inField = v => dn && norm(v||"").includes(dn) ? "yes" : "no";
+      PROFILES.push({
+        url: doc.url,
+        entity_count: ents.length,
+        dominant_entity: dominant ? dominant.entity : "",
+        dominant_type: dominant ? dominant.type : "",
+        dominant_salience: dominant && dominant.salience !== null ? dominant.salience : "",
+        dominant_mid: dominant ? dominant.mid : "",
+        has_dominant_entity: dominant ? "yes" : "no",
+        dominant_in_title: inField(doc.title),
+        dominant_in_h1: inField(doc.h1),
+        dominant_in_meta: inField(doc.meta),
+        intended_entity: doc.intended || "",
+        intent_match: !doc.intended ? "" :
+               (dominant && dn === norm(doc.intended)) ? "ok" : "MISMATCH",
+        _mentions: dominant ? dominant.mentions : 0
+      });
+    } catch(err){
+      failed++; if (!firstError) firstError = err;
+      if (err.status === 400 || err.status === 403){ abort = true; }
+    }
+    done++; $("prog").value = done;
+    $("status").textContent = `${done}/${docs.length} processed${failed?` · ${failed} failed`:""}`;
+  }
+
+  $("stop").hidden = true; $("prog").hidden = true; $("run").disabled = false;
+  if (firstError && !ENTITIES.length){ $("status").textContent = explainError(firstError); return; }
+  $("status").textContent = firstError
+    ? `Done with errors — ${explainError(firstError)}`
+    : `Done. ${ENTITIES.length} entity mentions across ${PROFILES.length} document(s).`;
+  render(floor);
+};
+
+/* ---- render ---- */
+function render(floor){
+  if (!PROFILES.length){ $("results").hidden = true; return; }
+  $("results").hidden = false;
+  const noDom = PROFILES.filter(p => p.has_dominant_entity === "no").length;
+  const withIntent = PROFILES.filter(p => p.intended_entity);
+  const mismatch = withIntent.filter(p => p.intent_match === "MISMATCH").length;
+  const withMid = ENTITIES.filter(e => e.mid).length;
+
+  $("tiles").innerHTML = [
+    ["Documents", PROFILES.length, "profiled", "var(--accent)"],
+    ["Entity mentions", ENTITIES.length.toLocaleString(), `${new Set(ENTITIES.map(e=>norm(e.entity))).size} distinct`, "var(--accent)"],
+    ["No dominant entity", noDom, noDom ? "machines can't tell the subject" : "every page has a subject",
+      noDom ? "var(--crit)" : "var(--good)"],
+    withIntent.length
+      ? ["Intent mismatch", mismatch, `of ${withIntent.length} with an intended entity`, mismatch ? "var(--crit)" : "var(--good)"]
+      : ["Carrying a MID", `${Math.round(withMid/ENTITIES.length*100)}%`, "linked to a graph node", "var(--accent)"]
+  ].map(([k,v,d,c]) => `<div class="tile" style="--lvl:${c}"><div class="k">${k}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join("");
+
+  const hasIntent = withIntent.length > 0;
+  $("profiles").innerHTML = `<thead><tr>
+      <th>URL</th><th>Dominant entity</th><th>Type</th><th class="n">Salience</th>
+      <th class="n">Mentions</th><th class="n">Entities</th>${hasIntent?"<th>Intended</th><th>Verdict</th>":""}
+    </tr></thead><tbody>${
+    PROFILES.map(p => `<tr>
+      <td class="url" title="${esc(p.url)}">${esc(p.url)}</td>
+      <td>${p.dominant_entity ? esc(p.dominant_entity) : '<span class="flag">none</span>'}</td>
+      <td>${p.dominant_type ? `<span class="type">${esc(p.dominant_type)}</span>` : ""}</td>
+      <td class="n">${p.dominant_salience === "" ? "&mdash;" : Number(p.dominant_salience).toFixed(3)}</td>
+      <td class="n">${p._mentions}</td><td class="n">${p.entity_count}</td>
+      ${hasIntent ? `<td>${esc(p.intended_entity)}</td><td>${
+        p.intent_match === "MISMATCH" ? '<span class="flag">mismatch</span>'
+        : p.intent_match === "ok" ? '<span class="flag ok">ok</span>' : ""}</td>` : ""}
+    </tr>`).join("")}</tbody>`;
+
+  const maxSal = Math.max(...ENTITIES.map(e => e.salience ?? 0), 0.0001);
+  const rows = ENTITIES.slice().sort((a,b)=>(b.salience??0)-(a.salience??0));
+  const head = [["entity","Entity"],["type","Type"],["salience","Salience"],
+                ["mentions","Mentions"],["proper","Proper"],["mid","MID"],["url","URL"]];
+  const draw = data => `<thead><tr>${head.map(([k,l],i)=>
+      `<th data-k="${k}" class="${i>=2&&i<=4?'n':''}">${l}</th>`).join("")}</tr></thead>
+    <tbody>${data.slice(0,600).map(e => `<tr>
+      <td>${esc(e.entity)}</td>
+      <td><span class="type">${esc(e.type)}</span></td>
+      <td class="n">${e.salience===null?"&mdash;":
+        `<span class="bar" style="width:${Math.max(2,(e.salience/maxSal)*46)}px"></span>${e.salience.toFixed(3)}`}</td>
+      <td class="n">${e.mentions}</td><td class="n">${e.proper}</td>
+      <td class="mono">${e.mid ? esc(e.mid) : '<span style="color:var(--muted)">&mdash;</span>'}</td>
+      <td class="url" title="${esc(e.url)}">${esc(e.url)}</td>
+    </tr>`).join("")}</tbody>`;
+  $("entities").innerHTML = draw(rows);
+  let dir = {};
+  $("entities").querySelectorAll("th").forEach(th => th.onclick = () => {
+    const k = th.dataset.k; dir[k] = !dir[k];
+    rows.sort((a,b) => {
+      const x=a[k]??"", y=b[k]??"";
+      const r = typeof x === "number" && typeof y === "number" ? x-y : String(x).localeCompare(String(y));
+      return dir[k] ? r : -r;
+    });
+    $("entities").innerHTML = draw(rows);
+    $("entities").querySelectorAll("th").forEach(t2 => t2.onclick = th.onclick);
+  });
+}
+
+/* ---- export ---- */
+async function offerFile(filename, text, mime){
+  const api = (typeof claude !== "undefined" && claude.use)
+    ? await claude.use("downloads").catch(()=>null) : null;
+  if (api){
+    try { await api.save({filename, data:text}); return "saved"; }
+    catch(e){ return e && e.code === "declined" ? "declined" : "failed"; }
+  }
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([text],{type:mime}));
+  a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  return "saved";
+}
+const toCSV = (rows, cols) => {
+  const q = v => `"${String(v??"").replace(/"/g,'""')}"`;
+  return [cols.map(q).join(",")].concat(
+    rows.map(r => cols.map(c => q(r[c])).join(","))).join("\n");
+};
+$("dl-profiles").onclick = async () => {
+  const r = await offerFile("page_entity_profiles.csv",
+    toCSV(PROFILES, ["url","entity_count","dominant_entity","dominant_type","dominant_salience","dominant_mid","has_dominant_entity","dominant_in_title","dominant_in_h1","dominant_in_meta","intended_entity","intent_match"]), "text/csv");
+  $("status").textContent = r==="saved" ? "Profiles exported." : "Export cancelled.";
+};
+$("dl-entities").onclick = async () => {
+  const r = await offerFile("entity_mentions.csv",
+    toCSV(ENTITIES, ["url","entity","type","salience","mentions","proper","mid","wiki"]), "text/csv");
+  $("status").textContent = r==="saved" ? "Entities exported." : "Export cancelled.";
+};
+
+refresh();
+</script>

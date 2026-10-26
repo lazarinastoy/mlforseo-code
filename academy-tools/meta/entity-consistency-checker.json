@@ -1,0 +1,19 @@
+{
+ "slug": "entity-consistency-checker",
+ "title": "Entity Consistency Checker",
+ "short": "Find the entities you refer to by more than one name, and the ones Google has quietly merged into something else. No API calls, no cost.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 3, Lesson 3.3",
+ "needs": "Nothing — it runs entirely in your browser",
+ "cost": "Free",
+ "inputs": "entity_mentions.csv from the Extractor",
+ "outputs": "A cluster report you can export",
+ "how": [
+  "Upload the entity export. The MID column is what makes this work.",
+  "Read the high-severity clusters first — those share an identifier.",
+  "Decide, per cluster, whether the variants are one thing or several.",
+  "Choose one canonical form and record it.",
+  "Leave case-only differences switched off unless you have a specific reason."
+ ],
+ "note": "Not every cluster is an error. “Google” and “Google Cloud” are different things; “LLM” and “LLMs” are not."
+}

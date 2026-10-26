@@ -1,0 +1,19 @@
+{
+ "slug": "entity-extractor-salience-profiler",
+ "title": "Entity Extractor & Salience Profiler",
+ "short": "Pull entities out of your content with Google's Natural Language API, then roll them up into one profile per URL — so you can see which pages are about something other than what you intended.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 2, Lesson 2.2",
+ "needs": "A Google Cloud API key with the Cloud Natural Language API enabled",
+ "cost": "Free for most audits — 5,000 units a month, then $1 per 1,000",
+ "inputs": "Paste one page, or upload a crawl export with a URL column and a content column",
+ "outputs": "entity_mentions.csv and page_entity_profiles.csv",
+ "how": [
+  "Paste your API key. It stays in this browser tab and is sent only to Google.",
+  "Start with a single page so you can see the shape of the data before spending anything.",
+  "Set the intended entity — what the page is supposed to be about.",
+  "Read the table: the top row is what a machine thinks the page is about.",
+  "Then upload your whole crawl and export both CSVs."
+ ],
+ "note": "Use API version 1. Version 2 does not return a salience score at all, and every prominence measure here depends on it."
+}

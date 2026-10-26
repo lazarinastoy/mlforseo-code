@@ -1,0 +1,171 @@
+<!-- wp:uagb/container {"block_id":"8b526cb2","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-8b526cb2 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/ai-meta-data-creator.css">
+<div class="mlfs-page">
+  <p class="eyebrow">MLforSEO Academy &middot; Introduction to Machine Learning for SEO</p>
+  <h1>AI Meta Data Creator</h1>
+  <p class="lede">Turn an article, or a CSV of pages, into three title tags, three meta descriptions and an H2/H3 outline each, with character counts so you can see what fits.</p>
+
+  <dl class="glance">
+      <div><dt>What you need</dt><dd>Your OpenAI API key</dd></div>
+      <div><dt>Cost</dt><dd>Paid OpenAI usage on your own key: well under a cent per article on GPT-6 Luna, roughly 3 to 6 cents on GPT-5.6 Sol</dd></div>
+      <div><dt>Feed it</dt><dd>Pasted article text and a target keyword, or a CSV with URL, Title and Content columns</dd></div>
+      <div><dt>You get back</dt><dd>Editable titles, meta descriptions and outlines to copy, and seo-metadata-generated.csv</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="steps">
+      <li>Paste your OpenAI API key and pick a model. The key stays in this browser tab and goes only to OpenAI.</li>
+      <li>For one page, paste the article text and enter the target keyword.</li>
+      <li>For many pages, upload a CSV with URL, Title and Content columns and check the preview.</li>
+      <li>Add the audience and content goal if you know them, then generate.</li>
+      <li>Check the character counts, edit the wording, then copy or export.</li>
+  </ol>
+
+  <p class="note"><b>Worth knowing.</b> The model cannot search the web, so the competitor analysis is its guess at what ranks, not a live SERP. Check any gap it names against a real search before you act on it.</p>
+
+  <div class="toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; Introduction to Machine Learning for SEO</div>
+    <h1>AI Meta Data Creator</h1>
+    <p>Turn an article, or a CSV of pages, into three title tags, three meta descriptions and an H2/H3 outline, with character counts so you can see what fits before you publish.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your API key and model</h2>
+    <div class="sub">Your key stays in this browser tab and is sent only to OpenAI. It is not saved anywhere.</div>
+    <div class="field">
+      <label for="key">OpenAI API key</label>
+      <input type="password" id="key" placeholder="sk-…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="model">Model</label>
+      <select id="model">
+        <option value="gpt-5.6-sol">GPT-5.6 Sol (replaces the retired chatgpt-4o-latest)</option>
+        <option value="gpt-6-luna" selected>GPT-6 Luna (lowest cost, suits large CSVs)</option>
+        <option value="gpt-4o">GPT-4o (OpenAI retires it on 14 January 2027)</option>
+      </select>
+      <span class="note">GPT-6 Luna costs roughly a fortieth of GPT-5.6 Sol per page. Try one article on each before a large CSV run.</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; Your content</h2>
+    <div class="sub">Paste one article, or upload a CSV of pages. Browsers cannot fetch other sites' pages, so the text comes from you or your crawler export.</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-article" aria-selected="true" aria-controls="pane-article" data-mode="article">Single article</button>
+      <button role="tab" id="tab-csv" aria-selected="false" aria-controls="pane-csv" data-mode="csv">CSV of pages</button>
+    </div>
+
+    <div id="pane-article" class="pane" role="tabpanel" aria-labelledby="tab-article">
+      <div class="field">
+        <label for="text">Article text</label>
+        <textarea id="text" placeholder="Paste the article, starting with its current title. Leave out the navigation and footer."></textarea>
+        <span class="note" id="textinfo">The first line longer than eight characters is treated as the current title. Only the first 8,000 characters are sent.</span>
+      </div>
+      <div class="field">
+        <label for="keyword">Target keyword <span class="note">(required)</span></label>
+        <input type="text" id="keyword" placeholder="e.g. machine learning for SEO">
+      </div>
+      <label class="check"><input type="checkbox" id="compA" checked> Include competitor analysis</label>
+      <div class="keynote warn">
+        <strong>The model cannot search the web.</strong> Competitor analysis is its informed guess at what ranks
+        for your keyword and what those pages cover. Check it against a real search before acting on it.
+      </div>
+    </div>
+
+    <div id="pane-csv" class="pane" role="tabpanel" aria-labelledby="tab-csv" hidden>
+      <div class="actions">
+        <label class="file">Choose CSV<input type="file" id="csvfile" accept=".csv,text/csv"></label>
+        <span class="hint" id="csvinfo">Needs URL, Title and Content columns. One row per page.</span>
+      </div>
+      <div class="preview" id="csvpreview" hidden>
+        <div class="tablewrap"><table id="csvtable"></table></div>
+      </div>
+      <div class="actions opt">
+        <label class="check"><input type="checkbox" id="compC"> Add a competitor gaps column</label>
+        <span class="hint">An inferred list per row, not a live search. Slower, and each row costs a little more.</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="audience">Target audience <span class="note">(optional)</span></label>
+        <input type="text" id="audience" placeholder="e.g. in-house SEO leads">
+      </div>
+      <div class="field">
+        <label for="goal">Content goal <span class="note">(optional)</span></label>
+        <select id="goal">
+          <option value="">Not set (treated as informational)</option>
+          <option value="informational">Informational</option>
+          <option value="commercial">Commercial</option>
+          <option value="transactional">Transactional</option>
+          <option value="navigational">Navigational</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="actions go">
+      <button class="accent" id="run">Generate metadata</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <button class="ghost" id="clear">Clear</button>
+      <span class="hint" id="status" role="status" aria-live="polite">Add your key and some content to begin.</span>
+    </div>
+    <progress id="prog" value="0" max="100" hidden></progress>
+  </div>
+
+  <div id="out-article" hidden>
+    <div class="section-head">
+      <h2>Your metadata</h2>
+      <div class="actions">
+        <button class="ghost" id="copy-all">Copy everything</button>
+        <button class="ghost" id="dl-article">Export CSV</button>
+      </div>
+    </div>
+    <p class="hint context" id="a-context"></p>
+    <div class="tiles" id="a-tiles"></div>
+    <h3 class="group-title">Title options <span class="hint">aim for 50 to 60 characters</span></h3>
+    <div id="a-titles"></div>
+    <h3 class="group-title">Meta descriptions <span class="hint">aim for 150 to 160 characters</span></h3>
+    <div id="a-metas"></div>
+    <h3 class="group-title">Heading outline <span class="hint">## is an H2, ### is an H3</span></h3>
+    <div id="a-outline"></div>
+    <div id="a-serp" hidden>
+      <h3 class="group-title">Competitor analysis <span class="hint">inferred by the model, not a live search</span></h3>
+      <div class="tablewrap"><table id="a-serp-table"></table></div>
+      <div class="row">
+        <div class="keynote" id="a-gaps"></div>
+        <div class="keynote" id="a-features"></div>
+      </div>
+    </div>
+    <p class="hint">Edit any field before you copy it. Counts and tiles update as you type.</p>
+  </div>
+
+  <div id="out-csv" hidden>
+    <div class="tiles" id="c-tiles"></div>
+    <div class="section-head">
+      <h2>Results</h2>
+      <div class="actions">
+        <button class="accent" id="dl-csv">Download complete CSV</button>
+        <button class="ghost" id="copy10">Copy first 10 results</button>
+      </div>
+    </div>
+    <div class="tablewrap"><table id="c-table"></table></div>
+    <p class="hint" id="c-note"></p>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and content go only to OpenAI.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+</div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/ai-meta-data-creator.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

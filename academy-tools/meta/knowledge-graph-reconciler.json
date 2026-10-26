@@ -1,0 +1,19 @@
+{
+ "slug": "knowledge-graph-reconciler",
+ "title": "Knowledge Graph Reconciler",
+ "short": "Match your extracted entities against Google's Knowledge Graph, and flag the ones where the returned type contradicts the type your content implies.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 3, Lesson 3.2",
+ "needs": "The same Google key, with the Knowledge Graph Search API also enabled",
+ "cost": "Free — 100,000 lookups a day",
+ "inputs": "entity_mentions.csv from the Extractor, or a pasted list",
+ "outputs": "kg_reconciliation.csv — matched, ambiguous, unmatched, with type conflicts flagged",
+ "how": [
+  "Paste your key and upload the entity export.",
+  "Leave the match-score floor at 20 unless you have a reason to change it.",
+  "Read the three verdicts before you read a single row.",
+  "Filter to type conflicts — those are matches that are confidently wrong.",
+  "Export, and keep the file for the Scorecard."
+ ],
+ "note": "A returned match is not a correct match. Check the type and the description before you trust the score."
+}
