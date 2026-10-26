@@ -44,6 +44,9 @@ Each folder belongs to one tutorial and has its own README (what it does, how to
 
 More folders arrive as tutorials are refreshed. The full list of MLforSEO templates, Colabs and workbooks, free and Academy, is in [CATALOGUE.md](CATALOGUE.md).
 
+## Academy tools
+[`academy-tools/`](academy-tools/) holds the 11 free browser tools at [academy.mlforseo.com/tools](https://academy.mlforseo.com/tools/) (entity extraction, knowledge graph reconciliation, content briefs, query classification and more). Each one is a single HTML file you can open locally; the academy pages load the same code from this repo.
+
 ## Learn the method
 These notebooks pair with the courses on the [MLforSEO Academy](https://academy.mlforseo.com/), starting with *Introduction to Machine Learning for SEO*.
 
