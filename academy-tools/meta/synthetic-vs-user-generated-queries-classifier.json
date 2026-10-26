@@ -1,19 +1,19 @@
 {
   "slug": "synthetic-vs-user-generated-queries-classifier",
   "title": "Synthetic vs User-generated Queries Classifier",
-  "short": "Sort a keyword list into the short queries people type and the longer, denser ones AI search generates, and see which signals drove each label.",
+  "short": "Sort a keyword list into the queries people type and the ones AI search generates with the four methods from the course notebooks, test them against your own labels, and find the templates and fan-out batches that give generated queries away.",
   "course": "semantic-ml-enabled-keyword-research",
   "lesson": "",
-  "needs": "Nothing: it runs in your browser",
+  "needs": "Nothing: it runs in your browser. The optional embeddings method downloads the all-MiniLM-L6-v2 model once (about 23 MB, plus about 4 MB for the runtime), and only when you switch it on.",
   "cost": "Free",
-  "inputs": "One query, or a CSV with one query per line or a column named keyword or query",
-  "outputs": "A label, score and reasons for each query, plus a CSV export of every feature and result",
+  "inputs": "One query, a pasted list, or a CSV or TSV export with a keyword or query column (up to 20,000 rows). Add a label column such as User / Synthetic to evaluate the methods and train your own model.",
+  "outputs": "A score, label and the signals behind it from each method for every query, metrics against your labels, repeated templates and fan-out batches, and a CSV export of each",
   "how": [
-    "Start in Feature extraction with one query to see the signals the classifiers read.",
-    "Open the Rule-based classifier and compare a short query with a long technical one.",
-    "Upload your keyword CSV and check the split between user and synthetic queries.",
-    "Adjust the rule thresholds or the ML threshold. The results on screen update as you go.",
-    "Export the results CSV and check a sample of each label by eye."
+    "Inspect one query to see every method's score and the signals behind it.",
+    "In Classify a list, paste your queries or upload a keyword export, or press Try a sample.",
+    "Switch on embeddings to add the embeddings method, seven embedding features for the ensemble and fan-out batches. The model downloads once.",
+    "If your file has a label column, open Evaluate & train: compare each method with the word-count baseline, set thresholds and train a model on your labels.",
+    "Open Batch patterns for repeated templates and fan-out batches, export the CSVs and check a sample of each label by eye."
   ],
-  "note": "Both classifiers use fixed rules and weights, not a model trained on your data, and entity detection relies on capital letters, so use the labels to sort a list rather than as proof of where a query came from."
+  "note": "The scores come from hand-set heuristics and a model trained on generated queries plus labelled searches from one niche, so use them to sort a list, not as proof of where a query came from. On the course's test set, word count alone separates most queries, so compare every method with that baseline and read a sample of each label before you act on it."
 }

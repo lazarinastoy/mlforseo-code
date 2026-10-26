@@ -1,0 +1,9 @@
+{
+  "name": "synthetic-classifier-training",
+  "private": true,
+  "description": "Offline training for the ensemble in the Synthetic vs User-generated Queries Classifier",
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "compromise": "14.19.0"
+  }
+}
