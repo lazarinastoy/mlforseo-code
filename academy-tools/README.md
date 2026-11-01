@@ -11,6 +11,7 @@ the API provider the tool names (Google Cloud, OpenAI, Anthropic). Several need 
 | [Knowledge Graph Reconciler](tools/knowledge-graph-reconciler.html) | The AI-powered Entity Audit | Google Cloud API key |
 | [Entity Consistency Checker](tools/entity-consistency-checker.html) | The AI-powered Entity Audit | Nothing |
 | [Entity Gap Matrix](tools/entity-gap-matrix.html) | The AI-powered Entity Audit | Nothing |
+| [Claude Entity Analyst](tools/claude-entity-analyst.html) | The AI-powered Entity Audit | Anthropic API key |
 | [Entity Brief Generator](tools/entity-brief-generator.html) | The AI-powered Entity Audit | Anthropic API key |
 | [Content Briefs Generator](tools/content-briefs-generator.html) | Semantic AI-powered SEO Keyword Research | Google Sheets + OpenAI API keys |
 | [Semantic Intent Drift Analyzer](tools/semantic-intent-drift-analyzer.html) | Semantic AI-powered SEO Keyword Research | Nothing |

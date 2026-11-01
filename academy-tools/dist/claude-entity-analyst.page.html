@@ -1,0 +1,152 @@
+<!-- wp:uagb/container {"block_id":"75e0c285","variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-uagb-container uagb-block-75e0c285 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap"><!-- wp:html -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/mlfs-chrome.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/claude-entity-analyst.css">
+<div class="mlfs-page">
+  <p class="mlfs-eyebrow">MLforSEO Academy &middot; The AI-powered Entity Audit</p>
+  <h1>Claude Entity Analyst</h1>
+  <p class="mlfs-lede">Ask Claude what a page is about — entities stated or implied, relationships, attribute gaps, the real subject and naming problems — in one fixed shape, then check every answer against the page text.</p>
+
+  <dl class="mlfs-glance">
+      <div><dt>What you need</dt><dd>An Anthropic API key</dd></div>
+      <div><dt>Cost</dt><dd>About a cent or two per page with Claude Sonnet 5.5; less with Haiku 4.5</dd></div>
+      <div><dt>Feed it</dt><dd>Paste one page&#x27;s main content, or upload a crawl export with a URL column and a content column. Optional: the Entity Extractor&#x27;s entity_mentions.csv</dd></div>
+      <div><dt>You get back</dt><dd>Entities with confidence tiers, relationships, attribute gaps and naming issues, as CSV and JSON</dd></div>
+  </dl>
+
+  <h2>How to use it</h2>
+  <ol class="mlfs-steps">
+      <li>Paste your Anthropic key. It stays in this tab and is sent only to Anthropic.</li>
+      <li>Choose an analysis: entity map, attribute gaps, subject check, or naming and ambiguity.</li>
+      <li>Paste one page&#x27;s main content (or upload your crawl CSV) and set the intended entity.</li>
+      <li>Check the price estimate, then run it. Start with one page before a whole crawl.</li>
+      <li>Read the tiers: use Solid and Likely rows, review Candidates, never use Discards. Export the CSVs.</li>
+  </ol>
+
+  <p class="mlfs-note"><b>Worth knowing.</b> An LLM can name entities that are not on the page. Every quote is checked against your text automatically — that check is the point of the tool, so never skip the tier column.</p>
+
+  <div class="mlfs-toolwrap">
+<div class="mlfs-tool" data-theme="light">
+<div class="wrap">
+  <div class="masthead">
+    <div class="eyebrow">MLforSEO &middot; The AI-powered Entity Audit</div>
+    <h1>Claude Entity Analyst</h1>
+    <p>Ask Claude what a page is about &mdash; entities, relationships, attribute gaps, the real subject and naming problems &mdash; in one fixed shape, then check every answer against the page text before you use it.</p>
+  </div>
+
+  <div class="panel">
+    <h2>1 &middot; Your Claude API key</h2>
+    <div class="sub">Held in this tab only and sent only to Anthropic. Create one at console.anthropic.com &rarr; API Keys.</div>
+    <div class="row">
+      <div class="field">
+        <label for="key">Anthropic API key</label>
+        <input type="password" id="key" placeholder="sk-ant-…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="claude-sonnet-5-5" data-in="2" data-out="10" selected>Claude Sonnet 5.5 — recommended</option>
+          <option value="claude-haiku-4-5" data-in="1" data-out="5">Claude Haiku 4.5 — cheapest, high volume</option>
+          <option value="claude-opus-5-5" data-in="4" data-out="20">Claude Opus 5.5 — hardest pages</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>2 &middot; What do you want to know?</h2>
+    <div class="sub">Each analysis returns the same structured shape, so runs can be compared and checked in bulk.</div>
+    <div class="modes">
+      <label class="mode"><input type="radio" name="mode" value="map" checked><b>Entity map</b><span>Every entity the page is about &mdash; stated or implied &mdash; with relationships and the evidence for each.</span></label>
+      <label class="mode"><input type="radio" name="mode" value="eav"><b>Attribute gaps</b><span>For the intended entity: which attributes the page covers, and which a reader would expect but cannot find.</span></label>
+      <label class="mode"><input type="radio" name="mode" value="subject"><b>Subject check</b><span>Is the page really about its intended entity? A verdict, the reason, and what is competing for the subject.</span></label>
+      <label class="mode"><input type="radio" name="mode" value="naming"><b>Naming &amp; ambiguity</b><span>One thing named several ways, and mentions a machine could resolve to the wrong entity.</span></label>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>3 &middot; The content</h2>
+    <div class="tabs" role="tablist">
+      <button type="button" id="tabOne" role="tab" aria-selected="true">One page</button>
+      <button type="button" id="tabCsv" role="tab" aria-selected="false">A crawl export (CSV)</button>
+    </div>
+    <div id="paneOne">
+      <div class="row">
+        <div class="field"><label for="url">Page URL <span class="note">(for your records)</span></label><input type="text" id="url" placeholder="https://www.example.com/blog/entity-extraction/"></div>
+        <div class="field"><label for="intended">Intended entity <span class="note">&mdash; what it should be about</span></label><input type="text" id="intended" placeholder="entity extraction"></div>
+      </div>
+      <div class="field"><label for="content">Main content <span class="note">&mdash; the body text only, not navigation or footer</span></label><textarea id="content" style="min-height:160px" placeholder="Paste the page's main content."></textarea></div>
+    </div>
+    <div id="paneCsv" hidden>
+      <div class="field"><label for="csv">Crawl CSV <span class="note">&mdash; e.g. Screaming Frog Internal export with your custom-extraction content column</span></label><input type="file" id="csv" accept=".csv,text/csv"></div>
+      <div class="row" id="csvCols" hidden>
+        <div class="field"><label for="colUrl">URL column</label><select id="colUrl"></select></div>
+        <div class="field"><label for="colText">Content column</label><select id="colText"></select></div>
+        <div class="field"><label for="colIntended">Intended entity column <span class="note">(optional)</span></label><select id="colIntended"></select></div>
+      </div>
+      <div class="row" id="csvFilter" hidden>
+        <div class="field"><label for="urlFilter">Only URLs containing <span class="note">(optional)</span></label><input type="text" id="urlFilter" placeholder="/blog/"></div>
+        <div class="field"><label for="maxPages">Pages to analyse</label><input type="text" id="maxPages" value="10"></div>
+        <div class="field"><label for="intendedAll">Intended entity for all pages <span class="note">(if no column)</span></label><input type="text" id="intendedAll" placeholder=""></div>
+      </div>
+      <div class="hint" id="csvInfo"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label for="nlp">Entity Extractor export <span class="note">&mdash; optional: entity_mentions.csv, to cross-check Claude against Google's NLP API</span></label><input type="file" id="nlp" accept=".csv,text/csv"></div>
+    <div class="hint" id="nlpInfo"></div>
+  </div>
+
+  <div class="panel">
+    <h2>4 &middot; Price it, then run it</h2>
+    <div class="est" id="est"></div>
+    <div class="actions">
+      <button class="accent" id="run" disabled>Analyse</button>
+      <button class="ghost" id="stop" hidden>Stop</button>
+      <span class="hint" id="status">Add your key and some content.</span>
+    </div>
+    <progress id="prog" value="0" max="1" hidden></progress>
+    <div class="keynote warn"><strong>An LLM can name entities that are not on the page.</strong> Every result below is checked against the page text automatically and given a confidence tier. Use Solid and Likely rows; review Candidates; never use Discards.</div>
+  </div>
+
+  <div id="out" hidden>
+    <div class="panel">
+      <h2>Results</h2>
+      <div class="est" id="sum"></div>
+      <div class="actions">
+        <button class="ghost" id="dlEnt">Entities CSV</button>
+        <button class="ghost" id="dlRel">Relationships CSV</button>
+        <button class="ghost" id="dlAttr">Attributes CSV</button>
+        <button class="ghost" id="dlName">Naming CSV</button>
+        <button class="ghost" id="dlJson">Full JSON</button>
+      </div>
+      <p class="small" style="margin-top:10px">Tiers: <span class="tier solid">Solid</span> on the page and confirmed by the NLP API &middot; <span class="tier likely">Likely</span> on the page, quote verified &middot; <span class="tier candidate">Candidate</span> implied, evidence verified &mdash; review &middot; <span class="tier discard">Discard</span> the quote is not on the page.</p>
+    </div>
+    <div id="pages"></div>
+  </div>
+
+  <div class="panel limits">
+    <h2>What this can and cannot tell you</h2>
+    <ul>
+      <li><b>It is an analyst, not a measurement.</b> Google's NLP API gives salience scores you can re-run; Claude gives judgement &mdash; implied entities, relationships, missing attributes. Use both: the <a href="https://academy.mlforseo.com/tools/entity-extractor-salience-profiler/">Entity Extractor</a> for the numbers, this for what extraction cannot see.</li>
+      <li><b>Answers vary between runs and models.</b> The fixed output shape makes them comparable, not identical. Record the model and date with any finding.</li>
+      <li><b>Missing attributes are suggestions.</b> They come from the model's general knowledge of what readers expect &mdash; check them against your gap matrix and real queries before you brief anyone.</li>
+      <li><b>Long pages are trimmed</b> to the first 30,000 characters. Feed it the main content, not the whole HTML.</li>
+      <li><b>Your content goes to Anthropic.</b> Check your client agreement before you paste client pages. Nothing is sent to MLforSEO.</li>
+    </ul>
+    <p class="small" style="margin-top:10px">Go deeper: <a href="https://academy.mlforseo.com/lesson/claude-as-your-entity-analyst/">Lesson 2.4 &mdash; Claude as your entity analyst</a> &middot; <a href="https://academy.mlforseo.com/lesson/controlling-cost-and-runtime/">Lesson 2.5 &mdash; controlling cost</a> &middot; <a href="https://www.mlforseo.com/machine-learning-tutorials/entity-analysis/comparing-nlp-apis-for-entity-and-sentiment-analysis/">NLP APIs vs generative AI for entity analysis</a> &middot; <a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Claude structured outputs</a> &middot; <a href="https://claude.com/pricing">Claude pricing</a></p>
+  </div>
+
+  <footer>
+    <span>Runs in your browser. Your key and content go only to Anthropic.</span>
+    <span>MLforSEO Academy</span>
+  </footer>
+</div>
+
+
+
+</div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lazarinastoy/mlforseo-code@main/academy-tools/dist/claude-entity-analyst.js" defer></script>
+<!-- /wp:html --></div></div>
+<!-- /wp:uagb/container -->

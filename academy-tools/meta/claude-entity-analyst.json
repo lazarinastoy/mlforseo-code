@@ -1,0 +1,19 @@
+{
+ "slug": "claude-entity-analyst",
+ "title": "Claude Entity Analyst",
+ "short": "Ask Claude what a page is about — entities stated or implied, relationships, attribute gaps, the real subject and naming problems — in one fixed shape, then check every answer against the page text.",
+ "course": "the-ai-powered-entity-audit",
+ "lesson": "Module 2, Lesson 2.4",
+ "needs": "An Anthropic API key",
+ "cost": "About a cent or two per page with Claude Sonnet 5.5; less with Haiku 4.5",
+ "inputs": "Paste one page's main content, or upload a crawl export with a URL column and a content column. Optional: the Entity Extractor's entity_mentions.csv",
+ "outputs": "Entities with confidence tiers, relationships, attribute gaps and naming issues, as CSV and JSON",
+ "how": [
+  "Paste your Anthropic key. It stays in this tab and is sent only to Anthropic.",
+  "Choose an analysis: entity map, attribute gaps, subject check, or naming and ambiguity.",
+  "Paste one page's main content (or upload your crawl CSV) and set the intended entity.",
+  "Check the price estimate, then run it. Start with one page before a whole crawl.",
+  "Read the tiers: use Solid and Likely rows, review Candidates, never use Discards. Export the CSVs."
+ ],
+ "note": "An LLM can name entities that are not on the page. Every quote is checked against your text automatically — that check is the point of the tool, so never skip the tier column."
+}

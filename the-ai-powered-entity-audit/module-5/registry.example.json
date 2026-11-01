@@ -1,0 +1,27 @@
+{
+  "_note": "One entry per real-world thing. The @id lives on the domain that owns the entity; every other site references it. Lesson 5.6.",
+  "entities": [
+    {
+      "@id": "https://www.example.com/#organization",
+      "@type": "Organization",
+      "name": "Example Co",
+      "url": "https://www.example.com/",
+      "logo": "https://www.example.com/logo.png",
+      "sameAs": ["https://www.wikidata.org/wiki/Q00000000", "https://www.linkedin.com/company/example-co/"],
+      "founder": {"@id": "https://janedoe.example/#person"}
+    },
+    {
+      "@id": "https://janedoe.example/#person",
+      "@type": "Person",
+      "name": "Jane Doe",
+      "url": "https://janedoe.example/"
+    },
+    {
+      "@id": "https://www.example.com/#website",
+      "@type": "WebSite",
+      "name": "Example Co",
+      "url": "https://www.example.com/",
+      "publisher": {"@id": "https://www.example.com/#organization"}
+    }
+  ]
+}

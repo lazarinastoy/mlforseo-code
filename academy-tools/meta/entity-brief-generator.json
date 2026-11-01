@@ -3,7 +3,7 @@
  "title": "Entity Brief Generator",
  "short": "Turn audit findings into a brief a writer can act on: canonical name, entities to add, entities to demote, and the placements that matter.",
  "course": "the-ai-powered-entity-audit",
- "lesson": "Module 5, Lesson 5.3",
+ "lesson": "Module 5, Lesson 5.4",
  "needs": "An Anthropic API key",
  "cost": "Pennies per brief",
  "inputs": "One page's audit row, plus the current page content",
