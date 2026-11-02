@@ -14,8 +14,11 @@ Scripts from the practical lessons of [The AI-powered Entity Audit](https://www.
 | [`module-4/strip_boilerplate.py`](module-4/strip_boilerplate.py) | Practical 4.4 | Finds repeated boilerplate text and chrome entities in every competitor corpus; your decisions are the record | Free |
 | [`module-5/meta_descriptions.py`](module-5/meta_descriptions.py) + [`import_meta.php`](module-5/import_meta.php) | Practical 5.2 | Claude drafts entity-first meta descriptions → review sheet → WP-CLI import with a backup | Claude, cents per page |
 | [`module-5/extraction_check.py`](module-5/extraction_check.py) | Practical 5.3 | The five extraction checks on any list of URLs; `--rewrite` drafts only the failing sections | Free (Claude only with `--rewrite`) |
-| [`module-5/link_map.py`](module-5/link_map.py) | Practical 5.5 | Entity → owner-page map, minus links that already exist, in rounds of 20, plus link rules | Free |
+| [`module-5/link_map.py`](module-5/link_map.py) | Practical 5.5 | Entity → owner-page map, minus links that already exist, in rounds of 20, plus link rules (JSON with variants, and CSV) | Free |
+| [`module-5/apply_link_rules.py`](module-5/apply_link_rules.py) | Practical 5.5 | Applies link rules to HTML the way our Auto Links plugin does: preview first, or write linked copies at build time | Free |
 | [`module-5/jsonld_from_registry.py`](module-5/jsonld_from_registry.py) | Practical 5.6 | Claude drafts JSON-LD from your entity registry; code checks graph integrity and evidence | Claude, cents per page |
+| [`module-5/entity-graph-starter.php`](module-5/entity-graph-starter.php) | Practical 5.6 | WordPress starter: one owned graph per page from the registry plus live data; switches other schema emitters off | Free |
+| [`module-5/graph_check.py`](module-5/graph_check.py) | Practical 5.6 | Post-deploy smoke test (one ld+json block per URL) and a site-wide entity census, on any CMS | Free |
 
 The Claude analysis from Lesson 2.4 is now a browser tool, no code at all: the [Claude Entity Analyst](https://academy.mlforseo.com/tools/claude-entity-analyst/).
 

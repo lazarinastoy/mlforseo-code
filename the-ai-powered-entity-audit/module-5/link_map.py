@@ -7,12 +7,16 @@ Inputs (all from earlier practicals)
   all_inlinks.csv            Screaming Frog > Bulk Export > Links > All Inlinks
 Outputs
   link_plan.csv   from_url, to_url, entity, anchor, from_salience, to_is_orphan, priority
-  link_rules.csv  keyword, url, max_per_page — the shape most auto-linking plugins import
+  link_rules.json one rule per entity, in the format our Auto Links plugin imports:
+                  {id, keywords[canonical + variants], url, type, case_sensitive, max, enabled, note}
+                  Owners you chose are enabled; owners the script guessed are disabled "suggestions"
+                  until you check them. Apply or preview with apply_link_rules.py.
+  link_rules.csv  keyword, url, max_per_page — the flat shape most other auto-linking plugins import
 
     python link_map.py --min-salience 0.02 --per-page 3
 No API calls: this step is arithmetic. Claude comes in afterwards, on the sentences.
 """
-import argparse, csv
+import argparse, csv, json, re
 from collections import defaultdict
 
 
@@ -31,11 +35,14 @@ def main():
     ok = lambda u: not any(x in u + "/" for x in skip)
 
     names = {}      # any surface form -> canonical
+    forms = defaultdict(list)   # canonical -> every surface form, canonical first
     owner = {}      # canonical -> the page that should receive links for it
     for r in csv.DictReader(open("naming_table.csv", encoding="utf-8")):
         c = r["canonical"].strip()
         for v in [c] + [x for x in r.get("variants", "").split("|") if x.strip()]:
             names[v.strip().lower()] = c
+            if v.strip() and v.strip() not in forms[c]:
+                forms[c].append(v.strip())
         if r.get("owner_url"):
             owner[c] = norm(r["owner_url"])
 
@@ -93,8 +100,27 @@ def main():
         w.writerow(["keyword", "url", "max_per_page", "owner_source"])
         for c, u in sorted(owner.items()):
             w.writerow([c, u, 1, "auto - check" if c in picked else "naming table"])
+    rules = []
+    for c, u in sorted(owner.items()):
+        kws = forms.get(c) or [c]
+        guessed = c in picked
+        rules.append({
+            "id": re.sub(r"[^a-z0-9]+", "-", c.lower()).strip("-"),
+            "keywords": sorted(kws, key=len, reverse=True),      # longest first
+            "url": u,
+            "type": "internal",
+            # short all-caps forms (NLP, KG, GA4) only match as written, so "nlp" in a URL slug can't
+            "case_sensitive": any(len(k) <= 4 and k.isupper() for k in kws),
+            "max": 1,                                             # one link per page per entity
+            "enabled": not guessed,
+            "note": "Suggestion: owner picked automatically (most salient page). Check, then enable."
+                    if guessed else "Owner from the naming table.",
+        })
+    with open("link_rules.json", "w", encoding="utf-8") as f:
+        json.dump(rules, f, indent=2, ensure_ascii=False)
     print(f"{len(rows)} proposed links on {len(plan)} pages -> link_plan.csv (rounds of 20)")
-    print(f"{len(owner)} entity -> page rules -> link_rules.csv ({len(picked)} owners picked automatically: check them)")
+    print(f"{len(owner)} entity -> page rules -> link_rules.json + link_rules.csv "
+          f"({len(picked)} owners picked automatically: disabled until you check them)")
 
 
 if __name__ == "__main__":
