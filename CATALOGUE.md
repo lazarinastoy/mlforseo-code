@@ -2,7 +2,7 @@
 
 Every resource in the [MLforSEO Resource Library](https://www.mlforseo.com/resources-library/). Free resources link straight to the file; Academy resources link to their page on mlforseo.com (access comes with the course).
 
-## Free (53)
+## Free (54)
 
 All search intent notebooks (rule-based from the query, SERP features, semantic with Google NL + spaCy, BART zero-shot, content formats and platforms from SERP) are also mirrored on GitHub in [`search-intent-classification/`](search-intent-classification/).
 
@@ -11,6 +11,7 @@ All search intent notebooks (rule-based from the query, SERP features, semantic 
 | [AI Crawler Access Checker: robots.txt, llms.txt and Bot Rules](https://colab.research.google.com/github/lazarinastoy/mlforseo-code/blob/main/ai-crawler-access-checker/ai_crawler_access_checker.ipynb) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [AI Overview Tracker: Presence, Cited Domains and Your Share](https://colab.research.google.com/github/lazarinastoy/mlforseo-code/blob/main/ai-overview-tracker/ai_overview_tracker.ipynb) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [Automated Redirect Mapping with Triple Fuzzy Matching for Site Migrations (Notebook)](https://colab.research.google.com/drive/1wcDFJHY_dusdlmKZVR6D2_OZFjsd1kGb?usp=sharing) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
+| [Backlink Quality Audit: DataForSEO, Embeddings and Claude (Colab Notebook)](https://colab.research.google.com/github/lazarinastoy/mlforseo-code/blob/main/backlink-quality-audit/backlink_quality_audit.ipynb) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [BERTopic: Benefits and Limitations](https://docs.google.com/spreadsheets/d/1pM7aHRxXN5OJJ8kclN-vIcZWRgt2i9EEKIkW6jwNIL8/view) | Guide | Google Sheets | Lazarina Stoy |
 | [Blog Architecture Audit: Click Depth, Orphan Pages and Hub Coverage (Python)](https://github.com/lazarinastoy/mlforseo-code/tree/main/blog-architecture-audit) | Coding Script or Notebook | Google Colab | Lazarina Stoy |
 | [Calculating Semantically Similar Terms with Fuzzy Matching for Keyword Clusers (Notebook)](https://colab.research.google.com/drive/1Uod2kf2C4xooG-QGC52xn2i7zhC-RjbF?usp=sharing) | Coding Script or Notebook | Google Colab | Lazarina Stoy |

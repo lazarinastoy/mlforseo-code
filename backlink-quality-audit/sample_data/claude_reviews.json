@@ -1,0 +1,480 @@
+[
+ {
+  "model": "claude-haiku-4-5-20251001",
+  "input_tokens": 4104,
+  "output_tokens": 984,
+  "cost_usd": 0.009024,
+  "domains": [
+   "about.me",
+   "webtan.impress.co.jp",
+   "ja.majestic.com",
+   "server2.radiookapi.net",
+   "mikekappel.com",
+   "autopod.co",
+   "advancedwebranking.com",
+   "mmocourse.hk",
+   "reacteur.com",
+   "mmocourse.top",
+   "mmocourse.org",
+   "brightonseo.com",
+   "website.usersupports.com",
+   "completeaitraining.com",
+   "ipullrank.com",
+   "growthmentor.com",
+   "bye.fyi",
+   "olivian.ro",
+   "imarketing.courses",
+   "groas.com",
+   "buzzshrink.website",
+   "concresca.com",
+   "shortenurls.eu",
+   "screenshots.wiki",
+   "urls-shortener.eu"
+  ],
+  "reviews": [
+   {
+    "id": 45,
+    "verdict": "keep_neutral",
+    "reason": "Profile page on about.me; nofollow; low referral value",
+    "confidence": "high"
+   },
+   {
+    "id": 76,
+    "verdict": "keep_valuable",
+    "reason": "Japanese SEO/marketing publication; on-topic expert roundup article",
+    "confidence": "high"
+   },
+   {
+    "id": 278,
+    "verdict": "investigate",
+    "reason": "Majestic author page; 38 links from domain; unusual volume warrants review",
+    "confidence": "medium"
+   },
+   {
+    "id": 18,
+    "verdict": "ignore_spam",
+    "reason": "Unrelated topic (daytrading charts); misplaced link",
+    "confidence": "high"
+   },
+   {
+    "id": 63,
+    "verdict": "keep_valuable",
+    "reason": "On-topic article about AI and search ranking algorithms",
+    "confidence": "high"
+   },
+   {
+    "id": 25,
+    "verdict": "keep_valuable",
+    "reason": "Polish marketing content on embeddings and semantic search; relevant",
+    "confidence": "medium"
+   },
+   {
+    "id": 33,
+    "verdict": "keep_valuable",
+    "reason": "Advanced Web Ranking; on-topic article mentioning courses naturally",
+    "confidence": "high"
+   },
+   {
+    "id": 9,
+    "verdict": "investigate",
+    "reason": "MMO course site with 'download' in title; possible course piracy",
+    "confidence": "high"
+   },
+   {
+    "id": 238,
+    "verdict": "keep_neutral",
+    "reason": "French marketing course site; generic link to Google Sheets template",
+    "confidence": "medium"
+   },
+   {
+    "id": 7,
+    "verdict": "investigate",
+    "reason": "MMO course piracy site; 'download' indicator; spam score 15",
+    "confidence": "high"
+   },
+   {
+    "id": 14,
+    "verdict": "investigate",
+    "reason": "MMO course piracy site; 'download' course indicator",
+    "confidence": "high"
+   },
+   {
+    "id": 190,
+    "verdict": "keep_neutral",
+    "reason": "Speaker profile on Brighton SEO; minimal value but legitimate event",
+    "confidence": "medium"
+   },
+   {
+    "id": 253,
+    "verdict": "keep_valuable",
+    "reason": "Japanese blog; on-topic entity SEO implementation case study",
+    "confidence": "medium"
+   },
+   {
+    "id": 94,
+    "verdict": "keep_neutral",
+    "reason": "AI courses roundup; generic directory-style list",
+    "confidence": "medium"
+   },
+   {
+    "id": 3,
+    "verdict": "keep_valuable",
+    "reason": "iPullRank; 22 links from domain; on-topic AI search article",
+    "confidence": "high"
+   },
+   {
+    "id": 2,
+    "verdict": "investigate",
+    "reason": "Growth Mentor profile; spam score 25; founder profile link",
+    "confidence": "medium"
+   },
+   {
+    "id": 44,
+    "verdict": "ignore_spam",
+    "reason": "Domain report tool; spam score 50; generic automated link",
+    "confidence": "high"
+   },
+   {
+    "id": 266,
+    "verdict": "keep_valuable",
+    "reason": "SERP conference follow-up post; on-topic industry event mention",
+    "confidence": "medium"
+   },
+   {
+    "id": 5,
+    "verdict": "investigate",
+    "reason": "iMarketing.courses reseller site; possible paid course listing",
+    "confidence": "high"
+   },
+   {
+    "id": 22,
+    "verdict": "keep_valuable",
+    "reason": "Groast.com; on-topic Knowledge Graph and entity SEO article",
+    "confidence": "high"
+   },
+   {
+    "id": 78,
+    "verdict": "ignore_spam",
+    "reason": "URL sharing site; spam score 50; generic automated link",
+    "confidence": "high"
+   },
+   {
+    "id": 116,
+    "verdict": "investigate",
+    "reason": "Concresca.com; spam score 40; replicates other site content",
+    "confidence": "high"
+   },
+   {
+    "id": 199,
+    "verdict": "ignore_spam",
+    "reason": "URL shortener tool; spam score 50; generic automated link",
+    "confidence": "high"
+   },
+   {
+    "id": 87,
+    "verdict": "ignore_spam",
+    "reason": "Screenshots wiki tool; spam score 50; automated link",
+    "confidence": "high"
+   },
+   {
+    "id": 97,
+    "verdict": "ignore_spam",
+    "reason": "URL shortener; spam score 50; generic automated link",
+    "confidence": "high"
+   }
+  ]
+ },
+ {
+  "model": "claude-haiku-4-5-20251001",
+  "input_tokens": 4048,
+  "output_tokens": 1078,
+  "cost_usd": 0.009438,
+  "domains": [
+   "lumeaseoppc.ro",
+   "tezvyn.com",
+   "newsletter.chuletaseo.com",
+   "vixendigital.com",
+   "newsletter.isocialweb.agency",
+   "ready.pro",
+   "dominikkienzle.de",
+   "crispycontent.de",
+   "personwise.ai",
+   "a-moz.groupbuyseo.org",
+   "aimarketers.co",
+   "aiseocourse.review",
+   "aiseocourse.study",
+   "oppalerts.com",
+   "rankfast.app",
+   "mypodcastdata.com",
+   "clairebroadley.com",
+   "domainanalysis.space",
+   "aiseocourse.directory",
+   "aioptimization.services",
+   "crimesofbeauty.com",
+   "rankvanceauthority.info",
+   "ecommerceedu.com",
+   "leefoot.com",
+   "ecommercenews.ro"
+  ],
+  "reviews": [
+   {
+    "id": 145,
+    "verdict": "keep_valuable",
+    "reason": "Conference coverage mentioning MLforSEO's ML for SEO work; relevant industry event.",
+    "confidence": "high"
+   },
+   {
+    "id": 108,
+    "verdict": "keep_neutral",
+    "reason": "Q&A site linking to academy; low SEO value but contextually relevant.",
+    "confidence": "medium"
+   },
+   {
+    "id": 35,
+    "verdict": "keep_neutral",
+    "reason": "Spanish SEO newsletter; on-topic but generic directory-style mention.",
+    "confidence": "medium"
+   },
+   {
+    "id": 181,
+    "verdict": "keep_valuable",
+    "reason": "Clean domain mentioning MLforSEO courses in contextual AI article.",
+    "confidence": "high"
+   },
+   {
+    "id": 43,
+    "verdict": "keep_neutral",
+    "reason": "Spanish newsletter with AI/ML topic; low authority but legitimate source.",
+    "confidence": "medium"
+   },
+   {
+    "id": 251,
+    "verdict": "ignore_spam",
+    "reason": "Website stats aggregator; high spam score and generic directory listing.",
+    "confidence": "high"
+   },
+   {
+    "id": 16,
+    "verdict": "keep_valuable",
+    "reason": "German SEO expert's Wikidata guide referencing MLforSEO; relevant expert blog.",
+    "confidence": "high"
+   },
+   {
+    "id": 66,
+    "verdict": "keep_valuable",
+    "reason": "Relevant entity SEO article with direct link to MLforSEO's Wikidata content.",
+    "confidence": "high"
+   },
+   {
+    "id": 27,
+    "verdict": "investigate",
+    "reason": "Course site linking to MLforSEO course content; possible cross-promotion or reseller.",
+    "confidence": "medium"
+   },
+   {
+    "id": 275,
+    "verdict": "investigate",
+    "reason": "Domain has 'groupbuyseo' suggesting content piracy/reseller despite Moz branding.",
+    "confidence": "high"
+   },
+   {
+    "id": 98,
+    "verdict": "keep_valuable",
+    "reason": "AI marketing newsletter mentioning MLforSEO's AI search content; relevant industry source.",
+    "confidence": "high"
+   },
+   {
+    "id": 79,
+    "verdict": "investigate",
+    "reason": "Course review site with suspicious .review TLD; appears to review/compare courses.",
+    "confidence": "high"
+   },
+   {
+    "id": 0,
+    "verdict": "investigate",
+    "reason": "AI SEO course site with suspicious .study TLD; pattern suggests course reseller or clone.",
+    "confidence": "high"
+   },
+   {
+    "id": 177,
+    "verdict": "keep_neutral",
+    "reason": "Startup market research site; mentions MLforSEO but generic business listing.",
+    "confidence": "medium"
+   },
+   {
+    "id": 11,
+    "verdict": "keep_valuable",
+    "reason": "SEO tool comparison guide with on-topic semantic search glossary reference.",
+    "confidence": "high"
+   },
+   {
+    "id": 268,
+    "verdict": "keep_neutral",
+    "reason": "Podcast data aggregator; mentions MLforSEO but moderate spam score suggests low quality.",
+    "confidence": "medium"
+   },
+   {
+    "id": 173,
+    "verdict": "keep_valuable",
+    "reason": "Expert bio recognizing MLforSEO expertise; credible individual attribution.",
+    "confidence": "high"
+   },
+   {
+    "id": 26,
+    "verdict": "ignore_spam",
+    "reason": "Link building service selling backlinks; high spam score and clear SEO scheme.",
+    "confidence": "high"
+   },
+   {
+    "id": 57,
+    "verdict": "investigate",
+    "reason": "Course directory with 38 links from same domain; suspicious pattern of course scraping/reselling.",
+    "confidence": "high"
+   },
+   {
+    "id": 8,
+    "verdict": "keep_valuable",
+    "reason": "Semantic keyword research guide linking to ML for SEO Academy; relevant tutorial.",
+    "confidence": "high"
+   },
+   {
+    "id": 198,
+    "verdict": "investigate",
+    "reason": "Beauty site with 7 links to MLforSEO; topically unrelated, possible hacked or automated links.",
+    "confidence": "high"
+   },
+   {
+    "id": 257,
+    "verdict": "ignore_spam",
+    "reason": "Backlink selling service with high spam score; clear SEO spam scheme.",
+    "confidence": "high"
+   },
+   {
+    "id": 284,
+    "verdict": "keep_valuable",
+    "reason": "E-commerce education site citing MLforSEO's ML keyword clustering method relevantly.",
+    "confidence": "high"
+   },
+   {
+    "id": 15,
+    "verdict": "keep_valuable",
+    "reason": "Independent SEO consultant's site mentioning ML for SEO; credible expert referral.",
+    "confidence": "high"
+   },
+   {
+    "id": 244,
+    "verdict": "keep_valuable",
+    "reason": "Conference coverage similar to ID 145; legitimate event mention of MLforSEO work.",
+    "confidence": "high"
+   }
+  ]
+ },
+ {
+  "model": "claude-haiku-4-5-20251001",
+  "input_tokens": 2625,
+  "output_tokens": 603,
+  "cost_usd": 0.00564,
+  "domains": [
+   "aeoeye.com",
+   "alljobs.info",
+   "llmstxtchecker.net",
+   "avenara.com",
+   "healthroutedaily.co",
+   "soboly.com",
+   "loadcourses.com",
+   "equityflow.finance",
+   "tunca.org",
+   "coursesbetter.com",
+   "phraseological.us",
+   "supervouch.com",
+   "telegram-top.com",
+   "downloadable.megademy.com"
+  ],
+  "reviews": [
+   {
+    "id": 192,
+    "verdict": "keep_valuable",
+    "reason": "On-topic article about AI and brand protection with relevant anchor text about Knowledge Graph.",
+    "confidence": "high"
+   },
+   {
+    "id": 276,
+    "verdict": "ignore_spam",
+    "reason": "Domain marketplace with high spam score selling aged domains and backlinks. Clear spam indicators.",
+    "confidence": "high"
+   },
+   {
+    "id": 21,
+    "verdict": "keep_valuable",
+    "reason": "Tech news site covering llms.txt standards relevant to AI and SEO automation.",
+    "confidence": "high"
+   },
+   {
+    "id": 20,
+    "verdict": "keep_valuable",
+    "reason": "YouTube SEO consultancy on-topic; mentions automation and optimization relevant to mlforseo.",
+    "confidence": "medium"
+   },
+   {
+    "id": 254,
+    "verdict": "keep_valuable",
+    "reason": "Organic traffic analysis article with Python/ML clustering relevance; moderate spam score acceptable.",
+    "confidence": "medium"
+   },
+   {
+    "id": 286,
+    "verdict": "keep_neutral",
+    "reason": "Google Colab tutorial tangentially related; nofollow link adds little value.",
+    "confidence": "medium"
+   },
+   {
+    "id": 1,
+    "verdict": "investigate",
+    "reason": "Course listing site selling Lazarina Stoy's course; possible reseller or piracy platform.",
+    "confidence": "high"
+   },
+   {
+    "id": 252,
+    "verdict": "keep_valuable",
+    "reason": "On-topic startup SEO deep dive with Wikidata discussion; relevant to entity SEO.",
+    "confidence": "high"
+   },
+   {
+    "id": 270,
+    "verdict": "ignore_spam",
+    "reason": "Backlink marketplace with high spam score; automated spam domain.",
+    "confidence": "high"
+   },
+   {
+    "id": 12,
+    "verdict": "investigate",
+    "reason": "CoursesBetter lists MLforSEO Academy as downloadable; likely piracy or unauthorized reseller.",
+    "confidence": "high"
+   },
+   {
+    "id": 245,
+    "verdict": "keep_valuable",
+    "reason": "Podcast episode featuring Lazarina Stoy directly; authentic promotional link.",
+    "confidence": "high"
+   },
+   {
+    "id": 239,
+    "verdict": "keep_neutral",
+    "reason": "Authority metrics article relevant but nofollow link; low link value.",
+    "confidence": "medium"
+   },
+   {
+    "id": 55,
+    "verdict": "keep_valuable",
+    "reason": "Telegram SEO community directory; links directly to keyword research guide; community source.",
+    "confidence": "medium"
+   },
+   {
+    "id": 287,
+    "verdict": "investigate",
+    "reason": "Megademy offers MLforSEO Academy as downloadable course; clear piracy indicator.",
+    "confidence": "high"
+   }
+  ]
+ }
+]
