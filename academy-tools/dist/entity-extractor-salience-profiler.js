@@ -6,7 +6,24 @@ const units = t => t ? Math.max(1, Math.ceil(t.length/1000)) : 0;
 const esc = s => String(s??"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm = s => String(s??"").toLowerCase().replace(/[^a-z0-9\s]/g," ").replace(/\s+/g," ").trim();
 
-let DOCS = [], ENTITIES = [], PROFILES = [], abort = false;
+// Unicode-aware key for the filters, so non-Latin entity names are not reduced to "".
+const fkey = s => String(s??"").normalize("NFKC").toLowerCase()
+  .replace(/[^\p{L}\p{N}\s]/gu," ").replace(/\s+/g," ").trim();
+
+/* Lesson 2.3: three noise filters, in order. */
+const NOISE_TYPES = new Set(["NUMBER","DATE","PRICE","ADDRESS","PHONE_NUMBER"]);
+const DEFAULT_STOP = ["one","two","three","four","five","data","content","course","lesson",
+  "thing","things","way","ways","time","part","example","examples","step","steps","page","pages",
+  "people","everything","anything","something","lot","bit","kind","type","types","number","numbers",
+  "case","cases","point","points"];
+const MIN_CHROME_PAGES = 10;   // below this, "a share of your pages" means nothing
+const WHY = {structural:"structural type", generic:"generic noun", chrome:"site chrome"};
+const WHY_PLURAL = {structural:"structural types", generic:"generic nouns", chrome:"site chrome"};
+
+// DONE: one entry per document that came back, {doc, ents}. ENTITIES and PROFILES derive from it.
+let DOCS = [], DONE = [], ENTITIES = [], PROFILES = [], CANDIDATES = [], abort = false;
+let FLOOR = 0.05, ESORT = {k:"salience", asc:false};
+const KEEP = new Set();        // chrome candidates the user unticked (by filter key)
 
 /* ---- mode tabs ---- */
 document.querySelectorAll('.tabs [role=tab]').forEach(b => b.onclick = () => {
@@ -129,9 +146,10 @@ $("stop").onclick = () => { abort = true; $("status").textContent = "Stopping…
 
 $("run").onclick = async () => {
   const key = $("key").value.trim(), version = $("version").value;
-  const docs = currentDocs(), floor = parseFloat($("floor").value) || 0.05;
+  const docs = currentDocs();
+  FLOOR = parseFloat($("floor").value) || 0.05;
   abort = false;
-  ENTITIES = []; PROFILES = [];
+  DONE = []; ENTITIES = []; PROFILES = []; KEEP.clear();
   $("run").disabled = true; $("stop").hidden = false;
   $("prog").hidden = false; $("prog").max = docs.length; $("prog").value = 0;
 
@@ -145,30 +163,11 @@ $("run").onclick = async () => {
         salience: e.salience ?? null,
         mentions: (e.mentions||[]).length,
         proper: (e.mentions||[]).filter(m=>m.type==="PROPER").length,
-        mid: e.metadata?.mid || "", wiki: e.metadata?.wikipedia_url || ""
+        mid: e.metadata?.mid || "", wiki: e.metadata?.wikipedia_url || "",
+        _key: fkey(e.name), _why: ""
       }));
+      DONE.push({doc, ents});
       ENTITIES.push(...ents);
-      ents.sort((a,b) => (b.salience ?? b.mentions/100) - (a.salience ?? a.mentions/100));
-      const top = ents[0];
-      const dominant = top && (top.salience === null ? top.mentions >= 2 : top.salience >= floor) ? top : null;
-      const dn = dominant ? norm(dominant.entity) : "";
-      const inField = v => dn && norm(v||"").includes(dn) ? "yes" : "no";
-      PROFILES.push({
-        url: doc.url,
-        entity_count: ents.length,
-        dominant_entity: dominant ? dominant.entity : "",
-        dominant_type: dominant ? dominant.type : "",
-        dominant_salience: dominant && dominant.salience !== null ? dominant.salience : "",
-        dominant_mid: dominant ? dominant.mid : "",
-        has_dominant_entity: dominant ? "yes" : "no",
-        dominant_in_title: inField(doc.title),
-        dominant_in_h1: inField(doc.h1),
-        dominant_in_meta: inField(doc.meta),
-        intended_entity: doc.intended || "",
-        intent_match: !doc.intended ? "" :
-               (dominant && dn === norm(doc.intended)) ? "ok" : "MISMATCH",
-        _mentions: dominant ? dominant.mentions : 0
-      });
     } catch(err){
       failed++; if (!firstError) firstError = err;
       if (err.status === 400 || err.status === 403){ abort = true; }
@@ -181,13 +180,88 @@ $("run").onclick = async () => {
   if (firstError && !ENTITIES.length){ $("status").textContent = explainError(firstError); return; }
   $("status").textContent = firstError
     ? `Done with errors — ${explainError(firstError)}`
-    : `Done. ${ENTITIES.length} entity mentions across ${PROFILES.length} document(s).`;
-  render(floor);
+    : `Done. ${ENTITIES.length} entity mentions across ${DONE.length} document(s).`;
+  update();
 };
 
+/* ---- page profile: one row per URL ---- */
+function profile(doc, list, floor){
+  const ents = list.slice().sort((a,b) => (b.salience ?? b.mentions/100) - (a.salience ?? a.mentions/100));
+  const top = ents[0];
+  const dominant = top && (top.salience === null ? top.mentions >= 2 : top.salience >= floor) ? top : null;
+  const dn = dominant ? norm(dominant.entity) : "";
+  const inField = v => dn && norm(v||"").includes(dn) ? "yes" : "no";
+  return {
+    url: doc.url,
+    entity_count: list.length,
+    dominant_entity: dominant ? dominant.entity : "",
+    dominant_type: dominant ? dominant.type : "",
+    dominant_salience: dominant && dominant.salience !== null ? dominant.salience : "",
+    dominant_mid: dominant ? dominant.mid : "",
+    has_dominant_entity: dominant ? "yes" : "no",
+    dominant_in_title: inField(doc.title),
+    dominant_in_h1: inField(doc.h1),
+    dominant_in_meta: inField(doc.meta),
+    intended_entity: doc.intended || "",
+    intent_match: !doc.intended ? "" :
+           (dominant && dn === norm(doc.intended)) ? "ok" : "MISMATCH",
+    _mentions: dominant ? dominant.mentions : 0,
+    _dom: dominant
+  };
+}
+
+/* ---- the three filters, in order ---- */
+function chromeShare(){
+  let s = parseFloat(String($("share").value).replace(",", "."));
+  if (!(s > 0)) s = 10;
+  return Math.min(s, 100) / 100;
+}
+
+function applyFilters(){
+  const useT = $("f-types").checked, useG = $("f-generic").checked, useC = $("f-chrome").checked;
+  const stop = new Set($("stoplist").value.split(/[\n,]+/).map(fkey).filter(Boolean));
+
+  // 1 and 2 are row-level checks.
+  for (const e of ENTITIES){
+    e._why = "";
+    if (useT && (NOISE_TYPES.has(e.type) || !e._key || /^[\p{N}\s]+$/u.test(e._key))) e._why = "structural";
+    else if (useG && stop.has(e._key)) e._why = "generic";
+  }
+
+  // 3 is site-level: pages an entity appears on, and whether it is ever a proper noun.
+  CANDIDATES = [];
+  const pageCount = DONE.length;
+  const minPages = Math.max(3, Math.ceil(chromeShare() * pageCount));
+  if (useC && pageCount >= MIN_CHROME_PAGES){
+    const stats = new Map();
+    for (const e of ENTITIES){
+      if (e._why) continue;
+      let s = stats.get(e._key);
+      if (!s){ s = {key:e._key, name:e.entity, pages:new Set(), proper:0, mentions:0, types:new Set()}; stats.set(e._key, s); }
+      s.pages.add(e.url); s.proper += e.proper; s.mentions += e.mentions; s.types.add(e.type);
+    }
+    CANDIDATES = [...stats.values()]
+      .filter(s => s.pages.size >= minPages && s.proper === 0)
+      .sort((a,b) => b.pages.size - a.pages.size || b.mentions - a.mentions);
+    const removed = new Set(CANDIDATES.filter(c => !KEEP.has(c.key)).map(c => c.key));
+    for (const e of ENTITIES) if (!e._why && removed.has(e._key)) e._why = "chrome";
+  }
+
+  const fromFiltered = $("f-dominant").checked;
+  PROFILES = DONE.map(d => profile(d.doc, fromFiltered ? d.ents.filter(e => !e._why) : d.ents, FLOOR));
+  return {pageCount, minPages, useC};
+}
+
+function update(){
+  if (!DONE.length){ $("results").hidden = true; return; }
+  const f = applyFilters();
+  render();
+  renderFilters(f);
+  renderEntities();
+}
+
 /* ---- render ---- */
-function render(floor){
-  if (!PROFILES.length){ $("results").hidden = true; return; }
+function render(){
   $("results").hidden = false;
   const noDom = PROFILES.filter(p => p.has_dominant_entity === "no").length;
   const withIntent = PROFILES.filter(p => p.intended_entity);
@@ -196,7 +270,7 @@ function render(floor){
 
   $("tiles").innerHTML = [
     ["Documents", PROFILES.length, "profiled", "var(--accent)"],
-    ["Entity mentions", ENTITIES.length.toLocaleString(), `${new Set(ENTITIES.map(e=>norm(e.entity))).size} distinct`, "var(--accent)"],
+    ["Entity mentions", ENTITIES.length.toLocaleString(), `${new Set(ENTITIES.map(e=>e._key)).size.toLocaleString()} distinct · ${ENTITIES.filter(e=>!e._why).length.toLocaleString()} kept by the filters`, "var(--accent)"],
     ["No dominant entity", noDom, noDom ? "machines can't tell the subject" : "every page has a subject",
       noDom ? "var(--crit)" : "var(--good)"],
     withIntent.length
@@ -211,7 +285,8 @@ function render(floor){
     </tr></thead><tbody>${
     PROFILES.map(p => `<tr>
       <td class="url" title="${esc(p.url)}">${esc(p.url)}</td>
-      <td>${p.dominant_entity ? esc(p.dominant_entity) : '<span class="flag">none</span>'}</td>
+      <td>${p.dominant_entity ? esc(p.dominant_entity) : '<span class="flag">none</span>'}${
+        p._dom && p._dom._why ? ` <span class="type noise" title="Removed by the ${WHY[p._dom._why]} filter">noise</span>` : ""}</td>
       <td>${p.dominant_type ? `<span class="type">${esc(p.dominant_type)}</span>` : ""}</td>
       <td class="n">${p.dominant_salience === "" ? "&mdash;" : Number(p.dominant_salience).toFixed(3)}</td>
       <td class="n">${p._mentions}</td><td class="n">${p.entity_count}</td>
@@ -220,12 +295,63 @@ function render(floor){
         : p.intent_match === "ok" ? '<span class="flag ok">ok</span>' : ""}</td>` : ""}
     </tr>`).join("")}</tbody>`;
 
-  const maxSal = Math.max(...ENTITIES.map(e => e.salience ?? 0), 0.0001);
-  const rows = ENTITIES.slice().sort((a,b)=>(b.salience??0)-(a.salience??0));
+}
+
+function renderFilters({pageCount, minPages, useC}){
+  const count = why => ENTITIES.filter(e => e._why === why).length;
+  const fmt = n => n ? `−${n.toLocaleString()} mentions` : "none removed";
+  $("c-types").textContent = $("f-types").checked ? fmt(count("structural")) : "off";
+  $("c-generic").textContent = $("f-generic").checked ? fmt(count("generic")) : "off";
+  $("c-chrome").textContent = !useC ? "off" : pageCount < MIN_CHROME_PAGES ? "needs a crawl" : fmt(count("chrome"));
+
+  const pct = Math.round(chromeShare()*1000)/10;
+  $("chrome-note").innerHTML = !useC ? "" :
+    pageCount < MIN_CHROME_PAGES
+      ? `Needs at least ${MIN_CHROME_PAGES} pages to mean anything. This run has ${pageCount}: upload your crawl to use it.`
+      : CANDIDATES.length
+        ? `<strong>${CANDIDATES.length}</strong> candidate(s) at ${pct}%, so on ${minPages}+ of your ${pageCount} pages.`
+        : `Nothing caught at ${pct}% (${minPages}+ of ${pageCount} pages). If button labels survive in the entity table below, lower it.`;
+
+  $("chrome-review").hidden = !CANDIDATES.length;
+  if (CANDIDATES.length){
+    const wrap = $("chrome-table").parentElement, top = wrap.scrollTop;
+    $("chrome-table").innerHTML = `<thead><tr><th>Remove</th><th>Entity</th><th class="n">Pages</th>
+        <th class="n">Share</th><th class="n">Mentions</th><th>Type</th></tr></thead><tbody>${
+      CANDIDATES.map(c => `<tr>
+        <td class="c"><input type="checkbox" data-key="${esc(c.key)}" ${KEEP.has(c.key)?"":"checked"} aria-label="Remove ${esc(c.name)}"></td>
+        <td>${esc(c.name)}</td>
+        <td class="n">${c.pages.size}</td>
+        <td class="n">${(c.pages.size/pageCount*100).toFixed(1)}%</td>
+        <td class="n">${c.mentions}</td>
+        <td>${[...c.types].map(t => `<span class="type">${esc(t)}</span>`).join(" ")}</td>
+      </tr>`).join("")}</tbody>`;
+    wrap.scrollTop = top;
+  }
+
+  const kept = ENTITIES.filter(e => !e._why);
+  const parts = Object.keys(WHY).map(k => [k, count(k)]).filter(([,n]) => n)
+    .map(([k,n]) => `${WHY_PLURAL[k]} ${n.toLocaleString()}`);
+  $("f-summary").innerHTML = `<strong>${kept.length.toLocaleString()} of ${ENTITIES.length.toLocaleString()} mentions kept</strong>
+    (${new Set(kept.map(e=>e._key)).size.toLocaleString()} distinct entities).
+    ${parts.length ? `Removed mentions: ${parts.join(" · ")}.` : "Nothing removed."}
+    Check what was removed with <em>Removed by the filters</em> below before you trust the result.`;
+}
+
+function renderEntities(){
+  const view = $("eview").value;
+  const data = ENTITIES.filter(e => view === "all" || (view === "kept" ? !e._why : !!e._why));
+  const {k, asc} = ESORT;
+  data.sort((a,b) => {
+    const x = a[k] ?? (k === "salience" ? -1 : ""), y = b[k] ?? (k === "salience" ? -1 : "");
+    const r = typeof x === "number" && typeof y === "number" ? x-y : String(x).localeCompare(String(y));
+    return asc ? r : -r;
+  });
+  const maxSal = Math.max(...data.map(e => e.salience ?? 0), 0.0001);
   const head = [["entity","Entity"],["type","Type"],["salience","Salience"],
                 ["mentions","Mentions"],["proper","Proper"],["mid","MID"],["url","URL"]];
-  const draw = data => `<thead><tr>${head.map(([k,l],i)=>
-      `<th data-k="${k}" class="${i>=2&&i<=4?'n':''}">${l}</th>`).join("")}</tr></thead>
+  if (view !== "kept") head.push(["_why","Removed by"]);
+  $("entities").innerHTML = `<thead><tr>${head.map(([key,l],i)=>
+      `<th data-k="${key}" class="${i>=2&&i<=4?'n':''}">${l}${key===k?(asc?" ↑":" ↓"):""}</th>`).join("")}</tr></thead>
     <tbody>${data.slice(0,600).map(e => `<tr>
       <td>${esc(e.entity)}</td>
       <td><span class="type">${esc(e.type)}</span></td>
@@ -234,20 +360,32 @@ function render(floor){
       <td class="n">${e.mentions}</td><td class="n">${e.proper}</td>
       <td class="mono">${e.mid ? esc(e.mid) : '<span style="color:var(--muted)">&mdash;</span>'}</td>
       <td class="url" title="${esc(e.url)}">${esc(e.url)}</td>
+      ${view !== "kept" ? `<td>${e._why ? esc(WHY[e._why]) : ""}</td>` : ""}
     </tr>`).join("")}</tbody>`;
-  $("entities").innerHTML = draw(rows);
-  let dir = {};
-  $("entities").querySelectorAll("th").forEach(th => th.onclick = () => {
-    const k = th.dataset.k; dir[k] = !dir[k];
-    rows.sort((a,b) => {
-      const x=a[k]??"", y=b[k]??"";
-      const r = typeof x === "number" && typeof y === "number" ? x-y : String(x).localeCompare(String(y));
-      return dir[k] ? r : -r;
-    });
-    $("entities").innerHTML = draw(rows);
-    $("entities").querySelectorAll("th").forEach(t2 => t2.onclick = th.onclick);
-  });
+  $("ehint").textContent = data.length > 600
+    ? `Showing the first 600 of ${data.length.toLocaleString()} rows · click a column to sort`
+    : `${data.length.toLocaleString()} rows · click a column to sort`;
 }
+
+/* ---- filter controls: re-filter locally, never re-call the API ---- */
+$("entities").onclick = ev => {
+  const th = ev.target.closest("th"); if (!th) return;
+  const k = th.dataset.k;
+  ESORT = {k, asc: ESORT.k === k ? !ESORT.asc : false};
+  renderEntities();
+};
+["f-types","f-generic","f-chrome","f-dominant"].forEach(id => $(id).addEventListener("change", update));
+let filterTimer;
+["stoplist","share"].forEach(id => $(id).addEventListener("input", () => {
+  clearTimeout(filterTimer); filterTimer = setTimeout(update, 300);
+}));
+$("eview").onchange = renderEntities;
+$("chrome-table").addEventListener("change", ev => {
+  const key = ev.target.dataset.key; if (key === undefined) return;
+  ev.target.checked ? KEEP.delete(key) : KEEP.add(key);
+  update();
+});
+$("stoplist").value = DEFAULT_STOP.join(", ");
 
 /* ---- export ---- */
 async function offerFile(filename, text, mime){
@@ -277,6 +415,32 @@ $("dl-entities").onclick = async () => {
   const r = await offerFile("entity_mentions.csv",
     toCSV(ENTITIES, ["url","entity","type","salience","mentions","proper","mid","wiki"]), "text/csv");
   $("status").textContent = r==="saved" ? "Entities exported." : "Export cancelled.";
+};
+// Same columns as entity_mentions.csv, so every downstream tool reads it unchanged.
+$("dl-filtered").onclick = async () => {
+  const r = await offerFile("entity_mentions_filtered.csv",
+    toCSV(ENTITIES.filter(e => !e._why), ["url","entity","type","salience","mentions","proper","mid","wiki"]), "text/csv");
+  $("status").textContent = r==="saved" ? "Filtered entities exported." : "Export cancelled.";
+};
+// The record of what was filtered: one row per entity removed, plus chrome candidates kept.
+$("dl-record").onclick = async () => {
+  const pageCount = DONE.length, agg = new Map();
+  for (const e of ENTITIES){
+    if (!e._why) continue;
+    const id = e._why + "|" + e._key;
+    let a = agg.get(id);
+    if (!a){ a = {entity:e.entity, filter:WHY[e._why], pages:new Set(), mentions:0, proper:0, decision:"remove"}; agg.set(id, a); }
+    a.pages.add(e.url); a.mentions += e.mentions; a.proper += e.proper;
+  }
+  for (const c of CANDIDATES) if (KEEP.has(c.key))
+    agg.set("kept|" + c.key, {entity:c.name, filter:WHY.chrome, pages:c.pages, mentions:c.mentions, proper:c.proper, decision:"keep"});
+  const rows = [...agg.values()].map(a => ({...a, pages:a.pages.size,
+    page_share:(a.pages.size/pageCount).toFixed(4)})).sort((a,b) => b.pages - a.pages);
+  const settings = `structural=${$("f-types").checked?"on":"off"}; generic=${$("f-generic").checked?"on":"off"}; chrome=${$("f-chrome").checked?`${Math.round(chromeShare()*1000)/10}%`:"off"}; pages=${pageCount}`;
+  rows.forEach(r => r.settings = settings);
+  const res = await offerFile("filter_decisions.csv",
+    toCSV(rows, ["entity","filter","decision","pages","page_share","mentions","proper","settings"]), "text/csv");
+  $("status").textContent = res==="saved" ? "Filter record exported." : "Export cancelled.";
 };
 
 refresh();

@@ -113,6 +113,23 @@
 .mlfs-tool .section-head{display:flex; align-items:baseline; justify-content:space-between;
   gap:16px; margin:34px 0 13px; flex-wrap:wrap}
 .mlfs-tool .section-head h2{font-size:21px; font-weight:600}
+.mlfs-tool /* noise filters */
+input[type=checkbox]{accent-color:var(--accent); width:15px; height:15px; margin:0; flex:none}
+.mlfs-tool .filters{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:13px}
+.mlfs-tool .fcard{border:1px solid var(--line); border-radius:4px; padding:14px; background:var(--sunk)}
+.mlfs-tool .fhead{display:flex; align-items:center; gap:8px; font-weight:600; color:var(--ink); font-size:13.5px; cursor:pointer}
+.mlfs-tool .fhead .count{margin-left:auto; font-size:12px; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+.mlfs-tool .fcard p{margin:6px 0 10px; font-size:12.5px; color:var(--muted)}
+.mlfs-tool .fcard textarea{min-height:96px; background:var(--panel); font-size:12.5px}
+.mlfs-tool .inline{display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:13px; color:var(--body)}
+.mlfs-tool .inline input[type=text]{width:72px; background:var(--panel)}
+.mlfs-tool .check{display:flex; gap:9px; align-items:flex-start; font-size:13px; color:var(--body); cursor:pointer}
+.mlfs-tool .check input{margin-top:3px}
+.mlfs-tool .panel h3{font-size:14.5px; font-weight:600; margin:18px 0 2px}
+.mlfs-tool .tablewrap.scroll{max-height:340px; overflow:auto}
+.mlfs-tool table.compact{min-width:520px}
+.mlfs-tool td.c{width:1%; text-align:center}
+.mlfs-tool .type.noise{color:var(--warn); border-color:var(--warn)}
 .mlfs-tool footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
   color:var(--muted); font-size:12.5px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
 @media (prefers-reduced-motion:reduce){.mlfs-tool *{transition:none !important}}
